@@ -1,0 +1,172 @@
+/* src/components/Summary.module.css */
+
+.summaryContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    background-color: #f7f8fa;
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.financialSummaryHeading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #23197e;
+    text-align: left;
+    margin-bottom: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+}
+.headerButtons {
+  display: flex;
+  gap: 10px; /* Space between the buttons */
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: -90px;
+}
+
+/* Common styles for both icon buttons */
+.homeIconButton,
+.exploreModulesButton { /* Renamed .settingsIconButton to .exploreModulesButton */
+  background: none;
+  border: none;
+  color: #3498db; /* Blue color for the icon */
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeIconButton:hover,
+.exploreModulesButton:hover { /* Renamed hover selector */
+  background-color: #e8f5fd;
+  color: #2980b9;
+  transform: scale(1.1);
+}
+
+.homeIconButton:active,
+.exploreModulesButton:active { /* Renamed active selector */
+  transform: scale(0.95);
+}
+
+.kpiLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between the rows */
+    margin-bottom: 20px;
+}
+
+.kpiRow {
+    display: grid;
+    gap: 10px; /* Spacing between the cards in a row */
+}
+
+/* First row with 4 cards */
+.kpiLayout > .kpiRow:nth-child(1) {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Second row with 4 cards */
+.kpiLayout > .kpiRow:nth-child(2) {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Third row with 5 cards */
+.kpiLayout > .kpiRow:nth-child(3) {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+/* Ensure direct children of kpiRow take full width of their grid cell */
+
+.kpiRow:nth-child(1) > *,
+.kpiRow:nth-child(2) > * {
+    width: 300px; /* Make sure KPICard doesn't have other width constraints */
+}
+.kpiRow:nth-child(3) > * {
+    width: 232px; /* Adjust this width for the third row */
+}
+
+.chartLayout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 20px;
+  padding: 10px;
+  justify-content: center; /* Center align charts */
+}
+
+.chartContainer {
+  flex: 1;
+  min-width: 500px; /* Prevent charts from getting too narrow */
+  max-width: 800px; /* Optional: limit width for better layout */
+  height: 800px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.chartContainer:hover {
+  transform: scale(1.02); /* Subtle hover effect */
+}
+
+
+
+/* Responsive adjustments if needed */
+@media (max-width: 1200px) {
+    .kpiLayout > .kpiRow:nth-child(1),
+    .kpiLayout > .kpiRow:nth-child(2) {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust minmax as needed */
+    }
+    .kpiLayout > .kpiRow:nth-child(3) {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust minmax as needed */
+    }
+}
+
+@media (max-width: 900px) {
+    .kpiLayout > .kpiRow:nth-child(1),
+    .kpiLayout > .kpiRow:nth-child(2) {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    .kpiLayout > .kpiRow:nth-child(3) {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .kpiLayout > .kpiRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.radarChartContainer {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.radarChartWrapper {
+    width: 1000px;
+    height: 500px;
+    margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .chartLayout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chartContainer {
+    width: 100%;
+    max-width: 90vw;
+  }
+}

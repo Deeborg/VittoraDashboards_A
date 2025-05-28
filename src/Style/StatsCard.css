@@ -1,0 +1,82 @@
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding: 0 15px;
+}
+
+.stats-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  flex: 1 1 150px;
+  min-width: 140px;
+  max-width: 180px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid #ddd;
+  position: relative; /* Needed for absolute positioning */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content initially */
+  height: 140px;
+  overflow: hidden; /* Prevent chart overflow */
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-color: #bbb;
+}
+.stats-card h4 {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: 0.25rem;
+  color: #333;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: absolute; /* Position title at the top */
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3; /* Ensure it's above the chart and value */
+}
+
+.area-chart-background {
+  position: absolute; /* Position chart as background */
+  top: 20px;
+  
+  left: 0;
+  width: 100%;
+  height: calc(100% - 20px);
+  opacity: 0.8; /* Slightly increased opacity for better visibility */
+  z-index: 1; /* Place it behind the value */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding: 0 8px;
+}
+
+.area-chart-background .recharts-responsive-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.kpi-value-center {
+  font-size: 1.6rem; /* Increased font size for better visibility */
+  font-weight: bold;
+  color: #222; /* Darker color for better contrast */
+  position: absolute; /* Center the value */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3; /* Ensure it's on top of everything */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15); /* Add a subtle text shadow */
+}

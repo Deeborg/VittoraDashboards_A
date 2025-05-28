@@ -1,0 +1,137 @@
+.container {
+    position: relative; /* Ensures child absolute elements stay within this container */
+    font-family: sans-serif;
+    padding: 20px;
+    background-color: #f7f8fa;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+  
+  .heading {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #23197e;
+    text-align: left;
+    margin-bottom: 30px;
+    margin-top: 0;
+    margin-left: 0;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+  }
+  
+  .description {
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 80%;
+    max-width: 900px;
+    margin-top: 5px;
+  }
+.contentWrapper {
+    display: flex;
+    width: 100%;
+    gap:40px;
+}
+
+.filterContainer {
+    flex: 0.399;
+    margin-top: 100px;
+    cursor:pointer;
+}
+  
+  .filterContainer h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  
+  .categoryGroup {
+    margin-bottom: 15px;
+  }
+  
+  .categoryTitle {
+    cursor: pointer;
+    padding: 8px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .ratiosList {
+    padding-left: 15px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+  }
+  
+  .ratiosList.expanded {
+    display: block;
+  }
+  
+  .categoryList {
+  display: flex;
+  flex-direction: column; /* Change to column layout */
+}
+
+.categoryList label {
+  margin-right: 0; /* Remove right margin */
+  margin-bottom: 5px; /* Add bottom margin for spacing */
+  display: flex; /* Keep label as flex for checkbox alignment */
+  align-items: center;
+}
+  
+  .gaugesContainer {
+    flex: 0.5; /* Remaining width for the gauges */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax for gauge size */
+    grid-template-rows: auto auto; /* Force a 2x2 layout initially */
+    gap: 10px;
+    margin-top: 100px;
+  }
+  
+  /* Ensure empty gauges container doesn't collapse entirely */
+  .gaugesContainer:empty {
+    display: block;
+    /* You can set a min-height or background if needed */
+  }
+
+  .node-group {
+  cursor:pointer;
+}
+
+.dot {
+  transition: transform 0.3s ease-in-out;
+  
+}
+
+.dot:hover {
+  transform: scale(1.1);
+
+}
+
+.node-group text {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  x:100px;
+  color: blueviolet;
+}
+
+.node-group:hover text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.node-group.clicked text {
+  visibility: visible;
+  opacity: 1;
+  position:relative;
+  left: calc(100% + 10px); /* Move text right */
+}

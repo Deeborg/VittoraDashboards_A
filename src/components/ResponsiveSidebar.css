@@ -1,0 +1,130 @@
+.layout {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    background: #4343af;
+    color: white;
+    transition: width 0.3s ease;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3); 
+    border-radius: 20px;
+    
+  }
+  
+  .sidebar.expanded {
+    width: 300px;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px;
+  }
+  
+  .sidebar-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .sidebar-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem; /* Space between title and toggle button */
+    text-align: center; /* Center the title */
+    width: 100%;
+  }
+  
+  .toggle-container {
+    display: flex;
+    justify-content: flex-end; /* Push toggle button to the right */
+    width: 100%; /* Ensure it takes full width of the header */
+  }
+  
+  .toggle-btn,
+  .back-btn {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.expand-btn {
+  background: none;
+  border: none;
+  color: white; /* Or your preferred icon color */
+  font-size: 1.5em; /* Adjust size as needed */
+  cursor: pointer;
+  padding: 0;
+  display: flex; /* Helps with centering */
+  justify-content: center;
+  align-items: center;
+  height: 40px; /* Match collapse button height if desired */
+  width: 40px; /* Match collapse button width if desired */
+}
+
+.sidebar.collapsed .toggle-container {
+  /* You might need to adjust this to center the expand button */
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+  width: 100%; /* Ensure the container spans the full width of the collapsed sidebar */
+}
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex-grow: 1; /* Allow navigation to take up remaining space */
+  }
+  
+  .sidebar-nav a {
+    text-decoration: none;
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.30rem;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, transform 0.1s ease-out;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    justify-content: center;
+    margin-left: 20px; /* Space between icon and text */
+    border-radius: 8px;
+  }
+  
+  .sidebar-nav a:hover {
+    color: #f9fafa;
+    transform: translateX(5px);
+  }
+  .sidebar-nav a.active {
+  background-color: #fafdff; /* A vibrant blue to highlight the active page */
+  color: #818181;
+  font-weight: bold;
+  box-shadow: inset 3px 0 0 0 #f8fbfd; /* A subtle border on the left */
+}
+
+
+  .main-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    position: relative; /* To position the logo */
+  }
+  .global-logo {
+    position: absolute;
+    top: 38px;
+    right: 38px;
+    height: 60px; /* Adjust as needed */
+    width: auto; /* Maintain aspect ratio */
+  }
+  

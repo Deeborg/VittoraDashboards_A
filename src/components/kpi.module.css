@@ -1,0 +1,68 @@
+/* src/components/KPICard.module.css */
+.kpiCard {
+    background-color: #ffffff; /* Light background */
+    border-radius: 30px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    width: 210px; /* Adjust this width for more cards */
+    height: 160px; /* Adjust this height for more cards */
+    text-align: left;
+    margin-bottom: 15px; /* Add some vertical spacing between cards */
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.icon {
+    font-size: 2.10em; /* Adjust icon size */
+    margin-right: 10px;
+    color: #1976d2; /* Example icon color */
+    align-items: center ;
+}
+
+.title {
+    font-size: 1.15em;
+    color: #546e7a;
+    margin: 0;
+    font-weight: 600;
+}
+
+.valueContainer {
+    display: flex;
+    align-items: baseline; /* Align value and unit at the baseline */
+    margin-bottom: 8px; /* Space above the comparison */
+  }
+  
+
+.value {
+    font-size: 1.75em;
+    font-weight: bold;
+    color: #08577e;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: center;
+    margin-left: 8px;
+    margin-top: 10px;
+    margin-right: 4px;
+}
+
+.unit {
+    font-size: 1em;
+    color: #78909c; /* Muted color for unit */
+  }
+
+.comparison {
+    font-size: 0.9em;
+    color: #78909c;
+}
+
+.positive {
+    color: #388e3c; /* Green for positive */
+}
+
+.negative {
+    color: #d32f2f; /* Red for negative */
+}

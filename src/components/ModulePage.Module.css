@@ -1,0 +1,282 @@
+/* ModulePage.Module.css */
+
+.key-modules-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  height: 100vh;
+  box-sizing: border-box;
+  border-radius: 12px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.key-modules-header {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Center the h1 */
+  align-items: center;
+  padding: 10px 20px; /* Add padding to the header itself */
+  margin-bottom: 20px; 
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.key-modules-header h1 {
+  font-size: 2.5em;
+  color: #23197e;
+  text-align: center;
+  /* justify-content: center;
+    display: flex; */
+    font-weight: bold;
+    flex: 1;
+    margin-top:0px;
+    margin-left: -40px;
+}
+
+.key-modules-button{
+  background: none;
+  border: none;
+  color: #3498db;
+  cursor: pointer;
+  padding: 0px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  margin-top: -70px;
+
+}
+.key-modules-button:hover {
+  background-color: #e8f5fd;
+  color: #2980b9;
+  transform: scale(1.15);
+}
+
+.modules-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px; /* Adjust based on your preference */
+  position: relative; /* Needed for absolute positioning of module texts */
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+
+.circular-diagram-wrapper {
+  position: relative;
+  width: 500px; /* Adjust image size as needed */
+  height: 500px; /* Adjust image size as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circular-diagram-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.module-text-container {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap; /* Keep text on one line */
+  font-size: 0.95em; /* Adjust font size */
+  color: #333;
+  cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.module-text-container.finance{
+    background-color: #f89a0d;
+}
+.module-text-container.commercial{
+    background-color: #6e993c;
+}
+.module-text-container.scm{
+    background-color: #bb4f4f;
+}
+.module-text-container.autm{
+    background-color: #0d6efd;
+}
+.module-text-container:not(.active):hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.1);
+}
+
+/* Active (selected) state - push & pull effect with darker color */
+.module-text-container.active {
+  transform: translateY(2px);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Specific darker colors for active state */
+.module-text-container.finance.active { background-color: #d17e00; }
+.module-text-container.commercial.active { background-color: #5b7e32; }
+.module-text-container.scm.active { background-color: #a04040; }
+.module-text-container.autm.active { background-color: #3b65a0; }
+
+
+/* Positioning for each module text */
+.module-text-container.finance {
+  top: -8%; /* Adjust to move above the image */
+  left: 20%;
+  transform: translate(0%, 5%); /* Move up and center */
+}
+
+.module-text-container.commercial {
+  top: 40%;
+  left: -65%; /* Adjust to move left of the image */
+  transform: translate(0%, 5%); /* Move left and center vertically */
+}
+
+.module-text-container.scm {
+  top: 40%;
+  right: -58%; /* Adjust to move right of the image */
+  transform: translate(0%, 5%); /* Move right and center vertically */
+}
+
+.module-text-container.autm {
+  bottom: -8%; /* Adjust to move below the image */
+  left: 18%;
+  transform: translate(0%, 5%); /* Move down and center */
+}
+
+/* Add this to your ModulePage.Module.css file */
+
+.module-details-section {
+    padding: 40px 20px; /* More padding for content */
+    margin: 30px;
+    margin-top: 120px; /* Center sections with margin */
+    width: 100%; /* Limit width for readability */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    line-height: 1.6; /* Improve readability */
+    color: #444;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.module-details-section h2 {
+    font-size: 2em;
+    color: #0056b3;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.module-details-section p {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+.module-details-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+.module-details-section li {
+    margin-bottom: 5px;
+}
+/* Optional: Add some spacing between sections if desired */
+.key-modules-container > .module-details-section:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .key-modules-header h1 {
+    font-size: 2em;
+    margin-left: auto; /* Re-center h1 */
+    margin-right: auto; /* Re-center h1 */
+  }
+
+  .circular-diagram-wrapper {
+    width: 350px;
+    height: 350px;
+  }
+
+  .module-text-container {
+    font-size: 0.8em;
+    padding: 8px 12px;
+  }
+
+  .module-text-container.finance {
+    transform: translate(-50%, -100%);
+  }
+  .module-text-container.commercial {
+    transform: translate(-100%, -50%);
+  }
+  .module-text-container.scm {
+    transform: translate(100%, -50%);
+  }
+  .module-text-container.autm {
+    transform: translate(-50%, 100%);
+  }
+  .module-details-section {
+        padding: 30px 15px;
+    }
+
+    .module-details-section h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+  .key-modules-header h1 {
+    font-size: 1.8em;
+  }
+
+  .circular-diagram-wrapper {
+    width: 300px;
+    height: 300px;
+  }
+
+  .module-text-container {
+    font-size: 0.7em;
+    padding: 6px 10px;
+  }
+
+  /* Further adjust positioning for very small screens if needed */
+  .module-text-container.finance {
+    top: -10px; /* More direct positioning */
+    transform: translateX(-50%);
+  }
+  .module-text-container.commercial {
+    left: -10px;
+    transform: translateY(-50%) rotate(0deg); /* No rotation for smaller screens to save space */
+  }
+  .module-text-container.scm {
+    right: -10px;
+    transform: translateY(-50%) rotate(0deg); /* No rotation */
+  }
+  .module-text-container.autm {
+    bottom: -10px;
+    transform: translateX(-50%);
+  }
+  .module-details-section {
+        padding: 20px 10px;
+    }
+
+    .module-details-section h2 {
+        font-size: 1.5em;
+    }
+
+    .module-details-section p {
+        font-size: 1em;
+    }
+}
