@@ -1,62 +1,135 @@
+/* Top Bar */
+.home-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.home-logo {
+  position: absolute;
+  left: 40px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  letter-spacing: 2px;
+  pointer-events: auto;
+}
+
+.home-title-center {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+  pointer-events: auto;
+}
+
+/* Main Content */
 .home-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  margin-top: 70px;
+}
+
+/* Bottom Right Animated Button */
+.home-immerse-btn-wrapper {
+  position: fixed; /* Fixed to viewport */
+  bottom: 40px;    /* Adjust spacing from bottom */
+  right: 40px;     /* Adjust spacing from right */
+  z-index: 100;    /* Ensure it's on top */
+}
+
+.immerse-btn {
+  position: relative; /* For positioning the ::before pseudo-element (ring) */
+  width: 120px;       /* Button width */
+  height: 120px;      /* Button height (same as width for a circle) */
+  background: linear-gradient(145deg, #6200ea, #3700b3); /* Purple gradient */
+  border-radius: 50%; /* Makes it circular */
+  border: none;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 60px); /* Adjust if you have a navbar */
-  background-color: #ffffff;
-  padding: 2rem;
-  text-align: center;
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(98, 0, 234, 0.7); /* Initial shadow for pulse */
+  transition: transform 0.2s ease-out, box-shadow 0.3s ease-out;
+  overflow: visible; /* Allow ring to expand outside */
 }
 
-.home-content {
-  max-width: 600px;
+.immerse-btn:hover {
+  transform: translateY(-3px) scale(1.05); /* Slight lift and scale on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 0 10px rgba(98, 0, 234, 0); /* End state for pulse animation */
 }
 
-.home-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 1rem;
+.immerse-btn:active {
+  transform: translateY(-1px) scale(1.02);
 }
 
-.home-subtitle {
-  font-size: 1.125rem;
-  color: #555;
-  margin-bottom: 2rem;
+.immerse-btn-text {
+  position: relative; /* To ensure it's above the ring if using z-index (not strictly needed here) */
+  z-index: 2;
 }
 
-.home-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.primary-btn,
-.secondary-btn {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.primary-btn {
-  background-color: #4f46e5;
-  color: #fff;
-  z-index: 1000;
-  position: relative;
-}
-
-.primary-btn:hover {
-  background-color: #4338ca;
-}
-
-.secondary-btn {
+/* The animated ring - using ::before for simplicity */
+.immerse-btn::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%; /* Start same size as button */
+  height: 100%; /* Start same size as button */
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
   background-color: transparent;
-  color: #4f46e5;
-  border: 2px solid #4f46e5;
+  border: 3px solid rgba(139, 71, 255, 0.7); /* Lighter shade of purple for the ring */
+  opacity: 0;
+  animation: pulse-ring 2.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: 1; /* Behind the text */
 }
 
-.secondary-btn:hover {
-  background-color: #f0f0ff;
+/* If you want a second, slightly delayed ring, you can use ::after */
+.immerse-btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid rgba(139, 71, 255, 0.5); /* Slightly different ring */
+  opacity: 0;
+  animation: pulse-ring 2.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  animation-delay: 0.4s; /* Delay the second ring */
+  z-index: 1;
+}
+
+
+@keyframes pulse-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.7;
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(1.6); /* Ring expands */
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.95); /* Reset for next loop if needed, but opacity 0 hides it */
+    opacity: 0;
+  }
 }
