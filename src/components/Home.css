@@ -23,21 +23,54 @@
 }
 
 .home-title-center {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #fff;
   pointer-events: auto;
 }
 
+.home-header-glass {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 70px;
+  padding: 0 0 10px 0;
+  z-index: 10;
+  /* Glassmorphism base */
+  background: linear-gradient(120deg, rgba(80, 7, 7, 0.12) 0%, rgba(56,189,248,0.18) 50%, rgba(37, 6, 92, 0.15) 100%);
+  background-size: 200% 200%;
+  animation: glass-move 3s ease-in-out infinite;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.18); */
+}
+@keyframes glass-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /* Main Content */
 .home-container {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
-  margin-top: 70px;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Bottom Right Animated Button */
@@ -132,4 +165,46 @@
     transform: translate(-50%, -50%) scale(0.95); /* Reset for next loop if needed, but opacity 0 hides it */
     opacity: 0;
   }
+}
+
+.home-top-image {
+  position: absolute;
+  top: -40px;
+  right: 40px;
+  height: 170px;
+  width: 170px;
+  object-fit: contain;
+  z-index: 11;
+}
+
+.center-glass-pane {
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 120px;
+  /* Glassmorphism base */
+  background: linear-gradient(120deg, rgba(80, 7, 7, 0.12) 0%, rgba(56,189,248,0.18) 50%, rgba(37, 6, 92, 0.15) 100%);
+  background-size: 200% 200%;
+  animation: glass-move 3s ease-in-out infinite;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+}
+
+.center-glass-text {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
 }

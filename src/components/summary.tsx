@@ -11,7 +11,7 @@ import styles from './Summary.module.css';
 import RatioAnalysisPage from "./ratio";
 import WaterfallChart from './waterfall';
 import SankeyChart from './Sankey';
-
+import DashboardPage from "./DashboardPage";
 
 interface ManualKPIData {
     title: string;
@@ -218,7 +218,8 @@ const Summary: React.FC = () => {
     return (
         <div className={styles.summaryContainer}>
             <div className={styles.summaryHeader}>
-                <h2 className={styles.financialSummaryHeading}>FINANCIAL DASHBOARD</h2>
+                <DashboardPage />
+                <h2 className={styles.financialSummaryHeading}>Snapshot of Financials</h2>
                 <div className={styles.headerButtons}>
                     <button
                         className={styles.homeIconButton}

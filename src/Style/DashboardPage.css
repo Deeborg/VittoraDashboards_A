@@ -1,0 +1,169 @@
+/* Import a Google Font (e.g., Poppins or Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #1a1c29; /* Dark background */
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-page {
+  padding: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns for KPI cards */
+  gap: 20px;
+}
+
+/* --- KPI Card --- */
+.kpi-card {
+  background-color: #232738; /* Slightly lighter dark for cards */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px; /* Ensure cards have some height */
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.kpi-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.kpi-card-title {
+  font-size: 0.9rem;
+  color: #a0a7c4; /* Lighter text for title */
+  font-weight: 500;
+}
+
+.kpi-card-icon {
+  font-size: 1.8rem;
+  color: #6366f1; /* Primary accent color */
+  background-color: rgba(99, 102, 241, 0.15);
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kpi-card-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.kpi-card-sparkline {
+  height: 50px; /* Height for the sparkline chart */
+  width: 100%;
+  margin-top: auto; /* Pushes sparkline to the bottom if card content is less */
+}
+
+/* --- Radial Chart Card --- */
+.radial-chart-card-wrapper {
+  /* This wrapper helps to center the card if it's in a larger grid cell */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: span 1; /* Default span, can be overridden for larger radial chart */
+}
+
+@media (min-width: 992px) { /* Larger screens, make radial chart span more columns */
+  .radial-chart-card-wrapper-prominent {
+    grid-column: span 2; /* Example: make it wider */
+    /* If you want it to take the space of 2 kpi cards side-by-side, adjust grid-template-columns */
+  }
+}
+
+
+.radial-chart-card {
+  background-color: #232738;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 320px; /* Max width for the radial chart card itself */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.radial-chart-container {
+  width: 180px; /* Size of the circular progress bar */
+  height: 180px;
+  margin-bottom: 15px;
+  position: relative; /* For centering icon inside */
+}
+
+.radial-chart-icon-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.5rem; /* Size of the icon inside the circle */
+  color: #6366f1; /* Accent color */
+}
+
+.radial-chart-label {
+  font-size: 0.9rem;
+  color: #a0a7c4;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* Custom styles for react-circular-progressbar */
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: #6366f1; /* Accent color for the progress path */
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+.CircularProgressbar .CircularProgressbar-trail {
+  stroke: #3b3e5e; /* Slightly darker trail */
+}
+.CircularProgressbar .CircularProgressbar-text {
+  fill: #ffffff; /* Text color inside */
+  font-size: 1.8rem; /* Percentage text size */
+  font-weight: 600;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+/* Responsive adjustments for the grid */
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Stack cards on very small screens */
+  }
+  .kpi-card-value {
+    font-size: 1.8rem;
+  }
+  .dashboard-header {
+    font-size: 1.5rem;
+  }
+}

@@ -13,14 +13,26 @@ export default function Home() {
   return (
     <div className="home-background">
       <MoneyFlowBackground />
-      {/* Top Bar */}
-      <div className="home-top-bar">
-        <div className="home-logo">Vittora</div>
-        <div className="home-title-center">Finance Digital Twin</div>
+      {/* Glassmorphism Header Container */}
+      <div className="home-header-glass">
+        <div className="home-top-bar">
+          <div className="home-logo">Vittora</div>
+          {/* <div className="home-title-center">Finance Digital Twin</div> */}
+          <img
+            className="home-top-image"
+            src=".\asset\ajalabs.png" // Change this path to your image
+            alt="Top Right"
+          />          
+        </div>
       </div>
       {/* Main Content Centered */}
       <div className="home-container glass-container">
       </div>
+      <div className="home-container glass-container">
+        <div className="center-glass-pane">
+          <span className="center-glass-text">Meet your Finance Digital Twin</span>
+        </div>
+      </div>      
       {/* Bottom Right Animated Button */}
       <div className="home-immerse-btn-wrapper">
         <button className="immerse-btn" onClick={handleGetStarted}>
