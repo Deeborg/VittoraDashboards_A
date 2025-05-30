@@ -25,10 +25,21 @@ body {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns for KPI cards */
+  grid-template-columns: repeat(5, 1fr); /* 5 columns */
   gap: 20px;
+  align-items: stretch;
 }
 
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns on small screens */
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; /* Stack on mobile */
+  }
+}
 /* --- KPI Card --- */
 .kpi-card {
   background-color: #232738; /* Slightly lighter dark for cards */
@@ -39,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px; /* Ensure cards have some height */
+  height: 140px; /* Ensure cards have some height */
 }
 
 .kpi-card:hover {
@@ -117,14 +128,14 @@ body {
 
 .radial-chart-container {
   width: 180px; /* Size of the circular progress bar */
-  height: 180px;
+  height: 230px;
   margin-bottom: 15px;
   position: relative; /* For centering icon inside */
 }
 
 .radial-chart-icon-center {
   position: absolute;
-  top: 50%;
+  top: 95%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2.5rem; /* Size of the icon inside the circle */
@@ -137,6 +148,8 @@ body {
   margin-top: 10px;
   font-weight: 500;
 }
+
+
 
 /* Custom styles for react-circular-progressbar */
 .CircularProgressbar .CircularProgressbar-path {

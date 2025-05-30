@@ -15,6 +15,8 @@ import {
   FiLayers, // For the radial chart center
 } from 'react-icons/fi'; // Example icons, choose what fits
 
+import { IconBaseProps } from "react-icons";
+
 const DashboardPage: React.FC = () => {
   // Sample data for sparklines (replace with your actual data)
   const salesSparkline = [
@@ -39,14 +41,14 @@ const DashboardPage: React.FC = () => {
         <KpiCard
           title="# Sales"
           value="12"
-          icon={FiTrendingUp}
+          icon={FiTrendingUp as React.ComponentType<IconBaseProps>}
           sparklineData={salesSparkline}
           trend="up"
         />
         <KpiCard
           title="Commission Paid ($)"
           value="491,121"
-          icon={FiDollarSign}
+          icon={FiDollarSign as React.ComponentType<IconBaseProps>}
           sparklineData={revenueSparkline.map(d => ({...d, value: d.value / 10000}))} // Scale down for display
           trend="up"
           iconBgColor="rgba(52, 211, 153, 0.15)" // Greenish icon bg
@@ -57,7 +59,7 @@ const DashboardPage: React.FC = () => {
         <KpiCard
           title="$ Sales"
           value="3,607,894"
-          icon={FiDollarSign}
+          icon={FiDollarSign as React.ComponentType<IconBaseProps>}
           sparklineData={revenueSparkline}
           trend="up"
           iconBgColor="rgba(52, 211, 153, 0.15)"
@@ -66,7 +68,7 @@ const DashboardPage: React.FC = () => {
         <KpiCard
           title="Average Days on Market"
           value="46"
-          icon={FiHome}
+          icon={FiHome as React.ComponentType<IconBaseProps>}
           sparklineData={defaultSparkline.slice().reverse()} // Example of different trend
           trend="down" // Assuming lower is better
           iconBgColor="rgba(251, 146, 60, 0.15)" // Orange icon bg
@@ -78,7 +80,7 @@ const DashboardPage: React.FC = () => {
           <RadialChartCard
             percentage={24}
             label="Sold Homes Per Available Inventory Ratio"
-            icon={FiLayers} // Example central icon
+            icon={FiLayers as React.ComponentType<IconBaseProps>} // Example central icon
             pathColor="#38bdf8" // A nice sky blue
           />
         </div>
@@ -88,21 +90,21 @@ const DashboardPage: React.FC = () => {
         <KpiCard
           title="# Properties Listed"
           value="60"
-          icon={FiClipboard}
+          icon={FiClipboard as React.ComponentType<IconBaseProps>}
           sparklineData={defaultSparkline}
           trend="neutral"
         />
          <KpiCard
           title="# New Listings"
           value="18"
-          icon={FiFileText}
+          icon={FiFileText as React.ComponentType<IconBaseProps>}
           sparklineData={defaultSparkline}
           trend="up"
         />
         <KpiCard
           title="# Expired"
           value="2"
-          icon={FiAlertOctagon}
+          icon={FiAlertOctagon as React.ComponentType<IconBaseProps>}
           sparklineData={salesSparkline.slice(0,3)} // Shorter data
           trend="down" // Assuming lower is better
           iconBgColor="rgba(248, 113, 113, 0.15)" // Reddish icon bg
@@ -111,7 +113,7 @@ const DashboardPage: React.FC = () => {
         <KpiCard
           title="# Lost"
           value="2"
-          icon={FiArchive}
+          icon={FiArchive as React.ComponentType<IconBaseProps>}
           sparklineData={defaultSparkline.slice(0,4)}
           trend="down"
           iconBgColor="rgba(248, 113, 113, 0.15)"

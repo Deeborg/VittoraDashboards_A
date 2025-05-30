@@ -170,3 +170,56 @@
     max-width: 90vw;
   }
 }
+/* In Summary.module.css */
+
+.profitButtonContainer {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center;
+  margin-bottom: 16px; /* Space between buttons and the chart below */
+  gap: 10px; /* Space between the two buttons */
+  flex-shrink: 0; /* Prevent this container from shrinking */
+}
+
+.profitButton {
+  width : 120px;
+  padding: 6px 16px; /* Adjust padding for desired button size */
+  border-radius: 20px; /* Pill shape */
+  border: 1px solid #444; /* Default border for inactive button */
+  background: #1a1c29;   /* Default background for inactive button */
+  color: #a0a7c4;        /* Default text color for inactive button */
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem; /* 14px, adjust as needed */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  outline: none; /* Remove default browser outline */
+  line-height: 1.5; /* Improves vertical text alignment in button */
+}
+
+.profitButton:hover:not(.activeProfitButton) {
+  border-color: #666; /* Slightly lighter border on hover for inactive */
+  color: #cbd5e0;     /* Slightly lighter text on hover for inactive */
+}
+
+.activeProfitButton {
+  border: 2px solid #38bdf8 !important; /* Prominent blue border for active */
+  background: #232738 !important;   /* Background for active, matching image */
+  color: #38bdf8 !important;       /* Blue text for active */
+}
+
+/* Optional: Hover effect for active button, if desired */
+/*
+.activeProfitButton:hover {
+  filter: brightness(110%);
+}
+*/
+
+.radialChartContent {
+  flex-grow: 1; /* Allows this area to take up remaining vertical space */
+  display: flex;
+  align-items: center; /* Vertically center the RadialChartCard */
+  justify-content: center; /* Horizontally center the RadialChartCard */
+  min-height: 0; /* Important for flex children to prevent overflow/sizing issues */
+  width: 100%; /* Ensure it takes the full width of its parent */
+}
+

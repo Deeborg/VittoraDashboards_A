@@ -12,6 +12,30 @@ import RatioAnalysisPage from "./ratio";
 import WaterfallChart from './waterfall';
 import SankeyChart from './Sankey';
 import DashboardPage from "./DashboardPage";
+import { GiProfit } from "react-icons/gi";
+
+import KpiCard from './KpiCard';
+import RadialChartCard from './RadialChartCard';
+import '../Style/DashboardPage.css'; // Import the CSS
+
+// Import some icons from react-icons
+import {
+  FiTrendingUp,
+  FiDollarSign,
+  FiHome,
+  FiClipboard,
+  FiFileText,
+  FiAlertOctagon,
+  FiArchive,
+  FiLayers, // For the radial chart center
+  
+} from 'react-icons/fi'; // Example icons, choose what fits
+
+import { IoPersonAdd, IoPersonRemove  } from 'react-icons/io5';
+
+import { IconBaseProps } from "react-icons";
+
+
 
 interface ManualKPIData {
     title: string;
@@ -36,6 +60,29 @@ const Summary: React.FC = () => {
     const [waterfallData, setWaterfallData] = useState<any[]>([]);
     const [stackedChartData, setStackedChartData] = useState<any[]>([]);
     const[waterfallprofit , setWaterfallprofit] = useState<any[]>([])
+    const salesSparkline = [
+        { name: 'Jan', value: 236 }, { name: 'Feb', value: 351 }, { name: 'Mar', value: 415 },
+        { name: 'Apr', value: 235 }, { name: 'May', value: 143 }, { name: 'Jun', value: 243 },
+        { name: 'Jul', value: 314 }, { name: 'Aug', value: 451 }, { name: 'Sept', value: 357 },
+        { name: 'Oct', value: 572 }, { name: 'Aug', value: 452 }, { name: 'Sept', value: 434 },
+
+    ];
+    const revenueSparkline = [
+        { name: 'Jan', value: 300000 }, { name: 'Feb', value: 360000 }, { name: 'Mar', value: 320000 },
+        { name: 'Apr', value: 400000 }, { name: 'May', value: 380000 }, { name: 'Jun', value: 450000 },
+    ];
+    const churnSparkLine = [
+        { name: 'Jan', value: 10.34 }, { name: 'Feb', value: 11.52 }, { name: 'Mar', value: 13.43 },
+        { name: 'Apr', value: 3.56 }, { name: 'May', value: 5.64 }, { name: 'Jun', value: 21.34 },
+        { name: 'Jul', value: 9.34 }, { name: 'Aug', value: 8.45 }, { name: 'Sept', value: 12.45 },
+        { name: 'Oct', value: 15.56 }, { name: 'Aug', value: 7.45 }, { name: 'Sept', value: 12.34 },
+    ];    
+    const defaultSparkline = [
+        { name: 'M1', value: 5 }, { name: 'M2', value: 6 }, { name: 'M3', value: 5 },
+        { name: 'M4', value: 7 }, { name: 'M5', value: 6 }, { name: 'M6', value: 8 },
+    ];
+    const [profitType, setProfitType] = useState<'gross' | 'net'>('net');
+    const radialValue = profitType === 'gross' ? 63 : 24;
 
     const navigate = useNavigate();
 
@@ -218,7 +265,6 @@ const Summary: React.FC = () => {
     return (
         <div className={styles.summaryContainer}>
             <div className={styles.summaryHeader}>
-                <DashboardPage />
                 <h2 className={styles.financialSummaryHeading}>Snapshot of Financials</h2>
                 <div className={styles.headerButtons}>
                     <button
@@ -237,6 +283,121 @@ const Summary: React.FC = () => {
                     </button>
                 </div>
             </div>
+            <div className="dashboard-grid">
+                {/* KPI Cards - Column 1 */}
+                <KpiCard
+                title="# New Customers"
+                value="434"
+                icon={IoPersonAdd as React.ComponentType<IconBaseProps>}
+                sparklineData={salesSparkline}
+                trend="up"
+                iconBgColor="rgba(52, 211, 153, 0.15)" // Greenish icon bg
+                iconColor="#34d399"
+
+                />
+                <KpiCard
+                title="Customer Churn Rate"
+                value="12.34%"
+                icon={IoPersonRemove as React.ComponentType<IconBaseProps>}
+                sparklineData={churnSparkLine} // Scale down for display
+                trend="up"
+                iconBgColor="rgba(255, 0, 0, 0.15)" 
+                iconColor="#f42c02"
+                />
+                {/* Radial Chart Section - Modified */}
+                <div
+                    className="radial-chart-card-wrapper radial-chart-card-wrapper-prominent"
+                    style={{
+                        gridColumn: "3 / span 1",
+                        gridRow: "1 / span 2",
+                        zIndex: 2,
+                        display: 'flex', 
+                        flexDirection: 'column',
+
+                    }}
+                >
+                    {/* Container for Profit Type Buttons */}
+                    <div className={styles.profitButtonContainer}>
+                        <button
+                            onClick={() => setProfitType('gross')}
+                            className={`${styles.profitButton} ${profitType === 'gross' ? styles.activeProfitButton : ''}`}
+                        >
+                            Gross Profit
+                        </button>
+                        <button
+                            onClick={() => setProfitType('net')}
+                            className={`${styles.profitButton} ${profitType === 'net' ? styles.activeProfitButton : ''}`}
+                        >
+                            Net Profit
+                        </button>
+                    </div>
+
+                    {/* Container for the Radial Chart to manage its flex behavior */}
+                    <div className={styles.radialChartContent}>
+                        <RadialChartCard
+                            percentage={radialValue}
+                            label={profitType === 'gross' ? "Gross Profit Ratio" : "Net Profit Ratio"}
+                            icon={GiProfit as React.ComponentType<IconBaseProps>}
+                            pathColor="#38bdf8" 
+                        />
+                    </div>
+                </div>                {/* KPI Cards - Column 2 (or part of general flow) */}
+                <KpiCard
+                title="$ Sales"
+                value="3,607,894"
+                icon={FiDollarSign as React.ComponentType<IconBaseProps>}
+                sparklineData={revenueSparkline}
+                trend="up"
+                iconBgColor="rgba(52, 211, 153, 0.15)"
+                iconColor="#34d399"
+                />
+                <KpiCard
+                title="Average Days on Market"
+                value="46"
+                icon={FiHome as React.ComponentType<IconBaseProps>}
+                sparklineData={defaultSparkline.slice().reverse()} // Example of different trend
+                trend="down" // Assuming lower is better
+                iconBgColor="rgba(251, 146, 60, 0.15)" // Orange icon bg
+                iconColor="#fb923c"
+                />
+                
+                {/* Radial Chart - This can be placed to span more if needed via CSS */}
+
+
+                {/* KPI Cards - Column 3 */}
+                <KpiCard
+                title="# Properties Listed"
+                value="60"
+                icon={FiClipboard as React.ComponentType<IconBaseProps>}
+                sparklineData={defaultSparkline}
+                trend="neutral"
+                />
+                <KpiCard
+                title="# New Listings"
+                value="18"
+                icon={FiFileText as React.ComponentType<IconBaseProps>}
+                sparklineData={defaultSparkline}
+                trend="up"
+                />
+                <KpiCard
+                title="# Expired"
+                value="2"
+                icon={FiAlertOctagon as React.ComponentType<IconBaseProps>}
+                sparklineData={salesSparkline.slice(0,3)} // Shorter data
+                trend="down" // Assuming lower is better
+                iconBgColor="rgba(248, 113, 113, 0.15)" // Reddish icon bg
+                iconColor="#f87171"
+                />
+                <KpiCard
+                title="# Lost"
+                value="2"
+                icon={FiArchive as React.ComponentType<IconBaseProps>}
+                sparklineData={defaultSparkline.slice(0,4)}
+                trend="down"
+                iconBgColor="rgba(248, 113, 113, 0.15)"
+                iconColor="#f87171"
+                />
+            </div>            
 
             <div className={styles.chartLayout}>
                 <div className={styles.chartContainer}>

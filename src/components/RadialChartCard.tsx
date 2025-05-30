@@ -1,12 +1,12 @@
 import React from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css'; // Import default styles
-import { IconType } from 'react-icons';
+import { IconBaseProps } from 'react-icons';
 
 interface RadialChartCardProps {
   percentage: number;
   label: string;
-  icon?: IconType; // Optional icon for the center
+  icon?: React.ComponentType<IconBaseProps>; // Optional icon for the center
   pathColor?: string;
   textColor?: string;
   trailColor?: string;

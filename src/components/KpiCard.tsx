@@ -1,11 +1,11 @@
 import React from 'react';
-import { IconType } from 'react-icons';
+import { IconBaseProps } from 'react-icons';
 import { LineChart, Line, ResponsiveContainer, Tooltip } from 'recharts';
 
 interface KpiCardProps {
   title: string;
   value: string | number;
-  icon: IconType;
+  icon: React.ComponentType<IconBaseProps>;
   sparklineData?: { name: string; value: number }[];
   trend?: 'up' | 'down' | 'neutral'; // For coloring sparkline
   iconBgColor?: string; // Optional custom icon background
@@ -26,14 +26,14 @@ const KpiCard: React.FC<KpiCardProps> = ({
     if (trend === 'down') return '#f87171'; // Reddish
     return '#60a5fa'; // Neutral blue
   };
-
+console.log(Icon)
   return (
     <div className="kpi-card">
       <div> {/* Top content wrapper */}
         <div className="kpi-card-header">
           <span className="kpi-card-title">{title}</span>
           <div className="kpi-card-icon" style={{ backgroundColor: iconBgColor }}>
-            <Icon style={{ color: iconColor }} />
+            {Icon && <Icon color={iconColor} />}
           </div>
         </div>
         <div className="kpi-card-value">{value}</div>

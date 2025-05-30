@@ -25,7 +25,7 @@ interface Particle {
 }
 
 // --- Configuration Constants ---
-const NUM_NODES = 37; // Slightly fewer nodes might look better with motion
+const NUM_NODES = 50; // Slightly fewer nodes might look better with motion
 const MIN_NODE_RADIUS = 10;
 const MAX_NODE_RADIUS = 15;
 const NODE_COLORS = ['#607D8B', '#795548', '#4cef00', '#455A64', '#0019ef', '#ff5722', '#9c27b0', '#00bcd4', '#ffc107', '#8bc34a', '#e91e63', '#673ab7'];
