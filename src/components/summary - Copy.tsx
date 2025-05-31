@@ -24,8 +24,6 @@ import KpiCard from './KpiCard';
 import RadialChartCard from './RadialChartCard';
 import '../Style/DashboardPage.css'; // Import the CSS
 
-import LoadingMobiusStrip from './LoadingMobiusStrip';
-
 // Import some icons from react-icons
 import {
   FiTrendingUp,
@@ -234,7 +232,6 @@ const Summary: React.FC = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);            
             try {
                 const response = await fetch("/Accounts.xlsx");
                 const arrayBuffer = await response.arrayBuffer();
@@ -322,18 +319,15 @@ const Summary: React.FC = () => {
         navigate('/modules'); // Example: Navigate to a '/modules' route
     };
 
+    if (loading) return <div>Loading...</div>;
     function abbreviateNumber(value: number): string {
-        if (value >= 1_000_000_000) {
-            return (value / 1_000_000_000).toFixed(2) + " B";
-        } else if (value >= 1_000_000) {
-            return (value / 1_000_000).toFixed(2) + " M";
-        } else {
-            return value.toLocaleString();
-        }
-    }    
-
-    if (loading) {
-        return <LoadingMobiusStrip />;
+    if (value >= 1_000_000_000) {
+        return (value / 1_000_000_000).toFixed(2) + " B";
+    } else if (value >= 1_000_000) {
+        return (value / 1_000_000).toFixed(2) + " M";
+    } else {
+        return value.toLocaleString();
+    }
     }    
 
     return (

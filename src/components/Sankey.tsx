@@ -50,19 +50,19 @@ const Sankey: React.FC = () => {
       { id: 'Investing Activities', balance: investingActivitiesTotal },
       { id: 'Financing Activities', balance: financingActivitiesTotal },
       // Investing Sub-nodes
-      { id: 'Purchase', balance: purchase },
-      { id: 'Disposal', balance: disposal },
+      { id: 'Purchase of Assets', balance: purchase },
+      { id: 'Disposal of Assets', balance: disposal },
       { id: 'Given to Subsidiaries', balance: givenToSubsidiaries },
       { id: 'Received from Subsidiaries', balance: receivedFromSubsidiaries },
-      { id: 'Investments (Item)', balance: investments }, // Renamed to avoid ID collision
-      { id: 'Sales of Investments (Item)', balance: salesOfInvestments }, // Renamed
-      { id: 'Fixed Deposits (Item)', balance: fd }, // Renamed
-      { id: 'Interest Received (Item)', balance: interestReceived }, // Renamed
+      { id: 'Investments', balance: investments }, // Renamed to avoid ID collision
+      { id: 'Sales of Investments', balance: salesOfInvestments }, // Renamed
+      { id: 'Fixed Deposits', balance: fd }, // Renamed
+      { id: 'Interest Received', balance: interestReceived }, // Renamed
       // Financing Sub-nodes
-      { id: 'Borrow (Item)', balance: borrow }, // Renamed
-      { id: 'Repayment of Borrow (Item)', balance: repaymentOfBorrow }, // Renamed
-      { id: 'Finance Cost (Item)', balance: financeCost }, // Renamed
-      { id: 'Dividend Paid (Item)', balance: dividendPaid }, // Renamed
+      { id: 'Borrow', balance: borrow }, // Renamed
+      { id: 'Repayment of Borrow', balance: repaymentOfBorrow }, // Renamed
+      { id: 'Finance Cost', balance: financeCost }, // Renamed
+      { id: 'Dividend Paid', balance: dividendPaid }, // Renamed
       // Final nodes
       { id: 'Closing Balance', balance: netIncreaseDecrease },
       // { id: 'Closing Balance', balance: closingBalance },
@@ -84,39 +84,39 @@ const Sankey: React.FC = () => {
 
       // Stage 2: Breakdown from Main Activity Categories to their detailed items
       // Investing Activities Breakdown
-      { source: 'Investing Activities', target: 'Purchase', value: Math.abs(purchase), originalValue: purchase },
-      { source: 'Investing Activities', target: 'Disposal', value: Math.abs(disposal), originalValue: disposal },
+      { source: 'Investing Activities', target: 'Purchase of Assets', value: Math.abs(purchase), originalValue: purchase },
+      { source: 'Investing Activities', target: 'Disposal of Assets', value: Math.abs(disposal), originalValue: disposal },
       { source: 'Investing Activities', target: 'Given to Subsidiaries', value: Math.abs(givenToSubsidiaries), originalValue: givenToSubsidiaries },
       { source: 'Investing Activities', target: 'Received from Subsidiaries', value: Math.abs(receivedFromSubsidiaries), originalValue: receivedFromSubsidiaries },
-      { source: 'Investing Activities', target: 'Investments (Item)', value: Math.abs(investments), originalValue: investments },
-      { source: 'Investing Activities', target: 'Sales of Investments (Item)', value: Math.abs(salesOfInvestments), originalValue: salesOfInvestments },
-      { source: 'Investing Activities', target: 'Fixed Deposits (Item)', value: Math.abs(fd), originalValue: fd },
-      { source: 'Investing Activities', target: 'Interest Received (Item)', value: Math.abs(interestReceived), originalValue: interestReceived },
+      { source: 'Investing Activities', target: 'Investments', value: Math.abs(investments), originalValue: investments },
+      { source: 'Investing Activities', target: 'Sales of Investments', value: Math.abs(salesOfInvestments), originalValue: salesOfInvestments },
+      { source: 'Investing Activities', target: 'Fixed Deposits', value: Math.abs(fd), originalValue: fd },
+      { source: 'Investing Activities', target: 'Interest Received', value: Math.abs(interestReceived), originalValue: interestReceived },
 
       // Financing Activities Breakdown
-      { source: 'Financing Activities', target: 'Borrow (Item)', value: Math.abs(borrow), originalValue: borrow },
-      { source: 'Financing Activities', target: 'Repayment of Borrow (Item)', value: Math.abs(repaymentOfBorrow), originalValue: repaymentOfBorrow },
-      { source: 'Financing Activities', target: 'Finance Cost (Item)', value: Math.abs(financeCost), originalValue: financeCost },
-      { source: 'Financing Activities', target: 'Dividend Paid (Item)', value: Math.abs(dividendPaid), originalValue: dividendPaid },
+      { source: 'Financing Activities', target: 'Borrow', value: Math.abs(borrow), originalValue: borrow },
+      { source: 'Financing Activities', target: 'Repayment of Borrow', value: Math.abs(repaymentOfBorrow), originalValue: repaymentOfBorrow },
+      { source: 'Financing Activities', target: 'Finance Cost', value: Math.abs(financeCost), originalValue: financeCost },
+      { source: 'Financing Activities', target: 'Dividend Paid', value: Math.abs(dividendPaid), originalValue: dividendPaid },
       
       // Stage 3: From Individual Breakdown Items (and Operating Activities) to Net Increase/Decrease
       // Each detailed item contributes to the final net change.
       // Operating Activities flow directly as it has no further breakdown here.
       { source: 'Operating Activities', target: 'Closing Balance', value: Math.abs(operatingActivitiesTotal), originalValue: operatingActivitiesTotal },
 
-      { source: 'Purchase', target: 'Closing Balance', value: Math.abs(purchase), originalValue: purchase },
-      { source: 'Disposal', target: 'Closing Balance', value: Math.abs(disposal), originalValue: disposal },
+      { source: 'Purchase of Assets', target: 'Closing Balance', value: Math.abs(purchase), originalValue: purchase },
+      { source: 'Disposal of Assets', target: 'Closing Balance', value: Math.abs(disposal), originalValue: disposal },
       { source: 'Given to Subsidiaries', target: 'Closing Balance', value: Math.abs(givenToSubsidiaries), originalValue: givenToSubsidiaries },
       { source: 'Received from Subsidiaries', target: 'Closing Balance', value: Math.abs(receivedFromSubsidiaries), originalValue: receivedFromSubsidiaries },
-      { source: 'Investments (Item)', target: 'Closing Balance', value: Math.abs(investments), originalValue: investments },
-      { source: 'Sales of Investments (Item)', target: 'Closing Balance', value: Math.abs(salesOfInvestments), originalValue: salesOfInvestments },
-      { source: 'Fixed Deposits (Item)', target: 'Closing Balance', value: Math.abs(fd), originalValue: fd },
-      { source: 'Interest Received (Item)', target: 'Closing Balance', value: Math.abs(interestReceived), originalValue: interestReceived },
+      { source: 'Investments', target: 'Closing Balance', value: Math.abs(investments), originalValue: investments },
+      { source: 'Sales of Investments', target: 'Closing Balance', value: Math.abs(salesOfInvestments), originalValue: salesOfInvestments },
+      { source: 'Fixed Deposits', target: 'Closing Balance', value: Math.abs(fd), originalValue: fd },
+      { source: 'Interest Received', target: 'Closing Balance', value: Math.abs(interestReceived), originalValue: interestReceived },
 
-      { source: 'Borrow (Item)', target: 'Closing Balance', value: Math.abs(borrow), originalValue: borrow },
-      { source: 'Repayment of Borrow (Item)', target: 'Closing Balance', value: Math.abs(repaymentOfBorrow), originalValue: repaymentOfBorrow },
-      { source: 'Finance Cost (Item)', target: 'Closing Balance', value: Math.abs(financeCost), originalValue: financeCost },
-      { source: 'Dividend Paid (Item)', target: 'Closing Balance', value: Math.abs(dividendPaid), originalValue: dividendPaid },
+      { source: 'Borrow', target: 'Closing Balance', value: Math.abs(borrow), originalValue: borrow },
+      { source: 'Repayment of Borrow', target: 'Closing Balance', value: Math.abs(repaymentOfBorrow), originalValue: repaymentOfBorrow },
+      { source: 'Finance Cost', target: 'Closing Balance', value: Math.abs(financeCost), originalValue: financeCost },
+      { source: 'Dividend Paid', target: 'Closing Balance', value: Math.abs(dividendPaid), originalValue: dividendPaid },
 
       // Stage 4: From Net Increase/Decrease to Closing Balance
       // This final link represents the change being added to the overall balance.
@@ -137,17 +137,16 @@ const Sankey: React.FC = () => {
           <div
             style={{
               width: '100%',
-              maxWidth: '2000px',
               margin: '0 auto',
               padding: '20px',
               borderRadius: '16px',
-              border: '1px solid #ddd',
+              border: '1px solid #fff',
               backgroundColor: '#ffffff',
               boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             }}
           >
             <div style={{ height: '60vh', minHeight: '400px' }}>
-              <h2 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '0.1rem' }}>
+              <h2 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '0.1rem', color: "black", fontSize:26 }}>
                 Cash Flow 
               </h2>
               <ResponsiveSankey

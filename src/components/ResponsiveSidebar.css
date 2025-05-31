@@ -4,7 +4,7 @@
   }
   
   .sidebar {
-    background: #4343af;
+    background: linear-gradient(135deg, #7474c2 60%, #a8aeaf 100%);
     color: white;
     transition: width 0.3s ease;
     height: 100%;
@@ -124,7 +124,7 @@
     position: absolute;
     top: 38px;
     right: 38px;
-    height: 60px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
     width: auto; /* Maintain aspect ratio */
   }
   

@@ -19,7 +19,7 @@ const formatNumber = (num: number): string => {
   let formattedValue: string;
 
   if (absNum >= 1_000_000_000) {
-    formattedValue = `${(absNum / 1_000_000_000).toFixed(2)} Bn`;
+    formattedValue = `${(absNum / 1_000_000_000).toFixed(2)} B`;
   } else if (absNum >= 1_000_000) {
     formattedValue = `${(absNum / 1_000_000).toFixed(2)} M`;
   } else if (absNum >= 1_00_00_00_000) {
@@ -121,7 +121,7 @@ zeroLine.get("grid")?.setAll({
 
     xAxis.children.push(
       am5.Label.new(root, {
-        text: "Category", // You can customize or use a prop
+        text: "Items", // You can customize or use a prop
         x: am5.p50,
         centerX: am5.p50,
         centerY: am5.p100,
@@ -133,7 +133,7 @@ zeroLine.get("grid")?.setAll({
 
     yAxis.children.unshift(
       am5.Label.new(root, {
-        text: "Value", // Customize as needed
+        text: "Amount in ₹", // Customize as needed
         rotation: -90,
         y: am5.p50,
         centerX: am5.p50,

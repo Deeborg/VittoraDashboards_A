@@ -1,194 +1,215 @@
 import React, { useRef, useState, useEffect } from 'react';
-import './ModulePage.Module.css'; // Import the CSS file
-import { FaHome } from 'react-icons/fa';
+import './ModulePage.Module.css'; // Your main CSS file
+import { FaHome, FaArrowUp } from 'react-icons/fa'; // Added FaArrowUp for back-to-top
 import { useNavigate } from 'react-router-dom';
+
+// Import your module detail components
 import SixPhaseInfographic from './modules/FinanceDetails';
 import CommercialDetails from './modules/CommercialDetails';
 import AuTmDetails from './modules/AutmDetails';
 import ScmDetails from './modules/ScmDetails';
 
+// Import your central diagram image (ensure the path is correct)
+// If 'asset' is in your 'public' folder: const modulesDiagram = "/asset/modules.png";
+// If 'asset' is relative to this file (e.g., src/pages/asset/):
+const modulesDiagram = './asset/modules.png';
+
+// Define ModuleDetail interface (as above, or import it)
+export interface ModuleDetail {
+  id: string;
+  displayText: string;
+  abbreviation: string;
+  color: string;
+  pillPositionClass: string;
+  detailsComponent: React.FC<any>;
+}
+
+// --- ModulePill Sub-Component ---
+interface ModulePillProps {
+  module: ModuleDetail;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+const ModulePill: React.FC<ModulePillProps> = ({ module, isActive, onClick }) => {
+  return (
+    <div
+      className={`module-pill ${module.pillPositionClass} ${isActive ? 'active' : ''}`}
+      onClick={onClick}
+      style={{ backgroundColor: !isActive ? module.color : undefined /* Active style via CSS */ }}
+      title={`Learn more about ${module.displayText}`}
+      role="button"
+      aria-pressed={isActive}
+      tabIndex={0} // Make it focusable
+      onKeyDown={(e) => { // Keyboard accessibility
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault(); // Prevent spacebar scroll
+          onClick();
+        }
+      }}
+    >
+      <span className="module-text">{module.displayText} ({module.abbreviation})</span>
+    </div>
+  );
+};
+
+
+// --- KeyModulesPage Main Component ---
 const KeyModulesPage: React.FC = () => {
     const navigate = useNavigate();
-
-    // State to keep track of the currently active/selected module
     const [activeModule, setActiveModule] = useState<string | null>(null);
 
-    // Create refs for each section you want to scroll to
+    // Refs for each module detail section
     const fpaRef = useRef<HTMLDivElement>(null);
     const cpxRef = useRef<HTMLDivElement>(null);
     const scmRef = useRef<HTMLDivElement>(null);
     const autmRef = useRef<HTMLDivElement>(null);
-    // Ref for the top section (circular diagram area)
-    const topSectionRef = useRef<HTMLDivElement>(null);
 
-    // Map module names to their respective refs for easier access
-    const moduleRefs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
-        finance: fpaRef,
-        commercial: cpxRef,
-        scm: scmRef,
-        autm: autmRef,
+    // Ref for the scrollable content area's top (where the diagram is)
+    const topContentRef = useRef<HTMLDivElement>(null);
+    // Ref for the scroll wrapper itself, to control its scroll position
+    const scrollWrapperRef = useRef<HTMLDivElement>(null);
+
+
+    // --- Module Configuration Data ---
+    const moduleDataList: ModuleDetail[] = [
+      {
+        id: 'finance',
+        displayText: 'Finance Planning and Analysis',
+        abbreviation: 'FP&A',
+        color: '#FFA726', // Orange
+        pillPositionClass: 'finance-pill-pos',
+        detailsComponent: SixPhaseInfographic,
+      },
+      {
+        id: 'commercial',
+        displayText: 'Commercial and Pricing Excellence',
+        abbreviation: 'CPX',
+        color: '#8BC34A', // Green
+        pillPositionClass: 'commercial-pill-pos',
+        detailsComponent: CommercialDetails,
+      },
+      {
+        id: 'scm',
+        displayText: 'Supply Chain Management',
+        abbreviation: 'SCM',
+        color: '#EF5350', // Red
+        pillPositionClass: 'scm-pill-pos',
+        detailsComponent: ScmDetails,
+      },
+      {
+        id: 'autm',
+        displayText: 'Autonomous Treasury Management',
+        abbreviation: 'AuTM',
+        color: '#29B6F6', // Blue
+        pillPositionClass: 'autm-pill-pos',
+        detailsComponent: AuTmDetails,
+      },
+    ];
+
+    // Map module IDs to their refs for scrolling
+    const moduleRefsMap: Record<string, React.RefObject<HTMLDivElement | null>> = {
+      finance: fpaRef,
+      commercial: cpxRef,
+      scm: scmRef,
+      autm: autmRef,
     };
 
     const handleGoHome = () => {
         navigate('/');
     };
 
-    // Function to scroll to a specific ref
-    const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
-        if (ref.current) {
-            ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Function to scroll a specific element into view within the scrollWrapper
+    const scrollToSection = (targetRef: React.RefObject<HTMLDivElement | null>) => {
+        if (targetRef.current && scrollWrapperRef.current) {
+            targetRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     };
 
-    // Handles the click on a module button
-    const handleModuleClick = (moduleName: string) => {
-        // If the clicked module is already active, deactivate it (hide content)
-        if (activeModule === moduleName) {
-            setActiveModule(null); // Deselect the button and hide content
-            // Scroll back to top when module is deselected
-            if (topSectionRef.current) {
-                scrollToSection(topSectionRef);
+    const handleModuleClick = (moduleId: string) => {
+        if (activeModule === moduleId) {
+            setActiveModule(null);
+            if (topContentRef.current) {
+                scrollToSection(topContentRef);
             }
         } else {
-            // Otherwise, activate the new module and show its content
-            setActiveModule(moduleName);
-            // Scroll to the content area after a slight delay to ensure it's rendered
+            setActiveModule(moduleId);
             setTimeout(() => {
-                const ref = moduleRefs[moduleName]; // Get the correct ref from the map
-                if (ref && ref.current) {
-                    scrollToSection(ref);
+                const targetRef = moduleRefsMap[moduleId];
+                if (targetRef && targetRef.current) {
+                    scrollToSection(targetRef);
                 }
-            }, 100);
+            }, 100); // Delay for DOM update
         }
     };
 
-    // Handles the click on the "Back to Top" button
     const handleBackToTop = () => {
-        setActiveModule(null); // Hide the currently active module content
-        if (topSectionRef.current) {
-            scrollToSection(topSectionRef); // Scroll back to the top section
+        setActiveModule(null); // Optionally deselect module
+        if (topContentRef.current) {
+            scrollToSection(topContentRef);
         }
     };
 
-    // useEffect hook to disable/enable body scrolling
+    // Optional: Show/hide back-to-top button based on scroll position
+    const [showBackToTop, setShowBackToTop] = useState(false);
     useEffect(() => {
-        // Disable scrolling when the component mounts
-        document.body.style.overflow = 'hidden';
-
-        // Re-enable scrolling when the component unmounts (cleanup function)
-        return () => {
-            document.body.style.overflow = 'auto';
+        const scrollWrapper = scrollWrapperRef.current;
+        const handleScroll = () => {
+            if (scrollWrapper) {
+                setShowBackToTop(scrollWrapper.scrollTop > 200 && activeModule !== null); // Show if scrolled down & module active
+            }
         };
-    }, []); // Empty dependency array means this effect runs once on mount and once on unmount
+        scrollWrapper?.addEventListener('scroll', handleScroll);
+        return () => scrollWrapper?.removeEventListener('scroll', handleScroll);
+    }, [activeModule]); // Re-check when activeModule changes
 
     return (
-        // The main container is set to hide overflow to prevent manual scrolling
-        <div className="key-modules-container" style={{ overflowY: 'hidden', height: '100vh', position: 'relative' }}>
-            <header className="key-modules-header" ref={topSectionRef}> {/* Attach ref to the header */}
-                <button className="key-modules-button" onClick={handleGoHome} title="Go to Home">
-                    {/* Render the home icon */}
-                    {React.createElement(FaHome as React.FC<any>, { size: 35 })}
+        <div className="key-modules-container">
+            <header className="key-modules-header">
+                <button className="home-button" onClick={handleGoHome} title="Go to Home">
+                    <FaHome size={28} />
                 </button>
                 <h1>KEY MODULES</h1>
             </header>
 
-            <div className="modules-content">
-                <div className="circular-diagram-wrapper">
-                    {/* The main image in the center */}
-                    <img src="./asset/modules.png" alt="Key Modules Diagram" className="circular-diagram-image" />
-
-                    {/* Module Text Containers - Add onClick handlers and dynamic active class */}
-                    {/* The 'active' class can be used in CSS to style the active button */}
-                    <div
-                        className={`module-text-container finance ${activeModule === 'finance' ? 'active' : ''}`}
-                        onClick={() => handleModuleClick('finance')}
-                    >
-                        <span className="module-text">Finance Planning and Analysis (FP&A)</span>
-                    </div>
-
-                    <div
-                        className={`module-text-container commercial ${activeModule === 'commercial' ? 'active' : ''}`}
-                        onClick={() => handleModuleClick('commercial')}
-                    >
-                        <span className="module-text">Commercial and Pricing Excellence (CPX)</span>
-                    </div>
-
-                    <div
-                        className={`module-text-container scm ${activeModule === 'scm' ? 'active' : ''}`}
-                        onClick={() => handleModuleClick('scm')}
-                    >
-                        <span className="module-text">Supply Chain Management (SCM)</span>
-                    </div>
-
-                    <div
-                        className={`module-text-container autm ${activeModule === 'autm' ? 'active' : ''}`}
-                        onClick={() => handleModuleClick('autm')}
-                    >
-                        <span className="module-text">Autonomous Treasury Management (AuTM)</span>
+            <div className="key-modules-scroll-wrapper" ref={scrollWrapperRef}>
+                <div className="modules-main-view" ref={topContentRef}>
+                    <div className="circular-diagram-wrapper">
+                        <img src={modulesDiagram} alt="Key Modules Diagram" className="circular-diagram-image" />
+                        {moduleDataList.map((module) => (
+                            <ModulePill
+                                key={module.id}
+                                module={module}
+                                isActive={activeModule === module.id}
+                                onClick={() => handleModuleClick(module.id)}
+                            />
+                        ))}
                     </div>
                 </div>
+
+                {moduleDataList.map((module) => {
+                    const DetailComponent = module.detailsComponent;
+                    return (
+                        <div
+                            key={`${module.id}-details`}
+                            className="module-details-section"
+                            ref={moduleRefsMap[module.id]}
+                            style={{ display: activeModule === module.id ? 'block' : 'none' }}
+                        >
+                            {/* <h2>{module.displayText} Details</h2> */}
+                            <DetailComponent />
+                        </div>
+                    );
+                })}
             </div>
 
-            {/* Content Sections for each module */}
-            {/* The 'display' style property is used to show/hide the content based on activeModule state */}
-            <div
-                className="module-details-section"
-                ref={fpaRef}
-                style={{ display: activeModule === 'finance' ? 'block' : 'none' }}
-            >
-                <SixPhaseInfographic />
-            </div>
-
-            <div
-                className="module-details-section"
-                ref={cpxRef}
-                style={{ display: activeModule === 'commercial' ? 'block' : 'none' }}
-            >
-                <CommercialDetails />
-            </div>
-
-            <div
-                className="module-details-section"
-                ref={scmRef}
-                style={{ display: activeModule === 'scm' ? 'block' : 'none' }}
-            >
-                <ScmDetails />
-            </div>
-
-            <div
-                className="module-details-section"
-                ref={autmRef}
-                style={{ display: activeModule === 'autm' ? 'block' : 'none' }}
-            >
-                <AuTmDetails />
-            </div>
-
-            {/* Back to Top Button */}
-            {activeModule && ( // Only render if a module is active
+            {showBackToTop && (
                 <button
                     className="back-to-top-button"
                     onClick={handleBackToTop}
                     title="Back to Top"
-                    style={{
-                        position: 'fixed',
-                        bottom: '20px',
-                        right: '20px',
-                        backgroundColor: '#007bff',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '50%',
-                        width: '50px',
-                        height: '50px',
-                        fontSize: '24px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
-                        zIndex: 1000,
-                    }}
                 >
-                    &#x2191; {/* Up arrow character */}
+                    <FaArrowUp />
                 </button>
             )}
         </div>

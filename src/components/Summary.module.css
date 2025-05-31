@@ -105,15 +105,17 @@
 }
 
 .chartContainer {
-  flex: 1;
-  min-width: 500px; /* Prevent charts from getting too narrow */
-  max-width: 800px; /* Optional: limit width for better layout */
-  height: 800px;
-  background-color: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  flex: 1 1 400px;
+  min-width: 320px;
+  max-width: 100%;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 16px #e3e6ee;
+  padding: 24px 12px;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;  transition: transform 0.2s ease;
 }
 
 .chartContainer:hover {
@@ -223,3 +225,72 @@
   width: 100%; /* Ensure it takes the full width of its parent */
 }
 
+.exploreModulesButton {
+  display: inline-block;
+  border: 2px solid #222;
+  border-radius: 1.5em;
+  background: #fff;
+  padding: 0.4em 1.2em;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  box-shadow: 2px 2px 6px #030f46;
+}
+
+.exploreModulesButton:hover {
+  box-shadow: 4px 4px 12px #bbb;
+}
+
+.exploreModulesContent {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.exploreModulesIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #222;
+  background: #fff;
+  object-fit: contain;
+  padding: 2px;
+}
+
+.exploreModulesText {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #222;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+/* LoadingMobiusStrip.module.css */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    /* Background gradient similar to the reference image's context */
+    background: radial-gradient(circle, #e8eff5 30%, #cdd7e0 100%);
+    position: fixed; /* Cover the whole page */
+    top: 0;
+    left: 0;
+    z-index: 9999; /* Ensure it's on top of other content */
+    overflow: hidden; /* Prevent scrollbars if canvas calculation is slightly off */
+}
+
+.mobiusCanvasContainer {
+    width: 350px; /* Adjust size of the 3D canvas as needed */
+    height: 350px;
+    margin-bottom: 25px; /* Space between animation and text */
+}
+
+.loadingText {
+    font-size: 1.6em; /* Adjust text size as needed */
+    color: #2c3e50; /* A dark, neutral text color */
+    font-weight: 500; /* Medium font weight */
+    text-align: center;
+    text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle shadow for better readability */
+}

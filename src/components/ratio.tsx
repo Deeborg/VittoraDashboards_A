@@ -19,7 +19,7 @@ interface ExcelRatioRow {
 
 const RatioAnalysisPage: React.FC = () => {
   const [allRatiosData, setAllRatiosData] = useState<RatioData[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(['Capital Structure Ratios']);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedCurveCategory, setSelectedCurveCategory] = useState<string | null>(null); // State for curve selection
 
@@ -34,7 +34,7 @@ const RatioAnalysisPage: React.FC = () => {
       ratios: ['Debt Service Coverage Ratio', 'Interest Coverage Ratio', 'Capital Gearing Ratio'],
     },
     'Return on Sales': {
-      ratios: ['Gross Profit', 'Net Profit', 'Operating Profit Margin', 'Pretax Margin'],
+      ratios: ['Gross Profit', 'Pretax Margin', 'Operating Profit Margin', 'Net Profit'],
     },
     'Return on Investment': {
       ratios: ['Return on Assets', 'Return on Capital Employed', 'Return on Equity'],
@@ -80,38 +80,38 @@ const RatioAnalysisPage: React.FC = () => {
     ],
     'Gross Profit': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.25, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.75, color: ' #22c55e' },
+      { start: 25, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 75, color: ' #22c55e' },
     ],
     'Net Profit': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.1, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.3, color: ' #22c55e' },
+      { start: 10, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 30, color: ' #22c55e' },
     ],
     'Operating Profit Margin': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.15, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.5, color: ' #22c55e' },
+      { start: 15, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 50, color: ' #22c55e' },
     ],
     'Pretax Margin': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.2, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.6, color: ' #22c55e' },
+      { start: 20, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 60, color: ' #22c55e' },
     ],
     'Return on Assets': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.05, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.1, color: ' #22c55e' },
+      { start: 5, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 10, color: ' #22c55e' },
     ],
     'Return on Capital Employed': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.12, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.2, color: ' #22c55e' },
+      { start: 12, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 20, color: ' #22c55e' },
     ],
     'Return on Equity': [
       { start: 0, color: ' #ef4444' },
-      { start: 0.1, color: ' rgba(238, 235, 56, 0.93)' },
-      { start: 0.2, color: ' #22c55e' },
+      { start: 10, color: ' rgba(238, 235, 56, 0.93)' },
+      { start: 20, color: ' #22c55e' },
     ],
     'Earnings Per Share': [
       { start: 0, color: ' #ef4444' },
@@ -186,7 +186,7 @@ const RatioAnalysisPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>RATIO ANALYSIS</h1>
+      <h1 style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '0.1rem', color: "black", fontSize:26 }}>Ratio Analysis</h1>
       <p className={styles.description}>{pageSummary}</p>
 
       <div className={styles.contentWrapper}>
@@ -263,7 +263,18 @@ const RatioAnalysisPage: React.FC = () => {
               gaugeTitle = 'Price Earning Ratio';
             }
 
-            if (ratio.name === 'Equity Ratio' || ratio.name === 'Debt Ratio' || ratio.name === 'Capital Gearing Ratio' || ratio.name === 'Gross Profit' || ratio.name === 'Net Profit' || ratio.name === 'Operating Profit Margin' || ratio.name === 'Pretax Margin' || ratio.name === 'Return on Assets' || ratio.name === 'Return on Capital Employed' || ratio.name === 'Return on Equity') {
+            if (
+              ratio.name === 'Equity Ratio' ||
+              ratio.name === 'Debt Ratio' ||
+              ratio.name === 'Capital Gearing Ratio' ||
+              ratio.name === 'Gross Profit' ||
+              ratio.name === 'Net Profit' ||
+              ratio.name === 'Operating Profit Margin' ||
+              ratio.name === 'Pretax Margin' ||
+              ratio.name === 'Return on Assets' ||
+              ratio.name === 'Return on Capital Employed' ||
+              ratio.name === 'Return on Equity'
+            ) {
               maxVal = 1;
             } else if (ratio.name === 'Debt to Equity Ratio') {
               maxVal = 5;
@@ -271,22 +282,41 @@ const RatioAnalysisPage: React.FC = () => {
               maxVal = 20;
             } else if (ratio.name === 'Price-Earnings(P/E)Ratio') {
               maxVal = 100;
-            } else if (ratio.name === 'Debt Service Coverage Ratio' || ratio.name === 'Interest Coverage Ratio' || ratio.name === 'Book Value Per Share') {
+            } else if (
+              ratio.name === 'Debt Service Coverage Ratio' ||
+              ratio.name === 'Interest Coverage Ratio' ||
+              ratio.name === 'Book Value Per Share'
+            ) {
               maxVal = 200;
             } else if (ratio.name === 'Market Value Per Share') {
               maxVal = 1000;
             }
+
+            // List of ratios to show as percentage
+            const percentRatios = [
+              'Gross Profit',
+              'Pretax Margin',
+              'Operating Profit Margin',
+              'Net Profit',
+              'Return on Assets',
+              'Return on Capital Employed',
+              'Return on Equity'
+            ];
+
+            const isPercent = percentRatios.includes(ratio.name);
+
             return (
               <GaugeChart
                 key={ratio.name}
                 title={gaugeTitle}
-                value={ratio.value ?? 0}
+                value={isPercent ? (ratio.value ?? 0) * 100 : ratio.value ?? 0}
                 min={minVal}
-                max={maxVal}
+                max={isPercent ? 100 : maxVal}
                 colorRanges={ratioColorRanges[ratio.name] || [
                   { start: minVal, color: '#22c55e' },
                   { start: maxVal * 0.66, color: '#ef4444' }
                 ]}
+                // valueSuffix={isPercent ? '%' : undefined} // If GaugeChart supports this prop
               />
             );
           })}

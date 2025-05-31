@@ -1,7 +1,7 @@
 import React, { useState, ReactNode } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./ResponsiveSidebar.css";
-
+import { FaChartBar, FaBook, FaChartLine, FaMoneyBillWave } from "react-icons/fa";
 interface Props {
   children: ReactNode;
 }
@@ -57,7 +57,7 @@ export default function ResponsiveSidebar({ children }: Props) {
           {expanded && (
             <nav className="sidebar-nav">
               <Link to="/summary" className={isSummaryPage ? "active" : ""}>
-                📊 Financial Summary
+                📊 Financial Snapshot
               </Link>
               <Link to="/modules" className={location.pathname === "/modules" ? "active" : ""}>
                 📚 Key Modules
@@ -75,7 +75,7 @@ export default function ResponsiveSidebar({ children }: Props) {
 
       <div className="main-content" style={{ marginLeft: shouldHideSidebar ? '0' : '' }}>
         <img
-          src=".\asset\logo-Picsart-BackgroundRemover.jpg"
+          src=".\asset\ajalabs_black.png"
           alt="Logo"
           className="global-logo"
         />

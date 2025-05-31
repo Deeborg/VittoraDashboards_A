@@ -1,13 +1,16 @@
 .container {
-    position: relative; /* Ensures child absolute elements stay within this container */
-    font-family: sans-serif;
-    padding: 20px;
-    background-color: #f7f8fa;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+  flex: 1 1 400px;
+  min-width: 0; /* Prevent charts from getting too narrow */
+  max-width: 100%; /* Optional: limit width for better layout */
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+.container:hover {
+  transform: scale(1.02); /* Subtle hover effect */
 }
   
   .heading {
@@ -24,18 +27,21 @@
     flex: 1;
   }
   
-  .description {
-    color: #555;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 80%;
-    max-width: 900px;
-    margin-top: 5px;
-  }
+.description {
+  color: #000000;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 900px;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .contentWrapper {
     display: flex;
     width: 100%;
     gap:40px;
+    align-items: flex-start;
 }
 
 .filterContainer {
@@ -61,6 +67,7 @@
     display: block;
     justify-content: space-between;
     align-items: center;
+    color :#000000;
   }
   
   .ratiosList {
@@ -87,14 +94,38 @@
   align-items: center;
 }
   
-  .gaugesContainer {
-    flex: 0.5; /* Remaining width for the gauges */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust minmax for gauge size */
-    grid-template-rows: auto auto; /* Force a 2x2 layout initially */
-    gap: 10px;
-    margin-top: 100px;
-  }
+.gaugesContainer {
+  flex: 1 1 0%;;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: auto auto;
+  gap: 30px;
+  margin-top: 100px;
+  background: #e3e7ee;
+  border-radius: 24px;
+  box-shadow:
+    8px 8px 24px #bec1c8,
+    -8px -8px 24px #f0eaea;
+  padding: 32px 24px;
+}
+
+/* Neomorphic pop-out for each gauge card */
+.gaugeCard, .gaugesContainer > div {
+  background: #f7f8fa;
+  border-radius: 18px;
+  box-shadow:
+    6px 6px 16px #9a9ca2,
+    -6px -6px 16px #ffffff;
+  padding: 24px 16px;
+  transition: box-shadow 0.2s;
+}
+
+.gaugeCard:hover, .gaugesContainer > div:hover {
+  box-shadow:
+    2px 2px 8px #e3e6ee,
+    -2px -2px 8px #ffffff,
+    0 0 0 4px #e0e7ff33;
+}
   
   /* Ensure empty gauges container doesn't collapse entirely */
   .gaugesContainer:empty {
@@ -105,6 +136,7 @@
   .node-group {
   cursor:pointer;
 }
+
 
 .dot {
   transition: transform 0.3s ease-in-out;
@@ -134,4 +166,10 @@
   opacity: 1;
   position:relative;
   left: calc(100% + 10px); /* Move text right */
+}
+
+.gauge-title {
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
 }

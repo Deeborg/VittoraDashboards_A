@@ -59,7 +59,7 @@ const WaterfallChart: React.FC<WaterfallProps> = ({ data, title }) => {
       am5xy.ColumnSeries.new(root, {
         xAxis,
         yAxis,
-        valueYField: "value",
+        valueYField: "Amount in ₹",
         openValueYField: "open",
         categoryXField: "category",
       })

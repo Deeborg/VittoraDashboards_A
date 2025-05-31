@@ -1,282 +1,226 @@
-/* ModulePage.Module.css */
-
+/* --- Overall Page Container --- */
 .key-modules-container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  background-color: #f9f9f9;
-  height: 100vh;
-  box-sizing: border-box;
-  border-radius: 12px;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  background-color: #f8f9fa; /* Lighter, softer background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+  position: relative; /* For fixed elements like back-to-top */
 }
 
+/* --- Header --- */
 .key-modules-header {
-  width: 100%;
+  padding: 12px 25px;
   display: flex;
-  justify-content: center; /* Center the h1 */
   align-items: center;
-  padding: 10px 20px; /* Add padding to the header itself */
-  margin-bottom: 20px; 
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
   flex-shrink: 0; /* Prevent header from shrinking */
+  z-index: 100; /* Ensure header is above other content */
 }
 
 .key-modules-header h1 {
-  font-size: 2.5em;
-  color: #23197e;
-  text-align: center;
-  /* justify-content: center;
-    display: flex; */
-    font-weight: bold;
-    flex: 1;
-    margin-top:0px;
-    margin-left: -40px;
+  margin: 0;
+  margin-left: 20px;
+  font-size: 1.75rem; /* Slightly adjusted size */
+  color: #2c3e50; /* Darker, muted blue/grey */
+  font-weight: 600;
 }
 
-.key-modules-button{
+.home-button {
   background: none;
   border: none;
-  color: #3498db;
   cursor: pointer;
-  padding: 0px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  display: flex;
+  padding: 5px;
+  color: #3498db; /* A pleasant blue */
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex; /* Align icon nicely if needed */
   align-items: center;
   justify-content: center;
-  margin-left: 5px;
-  margin-top: -70px;
-
 }
-.key-modules-button:hover {
-  background-color: #e8f5fd;
-  color: #2980b9;
-  transform: scale(1.15);
+.home-button:hover {
+  color: #2980b9; /* Darker blue on hover */
+  transform: scale(1.1);
+}
+.home-button:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
 }
 
-.modules-content {
+
+/* --- Scrollable Content Wrapper --- */
+.key-modules-scroll-wrapper {
+  flex-grow: 1; /* Takes remaining vertical space */
+  overflow-y: auto; /* Enables vertical scrolling for content within */
+  position: relative;
+}
+
+/* --- Main View (Diagram & Pills) --- */
+.modules-main-view {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 900px; /* Adjust based on your preference */
-  position: relative; /* Needed for absolute positioning of module texts */
-  margin-top: 20px;
-  flex-shrink: 0;
+  padding: 50px 20px; /* More vertical padding */
+  min-height: 400px; /* Ensure enough space for diagram and pills initially */
+  position: relative; /* For pill positioning context if not using wrapper */
 }
 
 .circular-diagram-wrapper {
-  position: relative;
-  width: 500px; /* Adjust image size as needed */
-  height: 500px; /* Adjust image size as needed */
+  position: relative; /* Pills will be positioned relative to this */
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Adjust width/max-width if your image is very large or small */
+  width: 100%;
+  max-width: 450px; /* Controls the spread of the diagram area */
 }
 
 .circular-diagram-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  max-width: 100%; /* Make it responsive within its wrapper */
+  width: 300px; /* Or a fixed size for your diagram */
+  height: auto;
+  display: block; /* Removes extra space below image */
 }
 
-.module-text-container {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 10px 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* --- ModulePill Styles --- */
+.module-pill {
+  position: absolute; /* Positioned relative to circular-diagram-wrapper */
+  padding: 10px 22px;
+  border-radius: 50px; /* Fully rounded */
+  color: white;
+  font-size: 0.85rem; /* Slightly smaller for better fit */
+  font-weight: 500;
   text-align: center;
-  font-weight: bold;
-  white-space: nowrap; /* Keep text on one line */
-  font-size: 0.95em; /* Adjust font size */
-  color: #333;
   cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-}
-.module-text-container.finance{
-    background-color: #f89a0d;
-}
-.module-text-container.commercial{
-    background-color: #6e993c;
-}
-.module-text-container.scm{
-    background-color: #bb4f4f;
-}
-.module-text-container.autm{
-    background-color: #0d6efd;
-}
-.module-text-container:not(.active):hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  filter: brightness(1.1);
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, background-color 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0,0,0,0.08); /* Softer shadow */
+  will-change: transform, box-shadow; /* Performance hint for animations */
 }
 
-/* Active (selected) state - push & pull effect with darker color */
-.module-text-container.active {
-  transform: translateY(2px);
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  border-color: rgba(0, 0, 0, 0.2);
+.module-pill:hover, .module-pill:focus-visible {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0,0,0,0.1);
+  outline: none;
+}
+.module-pill:focus-visible { /* Explicit focus style */
+    /* You can add a distinct outline or stronger shadow for focus */
+    /* E.g., box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5); */
 }
 
-/* Specific darker colors for active state */
-.module-text-container.finance.active { background-color: #d17e00; }
-.module-text-container.commercial.active { background-color: #5b7e32; }
-.module-text-container.scm.active { background-color: #a04040; }
-.module-text-container.autm.active { background-color: #3b65a0; }
-
-
-/* Positioning for each module text */
-.module-text-container.finance {
-  top: -8%; /* Adjust to move above the image */
-  left: 20%;
-  transform: translate(0%, 5%); /* Move up and center */
+.module-pill.active {
+  /* Example: Use a darker shade, border, or different shadow */
+  /* If using a specific active color different from module.color: */
+  background-color: #34495e !important; /* Darker, neutral active color - !important to override inline style */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset, 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(-1px) scale(1.01);
+  color: #ecf0f1;
+}
+.module-pill .module-text {
+  display: block; /* Ensures text wraps if too long for one line */
 }
 
-.module-text-container.commercial {
-  top: 40%;
-  left: -65%; /* Adjust to move left of the image */
-  transform: translate(0%, 5%); /* Move left and center vertically */
-}
+/* Specific positioning for each pill (adjust percentages based on your image) */
+/* These classes match 'pillPositionClass' in moduleDataList */
+.finance-pill-pos { top: -20%; left: 50%; transform: translateX(-50%); }
+.commercial-pill-pos { top: 45%; left: -35%; transform: translateY(-50%); }
+.scm-pill-pos { top: 45%; right: -35%; transform: translateY(-50%); }
+.autm-pill-pos { bottom: -20%; left: 50%; transform: translateX(-50%); }
 
-.module-text-container.scm {
-  top: 40%;
-  right: -58%; /* Adjust to move right of the image */
-  transform: translate(0%, 5%); /* Move right and center vertically */
-}
 
-.module-text-container.autm {
-  bottom: -8%; /* Adjust to move below the image */
-  left: 18%;
-  transform: translate(0%, 5%); /* Move down and center */
-}
-
-/* Add this to your ModulePage.Module.css file */
-
+/* --- Module Details Section --- */
 .module-details-section {
-    padding: 40px 20px; /* More padding for content */
-    margin: 30px;
-    margin-top: 120px; /* Center sections with margin */
-    width: 100%; /* Limit width for readability */
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    line-height: 1.6; /* Improve readability */
-    color: #444;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out;
+  /* display: none; (handled by inline style) */
+  padding: 30px 40px; /* More padding for content */
+  background-color: #ffffff; /* White background for content area */
+  /* min-height ensures it can fill the viewport if content is short, */
+  /* but overflow is handled by key-modules-scroll-wrapper */
+}
+.module-details-section h2 { /* Optional styling for titles within detail components */
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
 }
 
-.module-details-section h2 {
-    font-size: 2em;
-    color: #0056b3;
-    margin-bottom: 15px;
-    text-align: center;
+
+/* --- Back to Top Button --- */
+.back-to-top-button {
+  position: fixed; /* Relative to the viewport (or key-modules-container if it's the root) */
+  bottom: 30px;
+  right: 30px;
+  background-color: #3498db; /* Consistent blue */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px; /* Icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
+  opacity: 1; /* Will be controlled by showBackToTop logic */
+}
+.back-to-top-button:hover {
+  background-color: #2980b9;
+  transform: scale(1.1);
+}
+.back-to-top-button:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
 }
 
-.module-details-section p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-}
-.module-details-section ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    padding-left: 0;
-}
 
-.module-details-section li {
-    margin-bottom: 5px;
-}
-/* Optional: Add some spacing between sections if desired */
-.key-modules-container > .module-details-section:not(:last-child) {
-    margin-bottom: 20px;
-}
-
-/* Responsive adjustments */
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-  .key-modules-header h1 {
-    font-size: 2em;
-    margin-left: auto; /* Re-center h1 */
-    margin-right: auto; /* Re-center h1 */
-  }
+  .key-modules-header { padding: 10px 15px; }
+  .key-modules-header h1 { font-size: 1.4rem; margin-left: 15px; }
+  .home-button svg { font-size: 24px !important; } /* Adjust icon size if needed */
 
+  .modules-main-view { padding: 30px 15px; min-height: auto; }
+  .circular-diagram-wrapper { max-width: 100%; }
+  .circular-diagram-image { width: 180px; /* Smaller diagram on mobile */ }
+
+  .module-pill {
+    position: relative; /* Stack pills below diagram */
+    display: block; /* Take full available width */
+    width: 90%;
+    max-width: 320px; /* Max width for readability */
+    margin: 10px auto; /* Center them and add space */
+    font-size: 0.9rem;
+    padding: 12px 20px;
+    /* Reset absolute positioning styles */
+    top: auto; left: auto; right: auto; bottom: auto; transform: none !important;
+  }
   .circular-diagram-wrapper {
-    width: 350px;
-    height: 350px;
+    flex-direction: column; /* Stack image and then pills */
+  }
+  .circular-diagram-image {
+    margin-bottom: 25px; /* Space between image and first pill */
+  }
+  /* Remove specific absolute positioning classes on mobile as they are now relative */
+  .finance-pill-pos, .commercial-pill-pos, .scm-pill-pos, .autm-pill-pos {
+      /* All position styles are handled by .module-pill now for mobile */
   }
 
-  .module-text-container {
-    font-size: 0.8em;
-    padding: 8px 12px;
-  }
+  .module-details-section { padding: 20px; }
 
-  .module-text-container.finance {
-    transform: translate(-50%, -100%);
+  .back-to-top-button {
+    width: 45px;
+    height: 45px;
+    font-size: 18px; /* Smaller icon */
+    bottom: 20px;
+    right: 20px;
   }
-  .module-text-container.commercial {
-    transform: translate(-100%, -50%);
-  }
-  .module-text-container.scm {
-    transform: translate(100%, -50%);
-  }
-  .module-text-container.autm {
-    transform: translate(-50%, 100%);
-  }
-  .module-details-section {
-        padding: 30px 15px;
-    }
-
-    .module-details-section h2 {
-        font-size: 1.8em;
-    }
 }
 
 @media (max-width: 480px) {
-  .key-modules-header h1 {
-    font-size: 1.8em;
-  }
-
-  .circular-diagram-wrapper {
-    width: 300px;
-    height: 300px;
-  }
-
-  .module-text-container {
-    font-size: 0.7em;
-    padding: 6px 10px;
-  }
-
-  /* Further adjust positioning for very small screens if needed */
-  .module-text-container.finance {
-    top: -10px; /* More direct positioning */
-    transform: translateX(-50%);
-  }
-  .module-text-container.commercial {
-    left: -10px;
-    transform: translateY(-50%) rotate(0deg); /* No rotation for smaller screens to save space */
-  }
-  .module-text-container.scm {
-    right: -10px;
-    transform: translateY(-50%) rotate(0deg); /* No rotation */
-  }
-  .module-text-container.autm {
-    bottom: -10px;
-    transform: translateX(-50%);
-  }
-  .module-details-section {
-        padding: 20px 10px;
-    }
-
-    .module-details-section h2 {
-        font-size: 1.5em;
-    }
-
-    .module-details-section p {
-        font-size: 1em;
-    }
+  .key-modules-header h1 { font-size: 1.2rem; }
+  .circular-diagram-image { width: 150px; }
+  .module-pill { font-size: 0.85rem; padding: 10px 15px; }
+  .module-details-section { padding: 15px; }
 }
