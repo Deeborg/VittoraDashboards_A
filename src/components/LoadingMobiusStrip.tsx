@@ -1,7 +1,6 @@
-// LoadingMobiusStrip.tsx
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import styles from './LoadingMobiusStrip.module.css'; // We'll create this CSS file next
+import styles from './LoadingMobiusStrip.module.css';
 import { ParametricGeometry } from 'three-stdlib';
 
 const LoadingMobiusStrip: React.FC = () => {
@@ -11,153 +10,162 @@ const LoadingMobiusStrip: React.FC = () => {
     const sceneRef = useRef<THREE.Scene | null>(null);
     const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
     const mobiusStripRef = useRef<THREE.Mesh | null>(null);
+    const clockRef = useRef<THREE.Clock>(new THREE.Clock());
+    const animationStateRef = useRef({
+        rotationSpeed: { x: 100, y: 130 }, // degrees per second
+        colorChangeSpeed: 0.5, // hue cycles per minute
+        lastUpdateTime: 0
+    });
 
     useEffect(() => {
         if (!mountRef.current) return;
 
         const currentMount = mountRef.current;
 
-        // Scene
+        // Initialize Three.js components
         const scene = new THREE.Scene();
         sceneRef.current = scene;
 
-        // Camera
         const camera = new THREE.PerspectiveCamera(
-            75, // Field of View
-            currentMount.clientWidth / currentMount.clientHeight, // Aspect Ratio
-            0.1, // Near clipping plane
-            1000 // Far clipping plane
+            75,
+            currentMount.clientWidth / currentMount.clientHeight,
+            0.1,
+            1000
         );
-        camera.position.set(0, 0, 3.2); // Position the camera
+        camera.position.set(0, 0, 3.2);
         cameraRef.current = camera;
 
-        // Renderer
         const renderer = new THREE.WebGLRenderer({
-            antialias: true, // Smooth edges
-            alpha: true,     // Transparent background for the canvas
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance"
         });
         renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio); // Adjust for screen resolution
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         currentMount.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); // Soft white light
+        // Lighting - simplified for better performance
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         scene.add(ambientLight);
         
-        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2); // Main light
-        directionalLight1.position.set(5, 3, 5); // Positioned to cast highlights
-        scene.add(directionalLight1);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+        directionalLight.position.set(5, 3, 5);
+        scene.add(directionalLight);
 
-        const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8); // Fill light
-        directionalLight2.position.set(-5, -3, -2);
-        scene.add(directionalLight2);
-
-        // Mobius Strip Geometry
-        const R = 1.3; // Major radius of the strip
-        const stripWidth = 0.7; // Width of the strip material
+        // Mobius Strip
+        const R = 1.3;
+        const stripWidth = 0.7;
 
         const mobiusFunction = (u: number, v: number, target: THREE.Vector3) => {
-            // u and v are typically in the range [0, 1]
-            u = u * stripWidth - stripWidth / 2; // Map u to [-stripWidth/2, stripWidth/2]
-            v = v * 2 * Math.PI; // Map v to [0, 2*PI]
-
+            u = u * stripWidth - stripWidth / 2;
+            v = v * 2 * Math.PI;
             const x = (R + u * Math.cos(v / 2)) * Math.cos(v);
             const y = (R + u * Math.cos(v / 2)) * Math.sin(v);
             const z = u * Math.sin(v / 2);
             target.set(x, y, z);
         };
         
-        // ParametricGeometry(function, slices, stacks)
-        // Slices: number of segments along the v-direction (length)
-        // Stacks: number of segments along the u-direction (width)
-        const geometry = new ParametricGeometry(mobiusFunction, 200, 40); // High segments for smoothness
+        // Optimized geometry resolution
+        const geometry = new ParametricGeometry(mobiusFunction, 120, 24);
 
-        // Material
         const material = new THREE.MeshPhysicalMaterial({
-            color: 0x00ff00, // Initial color (e.g., green, will be animated)
-            metalness: 0.15,  // Low metalness for a plastic/glassy look
-            roughness: 0.05, // Very smooth for sharp reflections and glossy appearance
-            transmission: 0.85, // Controls transparency (0=opaque, 1=fully transparent glass)
-            transparent: true, // Necessary for transmission to work
-            side: THREE.DoubleSide, // Render both sides of the strip
-            ior: 1.5,        // Index of Refraction (glass is ~1.5)
-            thickness: 0.3,    // Simulates thickness for light transmission effects
+            color: 0x00aaff,
+            metalness: 0.1,
+            roughness: 0.1,
+            transmission: 0.8,
+            transparent: true,
+            side: THREE.DoubleSide,
+            ior: 1.5,
+            thickness: 0.3,
+            clearcoat: 0.5,
+            clearcoatRoughness: 0.1
         });
 
         const mobiusStrip = new THREE.Mesh(geometry, material);
         mobiusStripRef.current = mobiusStrip;
         scene.add(mobiusStrip);
 
-        // Animation loop
-        let hue = Math.random(); // Start with a random hue for variety
+        // Animation system that works even when tab is inactive
         const animate = () => {
             animationFrameIdRef.current = requestAnimationFrame(animate);
+            
+            const delta = clockRef.current.getDelta(); // Time since last frame in seconds
+            const state = animationStateRef.current;
 
             if (mobiusStripRef.current) {
-                // Spin the Mobius strip
-                mobiusStripRef.current.rotation.x += 0.07;
-                mobiusStripRef.current.rotation.y += 0.12;
-                // mobiusStripRef.current.rotation.z += 0.001; // Optional subtle z-axis spin
+                // Convert rotation speeds from degrees to radians
+                const radPerSecX = THREE.MathUtils.degToRad(state.rotationSpeed.x);
+                const radPerSecY = THREE.MathUtils.degToRad(state.rotationSpeed.y);
+                
+                // Apply rotation
+                mobiusStripRef.current.rotation.x += radPerSecX * delta;
+                mobiusStripRef.current.rotation.y += radPerSecY * delta;
 
-                // Change color over time by cycling the hue
-                hue = (hue + 0.04) % 1; // Adjust speed of color change here
+                // Time-based color animation (independent of frame rate)
+                const now = Date.now();
+                const timeDiff = now - state.lastUpdateTime;
+                const hue = ((now * 0.001 * state.colorChangeSpeed / 60) % 1);
+                
                 (mobiusStripRef.current.material as THREE.MeshPhysicalMaterial).color.setHSL(
-                    hue, // Hue (0-1 cycles through rainbow)
-                    0.75, // Saturation (0-1)
-                    0.55  // Lightness (0-1)
+                    hue,
+                    0.8,
+                    0.6
                 );
+                
+                state.lastUpdateTime = now;
             }
             
-            if (rendererRef.current && sceneRef.current && cameraRef.current) {
-                 rendererRef.current.render(sceneRef.current, cameraRef.current);
-            }
+            rendererRef.current?.render(sceneRef.current!, cameraRef.current!);
         };
 
-        animate(); // Start the animation
+        // Start animation systems
+        clockRef.current.start();
+        animationStateRef.current.lastUpdateTime = Date.now();
+        animate();
 
         // Handle window resize
         const handleResize = () => {
-            if (currentMount && rendererRef.current && cameraRef.current) {
-                const width = currentMount.clientWidth;
-                const height = currentMount.clientHeight;
+            if (!currentMount || !rendererRef.current || !cameraRef.current) return;
+            
+            const width = currentMount.clientWidth;
+            const height = currentMount.clientHeight;
 
-                cameraRef.current.aspect = width / height;
-                cameraRef.current.updateProjectionMatrix();
-                rendererRef.current.setSize(width, height);
-            }
+            cameraRef.current.aspect = width / height;
+            cameraRef.current.updateProjectionMatrix();
+            rendererRef.current.setSize(width, height);
         };
-        window.addEventListener('resize', handleResize);
+        
+        const resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(currentMount);
 
-        // Cleanup on component unmount
+        // Cleanup
         return () => {
             if (animationFrameIdRef.current) {
                 cancelAnimationFrame(animationFrameIdRef.current);
             }
-            window.removeEventListener('resize', handleResize);
+            resizeObserver.disconnect();
             
-            // Dispose of Three.js objects to free up resources
+            // Dispose of Three.js resources
             if (mobiusStripRef.current) {
                 mobiusStripRef.current.geometry.dispose();
-                if (Array.isArray(mobiusStripRef.current.material)) {
-                    mobiusStripRef.current.material.forEach(m => m.dispose());
+                const material = mobiusStripRef.current.material;
+                if (Array.isArray(material)) {
+                    material.forEach(m => m.dispose());
                 } else {
-                    (mobiusStripRef.current.material as THREE.Material).dispose();
+                    material.dispose();
                 }
-                if(sceneRef.current) sceneRef.current.remove(mobiusStripRef.current); // Remove from scene
+                scene.remove(mobiusStripRef.current);
             }
             
             if (rendererRef.current) {
-                if (currentMount && rendererRef.current.domElement) {
-                    // Check if domElement still exists before trying to remove
-                    if (currentMount.contains(rendererRef.current.domElement)) {
-                         currentMount.removeChild(rendererRef.current.domElement);
-                    }
+                rendererRef.current.dispose();
+                if (currentMount.contains(rendererRef.current.domElement)) {
+                    currentMount.removeChild(rendererRef.current.domElement);
                 }
-                rendererRef.current.dispose(); // Dispose renderer
             }
         };
-    }, []); // Empty dependency array ensures this runs once on mount and cleans up on unmount
+    }, []);
 
     return (
         <div className={styles.loadingContainer}>
