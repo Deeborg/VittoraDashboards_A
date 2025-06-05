@@ -23,7 +23,7 @@
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  transition: width var(--transition-speed) ease;
+  transition: width 0.3s ease;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -34,6 +34,9 @@
   align-items: center;
   padding: 20px 15px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.sidebar:hover {
+  width: 250px !important;
 }
 
 .sidebar-title {
@@ -53,6 +56,7 @@
   padding: 8px;
   border-radius: 50%;
   transition: all 0.2s ease;
+  z-index: 101;
 }
 
 .toggle-btn:hover {
@@ -105,62 +109,56 @@
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--sidebar-bg);
+  background: #2c3e50;
   color: white;
   padding: 8px 12px;
   border-radius: 4px;
-  margin-left: 15px;
+  margin-left: 10px;
   white-space: nowrap;
-  pointer-events: none;
+  /* pointer-events: none; */
   opacity: 0;
-  transition: opacity 0.2s ease;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 100;
 }
 
 .nav-item:hover .nav-tooltip {
   opacity: 1;
+  visibility: visible;
 }
 
+/* Add to your ResponsiveSidebar.css */
 .sidebar-footer {
-  padding: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+  border-top: 1px solid #e0e0e0;
+  padding: 10px 0;
 }
 
-.user-profile {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all var(--transition-speed) ease;
+.sidebar-footer .nav-item {
+  padding: 8px 15px;
 }
 
-.profile-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--primary-accent);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.profile-info {
+.sidebar-footer .profile-info {
   display: flex;
   flex-direction: column;
+  margin-left: 10px;
 }
 
-.profile-name {
-  font-weight: 500;
+.sidebar-footer .profile-name {
+  font-weight: 600;
   font-size: 0.9rem;
+  margin-left: 10px;
 }
 
-.profile-email {
+.sidebar-footer .profile-email {
   font-size: 0.7rem;
-  opacity: 0.8;
+  color: #777;
+  margin-left: 10px;
+}
+
+.sidebar-footer .nav-item.collapsed {
+  justify-content: center;
 }
 
 
@@ -170,7 +168,7 @@
     padding: 2rem;
     overflow-y: auto;
     position: relative; /* To position the logo */
-    transition: margin-left var(--transition-speed) ease;
+    transition: margin-left 0.3s ease;
   }
   .global-logo {
     position: absolute;

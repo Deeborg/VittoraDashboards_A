@@ -4,6 +4,7 @@ import "./ResponsiveSidebar.css";
 import { 
   FaChartBar, 
   FaBook, 
+  FaUser,
   FaChartLine, 
   FaMoneyBillWave,
   FaChevronLeft,
@@ -49,12 +50,17 @@ export default function ResponsiveSidebar({ children }: Props) {
         <aside
           className={`sidebar ${expanded ? "expanded" : "collapsed"}`}
           style={{ width: expanded ? "250px" : "80px" }}
+          onMouseEnter={() => setExpanded(true)}
+          onMouseLeave={() => setExpanded(false)}
         >
           <div className="sidebar-header-container">
             {expanded && <h1 className="sidebar-title">Vittora</h1>}
             <button
               className="toggle-btn"
-              onClick={() => setExpanded(!expanded)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpanded(!expanded);
+              }}
             >
               {expanded ? <FaChevronLeft /> : <FaChevronRight />}
             </button>
@@ -77,20 +83,30 @@ export default function ResponsiveSidebar({ children }: Props) {
             ))}
             </nav>
           <div className="sidebar-footer">
-            {expanded && (
-              <div className="user-profile">
-                <div className="profile-avatar">V</div>
-                <div className="profile-info">
-                  <span className="profile-name">AJALABS.AI</span>
-                  <span className="profile-email">info@ajalabs.ai</span>
-                </div>
-              </div>
-            )}
-          </div>
+  <a 
+    href="https://www.ajalabs.ai/" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className={`nav-item ${!expanded ? 'collapsed' : ''}`}
+  >
+    <div className="nav-icon">
+      <FaUser />
+    </div>
+    {expanded && (
+      <div className="profile-info">
+        <span className="profile-name">AJALABS.AI</span>
+        <span className="profile-email">info@ajalabs.ai</span>
+      </div>
+    )}
+    {!expanded && (
+      <div className="nav-tooltip">AJALABS.AI</div>
+    )}
+  </a>
+</div>
         </aside>
       )}
 
-      <div className="main-content" style={{ marginLeft: shouldHideSidebar ? '0' : '' ,transition: 'margin-left 0.3s ease'}}>
+      <div className="main-content" style={{ marginLeft: shouldHideSidebar ? '0' : (expanded ? '250px' : '80px') ,transition: 'margin-left 0.3s ease'}}>
         <img
           src=".\asset\ajalabs_black.png"
           alt="Logo"

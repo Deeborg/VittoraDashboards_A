@@ -1,58 +1,103 @@
 /* --- Overall Page Container --- */
+/* 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
 .key-modules-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f8f9fa; /* Lighter, softer background */
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); /* Lighter, softer background */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
   position: relative; /* For fixed elements like back-to-top */
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 /* --- Header --- */
 .key-modules-header {
-  padding: 12px 25px;
+  padding: 1.5rem 2rem;
+  position: sticky;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  top: 0;
   flex-shrink: 0; /* Prevent header from shrinking */
   z-index: 100; /* Ensure header is above other content */
 }
 
 .key-modules-header h1 {
   margin: 0;
-  margin-left: 20px;
-  font-size: 1.75rem; /* Slightly adjusted size */
+  /* margin-left: 0px; */
+  font-size: 2.5rem; /* Slightly adjusted size */
   color: #2c3e50; /* Darker, muted blue/grey */
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-align: center;
+  flex-grow: 1;
+  background: linear-gradient(90deg, #3a7bd5, #00d2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .home-button {
-  background: none;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
   border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
-  padding: 5px;
-  color: #3498db; /* A pleasant blue */
-  transition: color 0.2s ease, transform 0.2s ease;
+  /* padding: 5px; */
+  color: #3498db;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
   display: flex; /* Align icon nicely if needed */
   align-items: center;
   justify-content: center;
 }
 .home-button:hover {
   color: #2980b9; /* Darker blue on hover */
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
-.home-button:focus {
+/* .home-button:focus {
   outline: 2px solid #3498db;
   outline-offset: 2px;
+} */
+.key-modules-content {
+    display: flex;
+    flex-direction: column;
 }
-
 
 /* --- Scrollable Content Wrapper --- */
 .key-modules-scroll-wrapper {
   flex-grow: 1; /* Takes remaining vertical space */
-  overflow-y: auto; /* Enables vertical scrolling for content within */
+  /* overflow-y: auto; */
   position: relative;
+  height: calc(100vh - 80px);
+  scroll-behavior: smooth;
+  padding-bottom: 2rem;
+}
+
+.key-modules-scroll-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.key-modules-scroll-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.key-modules-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(#3a7bd5, #00d2ff);
+  border-radius: 4px;
 }
 
 /* --- Main View (Diagram & Pills) --- */
@@ -60,60 +105,84 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px; /* More vertical padding */
-  min-height: 400px; /* Ensure enough space for diagram and pills initially */
+  padding: 0px; /* More vertical padding */
+  min-height: 100vh; /* Ensure enough space for diagram and pills initially */
   position: relative; /* For pill positioning context if not using wrapper */
+  margin-top: -20px;
 }
 
 .circular-diagram-wrapper {
   position: relative; /* Pills will be positioned relative to this */
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   /* Adjust width/max-width if your image is very large or small */
-  width: 100%;
-  max-width: 450px; /* Controls the spread of the diagram area */
+  width: 80%;
+  max-width: 550px; /* Controls the spread of the diagram area */
+  margin: 2rem auto;
+  animation: float 6s ease-in-out infinite;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }
 
 .circular-diagram-image {
-  max-width: 100%; /* Make it responsive within its wrapper */
-  width: 300px; /* Or a fixed size for your diagram */
+  width: 100%; /* Make it responsive within its wrapper */
+  /* width: 300px;  */
   height: auto;
-  display: block; /* Removes extra space below image */
+  /* display: block;  */
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+  transition: transform 0.5s ease;
+}
+
+.circular-diagram-image:hover {
+  transform: scale(1.03);
 }
 
 /* --- ModulePill Styles --- */
 .module-pill {
   position: absolute; /* Positioned relative to circular-diagram-wrapper */
-  padding: 10px 22px;
+  padding: 1rem 1.5rem;
   border-radius: 50px; /* Fully rounded */
   color: white;
-  font-size: 0.85rem; /* Slightly smaller for better fit */
-  font-weight: 500;
-  text-align: center;
+  /* font-size: 0.85rem; */
+  
+  font-weight: 600;
+  /* text-align: center; */
   cursor: pointer;
-  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, background-color 0.25s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0,0,0,0.08); /* Softer shadow */
-  will-change: transform, box-shadow; /* Performance hint for animations */
+  border: 2px solid white;
+ transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  will-change: transform; 
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transform: scale(1);
+}
+.module-pill:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 }
 
-.module-pill:hover, .module-pill:focus-visible {
+/* .module-pill:hover, .module-pill:focus-visible {
   transform: translateY(-4px) scale(1.04);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0,0,0,0.1);
   outline: none;
 }
-.module-pill:focus-visible { /* Explicit focus style */
-    /* You can add a distinct outline or stronger shadow for focus */
-    /* E.g., box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5); */
-}
+.module-pill:focus-visible { 
+} */
 
 .module-pill.active {
   /* Example: Use a darker shade, border, or different shadow */
   /* If using a specific active color different from module.color: */
-  background-color: #34495e !important; /* Darker, neutral active color - !important to override inline style */
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset, 0 2px 4px rgba(0,0,0,0.1);
-  transform: translateY(-1px) scale(1.01);
-  color: #ecf0f1;
+  /* background-color: #34495e !important;  */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  transform: scale(1.1);
+   z-index: 10;
+  /* color: #ecf0f1; */
 }
 .module-pill .module-text {
   display: block; /* Ensures text wraps if too long for one line */
@@ -121,19 +190,44 @@
 
 /* Specific positioning for each pill (adjust percentages based on your image) */
 /* These classes match 'pillPositionClass' in moduleDataList */
-.finance-pill-pos { top: -20%; left: 50%; transform: translateX(-50%); }
+/* .finance-pill-pos { top: -20%; left: 50%; transform: translateX(-50%); }
 .commercial-pill-pos { top: 45%; left: -35%; transform: translateY(-50%); }
 .scm-pill-pos { top: 45%; right: -35%; transform: translateY(-50%); }
-.autm-pill-pos { bottom: -20%; left: 50%; transform: translateX(-50%); }
+.autm-pill-pos { bottom: -20%; left: 50%; transform: translateX(-50%); } */
+
+.finance-pill-pos { top: -5.5%; left: 21%; }
+.commercial-pill-pos { top: 38%; left: -58%; }
+.scm-pill-pos { bottom: 53%; right: -52%; }
+.autm-pill-pos { bottom: -8%; right: 15%; }
 
 
 /* --- Module Details Section --- */
 .module-details-section {
-  /* display: none; (handled by inline style) */
-  padding: 30px 40px; /* More padding for content */
-  background-color: #ffffff; /* White background for content area */
-  /* min-height ensures it can fill the viewport if content is short, */
-  /* but overflow is handled by key-modules-scroll-wrapper */
+  width: 90%;
+  max-width: 1000px;
+  min-height: 100vh;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  visibility: hidden;
+  display: none;
+}
+
+.module-details-section.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  visibility: visible;
+  position: relative;
+  display: block;
 }
 .module-details-section h2 { /* Optional styling for titles within detail components */
   color: #2c3e50;
@@ -146,34 +240,42 @@
 
 /* --- Back to Top Button --- */
 .back-to-top-button {
-  position: fixed; /* Relative to the viewport (or key-modules-container if it's the root) */
+  position: fixed;
   bottom: 30px;
   right: 30px;
-  background-color: #3498db; /* Consistent blue */
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
   color: white;
   border: none;
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  font-size: 20px; /* Icon size */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.3s ease;
-  opacity: 1; /* Will be controlled by showBackToTop logic */
-}
-.back-to-top-button:hover {
-  background-color: #2980b9;
-  transform: scale(1.1);
-}
-.back-to-top-button:focus {
-  outline: 2px solid #3498db;
-  outline-offset: 2px;
+  box-shadow: 0 10px 30px rgba(58, 123, 213, 0.4);
+  z-index: 100;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
 }
 
+.back-to-top-button.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top-button:hover {
+  background: #2c65c4;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(58, 123, 213, 0.5);
+}
+/* .back-to-top-button:focus {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+} */
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
@@ -203,9 +305,9 @@
     margin-bottom: 25px; /* Space between image and first pill */
   }
   /* Remove specific absolute positioning classes on mobile as they are now relative */
-  .finance-pill-pos, .commercial-pill-pos, .scm-pill-pos, .autm-pill-pos {
-      /* All position styles are handled by .module-pill now for mobile */
-  }
+  /* .finance-pill-pos, .commercial-pill-pos, .scm-pill-pos, .autm-pill-pos {
+  
+  } */
 
   .module-details-section { padding: 20px; }
 
@@ -218,9 +320,31 @@
   }
 }
 
-@media (max-width: 480px) {
-  .key-modules-header h1 { font-size: 1.2rem; }
+@media (max-width: 768px) 
+{
+  /* .key-modules-header h1 { font-size: 1.2rem; }
   .circular-diagram-image { width: 150px; }
   .module-pill { font-size: 0.85rem; padding: 10px 15px; }
-  .module-details-section { padding: 15px; }
+  .module-details-section { padding: 15px; } */
+}
+/* Removed invalid block without selector or at-rule */
+
+@media (max-width: 480px) {
+  .key-modules-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .module-pill {
+    position: relative;
+    margin: 0.5rem auto;
+    width: 80%;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+  
+  .circular-diagram-wrapper {
+    margin-top: 1rem;
+  }
 }
