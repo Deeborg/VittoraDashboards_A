@@ -20,47 +20,47 @@ const phasesData: Phase[] = [
     id: 'roi',
     title: 'ROI',
     description: 'Get insights on ROI on various strategic initiatives',
-    color: '#81C784', // Light Green (top-right in original image)
+    color: '#1a5276', // Light Green (top-right in original image)
     icon: '👥',
     angleStart: 30,
     angleEnd: 90,
     labelXOffset: 320, // Adjusted to match image
-    labelYOffset: -6, // Adjusted to match image
+    labelYOffset: -60, // Adjusted to match image
     textAlign: 'left', // Keep left based on image's visual spacing
   },
   {
     id: 'sentiment',
     title: 'Sentiment Analysis',
     description: 'Evaluate the overall attitude of public on the company',
-    color: '#9575CD', // Light Purple (mid-right in original image)
+    color: '#1f618d', // Light Purple (mid-right in original image)
     icon: '🎯',
     angleStart: -30, // Equivalent to 330 degrees
     angleEnd: 30,
-    labelXOffset: 70, // Adjusted to match image
-    labelYOffset: -120, // Adjusted to match image
+    labelXOffset: 40, // Adjusted to match image
+    labelYOffset: -180, // Adjusted to match image
     textAlign: 'left',
   },
   {
     id: 'flux',
     title: 'Flux Analysis', // Changed from Sentiment Analysis to Flux Analysis based on image
     description: 'GL Analysis & Fluctuation analysis of GL & Risk Magnitude',
-    color: '#64B5F6', // Light Blue (bottom-right in original image)
+    color: '#2471a3', // Light Blue (bottom-right in original image)
     icon: '⚙️',
     angleStart: -90, // Equivalent to 270 degrees
     angleEnd: -30,
-    labelXOffset: -120, // Adjusted to match image
-    labelYOffset: 0, // Adjusted to match image
+    labelXOffset: -220, // Adjusted to match image
+    labelYOffset: -40, // Adjusted to match image
     textAlign: 'left',
   },
   {
     id: 'esg',
     title: 'ESG',
     description: 'Evaluate the impact on the environment and society and governance',
-    color: '#EF5350', // Red (bottom-left in original image)
+    color: '#2980b9', // Red (bottom-left in original image)
     icon: '🔍',
     angleStart: 210,
     angleEnd: 270,
-    labelXOffset: -25, // Adjusted to match image
+    labelXOffset: -130, // Adjusted to match image
     labelYOffset: 180, // Adjusted to match image
     textAlign: 'right', // Keep right based on image's visual spacing
   },
@@ -68,19 +68,19 @@ const phasesData: Phase[] = [
     id: 'scenario',
     title: 'Scenerio Analysis',
     description: 'Examine & evaluate possible events/scenarios.',
-    color: '#FFD54F', // Yellow (mid-left in original image)
+    color: '#a9cce3', // Yellow (mid-left in original image)
     icon: '💡',
     angleStart: 150,
     angleEnd: 210,
-    labelXOffset: 210, // Adjusted to match image
-    labelYOffset: 290, // Adjusted to match image
+    labelXOffset: 160, // Adjusted to match image
+    labelYOffset: 320, // Adjusted to match image
     textAlign: 'right',
   },
   {
     id: 'forecast',
     title: 'FORECAST',
     description: 'Accurate financial forecast with machine learning',
-    color: '#CE93D8', // Light Purple (top-left in original image)
+    color: '#7fb3d5', // Light Purple (top-left in original image)
     icon: '🚀',
     angleStart: 90,
     angleEnd: 150,
@@ -115,34 +115,48 @@ const describeArc = (x: number, y: number, radius: number, startAngle: number, e
 
   return d;
 };
+const explodeDistance = 40; // How far to move the label and arc outward when active
+
+const getExplodedLabelOffset = (phase: Phase) => {
+  // Find the angle in radians for the middle of the arc
+  const midAngle = ((phase.angleStart + phase.angleEnd) / 2 - 90) * Math.PI / 180;
+  return {
+    x: explodeDistance * Math.cos(midAngle),
+    y: explodeDistance * Math.sin(midAngle),
+  };
+};
+
 
 
 const SixPhaseInfographic: React.FC = () => {
-  const svgSize = 400; // SVG canvas size
+  const svgSize = 500;
   const center = svgSize / 2;
-  const outerRadius = svgSize / 2 - 20; // Radius of the pie segments
-  const iconRadius = outerRadius * 0.65; // Radius for icon positioning
-  const pullDistance = 15; // How much the segment "pulls in"
+  const outerRadius = svgSize / 2 - 40;
+  const iconRadius = outerRadius * 0.65;
+  const pullDistance = 15;
+  const explodeDistance = 40;
 
-  const [activePhaseId, setActivePhaseId] = useState<string | null>(null); // State to hold the active phase ID
+  const [activePhaseId, setActivePhaseId] = useState<string | null>(null);
 
-  // CSS directly in the component
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
       position: 'relative',
       width: '100%',
-      maxWidth: '700px', // Max width for the whole component including text
+      maxWidth: '700px',
       margin: '20px auto',
       fontFamily: 'Arial, sans-serif',
-      display: 'flex', // Use flexbox for centering
+      display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center', // Center content horizontally
+      justifyContent: 'center',
+      alignItems: 'center',
+      
     },
     svgContainer: {
       position: 'relative',
       width: `${svgSize}px`,
       height: `${svgSize}px`,
       margin: '0 auto',
+      marginTop: '105px',
     },
     centralCircle: {
       position: 'absolute',
@@ -175,56 +189,71 @@ const SixPhaseInfographic: React.FC = () => {
       letterSpacing: '0.5px',
       marginTop: '4px',
     },
-    phaseLabel: { // Base style for all labels (titles)
+    phaseLabel: {
       position: 'absolute',
-      width: '150px', // Adjust as needed to fit the text
+      width: '150px',
       zIndex: 5,
     },
     phaseTitle: {
-      fontSize: '14px', // Slightly smaller for better fit
+      fontSize: '14px',
       fontWeight: 'bold',
       marginBottom: '4px',
-      cursor: 'pointer', // Make title clickable
+      cursor: 'pointer',
     },
     phaseDescription: {
       fontSize: '11px',
       color: '#666',
       lineHeight: 1.3,
-      transition: 'opacity 0.3s ease-in-out, max-height 0.3s ease-in-out', // Smooth transition for visibility
-      maxHeight: '0px', // Start hidden
+      transition: 'opacity 0.3s ease-in-out, max-height 0.3s ease-in-out',
+      maxHeight: '0px',
       overflow: 'hidden',
       opacity: 0,
     },
-    phaseDescriptionActive: { // Style for active description
-      maxHeight: '100px', // Enough height to show content
+    phaseDescriptionActive: {
+      maxHeight: '100px',
       opacity: 1,
     }
   };
 
+  const getExplodedLabelOffset = (phase: Phase) => {
+    const midAngle = ((phase.angleStart + phase.angleEnd) / 2 - 90) * Math.PI / 180;
+    return {
+      x: explodeDistance * Math.cos(midAngle),
+      y: explodeDistance * Math.sin(midAngle),
+    };
+  };
+
+  const svgMarginTop = 100; // This should match your svgContainer.marginTop
+
   const getLabelStyle = (phase: Phase): React.CSSProperties => {
     const baseStyle = { ...styles.phaseLabel };
 
-    // Calculate position based on offsets relative to the SVG center
-    const labelX = center + phase.labelXOffset;
-    const labelY = center + phase.labelYOffset;
+    let labelX = center + phase.labelXOffset;
+    let labelY = center + phase.labelYOffset + svgMarginTop; // <-- Add svgMarginTop here
+
+    // Explode if this phase is active or all are active
+    if (activePhaseId === phase.id || activePhaseId === 'all') {
+      const exploded = getExplodedLabelOffset(phase);
+      labelX += exploded.x;
+      labelY += exploded.y;
+    }
 
     baseStyle.left = `${labelX}px`;
     baseStyle.top = `${labelY}px`;
 
-    // Adjust transform based on textAlign
     if (phase.textAlign === 'right') {
-      baseStyle.transform = 'translate(-100%, -50%)'; // Move left by 100% of its width
+      baseStyle.transform = 'translate(-100%, -50%)';
     } else if (phase.textAlign === 'center') {
       baseStyle.transform = 'translate(-50%, -50%)';
-    } else { // left
-      baseStyle.transform = 'translate(0%, -50%)'; // No horizontal transform for left
+    } else {
+      baseStyle.transform = 'translate(0%, -50%)';
     }
 
     baseStyle.textAlign = phase.textAlign;
+    baseStyle.transition = 'left 0.3s, top 0.3s';
 
     return baseStyle;
   };
-
 
   return (
     <div style={styles.container}>
@@ -233,7 +262,6 @@ const SixPhaseInfographic: React.FC = () => {
       </h1>
       <div style={styles.svgContainer}>
         <svg width={svgSize} height={svgSize} viewBox={`0 0 ${svgSize} ${svgSize}`}>
-          {/* Define filter for shadow effect */}
           <defs>
             <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
               <feDropShadow dx="3" dy="3" stdDeviation="5" floodColor="#000" floodOpacity="0.4" />
@@ -244,10 +272,10 @@ const SixPhaseInfographic: React.FC = () => {
             const midAngle = (phase.angleStart + phase.angleEnd) / 2;
             const iconPos = polarToCartesian(center, center, iconRadius, midAngle);
 
-            // Calculate translation for active phase
+            // Explode if this phase is active or all are active
             let transform = '';
             let filter = '';
-            if (activePhaseId === phase.id) {
+            if (activePhaseId === phase.id || activePhaseId === 'all') {
               const translateAngle = ((midAngle - 90) * Math.PI) / 180.0;
               const translateX = -pullDistance * Math.cos(translateAngle);
               const translateY = -pullDistance * Math.sin(translateAngle);
@@ -274,7 +302,7 @@ const SixPhaseInfographic: React.FC = () => {
                   dominantBaseline="middle"
                   fontSize="24px"
                   fill="#333"
-                  style={{ pointerEvents: 'none' }} // Prevent text from interfering with segment click
+                  style={{ pointerEvents: 'none' }}
                 >
                   {phase.icon}
                 </text>
@@ -284,7 +312,7 @@ const SixPhaseInfographic: React.FC = () => {
         </svg>
         <div
           style={styles.centralCircle}
-          onClick={() => setActivePhaseId(null)}
+          onClick={() => setActivePhaseId(activePhaseId === 'all' ? null : 'all')}
         >
           <span style={styles.centralTextLarge}>FP&A</span>
         </div>
@@ -292,7 +320,6 @@ const SixPhaseInfographic: React.FC = () => {
 
       {phasesData.map((phase) => (
         <div key={`${phase.id}-label`} style={getLabelStyle(phase)}>
-          {/* Make the title clickable to activate the phase */}
           <div
             style={{ ...styles.phaseTitle, color: phase.color }}
             onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
@@ -302,7 +329,7 @@ const SixPhaseInfographic: React.FC = () => {
           <div
             style={{
               ...styles.phaseDescription,
-              ...(activePhaseId === phase.id ? styles.phaseDescriptionActive : {}),
+              ...((activePhaseId === phase.id || activePhaseId === 'all') ? styles.phaseDescriptionActive : {}),
             }}
           >
             {phase.description}

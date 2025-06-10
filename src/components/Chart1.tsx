@@ -10,7 +10,7 @@ import StatsCards from "../components/StatsCard";
 // import StackedBarWithLineChart from "../components/StackedBarWithLineChart";
 
 import "../Style/Chart1.css";
-import Layout from "../components/layout"; // Capitalized "Layout" (you had "layout")
+import Layout from "../components/layout"; 
 
 const DashBoard1: React.FC = () => {
   const [data, setData] = useState<Array<Record<string, any>>>([]);
@@ -130,92 +130,91 @@ const DashBoard1: React.FC = () => {
 
   return (
     <Layout title="Working Capital Management">
-      <div className="Navigation-container">
-        <button className="clear-filters-btn" onClick={RefreshData}>
-          Clear Filters
-        </button>
-      </div>
-
-      <StatsCards data={kpiData} graphdata={data} type="workingcapital"/>
-
-      <div className="Chart-row">
-        {/* <div className="chart-container">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Current Assets Composition vs Current Ratio </h3>
-            <StackedBarWithLineChart
-            data={filteredData}
-            xField="Fiscal Year"
-            stackFields={[
-              "Current Investments",
-              "Inventories",
-              "Trade Receivables",
-              "Cash And Cash Equivalents",]}
-              lineField="Current ratio "
-              xLabel="Fiscal Year"
-              yLabel="Current Assets Composition"
-              onFilterChange1={handleChartFilterChange}
-              />
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: "18px",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+          padding: "32px 28px",
+          margin: "32px auto",
+          maxWidth: "100vw",
+          minHeight: "100vh",
+          height: "100%",
+          position: "relative",
+          boxSizing: "border-box",
+        }}
+      >
+        {/* <div className="Navigation-container">
+          <button className="clear-filters-btn" onClick={RefreshData}>
+            Clear Filters
+          </button>
         </div> */}
-        <div className="chart-container">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Net Working Capital Over Time
-          </h3>
-          <BarChart
-          data={filteredData}
-          Xaxis="Fiscal Year"
-          Yaxis="Working capital"
-          xLabel="Fiscal Year"
-          yLabel="Working Capital (₹)"
-          onFilterChange1={handleChartFilterChange}
-          />
+
+        <StatsCards data={kpiData} graphdata={data} type="workingcapital" />
+
+        <div className="Chart-row">
+          {/* ...chart containers... */}
+          <div className="chart-container">
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Net Working Capital Over Time
+            </h3>
+            <BarChart
+              data={filteredData}
+              Xaxis="Fiscal Year"
+              Yaxis="Working capital"
+              xLabel="Fiscal Year"
+              yLabel="Working Capital (₹)"
+              onFilterChange1={handleChartFilterChange}
+            />
+          </div>
+          <div className="chart-container">
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Cash Conversion Cycle
+            </h3>
+            <BarChart2
+              data={filteredData}
+              Xaxis="Fiscal Year"
+              Yaxes={["DIO", "DPO(Neg)", "DSO", "CCC"]}
+              xLabel="Fiscal Year"
+              yLabel="Impact"
+              onFilterChange1={handleChartFilterChange}
+            />
+          </div>
+          <div className="chart-container">
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Net Working Cpaital to Net TurnOver
+            </h3>
+            <LineChart
+              data={filteredData}
+              catColumn="Fiscal Year"
+              valueColumLine="NWC_TNS"
+            />
+          </div>
+          <div className="chart-container">
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Inventories by Fiscal Year
+            </h3>
+            <BarChartLine
+              data={filteredData}
+              catColumn="Fiscal Year"
+              valueColum="Inventories"
+              valueColumLine="Inventory Turnover"
+              onFilterChange1={handleChartFilterChange}
+            />
+          </div>
         </div>
-        <div className="chart-container">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Cash Conversion Cycle
-          </h3>
-          <BarChart2
-          data={filteredData}
-          Xaxis="Fiscal Year"
-          Yaxes={["DIO", "DPO(Neg)", "DSO", "CCC"]}
-          xLabel="Fiscal Year"
-          yLabel="Impact"
-          onFilterChange1={handleChartFilterChange}
-          
-          />
-        </div>
-        <div className="chart-container">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Net Working Cpaital to Net TurnOver
-          </h3>
-          <LineChart
-          data={filteredData}
-          catColumn="Fiscal Year"
-          valueColumLine="NWC_TNS"
-          />
-        </div>
-        <div className="chart-container">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Inventories by Fiscal Year
-          </h3>
-          <BarChartLine
-          data={filteredData}
-          catColumn="Fiscal Year"
-          valueColum="Inventories"
-          valueColumLine="Inventory Turnover"
-          onFilterChange1={handleChartFilterChange}
-          />
-        </div>
-      </div>
-      <div className="Chart-row">
-        <div className="chart-container-full">
-          <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-            Net Working Cpaital Breakdown
-          </h3>
-          <WaterfallChart
-          data={data1.map((row) => ({
-          category: row["category"],
-          value: Number(row["value"]),
-          }))}/>
+        <div className="Chart-row">
+          <div className="chart-container-full">
+            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+              Net Working Cpaital Breakdown
+            </h3>
+            <WaterfallChart
+              data={data1.map((row) => ({
+                category: row["category"],
+                value: Number(row["value"]),
+              }))}
+            />
+          </div>
         </div>
       </div>
     </Layout>

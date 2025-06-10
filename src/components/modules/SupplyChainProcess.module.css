@@ -1,0 +1,139 @@
+/* General container for the component */
+.container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;   
+  height: 100vh;       
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+/* Flex container for the horizontal process flow */
+.timeline {
+  display: flex;
+  position: relative;
+  /* Give space above and below for the info bubbles */
+  margin-top: 150px;
+  margin-bottom: 130px;
+}
+
+/* Wrapper for a single step (arrow + bubble) */
+.stepNode {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Use a CSS variable for the step color, passed from the component */
+  --step-color: #ccc;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Dim non-active steps on hover */
+.stepNode.inactive {
+  opacity: 0.5;
+}
+
+/* The colored arrow shape */
+.timelineArrow {
+  background-color: var(--step-color);
+  height: 70px;
+  width: 220px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+  margin-left: -33px; /* 15% of 220px to overlap */
+}
+
+/* Style for the very first arrow in the sequence */
+.stepNode:first-child .timelineArrow {
+  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+  margin-left: 0;
+}
+
+/* The numbered circle */
+.timelineCircle {
+  background-color: white;
+  border: 5px solid; /* color set via inline style */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 2;
+  position: absolute;
+  left: 35px; /* Adjust to center within the arrow body */
+}
+
+/* Base styles for the info bubbles */
+.infoBubble {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--step-color);
+  width: 240px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 10;
+}
+
+/* Bubble pointer pseudo-element */
+.infoBubble::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+/* Position bubbles that are on top */
+.bubbleTop {
+  bottom: 100%;
+  margin-bottom: 20px;
+}
+
+.bubbleTop::after {
+  top: 100%;
+  border-width: 12px 12px 0 12px;
+  border-color: var(--step-color) transparent transparent transparent;
+}
+
+/* Position bubbles that are on the bottom */
+.bubbleBottom {
+  top: 100%;
+  margin-top: 20px;
+}
+
+.bubbleBottom::after {
+  bottom: 100%;
+  border-width: 0 12px 12px 12px;
+  border-color: transparent transparent var(--step-color) transparent;
+}
+
+.bubbleTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.bubbleList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

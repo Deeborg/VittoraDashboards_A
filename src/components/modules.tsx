@@ -161,7 +161,11 @@ const KeyModulesPage: React.FC = () => {
                 <button className="home-button" onClick={handleGoHome} title="Go to Home">
                     <FaHome size={28} />
                 </button>
-                <h1>KEY MODULES</h1>
+                <h1>
+                        {activeModule
+                            ? moduleDataList.find(m => m.id === activeModule)?.displayText || "Vittora Modules"
+                            : "Vittora Modules"}
+                    </h1>                
             </header>
             
             <div className="key-modules-scroll-wrapper" ref={scrollWrapperRef}>
@@ -196,8 +200,8 @@ const KeyModulesPage: React.FC = () => {
             <button
                 className={`back-to-top-button ${showBackToTop ? 'visible' : ''}`}
                 onClick={handleBackToTop}
-                title="Back to Top"
-                aria-label="Back to top"
+                title="Back to Modules"
+                aria-label="Back to Modules"
             >
                 <FaArrowUp size={20} />
             </button>

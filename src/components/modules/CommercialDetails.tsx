@@ -98,6 +98,15 @@ const infographicData: ColumnData[] = [
 
 const CommercialDetails: React.FC = () => {
   const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleColumnClick = () => {
+    setShowMessage(true);
+  };
+
+  const handleCloseMessage = () => {
+    setShowMessage(false);
+  };
 
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
@@ -105,15 +114,13 @@ const CommercialDetails: React.FC = () => {
       flexDirection: 'column',
       alignItems: 'center',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-      backgroundColor: '#f4f7f6', // Softer background
-      padding: '50px 20px',
-      minHeight: '90vh',
+      backgroundColor: '#f4f7f6',
+      padding: '0px 0px',
+      height: '100vh',
       boxSizing: 'border-box',
     },
     mainTitle: {
-      fontSize: 'clamp(28px, 5vw, 40px)', // Responsive font size
-      fontWeight: 700,
-      color: '#2c3e50', // Darker, more modern blue-gray
+      color: '#2c3e50',
       marginBottom: '60px',
       textAlign: 'center',
       letterSpacing: '0.5px',
@@ -121,29 +128,29 @@ const CommercialDetails: React.FC = () => {
     columnsContainer: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'stretch', // Make columns equal height if content differs
+      alignItems: 'stretch',
       gap: '25px',
       flexWrap: 'nowrap',
-      maxWidth: '1200px', // Max width for larger screens
+      maxWidth: '1200px',
       width: '100%',
     },
     column: {
       position: 'relative',
-      flex: '1 1 200px', // Flex properties for responsiveness
+      flex: '1 1 200px',
       maxWidth: '280px',
       minWidth: '240px',
       padding: '70px 25px 35px 25px',
-      borderRadius: '15px 15px 80px 80px', // Slightly adjusted border radius
+      borderRadius: '15px 15px 80px 80px',
       color: 'white',
       textAlign: 'left',
-      boxShadow: '0 6px 12px rgba(0,0,0,0.08)', // Softer shadow
+      boxShadow: '0 6px 12px rgba(0,0,0,0.08)',
       minHeight: '360px',
       display: 'flex',
       flexDirection: 'column',
-      transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out', // Smooth transition for hover
+      transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
       cursor: 'pointer',
     },
-    columnHovered: { // Styles to apply on hover
+    columnHovered: {
       transform: 'translateY(-10px) scale(1.03)',
       boxShadow: '0 12px 24px rgba(0,0,0,0.12)',
     },
@@ -169,17 +176,17 @@ const CommercialDetails: React.FC = () => {
     iconContainer: {
       textAlign: 'center',
       marginBottom: '15px',
-      marginTop: '-10px', // Pull icon up a bit
+      marginTop: '-10px',
     },
     columnTitle: {
       fontSize: '20px',
-      fontWeight: 600, // Semi-bold
+      fontWeight: 600,
       marginBottom: '20px',
       textAlign: 'center',
-      minHeight: '40px', // Ensure space for two-line titles
+      minHeight: '40px',
     },
     list: {
-      listStyle: 'none', // Remove default bullets
+      listStyle: 'none',
       paddingLeft: '0px',
       margin: '0',
       fontSize: '14.5px',
@@ -190,19 +197,22 @@ const CommercialDetails: React.FC = () => {
       lineHeight: '1.6',
       display: 'flex',
       alignItems: 'flex-start',
-      opacity: 0.9, // Slightly transparent text for modern feel
+      opacity: 0.9,
     },
     listItemBullet: {
       marginRight: '10px',
-      color: 'rgba(255, 255, 255, 0.7)', // Softer bullet color
+      color: 'rgba(255, 255, 255, 0.7)',
       fontSize: '1.2em',
-      lineHeight: '1.4', // Align with text
+      lineHeight: '1.4',
     }
   };
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.mainTitle}>Commercial and Pricing eXcellence</h1>
+      <p style={styles.mainTitle}> </p>
+      <p style={styles.mainTitle}>
+        The Pricing Module helps businesses maximize revenue and profitability by using data-driven insights to set optimal prices. By analyzing historical sales, demand patterns, and competitor pricing, it ensures that prices are aligned with market dynamics and customer value perception. Additionally, it enables granular profitability analysis across products, channels, and customer segments, empowering strategic decision-making and enhancing overall commercial performance.
+      </p>
       <div style={styles.columnsContainer}>
         {infographicData.map((col, index) => (
           <div
@@ -214,6 +224,10 @@ const CommercialDetails: React.FC = () => {
             }}
             onMouseEnter={() => setHoveredColumn(index)}
             onMouseLeave={() => setHoveredColumn(null)}
+            onClick={handleColumnClick}
+            tabIndex={0}
+            role="button"
+            aria-label={`Column: ${col.title}`}
           >
             <div
               style={{
@@ -238,13 +252,64 @@ const CommercialDetails: React.FC = () => {
           </div>
         ))}
       </div>
+      {showMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, width: '100vw', height: '100vh',
+            background: 'rgba(0,0,0,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            zIndex: 9999,
+          }}
+          onClick={handleCloseMessage}
+        >
+          <div
+            style={{
+              background: '#fff',
+              padding: '32px 24px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
+              maxWidth: 350,
+              textAlign: 'center',
+              position: 'relative',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>
+              Not available in demo environment.
+            </p>
+            <p style={{ color: '#2d3a4a', marginBottom: 0 }}>
+              Write to{' '}
+              <a
+                href="https://www.ajalabs.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}
+              >
+                ajalabs
+              </a>{' '}
+              to discuss further.
+            </p>
+            <button
+              onClick={handleCloseMessage}
+              style={{
+                marginTop: 18,
+                padding: '6px 18px',
+                borderRadius: 6,
+                border: 'none',
+                background: '#0072ce',
+                color: '#fff',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default CommercialDetails;
-
-// To use this component in your App.tsx or another page:
-// 1. Save this code as CommercialDetails.tsx in your components folder.
-// 2. Import it: import CommercialDetails from './components/CommercialDetails';
-// 3. Use it: <CommercialDetails />
