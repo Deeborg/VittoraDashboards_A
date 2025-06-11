@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 // import BarChart2 from "../Components/BarChart2";
 // import BarChartLine from "../Components/BarChartLine";
 import LineChart from "../components/LineChart";
-import WaterfallChart from "../components/WatterfallChart";
+import WaterfallChart from "../components/WatterfallChart_2";
 // import AreaChart from "../Components/AreaChart";
 // import AreaChartam from "../Components/AreaChartam";
 import AmMultiAreaChart from "../components/AreaChartMulti";
@@ -209,8 +209,8 @@ const DashBoard2: React.FC = () => {
               "CF from Investing Activities": "Investing Cash Flow",
               "CF from Financing Activities": "Financing Cash Flow",
               "Forex Gain/Loss": "Forex Impact",
-              "Adj on Amalgamation/ Merger/ Demerger": "Adj on Amalgamation/ Merger/ Demerger",
-              "C&CE at the beginning of the year": "C&CE at the beginning of the year",
+              "Adj on Amalgamation/ Merger/ Demerger": "Adj on Amalgamation",
+              "C&CE at the beginning of the year": "Opening Cash Balance",
             };
             
             const newWaterfallData = cashflowColumns.map((col) => {
@@ -237,94 +237,88 @@ const DashBoard2: React.FC = () => {
               setFilteredData(data);};
               if (loading) return <div>Loading...</div>;
               return (
-              <Layout title="Liquidity & CashFlow">
-                <div className="Navigation-container">
-                 {/* <nav className="nav-bar">
-                     <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Over View</NavLink>
-                      <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Liquidity & Cash</NavLink>
-                      <NavLink to="/receivables" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Account Receivables</NavLink>
-                      <NavLink to="/payables" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Account Payable</NavLink>
-                      <NavLink to="/inventory" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Inventory</NavLink>
-                  </nav> */}
-                  <button className="clear-filters-btn" onClick={RefreshData}>Clear Filters</button>
-                  </div>
-                  <div className="Status-cards">
-                    <StatsCards data={kpiData} graphdata={filteredData} type = "liquidity"/>
+                <Layout title="Liquidity & CashFlow">
+                  <div
+                    style={{
+                      background: "#fff",
+                      borderRadius: "18px",
+                      boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                      padding: "32px 28px",
+                      margin: "32px auto",
+                      maxWidth: "100vw",
+                      minHeight: "100vh",
+                      height: "100%",
+                      position: "relative",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    <div className="Navigation-container">
+                      {/* <button className="clear-filters-btn" onClick={RefreshData}>Clear Filters</button> */}
+                    </div>
+                    <div className="Status-cards">
+                      <StatsCards data={kpiData} graphdata={filteredData} type="liquidity" />
                     </div>
                     <div className="Chart-row">
                       <div className="chart-container">
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+                        <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
                           Liquidity Trends Over Time
                         </h3>
                         <StackedBarWithLineChart
-                        data={filteredData}
-                        xField="Fiscal Year"
-                        stackFields={[
-                        "Current Investments",
-                        "Inventories",
-                        "Trade Receivables",
-                        "Cash And Cash Equivalents",]}lineField="Current ratio "
-                        onFilterChange1={handleChartFilterChange}/>
-                      </div>
-                      <div className="chart-container">
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-                        CashFlow Breakdown
-                        </h3>
-                        <WaterfallChart
-                        data={cashflowWaterfallData}/>
-                      </div>
-                        {/* <div className="chart-container">
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-                        Liquidity Trends Over Time</h3>
-                        <StakedBar data={filteredData} stackedFields={[
-                        "Current Investments",
-                        "Inventories",
-                        "Trade Receivables",
-                        "Cash And Cash Equivalents",
-                        ]} xField="Fiscal Year"  lineField="Current ratio"/></div> */}
-                    </div>
-                    <div className="Chart-row">
-                      <div className="chart-container">
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-                          ROCE Over Time
-                        </h3>
-                        <LineChart
-                        data={filteredData}
-                        catColumn="Fiscal Year"
-                        valueColumLine="ROCE"
+                          data={filteredData}
+                          xField="Fiscal Year"
+                          stackFields={[
+                            "Current Investments",
+                            "Inventories",
+                            "Trade Receivables",
+                            "Cash And Cash Equivalents",
+                          ]}
+                          lineField="Current ratio "
+                          onFilterChange1={handleChartFilterChange}
                         />
                       </div>
                       <div className="chart-container">
-                      {/* <BarChartLine
-                      data={filteredData}
-                  catColumn="Fiscal Year"
-                  valueColum="Inventories"
-                  valueColumLine="Inventory Turnover"
-                  onFilterChange1={handleChartFilterChange}/> */}
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+                        <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
+                          CashFlow Breakdown
+                        </h3>
+                        <WaterfallChart data={cashflowWaterfallData} />
+                      </div>
+                    </div>
+                    <div className="Chart-row">
+                      <div className="chart-container">
+                        <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
+                          ROCE Over Time
+                        </h3>
+                        <LineChart
+                          data={filteredData}
+                          catColumn="Fiscal Year"
+                          valueColumLine="ROCE"
+                        />
+                      </div>
+                      <div className="chart-container">
+                        <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
                           Liquidity Ratios Over Time
                         </h3>
                         <AmMultiAreaChart
-                        data={filteredData.map(row => ({
-                        year: row["Fiscal Year"], // Assuming "Fiscal Year" is the correct key
-                        "Current ratio ": row["Current ratio "],
-                        "Quick ratio": row["Quick ratio"],
-                        "Cash ratio": row["Cash ratio"],
-                      }))}
-                      xField="year"
-                      yFields={["Current ratio ", "Quick ratio", "Cash ratio"]}
-
-                      />
+                          data={filteredData.map(row => ({
+                            year: row["Fiscal Year"],
+                            "Current ratio ": row["Current ratio "],
+                            "Quick ratio": row["Quick ratio"],
+                            "Cash ratio": row["Cash ratio"],
+                          }))}
+                          xField="year"
+                          yFields={["Current ratio ", "Quick ratio", "Cash ratio"]}
+                        />
                       </div>
                     </div>
                     <div className="Chart-row">
                       <div className="chart-container-full">
-                        <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-                           Cash Flow Forecast
+                        <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
+                          Cash Flow Forecast
                         </h3>
                         <CashFlowForecastChart data={cashflowData} />
                       </div>
                     </div>
-              </Layout>
+                  </div>
+                </Layout>
               );
             };export default DashBoard2;

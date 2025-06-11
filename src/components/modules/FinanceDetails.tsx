@@ -22,22 +22,36 @@ const phasesData: Phase[] = [
     description: 'Get insights on ROI on various strategic initiatives',
     color: '#1a5276', // Light Green (top-right in original image)
     icon: '👥',
-    angleStart: 30,
-    angleEnd: 90,
-    labelXOffset: 320, // Adjusted to match image
-    labelYOffset: -60, // Adjusted to match image
+    angleStart: 150,
+    angleEnd: 210,
+    labelXOffset: 95, // Adjusted to match image
+    labelYOffset: 320, // Adjusted to match image
+
     textAlign: 'left', // Keep left based on image's visual spacing
   },
+  {
+    id: 'scenario',
+    title: 'Scenerio Analysis',
+    description: 'Examine & evaluate possible events/scenarios.',
+    color: '#1f618d', // Yellow (mid-left in original image)
+    icon: '💡',
+    angleStart: -30, // Equivalent to 330 degrees
+    angleEnd: 30,
+    labelXOffset: 155, // Adjusted to match image
+    labelYOffset: -180, // Adjusted to match image
+
+    textAlign: 'right',
+  },  
   {
     id: 'sentiment',
     title: 'Sentiment Analysis',
     description: 'Evaluate the overall attitude of public on the company',
-    color: '#1f618d', // Light Purple (mid-right in original image)
+    color: '#2980b9', // Light Purple (mid-right in original image)
     icon: '🎯',
-    angleStart: -30, // Equivalent to 330 degrees
-    angleEnd: 30,
-    labelXOffset: 40, // Adjusted to match image
-    labelYOffset: -180, // Adjusted to match image
+    angleStart: 30,
+    angleEnd: 90,
+    labelXOffset: 320, // Adjusted to match image
+    labelYOffset: -60, // Adjusted to match image
     textAlign: 'left',
   },
   {
@@ -56,7 +70,7 @@ const phasesData: Phase[] = [
     id: 'esg',
     title: 'ESG',
     description: 'Evaluate the impact on the environment and society and governance',
-    color: '#2980b9', // Red (bottom-left in original image)
+    color: '#a9cce3', // Red (bottom-left in original image)
     icon: '🔍',
     angleStart: 210,
     angleEnd: 270,
@@ -64,18 +78,7 @@ const phasesData: Phase[] = [
     labelYOffset: 180, // Adjusted to match image
     textAlign: 'right', // Keep right based on image's visual spacing
   },
-  {
-    id: 'scenario',
-    title: 'Scenerio Analysis',
-    description: 'Examine & evaluate possible events/scenarios.',
-    color: '#a9cce3', // Yellow (mid-left in original image)
-    icon: '💡',
-    angleStart: 150,
-    angleEnd: 210,
-    labelXOffset: 160, // Adjusted to match image
-    labelYOffset: 320, // Adjusted to match image
-    textAlign: 'right',
-  },
+
   {
     id: 'forecast',
     title: 'FORECAST',
@@ -177,13 +180,13 @@ const SixPhaseInfographic: React.FC = () => {
       cursor: 'pointer',
     },
     centralTextLarge: {
-      fontSize: '28px',
+      fontSize: '45px',
       fontWeight: 'bold',
-      color: '#333',
+      color: '#000',
       lineHeight: 1,
     },
     centralTextSmall: {
-      fontSize: '12px',
+      fontSize: '30px',
       color: '#555',
       textTransform: 'uppercase',
       letterSpacing: '0.5px',

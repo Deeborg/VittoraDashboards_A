@@ -12,6 +12,8 @@ import {
   Brush,
 } from 'recharts';
 
+import { ReferenceLine } from 'recharts';
+
 interface CashFlowData {
   Date?: Date | string | number;
   'Opening Balance'?: number;
@@ -84,7 +86,7 @@ const CashFlowForecastChart: React.FC<CashFlowForecastChartProps> = ({ data }) =
             value="Year"
             offset={50}
             position="bottom"
-            style={{ textAnchor: 'middle' }}
+            style={{ textAnchor: 'middle',fontSize: '14px', color: '#000', fontWeight: 'bold' }}
           />
         </XAxis>
         <YAxis tickFormatter={formatYAxis} ticks={yAxisTicks}>
@@ -94,7 +96,7 @@ const CashFlowForecastChart: React.FC<CashFlowForecastChartProps> = ({ data }) =
             position="insideLeft"
             angle={-90}
             dx={-20}
-            style={{ textAnchor: 'middle' }}
+            style={{ textAnchor: 'middle',fontSize: '14px', color: '#000', fontWeight: 'bold'}}
           />
         </YAxis>
         <Tooltip
@@ -217,6 +219,18 @@ const CashFlowForecastChart: React.FC<CashFlowForecastChartProps> = ({ data }) =
             }}
           />
         )}
+        <ReferenceLine
+          x={new Date('01-01-2025').toISOString().split('T')[0]}
+          stroke="#d32f2f"
+          strokeDasharray="4 4"
+          label={{
+            value: "Forecast Period",
+            position: "top",
+            fill: "#d32f2f",
+            fontWeight: "bold",
+            fontSize: 13,
+          }}
+        />        
       </LineChart>
     </ResponsiveContainer>
   );

@@ -30,14 +30,17 @@ const LineChart: React.FC<DataPorts> = React.memo(({ data, catColumn,  valueColu
     const cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineY.set("visible", false);
 
-    // Add Scrollbar
-    chart.set(
-      "scrollbarX",
-      am5.Scrollbar.new(root, {
-        orientation: "horizontal",
-      })
-    );
 
+    // Add Scrollbar
+    const scrollbarX = am5xy.XYChartScrollbar.new(root, {
+      orientation: "horizontal",
+      height: 10,
+      background: am5.Rectangle.new(root, {
+        fill: am5.color(0xe0e0e0),
+        fillOpacity: 0.6,
+      }),
+    });
+    chart.set("scrollbarX", scrollbarX);
     // Create X Axis
     const xRenderer = am5xy.AxisRendererX.new(root, {
       minGridDistance: 60,
@@ -52,6 +55,7 @@ const LineChart: React.FC<DataPorts> = React.memo(({ data, catColumn,  valueColu
     );
 
     xRenderer.labels.template.setAll({
+      fontSize: 12,
       rotation: -45,
       centerY: am5.p50,
       centerX: am5.p100,
@@ -72,7 +76,7 @@ const LineChart: React.FC<DataPorts> = React.memo(({ data, catColumn,  valueColu
     // Add X Axis Label
 xAxis.children.push(
   am5.Label.new(root, {
-    text: catColumn, // or "Fiscal Year" for static label
+    text: catColumn, 
     x: am5.p50,
     centerX: am5.p50,
     centerY: am5.p100,
@@ -131,13 +135,13 @@ yAxis2.children.unshift(
     );
 
     // Set up legend
-    const legend = chart.children.push(
-      am5.Legend.new(root, {
-        centerX: am5.p50,
-        x: am5.p50,
-      })
-    );
-    legend.data.setAll(chart.series.values);
+    // const legend = chart.children.push(
+    //   am5.Legend.new(root, {
+    //     centerX: am5.p50,
+    //     x: am5.p50,
+    //   })
+    // );
+    // legend.data.setAll(chart.series.values);
 
     // Transform & Prepare Data
     const groupedData = data.reduce((acc, item) => {
@@ -169,7 +173,7 @@ yAxis2.children.unshift(
   }, [data, catColumn,  valueColumLine]);
 
   return (
-      <div id="linechartDiv" style={{ width: "100%", height: "500px" }}></div>
+      <div id="linechartDiv" style={{ width: "100%", height: "90%" }}></div>
   );
 });
 

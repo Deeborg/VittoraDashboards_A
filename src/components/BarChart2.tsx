@@ -51,14 +51,10 @@ const ColumnChart: React.FC<DataPorts> = ({
     const root = am5.Root.new(chartDivRef.current);
     root.setThemes([am5themes_Animated.new(root)]);
 
-    // ✅ Layout: stack chart + legend vertically
-    root.container.set("layout", root.verticalLayout);
-
-    // ✅ Increased height of the chart
+    // Remove vertical layout and height settings
+    // Create chart
     const chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        layout: root.verticalLayout,
-        height: am5.percent(80), // Increased height to 80%
         panX: true,
         panY: true,
         wheelX: "panX",
@@ -67,9 +63,13 @@ const ColumnChart: React.FC<DataPorts> = ({
       })
     );
 
+    // Add cursor
     const cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineY.set("visible", false);
 
+
+
+    // Create axes
     const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
     xRenderer.labels.template.setAll({
       rotation: -90,
@@ -92,19 +92,20 @@ const ColumnChart: React.FC<DataPorts> = ({
       })
     );
 
-    // Axis Labels
-    const xLabelObj = chart.children.push(
+    // Add X-axis label (same as BarChart.tsx)
+    chart.children.push(
       am5.Label.new(root, {
         text: xLabel,
         fontSize: 14,
         fontWeight: "bold",
         x: am5.p50,
         centerX: am5.p50,
-        y: am5.percent(88), // Adjusted y position
+        y: am5.percent(99),
       })
     );
 
-    const yLabelObj = chart.children.push(
+    // Add Y-axis label (same as BarChart.tsx)
+    chart.children.push(
       am5.Label.new(root, {
         text: yLabel,
         fontSize: 14,
@@ -116,20 +117,31 @@ const ColumnChart: React.FC<DataPorts> = ({
       })
     );
 
-    // ✅ Legend above chart, in root container
-    const legend = root.container.children.push(
+    // Legend inside chart (not root)
+    const legend = chart.children.push(
       am5.Legend.new(root, {
         centerX: am5.p50,
-        x: am5.p50, // Center the legend
-        // layout: root.horizontalLayout,  // Keep horizontal layout
-        marginTop: 20,
-        marginBottom: 20,
-        // width: am5.percent(100),
-        // useDefaultMarker: true,
+        x: am5.p50,
       })
     );
+    //move legend to the top
+    const legendIndex = root.container.children.indexOf(legend);
     root.container.children.removeValue(legend);
     root.container.children.insertIndex(0, legend);
+
+    legend.data.setAll(chart.series.values);
+
+    // Add Scrollbar
+    const scrollbarX = am5xy.XYChartScrollbar.new(root, {
+      orientation: "horizontal",
+      height: 10,
+      background: am5.Rectangle.new(root, {
+        fill: am5.color(0xe0e0e0),
+        fillOpacity: 0.6,
+      }),
+    });
+    chart.set("scrollbarX", scrollbarX);
+
     // Series
     Yaxes.forEach((yField, index) => {
       const series = chart.series.push(
@@ -180,7 +192,7 @@ const ColumnChart: React.FC<DataPorts> = ({
     };
   }, [data, Xaxis, Yaxes, xLabel, yLabel]);
 
-  return <div ref={chartDivRef} style={{ width: "100%", height: "600px" }} />; // Increased height of the container
+  return <div ref={chartDivRef} style={{ width: "100%", height: "83%" }} />;
 };
 
 export default ColumnChart;

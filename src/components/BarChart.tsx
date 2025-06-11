@@ -65,6 +65,18 @@ const ColumnChart: React.FC<DataPorts> = ({ data, Xaxis, Yaxis,  xLabel, yLabel,
     const cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
     cursor.lineY.set("visible", false);
 
+
+    // Add Scrollbar
+    const scrollbarX = am5xy.XYChartScrollbar.new(root, {
+      orientation: "horizontal",
+      height: 10,
+      background: am5.Rectangle.new(root, {
+        fill: am5.color(0xe0e0e0),
+        fillOpacity: 0.6,
+      }),
+    });
+    chart.set("scrollbarX", scrollbarX);
+
     // Create axes
     const xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
     xRenderer.labels.template.setAll({
@@ -96,7 +108,7 @@ const ColumnChart: React.FC<DataPorts> = ({ data, Xaxis, Yaxis,  xLabel, yLabel,
         fontWeight: "bold",
         x: am5.p50,
         centerX: am5.p50,
-        y: am5.percent(98),
+        y: am5.percent(99),
       })
     );
 
@@ -109,7 +121,7 @@ const ColumnChart: React.FC<DataPorts> = ({ data, Xaxis, Yaxis,  xLabel, yLabel,
         rotation: -90,
         y: am5.p50,
         centerY: am5.p50,
-        x: am5.percent(0),
+        x: am5.percent(-2),
       })
     );
 
@@ -165,7 +177,7 @@ const ColumnChart: React.FC<DataPorts> = ({ data, Xaxis, Yaxis,  xLabel, yLabel,
     };
   }, [data, Xaxis, Yaxis, xLabel, yLabel]);
 
-  return <div ref={chartDivRef} style={{ width: "100%", height: "500px" }} />;
+  return <div ref={chartDivRef} style={{ width: "100%", height: "83%" }} />;
 };
 
 export default ColumnChart;

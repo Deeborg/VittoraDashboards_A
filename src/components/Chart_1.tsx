@@ -189,9 +189,8 @@ const Chart_P1: React.FC = () => {
     <div>
       <div className="heading-container">
         <h1 className="vittora-icon">Vittora</h1>
-        <h3 className="main-heading">Flux Analysis</h3>
-        <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="100px" />
-        <img src=".\asset\vittora.png" alt="Logo" width="100px" />
+        <h3 className="main-heading">Financial Flux Analysis</h3>
+        <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="80px" />
       </div>
 
       <div className="chart-container">

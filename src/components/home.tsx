@@ -16,7 +16,12 @@ export default function Home() {
       {/* Glassmorphism Header Container */}
       <div className="home-header-glass">
         <div className="home-top-bar">
-          <div className="home-logo">Vittora</div>
+          <img
+            className="home-top-left-image"
+            src=".\asset\vittora_white.png" // Change this path to your image
+            alt="Top Left"
+          />          
+
           {/* <div className="home-title-center">Finance Digital Twin</div> */}
           <img
             className="home-top-image"

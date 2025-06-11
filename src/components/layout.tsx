@@ -1,6 +1,6 @@
 // layout.tsx
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import "../Style/layout.css";
 
 interface LayoutProps {
@@ -10,6 +10,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ title, children }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -33,6 +35,11 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
       behavior: 'smooth',
     });
   };
+  const handleRestrictedNav = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    setShowMessage(true);
+  };  
+  const handleCloseMessage = () => setShowMessage(false);
 
   return (
     <div className="layout-container">
@@ -60,14 +67,32 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
           <div className="nav-links-center">
             <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Overview</NavLink>
             <NavLink to="/liquidity" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Liquidity & Cash</NavLink>
-            <NavLink to="/receivables" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Account Receivables</NavLink>
-            <NavLink to="/payables" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Account Payable</NavLink>
-            <NavLink to="/inventory" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Inventory</NavLink>
+            {/* Restricted links */}
+            <NavLink
+              to="/receivables"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={handleRestrictedNav}
+            >
+              Account Receivables
+            </NavLink>
+            <NavLink
+              to="/payables"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={handleRestrictedNav}
+            >
+              Account Payable
+            </NavLink>
+            <NavLink
+              to="/inventory"
+              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              onClick={handleRestrictedNav}
+            >
+              Inventory
+            </NavLink>
           </div>
           <NavLink to="/dashboard" className="home-button">Home</NavLink>
         </nav>
       </div>
-
 
       {/* Page Content */}
       <main>{children}</main>
@@ -80,6 +105,64 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
       >
         &#8679;
       </button>
+
+      {/* Message Modal */}
+      {showMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, width: '100vw', height: '100vh',
+            background: 'rgba(0,0,0,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            zIndex: 9999,
+          }}
+          onClick={handleCloseMessage}
+        >
+          <div
+            style={{
+              background: '#fff',
+              padding: '32px 24px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
+              maxWidth: 350,
+              textAlign: 'center',
+              position: 'relative',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>
+              Not available in demo environment.
+            </p>
+            <p style={{ color: '#2d3a4a', marginBottom: 0 }}>
+              Write to{' '}
+              <a
+                href="https://www.ajalabs.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}
+              >
+                ajalabs
+              </a>{' '}
+              to discuss further.
+            </p>
+            <button
+              onClick={handleCloseMessage}
+              style={{
+                marginTop: 18,
+                padding: '6px 18px',
+                borderRadius: 6,
+                border: 'none',
+                background: '#0072ce',
+                color: '#fff',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -91,6 +91,16 @@ const StackedBarWithLineChart: React.FC<Props> = ({
         useDefaultMarker: true,
       })
     );
+    legend.labels.template.setAll({
+      maxWidth: 100, // adjust as needed
+      oversizedBehavior: "wrap",
+      textAlign: "center",
+      fontSize: 13,
+      paddingRight: 4,
+      paddingLeft: 4,
+    });    
+    
+    
     root.container.children.removeValue(legend);
     root.container.children.insertIndex(0, legend);
 
@@ -189,13 +199,37 @@ const StackedBarWithLineChart: React.FC<Props> = ({
         fontWeight: "bold",
       })
     );
+    yAxisLeft.children.unshift(
+      am5.Label.new(root, {
+        text: "Amount in INR", // Change to your desired label
+        rotation: -90,
+        y: am5.p50,
+        centerY: am5.p50,
+        x: am5.percent(-10),
+        fontSize: 14,
+        fontWeight: "bold",
+      })
+    );
+
+    // Add Y-Axis Label (Secondary)
+    yAxisRight.children.push(
+      am5.Label.new(root, {
+        text: "Current Asset Ratio", // Change to your desired label
+        rotation: -90,
+        y: am5.p50,
+        centerY: am5.p50,
+        x: am5.percent(80),
+        fontSize: 14,
+        fontWeight: "bold",
+      })
+    );    
 
     return () => {
       root.dispose();
     };
   }, [data, xField, stackFields, lineField, onFilterChange1, xAxisLabel]); // Include xAxisLabel in dependencies
 
-  return <div ref={chartRef} style={{ width: "100%", height: "700px" }} />;
+  return <div ref={chartRef} style={{ width: "100%", height: "90%" }} />;
 };
 
 export default StackedBarWithLineChart;

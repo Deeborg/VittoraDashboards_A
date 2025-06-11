@@ -9,7 +9,12 @@ import CommercialDetails from './modules/CommercialDetails';
 import AuTmDetails from './modules/AutmDetails';
 import ScmDetails from './modules/ScmDetails';
 
+import { useLocation } from 'react-router-dom';
+
+
 const modulesDiagram = './asset/modules.png';
+
+
 
 export interface ModuleDetail {
   id: string;
@@ -59,6 +64,20 @@ const KeyModulesPage: React.FC = () => {
     const autmRef = useRef<HTMLDivElement>(null);
     const topContentRef = useRef<HTMLDivElement>(null);
     const scrollWrapperRef = useRef<HTMLDivElement>(null);
+    const location = useLocation();
+
+    useEffect(() => {
+    if (location.state && location.state.scrollToModule) {
+        const moduleId = location.state.scrollToModule;
+        setActiveModule(moduleId);
+        setTimeout(() => {
+        const targetRef = moduleRefsMap[moduleId];
+        if (targetRef && targetRef.current) {
+            scrollToSection(targetRef);
+        }
+        }, 100);
+    }
+    }, [location.state]);    
 
     const moduleDataList: ModuleDetail[] = [
       {

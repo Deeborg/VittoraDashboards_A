@@ -204,7 +204,7 @@ const ScatteredFlowBackground: React.FC = () => {
     ctx.fillStyle = BACKGROUND_CANVAS_COLOR;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.strokeStyle = 'rgba(200, 200, 200, 0.03)'; // Even fainter connections
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)'; // Even fainter connections
     ctx.lineWidth = 0.7;
     nodesRef.current.forEach(node => {
       node.connections.forEach(targetId => {

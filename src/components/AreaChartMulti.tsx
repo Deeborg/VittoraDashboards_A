@@ -15,7 +15,7 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
   data,
   xField,
   yFields,
-  colors = ["#64b5f6", "#4e4eff", "#0000ff"],
+  colors = ["#64b5f6", "#0D41E1", "#432371"],
 }) => {
   const chartRef = useRef<HTMLDivElement>(null);
 
@@ -39,6 +39,13 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
         renderer: am5xy.AxisRendererX.new(root, {}),
       })
     );
+    xAxis.get("renderer").labels.template.setAll({
+      fontSize: 12,
+      rotation: -45, // Optional: rotate for better fit
+      centerY: am5.p50,
+      centerX: am5.p100,
+      paddingRight: 10,
+    });    
     xAxis.data.setAll(data);
 
     const yAxis = chart.yAxes.push(
@@ -87,6 +94,7 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
         y: am5.percent(98), // Adjust vertical position as needed
       })
     );
+    
 
     return () => {
       root.dispose();
@@ -106,11 +114,11 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
                 marginRight: '5px',
               }}
             ></div>
-            <span>{label}</span>
+            <span style={{ color: "#000",fontSize:12 }}>{label}</span>
           </div>
         ))}
       </div>
-      <div ref={chartRef} style={{ width: "100%", height: "400px" }} />
+      <div ref={chartRef} style={{ width: "100%", height: "148%" }} />
     </div>
   );
 };

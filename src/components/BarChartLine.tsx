@@ -238,7 +238,7 @@ const BarChartLine: React.FC<DataPorts> = React.memo(({ data, catColumn, valueCo
   }, [data, catColumn, valueColum, valueColumLine, onFilterChange1]);
 
   return (
-    <div id="chartDiv" style={{ width: "100%", height: "500px" }}></div>
+    <div id="chartDiv" style={{ width: "100%", height: "90%" }}></div>
   );
 });
 

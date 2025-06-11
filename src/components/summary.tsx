@@ -362,6 +362,12 @@ const Summary: React.FC = () => {
                             <span className={styles.exploreModulesText}>Explore Modules</span>
                         </span>
                     </button>
+                    <img
+                        src="/asset/vittora_grey.png"
+                        alt="AJA Labs Logo"
+                        className={styles.headerLogoRight}
+                        style={{ height: 40, marginLeft: 24 }}
+                    />                    
                 </div>
                 <p style={{ textAlign: 'center', margin: '12px 0 0 0', color: 'black', fontSize: '1.08rem' }}>
                     A quick overview of your company’s key financial metrics and performance indicators.<br />

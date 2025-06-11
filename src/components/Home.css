@@ -177,6 +177,17 @@
   z-index: 11;
 }
 
+.home-top-left-image {
+  position: absolute;
+  top: -40px;
+  left: 40px;
+  height: 170px;
+  width: 170px;
+  object-fit: contain;
+  z-index: 11;
+}
+
+
 .center-glass-pane {
   margin: 0 auto;
   padding: 2rem 3rem;

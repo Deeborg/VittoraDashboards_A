@@ -155,7 +155,7 @@ const DashBoard1: React.FC = () => {
         <div className="Chart-row">
           {/* ...chart containers... */}
           <div className="chart-container">
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
               Net Working Capital Over Time
             </h3>
             <BarChart
@@ -168,7 +168,7 @@ const DashBoard1: React.FC = () => {
             />
           </div>
           <div className="chart-container">
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
               Cash Conversion Cycle
             </h3>
             <BarChart2
@@ -181,8 +181,8 @@ const DashBoard1: React.FC = () => {
             />
           </div>
           <div className="chart-container">
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
-              Net Working Cpaital to Net TurnOver
+            <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
+              Net Working Capital to Net Turnover
             </h3>
             <LineChart
               data={filteredData}
@@ -191,7 +191,7 @@ const DashBoard1: React.FC = () => {
             />
           </div>
           <div className="chart-container">
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
               Inventories by Fiscal Year
             </h3>
             <BarChartLine
@@ -205,7 +205,7 @@ const DashBoard1: React.FC = () => {
         </div>
         <div className="Chart-row">
           <div className="chart-container-full">
-            <h3 style={{ textAlign: "center", marginBottom: "10px" }}>
+            <h3 style={{ textAlign: "center", marginBottom: "10px", color: "#000" }}>
               Net Working Cpaital Breakdown
             </h3>
             <WaterfallChart

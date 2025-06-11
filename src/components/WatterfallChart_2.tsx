@@ -178,7 +178,7 @@ const WaterfallChart: React.FC<WaterfallProps> = ({ data, title }) => {
 
   return (
 
-      <div id="chartdiv" style={{ width: "100%", minHeight: "800px", height:"90%" }}></div>
+      <div id="chartdiv" style={{ width: "100%", height:"90%" }}></div>
   );
 };
 
