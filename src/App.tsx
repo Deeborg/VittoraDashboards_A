@@ -9,6 +9,7 @@ import DashBoard3 from "./components/Chart2"
 import DashBoard2 from "./components/Chart3";
 import KeyModulesPage from "./components/modules";
 import Synario from "./Pages/Senario";
+import BankEfficiency from "./Pages/BankEfficiency";
 
 
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/liquidity" element={<DashBoard2 />} />
           <Route path="/receivables" element={<DashBoard3 />} />
           <Route path="/synario" element={<Synario />} />
+          <Route path="/bankefficiency" element={<BankEfficiency/>}/>
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

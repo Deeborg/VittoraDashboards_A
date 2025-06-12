@@ -53,8 +53,8 @@ const FilterComponent: React.FC<FilterProps> = ({ data, onFilterChange }) => {
   };
 
   return (
-    <div className="filters">
-      <div className="filter-row">
+    <div className="filters-senario">
+      <div className="filter-row-senario">
         <select value={selectedFilter1 || ""} onChange={handleFilter1Select}>
           <option value="">Choose Country...</option>
           {countries.map((country) => (
@@ -64,7 +64,7 @@ const FilterComponent: React.FC<FilterProps> = ({ data, onFilterChange }) => {
           ))}
         </select>
       </div>
-      <div className="filter-row">
+      <div className="filter-row-senario">
         <select value={selectedFilter2 || ""} onChange={handleFilter2Select}>
           <option value="">Choose Material Group...</option>
           {availableMaterialGroups.map((materialGroup) => (

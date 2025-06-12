@@ -60,11 +60,11 @@ const TableComponent: React.FC<TableComponentProps> = ({ data, visibleColumns })
           border: "1px solid #ddd",
         }}
       > */}
-        <table style={{ border: "2px solid #ccc", width: "100%", borderCollapse: "collapse" }} >
+        <table style={{ border: "2px solid #0f0f0f", width: "100%", borderCollapse: "collapse" }} >
           <thead >
                          
               {visibleColumns.map((key) => (
-                <th key={key} style={{ border: "2px solid #ccc", borderCollapse: "collapse" }}>
+                <th key={key} style={{ border: "2px solid #0f0f0f", borderCollapse: "collapse" }}>
                   {key}
                 </th>
               ))}
@@ -74,7 +74,7 @@ const TableComponent: React.FC<TableComponentProps> = ({ data, visibleColumns })
             {paginatedData.map((row, index) => (
               <tr key={index} >
                 {visibleColumns.map((key, idx) => (
-                  <td key={idx} style={{ border: "2px solid #ccc", borderCollapse: "collapse" }}>
+                  <td key={idx} style={{ border: "2px solid #0f0f0f", borderCollapse: "collapse" }}>
                     {typeof row[key] === 'object' && row[key] instanceof Date ? row[key].toISOString() : row[key]}
                   </td>
                 ))}

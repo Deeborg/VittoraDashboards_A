@@ -48,6 +48,8 @@ export default function ResponsiveSidebar({ children }: Props) {
   const afterModulesMenu = [
     { path: "/dashboard", icon: <FaMoneyBillWave />, label: "Working Capital" },
     { path: "/flux", icon: <FaChartLine />, label: "Flux Analysis" },
+    { path: "/synario", icon: <FaChartLine />, label: "Synario Analysis" },
+    { path: "/bankefficiency", icon: <FaChartLine />, label: "SBU Efficiency Analysis" },
   ];
 
   // Handler for module menu click: navigate to /modules and pass moduleId in state

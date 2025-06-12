@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import DateRangeSlider from "../Components/DateFilterSenario";
-
+import DateRangeSlider from "../components/DateFilterSenario";
+import "../Style/Chart1Synario.css"
 interface DataProps {
   data1: Record<string, any>[];
   startDate: Date;
@@ -59,8 +59,8 @@ const ForcastSimulate: React.FC<DataProps> = ({ data1, startDate, endDate }) => 
   return (
     <div>
       <h2>Forcaasted & Simulated Sales</h2>
-      <div className="Date-Filter">
-      <div className="Date-Filter1">
+      <div className="Date-Filter-senario">
+      <div className="Date-Filter1-senario">
       {dateRange && (
         <DateRangeSlider
           heading=""
@@ -72,32 +72,32 @@ const ForcastSimulate: React.FC<DataProps> = ({ data1, startDate, endDate }) => 
       )}
       </div>
       </div>
-      <div className="stats-cards">
-        <div className="stats-card">
+      <div className="stats-cards-senario">
+        <div className="stats-card-senario">
           
           <h2>{formatAmount(kpi1)}</h2>
           <h4>Forecast Sales</h4>
         </div>
-        <div className="stats-card">
+        <div className="stats-card-senario">
           
           <h2>{formatAmount(kpi2)}</h2>
           <h4>Direct Cost</h4>
         </div>
-        <div className="stats-card">
+        <div className="stats-card-senario">
           
           <h2>{formatAmount(kpi3)}</h2>
           <h4>Gross Profit</h4>
         </div>
-        <div className="stats-card">
+        <div className="stats-card-senario">
           
           <h2>{formatAmount(kpi4)}</h2>
           <h4>Simulated Revenue</h4>
         </div>
-        <div className="stats-card">          
+        <div className="stats-card-senario">          
           <h2>{formatAmount(kpi5)}</h2>
           <h4>Simulated Cost</h4>
         </div>
-        <div className="stats-card">          
+        <div className="stats-card-senario">          
           <h2>{formatAmount(kpi6)}</h2>
           <h4>Simulated Gross Profit</h4>
         </div>
