@@ -48,7 +48,7 @@ export default function ResponsiveSidebar({ children }: Props) {
   const afterModulesMenu = [
     { path: "/dashboard", icon: <FaMoneyBillWave />, label: "Working Capital" },
     { path: "/flux", icon: <FaChartLine />, label: "Flux Analysis" },
-    { path: "/synario", icon: <FaChartLine />, label: "Synario Analysis" },
+    { path: "/scenario", icon: <FaChartLine />, label: "Scenario Analysis" },
     { path: "/bankefficiency", icon: <FaChartLine />, label: "SBU Efficiency Analysis" },
   ];
 

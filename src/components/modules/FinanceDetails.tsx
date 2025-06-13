@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Phase {
   id: string;
@@ -13,7 +14,10 @@ interface Phase {
   labelXOffset: number; // Offset from the calculated radial position X
   labelYOffset: number; // Offset from the calculated radial position Y
   textAlign: 'left' | 'right' | 'center'; // Text alignment for the label block
+  route: string; // Optional route for navigation
 }
+
+
 
 const phasesData: Phase[] = [
   {
@@ -26,8 +30,8 @@ const phasesData: Phase[] = [
     angleEnd: 210,
     labelXOffset: 95, // Adjusted to match image
     labelYOffset: 320, // Adjusted to match image
-
     textAlign: 'left', // Keep left based on image's visual spacing
+    route: '/roi',
   },
   {
     id: 'scenario',
@@ -39,8 +43,8 @@ const phasesData: Phase[] = [
     angleEnd: 30,
     labelXOffset: 155, // Adjusted to match image
     labelYOffset: -180, // Adjusted to match image
-
     textAlign: 'right',
+    route: '/scenario',
   },  
   {
     id: 'sentiment',
@@ -53,6 +57,7 @@ const phasesData: Phase[] = [
     labelXOffset: 320, // Adjusted to match image
     labelYOffset: -60, // Adjusted to match image
     textAlign: 'left',
+    route: '/sentiment',
   },
   {
     id: 'flux',
@@ -65,6 +70,7 @@ const phasesData: Phase[] = [
     labelXOffset: -220, // Adjusted to match image
     labelYOffset: -40, // Adjusted to match image
     textAlign: 'left',
+    route: '/flux',
   },
   {
     id: 'esg',
@@ -77,6 +83,7 @@ const phasesData: Phase[] = [
     labelXOffset: -130, // Adjusted to match image
     labelYOffset: 180, // Adjusted to match image
     textAlign: 'right', // Keep right based on image's visual spacing
+    route: '/esg',
   },
 
   {
@@ -90,6 +97,7 @@ const phasesData: Phase[] = [
     labelXOffset: 400, // Adjusted to match image
     labelYOffset: 180, // Adjusted to match image
     textAlign: 'right',
+    route: '/forecast',
   },
 ];
 
@@ -138,6 +146,8 @@ const SixPhaseInfographic: React.FC = () => {
   const iconRadius = outerRadius * 0.65;
   const pullDistance = 15;
   const explodeDistance = 40;
+
+  const navigate = useNavigate();
 
   const [activePhaseId, setActivePhaseId] = useState<string | null>(null);
 
@@ -289,7 +299,8 @@ const SixPhaseInfographic: React.FC = () => {
             return (
               <g
                 key={phase.id}
-                onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
+                // onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
+                onClick={() => navigate(phase.route)}
                 style={{ cursor: 'pointer', transition: 'transform 0.3s ease-out, filter 0.3s ease-out' }}
                 transform={transform}
                 filter={filter}
@@ -325,7 +336,8 @@ const SixPhaseInfographic: React.FC = () => {
         <div key={`${phase.id}-label`} style={getLabelStyle(phase)}>
           <div
             style={{ ...styles.phaseTitle, color: phase.color }}
-            onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
+            // onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
+            onClick={() => navigate(phase.route)}
           >
             {phase.title}
           </div>
