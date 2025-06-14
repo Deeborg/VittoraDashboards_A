@@ -136,7 +136,7 @@ const Sankey: React.FC = () => {
         {data ? (
           <div
             style={{
-              width: '100%',
+              width: '90vw',
               margin: '0 auto',
               padding: '20px',
               borderRadius: '16px',

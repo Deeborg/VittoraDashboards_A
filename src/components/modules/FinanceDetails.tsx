@@ -28,8 +28,8 @@ const phasesData: Phase[] = [
     icon: '👥',
     angleStart: 150,
     angleEnd: 210,
-    labelXOffset: 95, // Adjusted to match image
-    labelYOffset: 320, // Adjusted to match image
+    labelXOffset: 92, // Adjusted to match image
+    labelYOffset: 230, // Adjusted to match image
     textAlign: 'left', // Keep left based on image's visual spacing
     route: '/roi',
   },
@@ -41,9 +41,9 @@ const phasesData: Phase[] = [
     icon: '💡',
     angleStart: -30, // Equivalent to 330 degrees
     angleEnd: 30,
-    labelXOffset: 155, // Adjusted to match image
-    labelYOffset: -180, // Adjusted to match image
-    textAlign: 'right',
+    labelXOffset: 45, // Adjusted to match image
+    labelYOffset: -230, // Adjusted to match image
+    textAlign: 'left',
     route: '/scenario',
   },  
   {
@@ -55,7 +55,7 @@ const phasesData: Phase[] = [
     angleStart: 30,
     angleEnd: 90,
     labelXOffset: 320, // Adjusted to match image
-    labelYOffset: -60, // Adjusted to match image
+    labelYOffset: -120, // Adjusted to match image
     textAlign: 'left',
     route: '/sentiment',
   },
@@ -68,7 +68,7 @@ const phasesData: Phase[] = [
     angleStart: -90, // Equivalent to 270 degrees
     angleEnd: -30,
     labelXOffset: -220, // Adjusted to match image
-    labelYOffset: -40, // Adjusted to match image
+    labelYOffset: -120, // Adjusted to match image
     textAlign: 'left',
     route: '/flux',
   },
@@ -80,23 +80,23 @@ const phasesData: Phase[] = [
     icon: '🔍',
     angleStart: 210,
     angleEnd: 270,
-    labelXOffset: -130, // Adjusted to match image
-    labelYOffset: 180, // Adjusted to match image
-    textAlign: 'right', // Keep right based on image's visual spacing
+    labelXOffset: -220, // Adjusted to match image
+    labelYOffset: 120, // Adjusted to match image
+    textAlign: 'left', // Keep right based on image's visual spacing
     route: '/esg',
   },
 
   {
     id: 'forecast',
-    title: 'FORECAST',
+    title: 'Forecast',
     description: 'Accurate financial forecast with machine learning',
     color: '#7fb3d5', // Light Purple (top-left in original image)
     icon: '🚀',
     angleStart: 90,
     angleEnd: 150,
-    labelXOffset: 400, // Adjusted to match image
-    labelYOffset: 180, // Adjusted to match image
-    textAlign: 'right',
+    labelXOffset: 320, // Adjusted to match image
+    labelYOffset: 120, // Adjusted to match image
+    textAlign: 'left',
     route: '/forecast',
   },
 ];
@@ -156,6 +156,7 @@ const SixPhaseInfographic: React.FC = () => {
       position: 'relative',
       width: '100%',
       maxWidth: '700px',
+      height: '700px',
       margin: '20px auto',
       fontFamily: 'Arial, sans-serif',
       display: 'flex',
@@ -169,7 +170,7 @@ const SixPhaseInfographic: React.FC = () => {
       width: `${svgSize}px`,
       height: `${svgSize}px`,
       margin: '0 auto',
-      marginTop: '105px',
+      marginTop: '0 auto',
     },
     centralCircle: {
       position: 'absolute',
@@ -270,9 +271,9 @@ const SixPhaseInfographic: React.FC = () => {
 
   return (
     <div style={styles.container}>
-      <h1 style={{ textAlign: 'center', marginBottom: '30px', marginTop: '3px', color: 'rgb(204, 145, 19)' }}>
+      {/* <h1 style={{ textAlign: 'center', marginBottom: '30px', marginTop: '3px', color: 'rgb(204, 145, 19)' }}>
         Financial Planning & Analysis
-      </h1>
+      </h1> */}
       <div style={styles.svgContainer}>
         <svg width={svgSize} height={svgSize} viewBox={`0 0 ${svgSize} ${svgSize}`}>
           <defs>

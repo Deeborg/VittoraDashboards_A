@@ -50,7 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 140px; /* Ensure cards have some height */
+  height: 178px; /* Ensure cards have some height */
 }
 
 .kpi-card:hover {
@@ -91,9 +91,10 @@ body {
 }
 
 .kpi-card-sparkline {
-  height: 50px; /* Height for the sparkline chart */
   width: 100%;
-  margin-top: auto; /* Pushes sparkline to the bottom if card content is less */
+  height: 60px; 
+  min-width: 60px;
+  min-height: 20px;
 }
 
 /* --- Radial Chart Card --- */

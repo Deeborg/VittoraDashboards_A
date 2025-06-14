@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import './Home.css';
 import MoneyFlowBackground from './MoneyFlowBackground';
 
 export default function Home() {
+
+  const [showRipple, setShowRipple] = useState(false);
+
+  const handleImmerseClick = () => {
+    setShowRipple(true);
+    setTimeout(() => setShowRipple(false), 1000); // Match animation duration
+    // ...your existing logic...
+  };
+  
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
@@ -45,6 +54,12 @@ export default function Home() {
           <span className="immerse-btn-ring"></span>
         </button>
       </div>
+      {showRipple && (
+        <div className="fullscreen-ripple">
+          <div className="ripple-circle" />
+        </div>
+      )}      
     </div>
   );
 }
+

@@ -295,9 +295,15 @@
     text-shadow: 0px 1px 2px rgba(255, 255, 255, 0.5); /* Subtle shadow for better readability */
 }
 .headerLogoRight {
-  margin-left: 24px;
+  position: absolute;
+  top: 10px;      /* Adjust this value to align vertically with the buttons */
+  right: 12px;     /* Adjust for space from the right edge */
   height: 40px;
-  
-  /* Optionally add: */
-  /* align-self: flex-end; */
+}
+
+
+
+.summaryHeader {
+    position: relative;
+    padding: 10px 0; /* Adds some vertical space for better alignment */
 }

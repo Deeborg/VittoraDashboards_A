@@ -182,10 +182,16 @@ const KeyModulesPage: React.FC = () => {
                 </button>
                 <h1>
                         {activeModule
-                            ? moduleDataList.find(m => m.id === activeModule)?.displayText || "Vittora Modules"
-                            : "Vittora Modules"}
-                    </h1>                
+                            ? moduleDataList.find(m => m.id === activeModule)?.displayText || "Finance Modules"
+                            : "Finance Modules"}
+                </h1>                
+                <img
+                    src="./asset/vittora_grey.png"
+                    alt="Vittora Logo"
+                    style={{ height: 40 }}
+                />
             </header>
+            
             
             <div className="key-modules-scroll-wrapper" ref={scrollWrapperRef}>
                 <div className="modules-main-view" ref={topContentRef}>
@@ -222,7 +228,7 @@ const KeyModulesPage: React.FC = () => {
                 title="Back to Modules"
                 aria-label="Back to Modules"
             >
-                <FaArrowUp size={20} />
+                <FaArrowUp size={50} />
             </button>
         </div>
     );

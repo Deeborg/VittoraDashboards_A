@@ -77,7 +77,7 @@ const SupplyChainProcess: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <p style={{ color: '#2d3a4a' }}>
+      <p style={{ color: '#2d3a4a', marginBottom: '104px' }}>
         Delve into the full spectrum of supply chain management — from forecasting demand to optimizing financial performance.
       </p>
       <div className={styles.timeline} onMouseLeave={handleMouseLeave}>

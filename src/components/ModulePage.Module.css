@@ -6,7 +6,7 @@
   padding: 0;
 } */
 .key-modules-container {
-  min-height: 100vh;
+  height: 97vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); /* Lighter, softer background */
@@ -18,7 +18,7 @@
 
 /* --- Header --- */
 .key-modules-header {
-  padding: 1.5rem 2rem;
+  padding: 0.5rem 2rem;
   position: sticky;
   display: flex;
   align-items: center;
@@ -79,10 +79,13 @@
 
 /* --- Scrollable Content Wrapper --- */
 .key-modules-scroll-wrapper {
-  flex-grow: 1; /* Takes remaining vertical space */
+  flex: 1 1 auto; /* Takes remaining vertical space */
   /* overflow-y: auto; */
+  display: flex;
+  flex-direction: column;
   position: relative;
-  height: calc(100vh - 80px);
+  min-height: 0;
+  /* height: calc(100vh - 80px); */
   scroll-behavior: smooth;
   padding-bottom: 2rem;
 }
@@ -106,21 +109,22 @@
   justify-content: center;
   align-items: center;
   padding: 0px; /* More vertical padding */
-  min-height: 100vh; /* Ensure enough space for diagram and pills initially */
+  height: 100vh; /* Ensure enough space for diagram and pills initially */
   position: relative; /* For pill positioning context if not using wrapper */
   margin-top: -20px;
 }
 
 .circular-diagram-wrapper {
   position: relative; /* Pills will be positioned relative to this */
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
   /* Adjust width/max-width if your image is very large or small */
-  width: 80%;
-  max-width: 550px; /* Controls the spread of the diagram area */
+  width: 100vw;
+  max-width: 550px; 
   margin: 2rem auto;
-  animation: float 6s ease-in-out infinite;
+  top:1.5rem;
+  /* animation: float 6s ease-in-out infinite; */
   margin-top: 10px;
   margin-bottom: 30px;
 }
@@ -132,9 +136,13 @@
 }
 
 .circular-diagram-image {
-  width: 100%; /* Make it responsive within its wrapper */
+  max-height: 90vh; /* Ensure it doesn't overflow vertically */
+  max-width: 60vh; /* Make it responsive within its wrapper */
   /* width: 300px;  */
+  object-fit: contain;
   height: auto;
+  justify-content: center;
+  align-items: center;
   /* display: block;  */
   filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
   transition: transform 0.5s ease;
@@ -146,8 +154,13 @@
 
 /* --- ModulePill Styles --- */
 .module-pill {
+  width: 380px;        
+  height: 48px;          
   position: absolute; /* Positioned relative to circular-diagram-wrapper */
   padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50px; /* Fully rounded */
   color: white;
   /* font-size: 0.85rem; */
@@ -161,10 +174,18 @@
   will-change: transform; 
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   transform: scale(1);
+  box-sizing: border-box;
 }
 .module-pill:hover {
   transform: scale(1.05) translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+.module-pills-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;      /* row gap, column gap */
+  margin-top: 32px;
 }
 
 /* .module-pill:hover, .module-pill:focus-visible {
@@ -195,10 +216,10 @@
 .scm-pill-pos { top: 45%; right: -35%; transform: translateY(-50%); }
 .autm-pill-pos { bottom: -20%; left: 50%; transform: translateX(-50%); } */
 
-.finance-pill-pos { top: -5.5%; left: 21%; }
-.commercial-pill-pos { top: 38%; left: -58%; }
-.scm-pill-pos { bottom: 53%; right: -52%; }
-.autm-pill-pos { bottom: -8%; right: 15%; }
+.finance-pill-pos { top: -8.5%; left: 16%; }
+.commercial-pill-pos { bottom: 49%; left: -65%; }
+.scm-pill-pos { bottom: 49%; right: -65%; }
+.autm-pill-pos { bottom: -11%; left: 16%; }
 
 
 /* --- Module Details Section --- */
@@ -242,7 +263,7 @@
   position: fixed;
   bottom: 30px;
   right: 50px;
-  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  background: linear-gradient(135deg, #022d69, #00d2ff);
   color: white;
   border: none;
   border-radius: 50%;
@@ -258,6 +279,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
+  font-size: 1.5em;
 }
 
 .back-to-top-button.visible {

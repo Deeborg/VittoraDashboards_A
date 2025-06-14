@@ -209,7 +209,7 @@ const CommercialDetails: React.FC = () => {
     <div style={styles.container}>
       <p style={styles.mainTitle}> </p>
       <p style={styles.mainTitle}>
-        The Treasury Management Module provides real-time visibility into cash, liquidity, and risk exposure while enabling accurate cash flow forecasting and optimal fund allocation. It streamlines FX management, debt planning, and investment tracking, helping reduce financial risk and improve returns. By automating treasury operations and integrating with banking systems, it ensures efficient, compliant, and data-driven financial decisions.
+        The Treasury Management Module provides real-time visibility into cash, liquidity, and risk exposure while enabling accurate cash flow forecasting and optimal fund allocation. It streamlines FX management, debt planning, and investment tracking, helping reduce financial risk and improve returns.
       </p>
       <div style={styles.columnsContainer}>
         {infographicData.map((col, index) => (

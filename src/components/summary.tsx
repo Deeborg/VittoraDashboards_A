@@ -114,11 +114,11 @@ const Summary: React.FC = () => {
         { name: 'Feb', value: 2200.3 },
         { name: 'Mar', value: 2100.7 },
         { name: 'Apr', value: 1800.2 },
-        { name: 'May', value: 1950.8 },   // slight spike
+        { name: 'May', value: 1950.8 },   
         { name: 'Jun', value: 1700.4 },
         { name: 'Jul', value: 1600.9 },
-        { name: 'Aug', value: 900.2 },    // big drop
-        { name: 'Sept', value: 1300.6 },  // spike up
+        { name: 'Aug', value: 900.2 },    
+        { name: 'Sept', value: 1300.6 },  
         { name: 'Oct', value: 1100.1 },
         { name: 'Nov', value: 950.7 },
         { name: 'Dec', value: 721.3 }
@@ -340,6 +340,7 @@ const Summary: React.FC = () => {
         <div className={styles.summaryContainer}>
             <div className={styles.summaryHeader}>
                 <h2 className={styles.financialSummaryHeading}>Snapshot of Financials</h2>
+                
                 <div className={styles.headerButtons}>
                     <button
                         className={styles.homeIconButton}
@@ -362,13 +363,13 @@ const Summary: React.FC = () => {
                             <span className={styles.exploreModulesText}>Explore Modules</span>
                         </span>
                     </button>
-                    <img
-                        src="/asset/vittora_grey.png"
-                        alt="AJA Labs Logo"
-                        className={styles.headerLogoRight}
-                        style={{ height: 40, marginLeft: 24 }}
-                    />                    
                 </div>
+                <img
+                    src="/asset/vittora_grey.png"
+                    alt="Vittora Logo"
+                    className={styles.headerLogoRight}
+                />                    
+
                 <p style={{ textAlign: 'center', margin: '12px 0 0 0', color: 'black', fontSize: '1.08rem' }}>
                     A quick overview of your company’s key financial metrics and performance indicators.<br />
                 
