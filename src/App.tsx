@@ -10,6 +10,7 @@ import DashBoard2 from "./components/Chart3";
 import KeyModulesPage from "./components/modules";
 import Scenario from "./Pages/Scenario";
 import BankEfficiency from "./Pages/BankEfficiency";
+import Forex from "./components/Forex";
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/receivables" element={<DashBoard3 />} />
           <Route path="/scenario" element={<Scenario />} />
           <Route path="/bankefficiency" element={<BankEfficiency/>}/>
+          <Route path="/forex" element={<Forex />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

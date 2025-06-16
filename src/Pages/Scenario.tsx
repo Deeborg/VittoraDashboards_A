@@ -9,10 +9,11 @@ import AmMultiAreaChart1 from "../components/AreaChartMultiSenario";
 import HorizontalBarChartSlid from "../components/BarChartHoriSlidSenario";
 import WorldBubbleMapChart from "../components/WorldMapSenario";
 import TableComponent from "../components/TableSenario";
+import LoadingMobiusStrip from '../components/LoadingMobiusStrip';
 
 const DashBoard1: React.FC = () => {
   const [data, setData] = useState<Array<Record<string, any>>>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filteredData, setFilteredData] = useState<Array<Record<string, any>>>([]);
   const [DateFiltered, setFilteredDate] = useState<Array<Record<string, any>>>([]);
@@ -53,6 +54,13 @@ const DashBoard1: React.FC = () => {
   const RetailSales_Factor = 1 + slider11 / 100;
   const StockMarket_Factor = 1 + slider12 / 100;
   const IndProd_Factor = 1 + slider13 / 100;
+
+  useEffect(() => {
+    // Your loading logic here (e.g., fetch data or simulate loading)
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);  
+  
 
   // Fetch data from the API
   useEffect(() => {
@@ -378,14 +386,17 @@ const DashBoard1: React.FC = () => {
   );
 
   if (error) return <div>{error}</div>;
-  if (loading || filteredData.length === 0) return <div>Loading...</div>;
+  if (loading) {
+    return <LoadingMobiusStrip />;
+  }  
 
+  
   return (
     <div className="dashboard-container-senario">
       <div className="Header-container-senario">
         <h1>Financial Forecast and Scenario Simulator</h1>
         <div>
-          <img src=".\asset\ajalabs_black.png" alt="Logo" height={30} />
+          <img src=".\asset\vittora_grey.png" alt="Logo" height={50} />
         </div>
       </div>
       <div className="Kpi-container-senario">

@@ -228,7 +228,7 @@ const KeyModulesPage: React.FC = () => {
                 title="Back to Modules"
                 aria-label="Back to Modules"
             >
-                <FaArrowUp size={50} />
+                <FaArrowUp size={200} />
             </button>
         </div>
     );

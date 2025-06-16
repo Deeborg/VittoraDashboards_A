@@ -13,10 +13,10 @@ const ExcelTable: React.FC<DataPorts> = ({ EXdata,EXdata1, visibleColumns,catego
   return (
     <>
     <h1>{category}</h1>
-    <div style={{ padding: "10px", display:'flex'}}>
+    <div style={{ padding: "10px", display:'flex',backgroundColor:"white",borderRadius:"10px",border:"2px solid black" }}>
       
 
-      <table style={{ width: "15%", borderCollapse: "collapse", border:"2px" }}>
+      <table style={{ width: "15%", borderCollapse: "collapse", border:"2px",borderColor:"black"}}>
 
       <thead>
           <tr>

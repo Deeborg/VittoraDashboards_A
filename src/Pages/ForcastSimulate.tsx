@@ -58,7 +58,7 @@ const ForcastSimulate: React.FC<DataProps> = ({ data1, startDate, endDate }) => 
   
   return (
     <div>
-      <h2>Forcaasted & Simulated Sales</h2>
+      <h2>Sales Forecast and Simulation</h2>
       <div className="Date-Filter-senario">
       <div className="Date-Filter1-senario">
       {dateRange && (

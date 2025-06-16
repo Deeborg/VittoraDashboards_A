@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+
+
+
 
 // --- SVG Icons (as functional components for reusability and cleanliness) ---
 const UserGroupIcon: React.FC<{ fill?: string; size?: string | number }> = ({ fill = 'currentColor', size = '24px' }) => (
@@ -105,6 +110,7 @@ const CommercialDetails: React.FC = () => {
   const handleCloseMessage = () => {
     setShowMessage(false);
   };
+  const navigate = useNavigate();
 
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
@@ -222,7 +228,18 @@ const CommercialDetails: React.FC = () => {
             }}
             onMouseEnter={() => setHoveredColumn(index)}
             onMouseLeave={() => setHoveredColumn(null)}
-            onClick={handleColumnClick}
+            // onClick={handleColumnClick}
+            onClick={() => {
+              if (col.title === "Working Capital Optimization") {
+                navigate("/dashboard");
+              } 
+              else if (col.title === "Forex and Risk") {
+                navigate("/forex");
+              } 
+              else {
+                handleColumnClick();
+              }
+            }}            
             tabIndex={0}
             role="button"
             aria-label={`Column: ${col.title}`}

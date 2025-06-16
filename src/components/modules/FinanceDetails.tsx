@@ -150,6 +150,10 @@ const SixPhaseInfographic: React.FC = () => {
   const navigate = useNavigate();
 
   const [activePhaseId, setActivePhaseId] = useState<string | null>(null);
+  const [showMessage, setShowMessage] = useState(false);
+
+  const handleShowMessage = () => setShowMessage(true);
+  const handleCloseMessage = () => setShowMessage(false);  
 
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
@@ -282,6 +286,7 @@ const SixPhaseInfographic: React.FC = () => {
             </filter>
           </defs>
 
+
           {phasesData.map((phase) => {
             const midAngle = (phase.angleStart + phase.angleEnd) / 2;
             const iconPos = polarToCartesian(center, center, iconRadius, midAngle);
@@ -297,12 +302,21 @@ const SixPhaseInfographic: React.FC = () => {
               filter = 'url(#shadow)';
             }
 
+            // Conditionally set onClick and style
+            const isDemoPhase = ["esg", "forecast", "roi"].includes(phase.id);
+
             return (
               <g
                 key={phase.id}
-                // onClick={() => setActivePhaseId(activePhaseId === phase.id ? null : phase.id)}
-                onClick={() => navigate(phase.route)}
-                style={{ cursor: 'pointer', transition: 'transform 0.3s ease-out, filter 0.3s ease-out' }}
+                onClick={
+                  isDemoPhase
+                    ? handleShowMessage
+                    : () => navigate(phase.route)
+                }
+                style={{
+                  cursor: 'pointer',
+                  transition: 'transform 0.3s ease-out, filter 0.3s ease-out'
+                }}
                 transform={transform}
                 filter={filter}
               >
@@ -324,6 +338,7 @@ const SixPhaseInfographic: React.FC = () => {
               </g>
             );
           })}
+
         </svg>
         <div
           style={styles.centralCircle}
@@ -352,6 +367,63 @@ const SixPhaseInfographic: React.FC = () => {
           </div>
         </div>
       ))}
+
+      {showMessage && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, width: '100vw', height: '100vh',
+            background: 'rgba(0,0,0,0.3)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            zIndex: 9999,
+          }}
+          onClick={handleCloseMessage}
+        >
+          <div
+            style={{
+              background: '#fff',
+              padding: '32px 24px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
+              maxWidth: 350,
+              textAlign: 'center',
+              position: 'relative',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>
+              Not available in demo environment.
+            </p>
+            <p style={{ color: '#2d3a4a', marginBottom: 0 }}>
+              Write to{' '}
+              <a
+                href="https://www.ajalabs.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}
+              >
+                ajalabs
+              </a>{' '}
+              to discuss further.
+            </p>
+            <button
+              onClick={handleCloseMessage}
+              style={{
+                marginTop: 18,
+                padding: '6px 18px',
+                borderRadius: 6,
+                border: 'none',
+                background: '#0072ce',
+                color: '#fff',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

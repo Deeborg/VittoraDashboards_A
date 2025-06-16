@@ -114,7 +114,7 @@ const Chart_P1: React.FC = () => {
 
       return {
         ...row,
-        "Flux Percentage": ((fluxAmount / q4fy22_1) * 100).toFixed(2),
+        "Flux Percentage": ((fluxAmount / Math.abs(q4fy22_1)) * 100).toFixed(2),
       };
     });
 
@@ -187,11 +187,45 @@ const Chart_P1: React.FC = () => {
   }
   return (
     <div>
-      <div className="heading-container">
+      {/* <div className="heading-container">
         <h1 className="vittora-icon">Vittora</h1>
         <h3 className="main-heading">Financial Flux Analysis</h3>
         <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="80px" />
-      </div>
+      </div> */}
+        <div
+          style={{
+            background: "#fff",
+            borderRadius: "16px",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+            padding: "24px 32px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "32px auto 24px auto",
+            // maxWidth: 900,
+            width: "100%",
+            boxSizing: "border-box"
+          }}
+        >
+          <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="80px" />
+          {/* Empty div for left spacing, same width as logo */}
+          <div style={{ width: 48 }} />
+          <h2 style={{ 
+            margin: 0, 
+            fontWeight: 700, 
+            fontSize: "2rem", 
+            color: "#1a237e", 
+            flex: 1, 
+            textAlign: "center" 
+          }}>
+            Flux Analysis
+          </h2>
+          <img
+            src="./asset/vittora_grey.png"
+            alt="Vittora Logo"
+            style={{ height: 48 }}
+          />
+        </div>      
 
       <div className="chart-container">
         <HorizontalBarChartSlid

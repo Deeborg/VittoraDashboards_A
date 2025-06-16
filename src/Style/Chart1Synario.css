@@ -47,7 +47,7 @@ html, body {
   text-align: center;
 }
 
-h1 {
+.dashboard-container-senario h1 {
   color: #000;
   background: transparent;
   margin: 0;
@@ -157,7 +157,7 @@ h1 {
 }
 
 /* Dropdowns */
-select {
+.dashboard-container-senario select {
   width: 100%;
   padding: 10px 15px;
   font-size: 14px;
@@ -168,7 +168,7 @@ select {
   appearance: none;
 }
 
-select:focus {
+.dashboard-container-senario select:focus {
   border-color: #007bff;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
@@ -180,7 +180,7 @@ td, th {
 }
 
 /* Buttons */
-button {
+.dashboard-container-senario button {
   padding: 12px 24px;
   background-color: #28a745;
   color: white;
@@ -191,15 +191,15 @@ button {
   transition: background-color 0.2s ease-in-out;
 }
 
-button:hover {
+.dashboard-container-senario button:hover {
   background-color: #218838;
 }
 
-button.listening {
+.dashboard-container-senario button.listening {
   background-color: #dc3545;
 }
 
-button.listening:hover {
+.dashboard-container-senario button.listening:hover {
   background-color: #c82333;
 }
 
@@ -244,7 +244,7 @@ button.listening:hover {
     flex: 1 1 100%;
   }
 
-  button {
+.dashboard-container-senario button {
     width: 100%;
     font-size: 1rem;
   }
