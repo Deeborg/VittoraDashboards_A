@@ -11,6 +11,7 @@ import KeyModulesPage from "./components/modules";
 import Scenario from "./Pages/Scenario";
 import BankEfficiency from "./Pages/BankEfficiency";
 import Forex from "./components/Forex";
+import SentimentDashboard from "./components/Sentimentanalysis"
 
 
 
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/scenario" element={<Scenario />} />
           <Route path="/bankefficiency" element={<BankEfficiency/>}/>
           <Route path="/forex" element={<Forex />} />
+          <Route path="/sentiment" element={<SentimentDashboard />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>
