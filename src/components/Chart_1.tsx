@@ -25,7 +25,7 @@ const Chart_P1: React.FC = () => {
   useEffect(() => {
     const readExcel = async () => {
       try {
-        const response = await fetch("/Accounts.xlsx");
+        const response = await fetch("/Accounts_flux.xlsx");
         if (!response.ok) throw new Error("Failed to fetch the file");
 
         const blob = await response.blob();
