@@ -138,7 +138,9 @@ const HorizontalBarChartSlid: React.FC<DataPorts> = ({
     yAxis.title.fontSize = 15;
     yAxis.title.fontWeight = "bold";
     yAxis.title.dy = 0;
+    yAxis.start=0;
     yAxis.maxZoomCount = 5;
+    
 
     // Scrollbar just after bar chart
     chart.scrollbarY = new am4core.Scrollbar();

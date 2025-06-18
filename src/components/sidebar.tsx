@@ -45,12 +45,12 @@ export default function ResponsiveSidebar({ children }: Props) {
   ];
 
   // Other menu items after Modules
-  const afterModulesMenu = [
-    { path: "/dashboard", icon: <FaMoneyBillWave />, label: "Working Capital" },
-    { path: "/flux", icon: <FaChartLine />, label: "Flux Analysis" },
-    { path: "/scenario", icon: <FaChartLine />, label: "Scenario Analysis" },
-    { path: "/bankefficiency", icon: <FaChartLine />, label: "SBU Efficiency Analysis" },
-  ];
+  // const afterModulesMenu = [
+  //   { path: "/dashboard", icon: <FaMoneyBillWave />, label: "Working Capital" },
+  //   { path: "/flux", icon: <FaChartLine />, label: "Flux Analysis" },
+  //   { path: "/scenario", icon: <FaChartLine />, label: "Scenario Analysis" },
+  //   { path: "/bankefficiency", icon: <FaChartLine />, label: "SBU Efficiency Analysis" },
+  // ];
 
   // Handler for module menu click: navigate to /modules and pass moduleId in state
   const handleModuleMenuClick = (moduleId: string) => {
@@ -158,7 +158,7 @@ export default function ResponsiveSidebar({ children }: Props) {
             </div>
 
             {/* Other menu items */}
-            {afterModulesMenu.map((item) => (
+            {/* {afterModulesMenu.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
@@ -168,7 +168,7 @@ export default function ResponsiveSidebar({ children }: Props) {
                 {expanded && <span className="nav-label">{item.label}</span>}
                 {!expanded && <div className="nav-tooltip">{item.label}</div>}
               </Link>
-            ))}
+            ))} */}
           </nav>
           <div className="sidebar-footer">
             <a

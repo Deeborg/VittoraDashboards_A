@@ -249,3 +249,34 @@ td, th {
     font-size: 1rem;
   }
 }
+
+/* Add this to Chart1Synario.css */
+
+.simulate-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0 10px 0; /* Add some spacing */
+}
+
+.simulate-button {
+  padding: 12px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff; /* A nice blue color */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.simulate-button:hover {
+  background-color: #0056b3; /* A darker blue on hover */
+}
+
+.simulate-button:active {
+  background-color: #004494;
+  transform: scale(0.98); /* A slight shrink effect on click */
+}
