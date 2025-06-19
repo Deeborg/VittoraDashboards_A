@@ -170,7 +170,7 @@ const LoadingMobiusStrip: React.FC = () => {
     return (
         <div className={styles.loadingContainer}>
             <div ref={mountRef} className={styles.mobiusCanvasContainer}></div>
-            <div className={styles.loadingText}>Loading Financial Snapshot...</div>
+            <div className={styles.loadingText}>Loading Vittora...</div>
         </div>
     );
 };
