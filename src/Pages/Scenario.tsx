@@ -24,74 +24,36 @@ const DashBoard1: React.FC = () => {
   const [Materialsummary, setMaterialSummary] = useState<Array<Record<string, any>>>([]);
   const [materialDateSummary, setMaterialDateSummary] = useState<any[]>([]);
 
-  // MODIFICATION: 1. State for UI sliders (updates instantly)
-  // These hold the current visual value of the sliders.
-  const [priceChangeSlider, setPriceChangeSlider] = useState(8);
-  const [costChangeSlider, setCostChangeSlider] = useState(0);
-  const [quantitySlider, setQuantitySlider] = useState(0);
-  const [cpiSlider, setCpiSlider] = useState(0);
-  const [exchangeRateSlider, setExchangeRateSlider] = useState(0);
-  const [importMerchSlider, setImportMerchSlider] = useState(0);
-  const [gdpSlider, setGdpSlider] = useState(0);
-  const [unemploymentSlider, setUnemploymentSlider] = useState(0);
-  const [exportMerchSlider, setExportMerchSlider] = useState(0);
-  const [forexReserveSlider, setForexReserveSlider] = useState(0);
-  const [retailSalesSlider, setRetailSalesSlider] = useState(0);
-  const [stockMarketSlider, setStockMarketSlider] = useState(0);
-  const [indProdSlider, setIndProdSlider] = useState(0);
+  const [slider1, setSlider1] = useState(8);
+  const [slider2, setSlider2] = useState(0);
+  const [slider3, setSlider3] = useState(0);
+  const [slider4, setSlider4] = useState(0);
+  const [slider5, setSlider5] = useState(0);
+  const [slider6, setSlider6] = useState(0);
+  const [slider7, setSlider7] = useState(0);
+  const [slider8, setSlider8] = useState(0);
+  const [slider9, setSlider9] = useState(0);
+  const [slider10, setSlider10] = useState(0);
+  const [slider11, setSlider11] = useState(0);
+  const [slider12, setSlider12] = useState(0);
+  const [slider13, setSlider13] = useState(0);
 
-  // MODIFICATION: 2. State for Simulation (updates only on button click)
-  // These values are used in the actual calculation.
-  const [simPriceChange, setSimPriceChange] = useState(8);
-  const [simCostChange, setSimCostChange] = useState(0);
-  const [simQuantity, setSimQuantity] = useState(0);
-  const [simCPI, setSimCPI] = useState(0);
-  const [simExchangeRate, setSimExchangeRate] = useState(0);
-  const [simImportMerch, setSimImportMerch] = useState(0);
-  const [simGDP, setSimGDP] = useState(0);
-  const [simUnemployment, setSimUnemployment] = useState(0);
-  const [simExportMerch, setSimExportMerch] = useState(0);
-  const [simForexReserve, setSimForexReserve] = useState(0);
-  const [simRetailSales, setSimRetailSales] = useState(0);
-  const [simStockMarket, setSimStockMarket] = useState(0);
-  const [simIndProd, setSimIndProd] = useState(0);
-  
-  // MODIFICATION: Note that `const [rangeStart, rangeEnd] = useState()` was invalid syntax and removed.
-  // You correctly deconstruct `dateRange` inside the useEffect where it's needed.
+  const [rangeStart, rangeEnd] = useState()
 
-  // MODIFICATION: 3. Calculate factors based on the SIMULATION state, not the slider state.
-  const PriceChangeFactor = 1 + simPriceChange / 100;
-  const CostChangeFactor = 1 + simCostChange / 100;
-  const QuantityFactor = 1 + simQuantity / 100;
-  const CPI_Factor = 1 + simCPI / 100;
-  const ExchangeRate_Factor = 1 + simExchangeRate / 100;
-  const ImportMerch_Factor = 1 + simImportMerch / 100;
-  const GDP_Factor = 1 + simGDP / 100;
-  const Unemployment_Factor = 1 + simUnemployment / 100;
-  const ExportMerch_Factor = 1 + simExportMerch / 100;
-  const ForexReserve_Factor = 1 + simForexReserve / 100;
-  const RetailSales_Factor = 1 + simRetailSales / 100;
-  const StockMarket_Factor = 1 + simStockMarket / 100;
-  const IndProd_Factor = 1 + simIndProd / 100;
-  
-  // MODIFICATION: 4. Create the function to run the simulation on demand.
-  const handleSimulate = () => {
-    console.log("Running simulation with new values...");
-    setSimPriceChange(priceChangeSlider);
-    setSimCostChange(costChangeSlider);
-    setSimQuantity(quantitySlider);
-    setSimCPI(cpiSlider);
-    setSimExchangeRate(exchangeRateSlider);
-    setSimImportMerch(importMerchSlider);
-    setSimGDP(gdpSlider);
-    setSimUnemployment(unemploymentSlider);
-    setSimExportMerch(exportMerchSlider);
-    setSimForexReserve(forexReserveSlider);
-    setSimRetailSales(retailSalesSlider);
-    setSimStockMarket(stockMarketSlider);
-    setSimIndProd(indProdSlider);
-  };
 
+  const PriceChangeFactor = 1 + slider1 / 100;
+  const CostChangeFactor = 1 + slider2 / 100;
+  const QuantityFactor = 1 + slider3 / 100;
+  const CPI_Factor = 1 + slider4 / 100;
+  const ExchangeRate_Factor = 1 + slider5 / 100;
+  const ImportMerch_Factor = 1 + slider6 / 100;
+  const GDP_Factor = 1 + slider7 / 100;
+  const Unemployment_Factor = 1 + slider8 / 100;
+  const ExportMerch_Factor = 1 + slider9 / 100;
+  const ForexReserve_Factor = 1 + slider10 / 100;
+  const RetailSales_Factor = 1 + slider11 / 100;
+  const StockMarket_Factor = 1 + slider12 / 100;
+  const IndProd_Factor = 1 + slider13 / 100;
 
   useEffect(() => {
     // Your loading logic here (e.g., fetch data or simulate loading)
@@ -99,6 +61,8 @@ const DashBoard1: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);  
   
+
+  // Fetch data from the API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -109,6 +73,7 @@ const DashBoard1: React.FC = () => {
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const result: Array<Record<string, any>> = XLSX.utils.sheet_to_json(worksheet);
         console.log("result",result)
+        // Transform Date and Month fields
         const transformedData = result.map((row) => {
           const dateSerial = Number(row["Date"]);
           const monthSerial = Number(row["Month"]);
@@ -120,7 +85,8 @@ const DashBoard1: React.FC = () => {
         });
 
         setData(transformedData);
-        // We will trigger the first calculation inside the main simulation useEffect
+        setFilteredData(transformedData);
+        setFilteredDate(transformedData);
       } catch (error) {
         console.error("Error fetching data:", error);
         setError("Failed to load data. Please try again.");
@@ -139,6 +105,7 @@ const DashBoard1: React.FC = () => {
 
   useEffect(() => {
     if (data.length === 0) return;
+
     const validDates = data
       .map((row) => row["Date"])
       .filter((date) => date instanceof Date && !isNaN(date.getTime()));
@@ -156,12 +123,10 @@ const DashBoard1: React.FC = () => {
       setDateRange([startDate.getTime(), endDate.getTime()]);
     }
   }, [startDate, endDate]);
-  
-  // MODIFICATION: 5. Update the dependency array of the main calculation `useEffect`.
-  // It now depends on the `Factor` variables, which only change when the simulation state changes (after a button click).
+
+  // Filter data based on date range
   useEffect(() => {
-    if (!dateRange || data.length === 0) return;
-    console.log("Recalculating dataset...");
+    if (!dateRange) return;
     const [rangeStart, rangeEnd] = dateRange;
 
     const filtereddate = data.filter((row) => {
@@ -215,12 +180,13 @@ const DashBoard1: React.FC = () => {
     });
 
     setFilteredDate(transformedData1);
-    setFilteredData(transformedData1); // Keep this to ensure other components get the initial data
+    setFilteredData(transformedData1);
     console.log("transformedData1", transformedData1);
   }, [
-    data, // still need to run when base data loads
-    dateRange, // still need to run when date range changes
-    // The rest of the dependencies now trace back to the simulation state, not the sliders.
+    data,
+    dateRange,
+    startDate,
+    endDate,
     PriceChangeFactor,
     CPI_Factor,
     ExchangeRate_Factor,
@@ -233,9 +199,18 @@ const DashBoard1: React.FC = () => {
     StockMarket_Factor,
     Unemployment_Factor,
   ]);
-  
-  // No changes needed below this line, except for the renderSlider calls and adding the button
-  // ... (handleChartFilterChange and summary useEffects remain the same) ...
+
+  const handleChartFilterChange = (filters: any) => {
+    const { selectedFilter1, selectedFilter2 } = filters;
+
+    const filtered = DateFiltered.filter((row) => {
+      const matchesFilter1 = selectedFilter1 ? row["Country"] === selectedFilter1 : true;
+      const matchesFilter2 = selectedFilter2 ? row["Material Group Desc"] === selectedFilter2 : true;
+      return matchesFilter1 && matchesFilter2;
+    });
+
+    setFilteredData(filtered);
+  };
 
   useEffect(() => {
     const safeNumber = (val: any): number => (isNaN(Number(val)) ? 0 : Number(val));
@@ -375,17 +350,10 @@ const DashBoard1: React.FC = () => {
     setMaterialSummary(materialGroupSummary);
     setMaterialDateSummary(materialGroupDateSummary);
 
+    console.log("Country Summary:", countrySummary);
+    console.log("Material Group Summary:", materialGroupSummary);
+    console.log("Material Group + Date Summary:", materialGroupDateSummary);
   }, [filteredData]);
-
-  const handleChartFilterChange = (filters: any) => {
-    const { selectedFilter1, selectedFilter2 } = filters;
-    const filtered = DateFiltered.filter((row) => {
-      const matchesFilter1 = selectedFilter1 ? row["Country"] === selectedFilter1 : true;
-      const matchesFilter2 = selectedFilter2 ? row["Material Group Desc"] === selectedFilter2 : true;
-      return matchesFilter1 && matchesFilter2;
-    });
-    setFilteredData(filtered);
-  };
 
   const renderSlider = (
     label: string,
@@ -420,8 +388,9 @@ const DashBoard1: React.FC = () => {
   if (error) return <div>{error}</div>;
   if (loading) {
     return <LoadingMobiusStrip />;
-  }
+  }  
 
+  
   return (
     <div className="dashboard-container-senario">
       <div className="Header-container-senario">
@@ -475,28 +444,22 @@ const DashBoard1: React.FC = () => {
           />
         </div>
       </div>
-      
-      {/* MODIFICATION: 6. Add the simulate button and update slider calls */}
+
       <div className="Slider-container-senario">
         <div className="Sliders-senario">
           <h3>Control Center</h3>
           <div className="Sliders1-senario">
-            {renderSlider("Price Changes %", priceChangeSlider, setPriceChangeSlider)}
-            {renderSlider("CPI %", cpiSlider, setCpiSlider)}
-            {renderSlider("Exchange Rate %", exchangeRateSlider, setExchangeRateSlider)}
-            {renderSlider("Import Merch %", importMerchSlider, setImportMerchSlider)}
-            {renderSlider("GDP %", gdpSlider, setGdpSlider)}
-            {renderSlider("Unemployment Rate %", unemploymentSlider, setUnemploymentSlider)}
-            {renderSlider("Export Merch %", exportMerchSlider, setExportMerchSlider)}
-            {renderSlider("Forex Reserve %", forexReserveSlider, setForexReserveSlider)}
-            {renderSlider("Retail Sale %", retailSalesSlider, setRetailSalesSlider)}
-            {renderSlider("Stock Market %", stockMarketSlider, setStockMarketSlider)}
-            {renderSlider("Industrial Production %", indProdSlider, setIndProdSlider)}
-          </div>
-          <div className="simulate-button-container">
-            <button className="simulate-button" onClick={handleSimulate}>
-              Run Simulation
-            </button>
+            {renderSlider("Price Changes %", slider1, setSlider1)}
+            {renderSlider("CPI %", slider4, setSlider4)}
+            {renderSlider("Exchange Rate %", slider5, setSlider5)}
+            {renderSlider("Import Merch %", slider6, setSlider6)}
+            {renderSlider("GDP %", slider7, setSlider7)}
+            {renderSlider("Unemployment Rate %", slider8, setSlider8)}
+            {renderSlider("Export Merch %", slider9, setSlider9)}
+            {renderSlider("Forex Reserve %", slider10, setSlider10)}
+            {renderSlider("Retail Sale %", slider11, setSlider11)}
+            {renderSlider("Stock Market %", slider12, setSlider12)}
+            {renderSlider("Industrial Production %", slider13, setSlider13)}
           </div>
         </div>
       </div>
@@ -517,8 +480,7 @@ const DashBoard1: React.FC = () => {
         </div>
       </div>
 
-      {/* ... The rest of the component remains the same ... */}
-       <div className="Chart-container-senario">
+      <div className="Chart-container-senario">
         <div className="chart-row-senario">
           <h3>Simulated Gross Profit vs Base Gross Profit</h3>
           <AmMultiAreaChart1
