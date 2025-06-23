@@ -144,7 +144,7 @@ const DashBoard1: React.FC = () => {
 
       const NewPrice = price_computed * PriceChangeFactor;
       const PriceImpact = Math.pow(PriceChangeFactor, Number(row["Price Elasticity"]));
-      const Sim_Revenue_Final =
+      const Sim_Revenue_Final_calc =
         qty *
         PriceImpact *
         Math.pow(CPI_Factor, Number(row["CPI_corr"])) *
@@ -159,10 +159,19 @@ const DashBoard1: React.FC = () => {
         Math.pow(Unemployment_Factor, Number(row["Unemployment Rate_corr"])) *
         NewPrice;
 
-      const Simulated_Cost = Sim_Revenue_Final * (Number(row["Cost"]) / 100);
-      const Sim_Gross_Profit_Final = Sim_Revenue_Final * (Number(row["Operating Profit"]) / 100);
-      const Revenue_Impact = Sim_Revenue_Final - sales;
-      const Profit_Impact = Sim_Gross_Profit_Final - GrossProfit;
+      const Simulated_Cost = Sim_Revenue_Final_calc * (Number(row["Cost"]) / 100);
+      const Sim_Gross_Profit_Final_calc = Sim_Revenue_Final_calc * (Number(row["Operating Profit"]) / 100);
+      const Revenue_Impact = Sim_Revenue_Final_calc - sales;
+      const Profit_Impact = Sim_Gross_Profit_Final_calc - GrossProfit;
+
+
+       // Parse and compare the date
+      const rowDate = new Date(row["Date"]);
+      const cutoffDate = new Date("2025-01-01");
+
+      const Sim_Revenue_Final = rowDate < cutoffDate ? sales : Sim_Revenue_Final_calc;
+      const Sim_Gross_Profit_Final = rowDate < cutoffDate ? GrossProfit : Sim_Gross_Profit_Final_calc;
+
 
       return {
         ...row, CostValue, GrossProfit, price_computed, Sim_Revenue_Final, Simulated_Cost,
@@ -194,6 +203,30 @@ const DashBoard1: React.FC = () => {
     const groupedByCountry = new Map();
     const groupedByMaterialGroup = new Map();
     const groupedByMaterialGroupDate = new Map();
+    type GroupData = {
+      Country?: string;
+      Countryid?: string;
+      MaterialGroup?: string;
+      Date?: Date;
+      MaterialGroupDate?: string;
+      Sim_Revenue_Final: number;
+      Simulated_Cost: number;
+      Sim_Gross_Profit_Final: number;
+      Sales_Value: number;
+      Gross_profit: number;
+      Profit_Impact: number;
+      Revenue_Impact: number;
+    };
+    type NumericField = keyof Pick<
+      GroupData,
+      | "Sim_Revenue_Final"
+      | "Simulated_Cost"
+      | "Sim_Gross_Profit_Final"
+      | "Sales_Value"
+      | "Gross_profit"
+      | "Profit_Impact"
+      | "Revenue_Impact"
+    >;
 
     filteredData.forEach((row) => {
       // ... (Grouping logic remains the same)
@@ -216,11 +249,55 @@ const DashBoard1: React.FC = () => {
       const groupMaterial = groupedByMaterialGroup.get(keyMaterial);
       const groupMatDate = groupedByMaterialGroupDate.get(keyMaterialDate);
       
-      groupCountry.Sim_Revenue_Final += safeNumber(row["Sim_Revenue_Final"]);
-      groupMaterial.Sim_Revenue_Final += safeNumber(row["Sim_Revenue_Final"]);
-      groupMatDate.Sim_Revenue_Final += safeNumber(row["Sim_Revenue_Final"]);
-      //... and so on for all fields
+      const fields: [NumericField, string][] = [
+        ["Sim_Revenue_Final", "Sim_Revenue_Final"],
+        ["Simulated_Cost", "Simulated_Cost"],
+        ["Sim_Gross_Profit_Final", "Sim_Gross_Profit_Final"],
+        ["Sales_Value", "Sales Value"],
+        ["Gross_profit", "GrossProfit"],
+        ["Profit_Impact", "Profit_Impact"],
+        ["Revenue_Impact", "Revenue_Impact"],
+      ];
+
+      fields.forEach(([targetField, sourceField]) => {
+        const val = safeNumber(row[sourceField]);
+        groupCountry[targetField] += val;
+        groupMaterial[targetField] += val;
+        groupMatDate[targetField] += val;
+      });
     });
+
+    const computeSummary = (groupMap: Map<string, GroupData>, labelKey: keyof GroupData) =>
+      Array.from(groupMap.values()).map((group) => ({
+        [labelKey]: group[labelKey],
+        Sim_Revenue_Final: group.Sim_Revenue_Final,
+        Simulated_Cost: group.Simulated_Cost,
+        Sim_Gross_Profit_Final: group.Sim_Gross_Profit_Final,
+        ...(labelKey === "MaterialGroupDate" && { MaterialGroup: group.MaterialGroup }),
+        ...(labelKey === "MaterialGroupDate" && { Date: group.Date }),
+        ...(labelKey === "MaterialGroupDate" && { Sales_Value: group.Sales_Value }),
+        ...(labelKey === "MaterialGroupDate" && { Gross_profit: group.Gross_profit }),
+        ...(labelKey === "MaterialGroupDate" && { Profit_Impact: group.Profit_Impact }),
+        ...(labelKey === "MaterialGroupDate" && { Revenue_Impact: group.Revenue_Impact }),
+        ...(labelKey === "Country" && { Countryid: group.Countryid }),
+      }));
+
+    const countrySummary = computeSummary(groupedByCountry, "Country").sort(
+      (b, a) => b.Sim_Revenue_Final - a.Sim_Revenue_Final
+    );
+
+    const materialGroupSummary = computeSummary(groupedByMaterialGroup, "MaterialGroup").sort(
+      (b, a) => b.Sim_Revenue_Final - a.Sim_Revenue_Final
+    );
+
+    const materialGroupDateSummary = computeSummary(groupedByMaterialGroupDate, "MaterialGroupDate").sort(
+      (b, a) => b.Sim_Revenue_Final - a.Sim_Revenue_Final
+    );
+
+    setCountrySummary(countrySummary);
+    console.log("countrySummary", countrySummary);
+    setMaterialSummary(materialGroupSummary);
+    setMaterialDateSummary(materialGroupDateSummary);
 
     // ... (Summary creation logic remains the same)
   }, [filteredData]);
