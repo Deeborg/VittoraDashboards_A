@@ -280,3 +280,36 @@ td, th {
   background-color: #004494;
   transform: scale(0.98); /* A slight shrink effect on click */
 }
+
+
+
+
+.centered-zero-slider {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 4px;
+  background: #ccc; /* fallback */
+  outline: none;
+  position: relative;
+}
+
+.centered-zero-slider::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+  margin-top: -5px;
+  position: relative;
+  z-index: 2;
+}
+
+.centered-zero-slider::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+}

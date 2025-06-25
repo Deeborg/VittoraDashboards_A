@@ -52,23 +52,64 @@ const ControlCenter: React.FC<ControlCenterProps> = ({ initialValues, onSimulate
     });
   };
 
+  const handleResetClick = () => {
+    setPriceChange(0);
+    setCpi(0);
+    setExchangeRate(0);
+    setImportMerch(0);
+    setGdp(0);
+    setUnemployment(0);
+    setExportMerch(0);
+    setForexReserve(0);
+    setRetailSales(0);
+    setStockMarket(0);
+    setIndProd(0);
+
+    onSimulate({
+      priceChange,
+      cpi,
+      exchangeRate,
+      importMerch,
+      gdp,
+      unemployment,
+      exportMerch,
+      forexReserve,
+      retailSales,
+      stockMarket,
+      indProd,
+    });
+    
+  };
   // This render function is cheap and fast.
   const renderSlider = (
-    label: string,
-    value: number,
-    setValue: React.Dispatch<React.SetStateAction<number>>
-  ) => (
-    <div className="slider-senario">
+  label: string,
+  value: number,
+  setValue: React.Dispatch<React.SetStateAction<number>>
+) => {
+  const min = -20;
+  const max = 20;
+  const percentage = ((value - min) / (max - min)) * 100;
+
+  // Calculate gradient based on direction
+  const bg = value < 0
+    ? `linear-gradient(to left, red ${Math.abs(percentage - 50)}%, #ccc 0%)`
+    : `linear-gradient(to right, green ${Math.abs(percentage - 50)}%, #ccc 0%)`;
+
+  return (
+    <div className="slider-senario" style={{ position: 'relative', marginBottom: '20px' }}>
       <label>{label}</label>
-      <input
-        type="range"
-        min={-20}
-        max={20}
-        value={value}
-        step={1}
-        onChange={(e) => setValue(Number(e.target.value))}
-        style={{ width: '100%' }}
-      />
+      <div style={{ position: 'relative', width: '100%' }}>
+        <input
+          type="range"
+          min={-20}
+          max={20}
+          value={value}
+          step={1}
+          onChange={(e) => setValue(Number(e.target.value))}
+          className="centered-zero-slider"
+          style={{ background: bg, width: '100%' }}
+        />       
+      </div>
       <input
         type="number"
         min={-20}
@@ -82,6 +123,8 @@ const ControlCenter: React.FC<ControlCenterProps> = ({ initialValues, onSimulate
       />
     </div>
   );
+};
+
 
   return (
     <div className="Slider-container-senario">
@@ -100,7 +143,11 @@ const ControlCenter: React.FC<ControlCenterProps> = ({ initialValues, onSimulate
           {renderSlider('Stock Market %', stockMarket, setStockMarket)}
           {renderSlider('Industrial Production %', indProd, setIndProd)}
         </div>
-        <div className="simulate-button-container">
+        <div className="simulate-button-container" style={{ display: 'flex', gap: '10px' }}>
+          
+          <button className="simulate-button" onClick={handleResetClick}>
+            Reset to Zero
+          </button>
           <button className="simulate-button" onClick={handleSimulateClick}>
             Run Simulation
           </button>

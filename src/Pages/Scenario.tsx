@@ -5,7 +5,8 @@ import HistoricalSale from "./HistoricalSale";
 import FilterComponent from "../components/FiltersSenario";
 import ForcastSimulate from "./ForcastSimulate";
 import DateRangeSlider from "../components/DateFilterSenario";
-import AmMultiAreaChart1 from "../components/AreaChartMultiSenario";
+import AmMultiAreaChart from "../components/AreaChartMultiSenario";
+import AmMultiAreaChart1 from "../components/AreaChartMultiSenario1";
 import HorizontalBarChartSlid from "../components/BarChartHoriSlidSenario";
 import WorldBubbleMapChart from "../components/WorldMapSenario";
 import TableComponent from "../components/TableSenario";
@@ -346,7 +347,7 @@ const DashBoard1: React.FC = () => {
       <div className="Chart-container-senario">
         <div className="chart-row-senario">
           <h3>Sales Direct Cost and Gross Profit Trend</h3>
-          <AmMultiAreaChart1 data={filteredData} xField="Date" yFields={["Sales Value", "GrossProfit", "CostValue"]}
+          <AmMultiAreaChart data={filteredData} xField="Date" yFields={["Sales Value", "GrossProfit", "CostValue"]}
             displayNames={{ "Sales Value": "Sales Value", GrossProfit: "Gross Profit", CostValue: "Cost Value" }}
             colors={["#335eff", "#36ff33", "#fe0000"]}
           />
@@ -362,9 +363,9 @@ const DashBoard1: React.FC = () => {
       <div className="Chart-container-senario">
         <div className="chart-row-senario">
           <h3>Simulated Revenue vs Base Revenue</h3>
-          <AmMultiAreaChart1 data={filteredData} xField="Date" yFields={["Sim_Revenue_Final", "Sales Value"]}
+          <AmMultiAreaChart1 data={filteredData} xField="Date" yFields={["Sim_Revenue_Final","Sales Value"]}
             displayNames={{ "Sales Value": "Sales Value", Sim_Revenue_Final: "Simulated Revenue" }}
-            colors={["#36ff33", "#335eff"]}
+            colors={["#000000","#0519f2"]}
           />
         </div>
       </div>
@@ -372,9 +373,9 @@ const DashBoard1: React.FC = () => {
       <div className="Chart-container-senario">
         <div className="chart-row-senario">
           <h3>Simulated Gross Profit vs Base Gross Profit</h3>
-          <AmMultiAreaChart1 data={filteredData} xField="Date" yFields={["Sim_Gross_Profit_Final", "GrossProfit"]}
+          <AmMultiAreaChart1 data={filteredData} xField="Date" yFields={["Sim_Gross_Profit_Final","GrossProfit"]}
             displayNames={{ GrossProfit: "Gross Profit", Sim_Gross_Profit_Final: "Simulated Gross Profit" }}
-            colors={["#36ff33", "#335eff"]}
+            colors={["#000000","#0519f2"]}
           />
         </div>
       </div>
