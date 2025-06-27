@@ -75,8 +75,13 @@ const TableComponent: React.FC<TableComponentProps> = ({ data, visibleColumns })
               <tr key={index} >
                 {visibleColumns.map((key, idx) => (
                   <td key={idx} style={{ border: "2px solid #0f0f0f", borderCollapse: "collapse" }}>
-                    {typeof row[key] === 'object' && row[key] instanceof Date ? row[key].toISOString() : row[key]}
-                  </td>
+                    {
+                      typeof row[key] === 'object' && row[key] instanceof Date
+                        ? row[key].toLocaleDateString('en-GB') // formats to DD/MM/YYYY
+                        : typeof row[key] === 'number'
+                          ? row[key].toFixed(2)
+                          : row[key]
+                    }                  </td>
                 ))}
               </tr>
             ))}
