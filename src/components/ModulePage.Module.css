@@ -9,7 +9,8 @@
   height: 97vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); /* Lighter, softer background */
+  
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
   position: relative; /* For fixed elements like back-to-top */
   overflow: hidden;
@@ -228,7 +229,7 @@
   height: 100vh;
   margin: 0 auto;
   padding: 0 0 40px 0;
-  background: white;
+  /* background: white; */
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
   opacity: 0;
@@ -241,6 +242,8 @@
   visibility: hidden;
   display: none;
 }
+
+
 
 .module-details-section.active {
   opacity: 1;
@@ -259,7 +262,7 @@
 
 
 /* --- Back to Top Button --- */
-.back-to-top-button {
+/* .back-to-top-button {
   position: fixed;
   bottom: 30px;
   right: 50px;
@@ -292,11 +295,54 @@
   background: #2c65c4;
   transform: translateY(-3px);
   box-shadow: 0 15px 40px rgba(58, 123, 213, 0.5);
-}
+} */
 /* .back-to-top-button:focus {
   outline: 2px solid #3498db;
   outline-offset: 2px;
 } */
+
+.back-to-top-button {
+  position: fixed;
+  bottom: 30px;
+  right: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1e1f70; /* dark blue */
+  border: none;
+  border-radius: 16px;
+  padding: 10px 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  gap: 10px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.back-to-top-button .back-icon {
+  background-color: #00004d;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-to-top-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top-button:not(.visible) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+}
+
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {

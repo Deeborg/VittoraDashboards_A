@@ -194,7 +194,9 @@ const KeyModulesPage: React.FC = () => {
             
             
             <div className="key-modules-scroll-wrapper" ref={scrollWrapperRef}>
+                
                 <div className="modules-main-view" ref={topContentRef}>
+                    
                     <div className="circular-diagram-wrapper">
                         <img src={modulesDiagram} alt="Key Modules Diagram" className="circular-diagram-image" />
                         {moduleDataList.map((module) => (
@@ -223,15 +225,17 @@ const KeyModulesPage: React.FC = () => {
             </div>
 
             <button
-                className={`back-to-top-button ${showBackToTop ? 'visible' : ''}`}
-                onClick={handleBackToTop}
-                title="Back to Modules"
-                aria-label="Back to Modules"
-            >
-                <FaArrowUp size={200} />
-            </button>
+  className={`back-to-top-button ${showBackToTop ? 'visible' : ''}`}
+  onClick={handleBackToTop}
+  title="Back to top"
+  aria-label="Back to top"
+>
+  <span className="back-text">Back to top</span>
+  <span className="back-icon">&#9650;</span> {/* Upward triangle icon */}
+</button>
+
         </div>
     );
 };
 
-export default KeyModulesPage;
+export default KeyModulesPage;     
