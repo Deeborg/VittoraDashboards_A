@@ -1,47 +1,39 @@
-/* --- Overall Page Container --- */
-/* 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
+/* --- General Container --- */
 .key-modules-container {
-  height: 97vh;
   display: flex;
   flex-direction: column;
-  
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%); 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
-  position: relative; /* For fixed elements like back-to-top */
+  position: relative;
+  height: 97vh;
   overflow: hidden;
+  background: #fcf5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 12px;
 }
 
 /* --- Header --- */
 .key-modules-header {
-  padding: 0.5rem 2rem;
-  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  position: sticky;
   top: 0;
-  flex-shrink: 0; /* Prevent header from shrinking */
-  z-index: 100; /* Ensure header is above other content */
+  padding: 0.5rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  z-index: 100;
 }
 
 .key-modules-header h1 {
+  flex-grow: 1;
   margin: 0;
-  /* margin-left: 0px; */
-  font-size: 2.5rem; /* Slightly adjusted size */
-  color: #2c3e50; /* Darker, muted blue/grey */
+  font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.5px;
   text-align: center;
-  flex-grow: 1;
   background: linear-gradient(90deg, #3a7bd5, #00d2ff);
   -webkit-background-clip: text;
   background-clip: text;
@@ -49,258 +41,245 @@
 }
 
 .home-button {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  /* padding: 5px; */
-  color: #3498db;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  z-index: 10;
-  display: flex; /* Align icon nicely if needed */
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  color: #3498db;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
+
 .home-button:hover {
-  color: #2980b9; /* Darker blue on hover */
+  color: #2980b9;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-/* .home-button:focus {
-  outline: 2px solid #3498db;
-  outline-offset: 2px;
-} */
-.key-modules-content {
-    display: flex;
-    flex-direction: column;
 }
 
 /* --- Scrollable Content Wrapper --- */
 .key-modules-scroll-wrapper {
-  flex: 1 1 auto; /* Takes remaining vertical space */
-  /* overflow-y: auto; */
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   position: relative;
   min-height: 0;
-  /* height: calc(100vh - 80px); */
   scroll-behavior: smooth;
   padding-bottom: 2rem;
 }
 
-.key-modules-scroll-wrapper::-webkit-scrollbar {
-  width: 8px;
-}
-
-.key-modules-scroll-wrapper::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.key-modules-scroll-wrapper::-webkit-scrollbar-thumb {
-  background: linear-gradient(#3a7bd5, #00d2ff);
-  border-radius: 4px;
-}
-
-/* --- Main View (Diagram & Pills) --- */
+/* --- Main View (Cards Area) --- */
 .modules-main-view {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px; /* More vertical padding */
-  height: 100vh; /* Ensure enough space for diagram and pills initially */
-  position: relative; /* For pill positioning context if not using wrapper */
-  margin-top: -20px;
-}
-
-.circular-diagram-wrapper {
-  position: relative; /* Pills will be positioned relative to this */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Adjust width/max-width if your image is very large or small */
-  width: 100vw;
-  max-width: 550px; 
-  margin: 2rem auto;
-  top:1.5rem;
-  /* animation: float 6s ease-in-out infinite; */
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0px); }
-}
-
-.circular-diagram-image {
-  max-height: 90vh; /* Ensure it doesn't overflow vertically */
-  max-width: 60vh; /* Make it responsive within its wrapper */
-  /* width: 300px;  */
-  object-fit: contain;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-  /* display: block;  */
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
-  transition: transform 0.5s ease;
-}
-
-.circular-diagram-image:hover {
-  transform: scale(1.03);
-}
-
-/* --- ModulePill Styles --- */
-.module-pill {
-  width: 380px;        
-  height: 48px;          
-  position: absolute; /* Positioned relative to circular-diagram-wrapper */
-  padding: 1rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50px; /* Fully rounded */
-  color: white;
-  /* font-size: 0.85rem; */
-  
-  font-weight: 600;
-  /* text-align: center; */
-  cursor: pointer;
-  border: 2px solid white;
- transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  will-change: transform; 
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transform: scale(1);
-  box-sizing: border-box;
-}
-.module-pill:hover {
-  transform: scale(1.05) translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-}
-.module-pills-container {
-  display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 16px 24px;      /* row gap, column gap */
-  margin-top: 32px;
+  position: relative;
+  height: 100vh;
+  padding: 0px;
+  margin-top: -20px;
+  gap: 40px;
 }
 
-/* .module-pill:hover, .module-pill:focus-visible {
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0,0,0,0.1);
-  outline: none;
-}
-.module-pill:focus-visible { 
-} */
-
-.module-pill.active {
-  /* Example: Use a darker shade, border, or different shadow */
-  /* If using a specific active color different from module.color: */
-  /* background-color: #34495e !important;  */
+/* --- NEW BLUE GLASSMORPHISM CARD --- */
+.box {
+  position: relative;
+  top: 30px;
+  width: 280px;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.05); /* The glassy part */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  transform: scale(1.1);
-   z-index: 10;
-  /* color: #ecf0f1; */
-}
-.module-pill .module-text {
-  display: block; /* Ensures text wraps if too long for one line */
+  cursor: pointer;
+  transition: transform 0.8s ease;
+  animation: gradientShift 10s ease infinite;
 }
 
-/* Specific positioning for each pill (adjust percentages based on your image) */
-/* These classes match 'pillPositionClass' in moduleDataList */
-/* .finance-pill-pos { top: -20%; left: 50%; transform: translateX(-50%); }
-.commercial-pill-pos { top: 45%; left: -35%; transform: translateY(-50%); }
-.scm-pill-pos { top: 45%; right: -35%; transform: translateY(-50%); }
-.autm-pill-pos { bottom: -20%; left: 50%; transform: translateX(-50%); } */
+.box:hover {
+  transform: translateY(-10px) scale(1.05);
+}
 
-.finance-pill-pos { top: -8.5%; left: 16%; }
-.commercial-pill-pos { bottom: 49%; left: -65%; }
-.scm-pill-pos { bottom: 49%; right: -65%; }
-.autm-pill-pos { bottom: -11%; left: 16%; }
+/* The blue gradient background layer */
+.box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  background: linear-gradient(45deg, #243b55, #141e30, #03a9f4);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+  z-index: -1; /* Place it behind the content */
+}
 
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card content styling */
+.box .content {
+  position: relative;
+  padding: 20px 30px;
+  color: #fff; /* White text looks better on the dark blue */
+  text-align: center;
+  z-index: 5;
+}
+
+.box .content h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.box .content p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+}
+
+
+/* --- NEW: FLOATING ANIMATED SQUARES --- */
+.floating-square {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+    background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  opacity: 0;
+  /* Smooth transition for appearing on hover */
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* The continuous floating animation */
+  animation-name: float-animation;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  overflow: hidden;
+}
+
+.floating-square.top-square::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* Fills the entire parent square */
+  background: linear-gradient(180deg, rgba(80, 227, 194, 0.7), rgba(52, 152, 219, 0.7));
+  opacity: 0.6;
+  z-index: -1; 
+}
+.floating-square.bottom-square::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* Fills the entire parent square */
+  background: linear-gradient(180deg, rgba(22, 160, 133, 0.7), rgba(26, 82, 118, 0.7));
+  opacity: 0.6;
+  z-index: -1; 
+}
+
+/* Keep the rest of your floating square animation CSS */
+/* (The :hover states, positions, and @keyframes float-animation) */
+
+/* Show the squares on hover */
+.box:hover .floating-square {
+  opacity: 1;
+}
+/* Show the squares on hover */
+.box:hover .floating-square {
+  opacity: 1;
+}
+
+/* Start position and animation for the top square */
+.top-square {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5) rotate(45deg);
+  animation-duration: 4s; /* Slower float */
+}
+
+/* End position for the top square on hover */
+.box:hover .top-square {
+  top: -30px;
+  left: 40px;
+  transform: translate(0, 0) scale(1) rotate(15deg);
+}
+
+/* Start position and animation for the bottom square */
+.bottom-square {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5) rotate(45deg);
+  animation-duration: 5s; /* Faster float */
+  animation-delay: -1.5s; /* De-syncs the animation from the top one */
+}
+
+/* End position for the bottom square on hover */
+.box:hover .bottom-square {
+  bottom: -40px;
+  right: 30px;
+  /* Reset top/left so 'bottom' and 'right' can take over */
+  top: auto;
+  left: auto;
+  transform: translate(0, 0) scale(1) rotate(-25deg);
+}
+
+/* The keyframe animation for the continuous floating effect */
+@keyframes float-animation {
+  0% { transform: translateY(0px) rotate(var(--start-rotate, 0deg)); }
+  50% { transform: translateY(-12px) rotate(var(--start-rotate, 0deg)); }
+  100% { transform: translateY(0px) rotate(var(--start-rotate, 0deg)); }
+}
 
 /* --- Module Details Section --- */
 .module-details-section {
+  display: none;
+  visibility: hidden;
+  position: relative;
+  top: 0;
+  left: 50%;
   width: 100%;
   height: 100vh;
   margin: 0 auto;
   padding: 0 0 40px 0;
-  /* background: white; */
+  background: #f4f4f4;
   border-radius: 20px;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateX(-50%) translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
-  position: relative;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  visibility: hidden;
-  display: none;
 }
-
-
 
 .module-details-section.active {
+  display: block;
+  visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  visibility: visible;
-  position: relative;
-  display: block;
 }
-.module-details-section h2 { /* Optional styling for titles within detail components */
+
+.module-details-section h2 {
   color: #2c3e50;
+  padding-bottom: 10px;
   margin-top: 0;
   margin-bottom: 20px;
   border-bottom: 1px solid #eaeaea;
-  padding-bottom: 10px;
 }
-
 
 /* --- Back to Top Button --- */
-/* .back-to-top-button {
-  position: fixed;
-  bottom: 30px;
-  right: 50px;
-  background: linear-gradient(135deg, #022d69, #00d2ff);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(58, 123, 213, 0.4);
-  z-index: 100;
-  transition: all 0.3s ease;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  font-size: 1.5em;
-}
-
-.back-to-top-button.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.back-to-top-button:hover {
-  background: #2c65c4;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(58, 123, 213, 0.5);
-} */
-/* .back-to-top-button:focus {
-  outline: 2px solid #3498db;
-  outline-offset: 2px;
-} */
-
 .back-to-top-button {
   position: fixed;
   bottom: 30px;
@@ -308,28 +287,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1e1f70; /* dark blue */
-  border: none;
-  border-radius: 16px;
+  gap: 10px;
   padding: 10px 16px;
+  background-color: #1e1f70;
   color: white;
   font-weight: 600;
   font-size: 14px;
-  gap: 10px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.back-to-top-button .back-icon {
-  background-color: #00004d;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .back-to-top-button.visible {
@@ -339,79 +308,67 @@
 
 .back-to-top-button:not(.visible) {
   opacity: 0;
-  pointer-events: none;
   transform: translateY(20px);
+  pointer-events: none;
 }
 
+.back-to-top-button .back-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  background-color: #00004d;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* --- Animated Background Circles --- */
+.circles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.circles li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(14, 118, 202, 0.2);
+  animation: animate 25s linear infinite;
+  bottom: -150px;
+}
+
+.circles li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+.circles li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+.circles li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+.circles li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+.circles li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+.circles li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
+.circles li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+.circles li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+.circles li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+.circles li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+@keyframes animate {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+  100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
   .key-modules-header { padding: 10px 15px; }
   .key-modules-header h1 { font-size: 1.4rem; margin-left: 15px; }
-  .home-button svg { font-size: 24px !important; } /* Adjust icon size if needed */
-
+  .home-button svg { font-size: 24px !important; }
   .modules-main-view { padding: 30px 15px; min-height: auto; }
-  .circular-diagram-wrapper { max-width: 100%; }
-  .circular-diagram-image { width: 180px; /* Smaller diagram on mobile */ }
-
-  .module-pill {
-    position: relative; /* Stack pills below diagram */
-    display: block; /* Take full available width */
-    width: 90%;
-    max-width: 320px; /* Max width for readability */
-    margin: 10px auto; /* Center them and add space */
-    font-size: 0.9rem;
-    padding: 12px 20px;
-    /* Reset absolute positioning styles */
-    top: auto; left: auto; right: auto; bottom: auto; transform: none !important;
-  }
-  .circular-diagram-wrapper {
-    flex-direction: column; /* Stack image and then pills */
-  }
-  .circular-diagram-image {
-    margin-bottom: 25px; /* Space between image and first pill */
-  }
-  /* Remove specific absolute positioning classes on mobile as they are now relative */
-  /* .finance-pill-pos, .commercial-pill-pos, .scm-pill-pos, .autm-pill-pos {
-  
-  } */
-
   .module-details-section { padding: 20px; }
-
-  .back-to-top-button {
-    width: 45px;
-    height: 45px;
-    font-size: 18px; /* Smaller icon */
-    bottom: 20px;
-    right: 20px;
-  }
+  .back-to-top-button { width: 45px; height: 45px; font-size: 18px; bottom: 20px; right: 20px; }
 }
-
-@media (max-width: 768px) 
-{
-  /* .key-modules-header h1 { font-size: 1.2rem; }
-  .circular-diagram-image { width: 150px; }
-  .module-pill { font-size: 0.85rem; padding: 10px 15px; }
-  .module-details-section { padding: 15px; } */
-}
-/* Removed invalid block without selector or at-rule */
 
 @media (max-width: 480px) {
-  .key-modules-header h1 {
-    font-size: 1.8rem;
-  }
-  
-  .module-pill {
-    position: relative;
-    margin: 0.5rem auto;
-    width: 80%;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-  }
-  
-  .circular-diagram-wrapper {
-    margin-top: 1rem;
-  }
+  .key-modules-header h1 { font-size: 1.8rem; }
 }

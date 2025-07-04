@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  FiTrendingUp, FiTarget, FiBarChart2, FiShuffle, FiGlobe, FiGitMerge
+} from 'react-icons/fi';
 
 interface Phase {
   id: string;
   title: string;
   description: string;
-  color: string;
-  icon: string;
+  color: string; // Refers to an SVG gradient ID
+  cssGradient: string; // Holds the CSS gradient for the info box
+  icon: React.ReactElement;
   angleStart: number;
   angleEnd: number;
   labelXOffset: number;
@@ -16,84 +20,12 @@ interface Phase {
 }
 
 const phasesData: Phase[] = [
-  {
-    id: 'roi',
-    title: 'ROI',
-    description: 'Get insights on ROI on various strategic initiatives',
-    color: ' #74B9F4',
-    icon: '👥',
-    angleStart: 150,
-    angleEnd: 210,
-    labelXOffset: 75,
-    labelYOffset: 230,
-    textAlign: 'left',
-    route: '/roi',
-  },
-  {
-    id: 'scenario',
-    title: 'Scenerio Analysis',
-    description: 'Examine & evaluate possible events/scenarios.',
-    color: '#ADE68A',
-    icon: '💡',
-    angleStart: -30,
-    angleEnd: 30,
-    labelXOffset: 35,
-    labelYOffset: -225,
-    textAlign: 'left',
-    route: '/scenario',
-  },
-  {
-    id: 'sentiment',
-    title: 'Sentiment Analysis',
-    description: 'Evaluate the overall attitude of public on the company',
-    color: '#FFD9A1',
-    icon: '🎯',
-    angleStart: 30,
-    angleEnd: 90,
-    labelXOffset: 275,
-    labelYOffset: -115,
-    textAlign: 'left',
-    route: '/sentiment',
-  },
-  {
-    id: 'flux',
-    title: 'Flux Analysis',
-    description: 'GL Analysis & Fluctuation analysis of GL & Risk Magnitude',
-    color: '#F3C1D4',
-    icon: '⚙️',
-    angleStart: -90,
-    angleEnd: -30,
-    labelXOffset: -220,
-    labelYOffset: -100,
-    textAlign: 'left',
-    route: '/flux',
-  },
-  {
-    id: 'esg',
-    title: 'ESG',
-    description: 'Evaluate the impact on the environment and society and governance',
-    color: '#E64E99',
-    icon: '🔍',
-    angleStart: 210,
-    angleEnd: 270,
-    labelXOffset: -220,
-    labelYOffset: 110,
-    textAlign: 'left',
-    route: '/esg',
-  },
-  {
-    id: 'forecast',
-    title: 'Forecast',
-    description: 'Accurate financial forecast with machine learning',
-    color: '#DFA569',
-    icon: '🚀',
-    angleStart: 90,
-    angleEnd: 150,
-    labelXOffset: 280,
-    labelYOffset: 100,
-    textAlign: 'left',
-    route: '/forecast',
-  },
+  { id: 'roi', title: 'ROI', description: 'Get insights on ROI on various strategic initiatives', color: 'gradient-roi', cssGradient: 'linear-gradient(135deg, #4dabf7, #1971c2)', icon: <FiBarChart2 size={26} />, angleStart: 150, angleEnd: 210, labelXOffset: 99, labelYOffset: 220, textAlign: 'center', route: '/roi' },
+  { id: 'scenario', title: 'Scenerio Analysis', description: 'Examine & evaluate possible events/scenarios.', color: 'gradient-scenario',cssGradient: 'linear-gradient(135deg, #63e6be, #20c997)', icon: <FiGitMerge size={26} />, angleStart: -30, angleEnd: 30, labelXOffset: 98, labelYOffset: -220, textAlign: 'center', route: '/scenario' },
+  { id: 'sentiment', title: 'Sentiment Analysis', description: 'Evaluate the overall attitude of public on the company', color: 'gradient-sentiment',cssGradient: 'linear-gradient(135deg, #845ef7, #5f3dc4)', icon: <FiTarget size={26} />, angleStart: 30, angleEnd: 90, labelXOffset: 350, labelYOffset: -90, textAlign: 'center', route: '/sentiment' },
+  { id: 'flux', title: 'Flux Analysis', description: 'GL Analysis & Fluctuation analysis of GL & Risk Magnitude', color: 'gradient-flux', cssGradient: 'linear-gradient(135deg, #4c6ef5, #364fc7)', icon: <FiShuffle size={26} />,  angleStart: -90, angleEnd: -30, labelXOffset: -145, labelYOffset: -90, textAlign: 'center', route: '/flux' },
+  { id: 'esg', title: 'ESG', description: 'Evaluate the impact on the environment and society and governance', color: 'gradient-esg', cssGradient: 'linear-gradient(135deg, #22b8cf, #0b7285)', icon: <FiGlobe size={26} />, angleStart: 210, angleEnd: 270, labelXOffset: -135, labelYOffset: 105, textAlign: 'center', route: '/esg' },
+  { id: 'forecast', title: 'Forecast', description: 'Accurate financial forecast with machine learning', color: 'gradient-forecast', cssGradient: 'linear-gradient(135deg, #748ffc, #4c6ef5)', icon: <FiTrendingUp size={26} />, angleStart: 90, angleEnd: 150, labelXOffset: 330, labelYOffset: 105, textAlign: 'center', route: '/forecast' },
 ];
 
 const polarToCartesian = (centerX: number, centerY: number, radius: number, angleInDegrees: number) => {
@@ -109,14 +41,12 @@ const describeArc = (x: number, y: number, radius: number, startAngle: number, e
   const end = polarToCartesian(x, y, radius, startAngle);
   const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
-  const d = [
+  return [
     'M', x, y,
     'L', start.x, start.y,
     'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y,
     'Z',
   ].join(' ');
-
-  return d;
 };
 
 const explodeDistance = 40;
@@ -131,10 +61,13 @@ const SixPhaseInfographic: React.FC = () => {
   const navigate = useNavigate();
   const [activePhaseId, setActivePhaseId] = useState<string | null>(null);
   const [showMessage, setShowMessage] = useState(false);
-
+  const [isCentralCirclePressed, setIsCentralCirclePressed] = useState(false);
   const handleShowMessage = () => setShowMessage(true);
   const handleCloseMessage = () => setShowMessage(false);
 
+  // --- CHANGED SECTION 1: Updated styles object ---
+  // I have removed the 'centralCircle' and 'centralTextLarge' styles
+  // as they are no longer used by the new button.
   const styles: { [key: string]: React.CSSProperties } = {
     container: {
       position: 'relative',
@@ -153,37 +86,6 @@ const SixPhaseInfographic: React.FC = () => {
       position: 'relative',
       width: `${svgSize}px`,
       height: `${svgSize}px`,
-    },
-    centralCircle: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: `${outerRadius * 0.8}px`,
-      height: `${outerRadius * 0.8}px`,
-      borderRadius: '50%',
-      background: 'radial-gradient(circle, rgba(255,255,255,0.98) 50%, rgba(255,255,255,0.85) 100%)',
-      boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      textAlign: 'center',
-      zIndex: 10,
-      cursor: 'pointer',
-      transition: 'transform 0.3s',
-    },
-    centralTextLarge: {
-      fontSize: '45px',
-      fontWeight: 'bold',
-      color: '#2D3748',
-      lineHeight: 1,
-      fontFamily: "'Inter', sans-serif",
-    },
-    centralTextSmall: {
-      fontSize: '30px',
-      color: '#555',
-      marginTop: '4px',
     },
     phaseLabel: {
       position: 'absolute',
@@ -240,40 +142,91 @@ const SixPhaseInfographic: React.FC = () => {
     baseStyle.left = `${labelX}px`;
     baseStyle.top = `${labelY}px`;
 
-    if (phase.textAlign === 'right') {
-      baseStyle.transform = 'translate(-100%, -50%)';
-    } else if (phase.textAlign === 'center') {
-      baseStyle.transform = 'translate(-50%, -50%)';
-    } else {
-      baseStyle.transform = 'translate(0%, -50%)';
-    }
+    if (phase.textAlign === 'right') baseStyle.transform = 'translate(-100%, -50%)';
+    else if (phase.textAlign === 'center') baseStyle.transform = 'translate(-50%, -50%)';
+    else baseStyle.transform = 'translate(0%, -50%)';
 
     baseStyle.textAlign = phase.textAlign;
-    baseStyle.transition = 'left 0.3s, top 0.3s';
-
     return baseStyle;
   };
 
-  const getPhaseBoxStyle = (phase: Phase): React.CSSProperties => ({
-    background: isPhaseActive(phase.id) ? '#fff' : 'transparent',
-    borderRadius: '16px',
-    boxShadow: isPhaseActive(phase.id) ? '0 8px 24px rgba(0, 0, 0, 0.2)' : 'none',
-    padding: '12px 14px',
-    transition: 'all 0.3s ease',
-    border: isPhaseActive(phase.id) ? `1px solid ${phase.color}` : 'none',
-    minWidth: '150px',
-    transform: isPhaseActive(phase.id) ? 'scale(1.02)' : 'scale(1)',
-    backdropFilter: isPhaseActive(phase.id) ? 'blur(3px)' : 'none',
-  });
+  const getPhaseBoxStyle = (phase: Phase): React.CSSProperties => {
+    const isActive = isPhaseActive(phase.id);
+    return {
+      background: isActive ? phase.cssGradient : 'transparent',
+      borderRadius: '16px',
+      boxShadow: isActive ? '0 8px 24px rgba(0, 0, 0, 0.2)' : 'none',
+      padding: '12px 14px',
+      border: 'none',
+      transform: isActive ? 'scale(1.02)' : 'scale(1)',
+    };
+  };
+
+  // --- CHANGED SECTION 2: Updated central element style function ---
+  // This function now generates the styles for the new button,
+  // incorporating the styles you provided and the component's state logic.
+  const getCentralButtonStyle = (): React.CSSProperties => {
+    const baseStyle: React.CSSProperties = {
+      // Styles from your provided CSS
+      backgroundColor: 'rgb(242, 245, 247)',
+      color: ' #48abe0',
+      border: 'none',
+      height: '130px',
+      width: '130px',
+      boxShadow: '0 2px 4px darkslategray',
+      cursor: 'pointer',
+      transition: 'all 0.2s ease',
+      borderRadius: '50%', // To make it a circle
+      
+      // Styles for content and positioning
+      fontSize: '28px', // Better size for text
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 10,
+      fontFamily: "'Inter', sans-serif", 
+      fontWeight: 'bold', // Make it stand out
+      lineHeight: 1,
+      
+      // Positioning from the original component
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    };
+
+    // Style for the pressed state (:active)
+    if (isCentralCirclePressed) {
+      return {
+        ...baseStyle,
+        boxShadow: '0 0 2px darkslategray',
+        transform: 'translate(-50%, calc(-50% + 2px))', // Replicates the translateY(2px) effect
+      };
+    }
+    
+    // Style for when all phases are active
+    if (activePhaseId === 'all') {
+        return {
+           ...baseStyle,
+           transform: 'translate(-50%, -50%) scale(0.95)',
+           boxShadow: '0 1px 2px darkslategray',
+       };
+   }
+
+    return baseStyle;
+  };
 
   return (
     <div style={styles.container}>
       <div style={styles.svgContainer}>
         <svg width={svgSize} height={svgSize}>
           <defs>
-            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feDropShadow dx="3" dy="3" stdDeviation="5" floodColor="#000" floodOpacity="0.4" />
-            </filter>
+              <linearGradient id="gradient-roi" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#4dabf7" /><stop offset="100%" stopColor="#1971c2" /></linearGradient>
+              <linearGradient id="gradient-scenario" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#63e6be" /><stop offset="100%" stopColor="#20c997" /></linearGradient>
+              <linearGradient id="gradient-sentiment" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#845ef7" /><stop offset="100%" stopColor="#5f3dc4" /></linearGradient>
+              <linearGradient id="gradient-flux" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#4c6ef5" /><stop offset="100%" stopColor="#364fc7" /></linearGradient>
+              <linearGradient id="gradient-esg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#22b8cf" /><stop offset="100%" stopColor="#0b7285" /></linearGradient>
+              <linearGradient id="gradient-forecast" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#748ffc" /><stop offset="100%" stopColor="#4c6ef5" /></linearGradient>
           </defs>
 
           {phasesData.map((phase) => {
@@ -296,103 +249,75 @@ const SixPhaseInfographic: React.FC = () => {
               <g
                 key={phase.id}
                 onClick={isDemoPhase ? handleShowMessage : () => navigate(phase.route)}
-                style={{ cursor: 'pointer', transition: 'transform 0.3s ease-out, filter 0.3s ease-out' }}
                 transform={transform}
                 filter={filter}
-                // onMouseEnter={() => setActivePhaseId(phase.id)}
+                style={{ cursor: 'pointer' }}
               >
-                <path d={describeArc(center, center, outerRadius, phase.angleStart, phase.angleEnd)} fill={phase.color} />
-                <text
-                  x={iconPos.x}
-                  y={iconPos.y}
-                  textAnchor="middle"
-                  dominantBaseline="middle"
-                  fontSize="24px"
-                  fill="#333"
-                  style={{ pointerEvents: 'none' }}
-                >
+                <path d={describeArc(center, center, outerRadius, phase.angleStart, phase.angleEnd)} fill={`url(#${phase.color})`} />
+                <foreignObject x={iconPos.x - 20} y={iconPos.y - 20} width="40" height="40">
+                <div style={{ color: 'rgba(255, 255, 255, 0.85)', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
                   {phase.icon}
-                </text>
+                </div>
+                </foreignObject>
               </g>
             );
           })}
         </svg>
 
-        <div
-          style={styles.centralCircle}
+      {/* --- CHANGED SECTION 3: Replaced central div with a button --- */}
+      {/* The old div has been replaced with this button element, */}
+      {/* which uses the new style function and contains the sun icon. */}
+      {/* All event handlers have been preserved. */}
+      <button
+          style={getCentralButtonStyle()}
           onClick={() => setActivePhaseId(activePhaseId === 'all' ? null : 'all')}
+          onMouseDown={() => setIsCentralCirclePressed(true)}
+          onMouseUp={() => setIsCentralCirclePressed(false)}
+          onMouseLeave={() => setIsCentralCirclePressed(false)}
+          onTouchStart={() => setIsCentralCirclePressed(true)}
+          onTouchEnd={() => setIsCentralCirclePressed(false)}
         >
-          <span style={styles.centralTextLarge}>FP&A</span>
-        </div>
+          FP&A
+        </button>
       </div>
-
-      {phasesData.map((phase) => (
-        <div key={`${phase.id}-label`} style={getLabelStyle(phase)}>
-          <div style={getPhaseBoxStyle(phase)} onClick={() => navigate(phase.route)}>
-            <div style={{ ...styles.phaseTitle, color: phase.color }}>
-              {phase.title}
-            </div>
-            <div style={{
-              ...styles.phaseDescription,
-              ...(isPhaseActive(phase.id) ? styles.phaseDescriptionActive : {}),
-            }}>
-              {phase.description}
+      
+      {phasesData.map((phase) => {
+        const isActive = isPhaseActive(phase.id);
+        return (
+          <div key={`${phase.id}-label`} style={getLabelStyle(phase)}>
+            <div style={getPhaseBoxStyle(phase)} onClick={() => navigate(phase.route)}>
+              <div style={{
+                ...styles.phaseTitle,
+                color: isActive ? '#fff' : '#555',
+                textShadow: isActive ? '0 1px 2px rgba(0,0,0,0.25)' : 'none'
+              }}>
+                {phase.title}
+              </div>
+              <div style={{
+                ...styles.phaseDescription,
+                ...(isActive ? styles.phaseDescriptionActive : {}),
+                color: isActive ? 'rgba(255, 255, 255, 0.9)' : '#666',
+                textShadow: isActive ? '0 1px 2px rgba(0,0,0,0.2)' : 'none'
+              }}>
+                {phase.description}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {showMessage && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0, left: 0, width: '100vw', height: '100vh',
-            background: 'rgba(0,0,0,0.3)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            zIndex: 9999,
-          }}
-          onClick={handleCloseMessage}
-        >
-          <div
-            style={{
-              background: '#fff',
-              padding: '32px 24px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
-              maxWidth: 350,
-              textAlign: 'center',
-              position: 'relative',
-            }}
-            onClick={e => e.stopPropagation()}
-          >
-            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>
-              Not available in demo environment.
-            </p>
-            <p style={{ color: '#2d3a4a', marginBottom: 0 }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }} onClick={handleCloseMessage}>
+          <div style={{ background: '#fff', padding: '32px 24px', borderRadius: '12px', boxShadow: '0 4px 24px rgba(0,0,0,0.15)', maxWidth: 350, textAlign: 'center', position: 'relative' }} onClick={e => e.stopPropagation()}>
+            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>Not available in demo environment.</p>
+            <p style={{ color: '#2d3a4a' }}>
               Write to{' '}
-              <a
-                href="https://www.ajalabs.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}
-              >
+              <a href="https://www.ajalabs.ai" target="_blank" rel="noopener noreferrer" style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}>
                 ajalabs
               </a>{' '}
               to discuss further.
             </p>
-            <button
-              onClick={handleCloseMessage}
-              style={{
-                marginTop: 18,
-                padding: '6px 18px',
-                borderRadius: 6,
-                border: 'none',
-                background: '#0072ce',
-                color: '#fff',
-                fontWeight: 500,
-                cursor: 'pointer',
-              }}
-            >
+            <button onClick={handleCloseMessage} style={{ marginTop: 18, padding: '6px 18px', borderRadius: 6, border: 'none', background: '#0072ce', color: '#fff', fontWeight: 500, cursor: 'pointer' }}>
               Close
             </button>
           </div>
