@@ -1,0 +1,206 @@
+/* Sidebar.scss */
+#sales-dashboard-isolated {
+  
+  .sales-sidebar {
+    width: 280px !important;
+    min-width: 280px !important; /* Physically prevents stretching */
+    flex-shrink: 0 !important;   /* Prevents flexbox from resizing it */
+    height: 100vh !important;
+    background: white !important;
+    border-right: 1px solid #e5e7eb !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: sticky !important; 
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .sales-sidebar.collapsed {
+    width: 80px !important;
+    min-width: 80px !important;
+  }
+
+  .sidebar-header {
+    padding: 24px 20px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .sales-sidebar.collapsed .sidebar-header {
+    padding: 24px 10px !important;
+    justify-content: center !important;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sales-sidebar.collapsed .logo {
+    gap: 0;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+    background: #3b82f6; /* Hardcoded blue */
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  .sales-sidebar.collapsed .logo h2 {
+    display: none !important;
+  }
+
+  .sidebar-toggle {
+    background: none;
+    border: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    gap: 4px;
+  }
+
+  .sidebar-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: #4b5563;
+    border-radius: 2px;
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 24px 0;
+    overflow-y: auto;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    margin: 0 10px 4px;
+    color: #4b5563;
+    text-decoration: none;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .nav-item:hover {
+    background: #f3f4f6;
+    color: #111827;
+  }
+
+  .nav-item.active {
+    background: #3b82f6;
+    color: white;
+    font-weight: 600;
+  }
+
+  .nav-icon {
+    font-size: 1.25rem;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-label {
+    flex: 1;
+    font-size: 0.875rem;
+  }
+
+  .sales-sidebar.collapsed .nav-label {
+    display: none !important;
+  }
+
+  .sidebar-footer {
+    padding: 24px;
+    border-top: 1px solid #e5e7eb;
+  }
+
+  .sales-sidebar.collapsed .sidebar-footer {
+    padding: 24px 10px;
+  }
+
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .sales-sidebar.collapsed .user-profile {
+    justify-content: center;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    background: #3b82f6;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+
+  .user-info h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 2px 0;
+  }
+
+  .user-info p {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .sales-sidebar.collapsed .user-info {
+    display: none !important;
+  }
+
+  .logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: #374151;
+    cursor: pointer;
+  }
+
+  .sales-sidebar.collapsed .logout-btn span:last-child {
+    display: none !important;
+  }
+}

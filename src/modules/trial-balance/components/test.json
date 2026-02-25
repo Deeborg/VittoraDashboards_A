@@ -1,0 +1,3278 @@
+[
+  {
+    "glAccount": "",
+    "glName": "",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "11110096",
+    "glName": "Cash - EC-CO",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110097",
+    "glName": "Cash - New Delhi",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110098",
+    "glName": "Cash - Kolkata",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110099",
+    "glName": "Cash - Mumbai",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110100",
+    "glName": "Cash - Baroda",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110101",
+    "glName": "Cash - Chennai",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Cash on hand"
+  },
+  {
+    "glAccount": "11110112",
+    "glName": "MB-EEFC USD 009988",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11110113",
+    "glName": "MB-EEFC USD 009988",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130265",
+    "glName": "SBI Delhi",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130266",
+    "glName": "SBI DHAKA- 05120490620201",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130267",
+    "glName": "DHAKA BANK-GTCL",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130268",
+    "glName": "SBI Kolkata",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130269",
+    "glName": "SBI - Mumbai",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130270",
+    "glName": "SBI - Baroda",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130271",
+    "glName": "SBI - Chennai",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130272",
+    "glName": "Kotak Mahindra Bank Cur A/c-Bangalore",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130273",
+    "glName": "Tokyo-Mitsubishi UFJ",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130275",
+    "glName": "ICICI A/C I",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130276",
+    "glName": "ICICI A/C II",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130277",
+    "glName": "Mizuho bank ltd",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130278",
+    "glName": "SBI IFB EEFC A/c",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In EEFC accounts"
+  },
+  {
+    "glAccount": "11130279",
+    "glName": "SBI - Industrial Finance Branch (CC)",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130281",
+    "glName": "Axis Bank Ltd Dividend A/c 2010-11",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130282",
+    "glName": "Axis Bank Ltd Dividend A/c 2011-12",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130283",
+    "glName": "Axis Bank Ltd Dividend A/c 2012-13",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130284",
+    "glName": "KOTAK MAHINDRA BANK DIV A/C 2013-14",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130285",
+    "glName": "KOTAK MAHINDRA BANK DIV A/C 2014-15",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130286",
+    "glName": "KOTAK MAHINDRA BANK DIV A/C 2015-16",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130287",
+    "glName": "KOTAK MAHINDRA BANK DIV A/C 2016-17",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11130289",
+    "glName": "Mizuho Bank EEFC A/c F10-716-000183",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In EEFC accounts"
+  },
+  {
+    "glAccount": "11130290",
+    "glName": "SBI IFB Current account",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11130310",
+    "glName": "KMB Spl Acc Cap Red",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Capital Reduction "
+  },
+  {
+    "glAccount": "11130321",
+    "glName": "MUFG ? DIV ACC",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "unpaid dividend account"
+  },
+  {
+    "glAccount": "11160038",
+    "glName": "Deposit less than 3Mnth",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Fixed deposits with maturity less than 3 months"
+  },
+  {
+    "glAccount": "11170009",
+    "glName": "Deposit More than 3Mnth",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "Fixed deposits with maturity greater than 3 months"
+  },
+  {
+    "glAccount": "11290001",
+    "glName": "Incoming Checks",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11299000",
+    "glName": "Clearing Account for Currency Transfer",
+    "Level 1 Desc": "Cash and cash equivalents",
+    "Level 2 Desc": "In current accounts"
+  },
+  {
+    "glAccount": "11410000",
+    "glName": "Accounts receivable_trade",
+    "Level 1 Desc": "Trade receivables",
+    "Level 2 Desc": "Trade receivables"
+  },
+  {
+    "glAccount": "11420000",
+    "glName": "Accounts receivable_trade_adjustment",
+    "Level 1 Desc": "Trade receivables",
+    "Level 2 Desc": "Trade receivables"
+  },
+  {
+    "glAccount": "11430000",
+    "glName": "Unbilled receivables_result analysis",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Unbilled receivable"
+  },
+  {
+    "glAccount": "11440000",
+    "glName": "Unbilled receivables_under MC method",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Unbilled receivable"
+  },
+  {
+    "glAccount": "11450000",
+    "glName": "Unbilled receivables_adjustment",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Unbilled receivable"
+  },
+  {
+    "glAccount": "11480000",
+    "glName": "Accounts receivable_allocation",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Unbilled receivable"
+  },
+  {
+    "glAccount": "11490000",
+    "glName": "Unbilled AR_allocat.",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Unbilled receivable"
+  },
+  {
+    "glAccount": "12110000",
+    "glName": "Product and finished goods",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Stock-in-trade (acquired for trading)"
+  },
+  {
+    "glAccount": "12120000",
+    "glName": "Product/FG_SIT",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Goods-in-transit- (acquired for trading) "
+  },
+  {
+    "glAccount": "12130000",
+    "glName": "Product and finished goods_adjustment",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Stock-in-trade (acquired for trading)"
+  },
+  {
+    "glAccount": "12150000",
+    "glName": "Prod./FG_market loss",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Stock-in-trade (acquired for trading)"
+  },
+  {
+    "glAccount": "12210000",
+    "glName": "Semi-finished products and parts",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Raw materials"
+  },
+  {
+    "glAccount": "12220000",
+    "glName": "SFP/parts_SIT",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Goods-in-transit- (acquired for trading) "
+  },
+  {
+    "glAccount": "12230000",
+    "glName": "SFP/parts_Adj.",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Raw materials"
+  },
+  {
+    "glAccount": "12310000",
+    "glName": "Raw materials",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Raw materials"
+  },
+  {
+    "glAccount": "12320000",
+    "glName": "Raw materials_stock in transit",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Goods-in-transit- Raw materials"
+  },
+  {
+    "glAccount": "12330000",
+    "glName": "Raw materials_adjustment",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Raw materials"
+  },
+  {
+    "glAccount": "12370000",
+    "glName": "Raw mat._loss no use",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Raw materials"
+  },
+  {
+    "glAccount": "12410000",
+    "glName": "Work in process",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Work-in-progress"
+  },
+  {
+    "glAccount": "12430000",
+    "glName": "Work in process_adjustment",
+    "Level 1 Desc": "Inventories",
+    "Level 2 Desc": "Work-in-progress"
+  },
+  {
+    "glAccount": "14110000",
+    "glName": "Advance payment for Jobs",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Advance to creditors"
+  },
+  {
+    "glAccount": "14110000-R",
+    "glName": "Advance payment for Jobs-CTO",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14110000-RR",
+    "glName": "Advances to creditors-Non current",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Advance to creditors"
+  },
+  {
+    "glAccount": "14110000-RRR",
+    "glName": "Advance to creditors-related party",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Advance to creditors-RP"
+  },
+  {
+    "glAccount": "14110001",
+    "glName": "Employee Advances",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Advances to employees"
+  },
+  {
+    "glAccount": "14110002",
+    "glName": "Employee Purchase Advance",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Advances to employees"
+  },
+  {
+    "glAccount": "14120000",
+    "glName": "Advanced money_adjustment",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Advance to creditors"
+  },
+  {
+    "glAccount": "14210000",
+    "glName": "Prepaid expenses",
+    "Level 1 Desc": "Other current assets",
+    "Level 2 Desc": "Prepaid expenses"
+  },
+  {
+    "glAccount": "14210000-R",
+    "glName": "Prepaid expenses-NC",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Prepaid expenses"
+  },
+  {
+    "glAccount": "14310000",
+    "glName": "Deferred tax assets_short-term",
+    "Level 1 Desc": "Deferred tax assets (net)",
+    "Level 2 Desc": "Deferred tax assets (net)"
+  },
+  {
+    "glAccount": "14410001",
+    "glName": "Accrued income_Interest income",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Interest accrued but not due"
+  },
+  {
+    "glAccount": "14610000",
+    "glName": "Accounts receivable_non trade_Others",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Other recoverable from customers"
+  },
+  {
+    "glAccount": "14610002",
+    "glName": "AR_CorpTax refund",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14610023",
+    "glName": "Net Invt in lease",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Net Investment in Lease- Current"
+  },
+  {
+    "glAccount": "14640001",
+    "glName": "Advance income tax",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640010",
+    "glName": "WITHHOLDING TAX - GTCL BANGALADESH",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640011",
+    "glName": "Advance Income Tax FY 06-07 ( AY 07-08",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640012",
+    "glName": "Advance Income Tax FY 07-08 ( AY 08-09",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640013",
+    "glName": "Adv Inc Tax FY08-09",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640014",
+    "glName": "Adv Inc Tax FY09-10",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640015",
+    "glName": "Adv Inc Tax FY10-11",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640016",
+    "glName": "Advance Income Tax FY 11-12 ( AY 12-13",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640017",
+    "glName": "Advance Income Tax FY 12-13 ( AY 13-14",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640018",
+    "glName": "Advance Income Tax FY 13-14 ( AY 14-15",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640019",
+    "glName": "Advance Income Tax FY 14-15 ( AY 15-16",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640020",
+    "glName": "Advance Income Tax FY 15-16 ( AY 16-17",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640021",
+    "glName": "TDS Oth-2008-09-OVS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640022",
+    "glName": "TDS Oth-2009-10-OVS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640023",
+    "glName": "TDS Oth-2010-11-OVS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640024",
+    "glName": "TDS Oth-11-12-Ovs",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640025",
+    "glName": "TDS Oth-12-13-Ovs",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640026",
+    "glName": "TDS Oth-FY-13-14-Ovs",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640027",
+    "glName": "Tax Deducted at Source-Oth-2014-15",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640028",
+    "glName": "TDS Oth-FY-14-15-Ovs",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640029",
+    "glName": "Tax Deducted at Source-Oth-2015-16",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640030",
+    "glName": "TDS Oth-FY-15-16-Ovs",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640031",
+    "glName": "Tax Deducted at Source-Oth-2017-18",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640032",
+    "glName": "Tax Deducted at Source Oth 17-18 Over",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640033",
+    "glName": "Advance Income Tax FY 17-18( AY 18-19",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640034",
+    "glName": "Advance Income Tax Singapore branch",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640035",
+    "glName": "Provision For Taxation - AY 18-19",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "14640036",
+    "glName": "Adv CORP TaxBGDESH",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640037",
+    "glName": "Tax Deducted at Source 18-19 Overseas",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640038",
+    "glName": "Tax Deducted at Source 18-19",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640039",
+    "glName": "Advance Income Tax FY 18-19",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640040",
+    "glName": "Adv Corp Tax FY19-20",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640041",
+    "glName": "Tax Ded FY19-20 Overeas",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640042",
+    "glName": "Tax Deducted at Source FY19-20",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640043",
+    "glName": "Tax Ded FY20-21 Ov",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640044",
+    "glName": "Adv Corp Tax 20-21",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640045",
+    "glName": "Tax Ded FY20-21 Do",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640046",
+    "glName": "TCS receivable Pur",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640047",
+    "glName": "TDS-FY 21-22-OVERS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640048",
+    "glName": "TDS-FY 21-22-DOMES",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640049",
+    "glName": "TDS-FY 22-23-OVERS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640050",
+    "glName": "TDS-FY 22-23-DOMES",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640050-R",
+    "glName": "TDS RECEIVABLE YEC",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640052",
+    "glName": "TDS-FY 23-24-OVERS",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640053",
+    "glName": "TDS-FY 23-24-DOMES",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640054",
+    "glName": "TDS-FY 24-25OVERSE",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640055",
+    "glName": "TDS-FY 24-25DOMEST",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640056",
+    "glName": "Adv corp tax FY24-",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640057",
+    "glName": "AR_NT_tax refund.a",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640058",
+    "glName": "TDS-FY25-26 OVERSE",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640059",
+    "glName": "TDS-FY25-26 DOMEST",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14640060",
+    "glName": "Adv corp tax FY25-",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14650001",
+    "glName": "ED Rec Dmd Exports",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Other recoverable from customers"
+  },
+  {
+    "glAccount": "14650002",
+    "glName": "SGST Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650003",
+    "glName": "SGST RCM Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650004",
+    "glName": "CGST Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650005",
+    "glName": "CGST RCM Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650006",
+    "glName": "IGST Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650007",
+    "glName": "IGST RCM Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650008",
+    "glName": "IGST Import Receivable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650009",
+    "glName": "CVD Credit Opening Inventory",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650011",
+    "glName": "GSTTDS- CGST",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650012",
+    "glName": "GSTTDS- IGST",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650013",
+    "glName": "GSTTDS- SGST",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650014",
+    "glName": "GSTTDS Availement",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650015",
+    "glName": "GSTTDS Customer",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650016",
+    "glName": "TDS-DOMESTIC CLR A",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Advance tax and TDS"
+  },
+  {
+    "glAccount": "14650017",
+    "glName": "GST CREDIT LEDGER",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650018",
+    "glName": "GST CASH LEDGER",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14650019",
+    "glName": "GST CLEARING GL",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "14660000",
+    "glName": "AR_NT_Tangible_FA",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Other recoverable from customers"
+  },
+  {
+    "glAccount": "14720000",
+    "glName": "Suspense payment for VAT-GST",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Balances with government authorities"
+  },
+  {
+    "glAccount": "14910010",
+    "glName": "Asset Clearing",
+    "Level 1 Desc": "Capital work in progress",
+    "Level 2 Desc": "Capital work in progress"
+  },
+  {
+    "glAccount": "14910011",
+    "glName": "DEPOSIT",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Security deposits"
+  },
+  {
+    "glAccount": "14910012",
+    "glName": "INSURANCE CLAIMS RECOVERABLE",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Insurance claim receivable"
+  },
+  {
+    "glAccount": "14910015",
+    "glName": "YHQ RECOVERABLE",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Dues to related parties"
+  },
+  {
+    "glAccount": "14910033",
+    "glName": "Inter Branch Transfer",
+    "Level 1 Desc": "Trade receivables",
+    "Level 2 Desc": "Trade receivables"
+  },
+  {
+    "glAccount": "14910034",
+    "glName": "BS Reval Adj Account",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "14910035",
+    "glName": "Custom Duty Deposit",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Balances with government authorities"
+  },
+  {
+    "glAccount": "14910036",
+    "glName": "LIC LEAVE FUND Deposits",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Others : Provision for compensated absences"
+  },
+  {
+    "glAccount": "14910036-R",
+    "glName": "LIC Deposit Fund",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Others : Provision for compensated absences"
+  },
+  {
+    "glAccount": "19910000",
+    "glName": "Allowance for bad debts_short term",
+    "Level 1 Desc": "Trade receivables",
+    "Level 2 Desc": "Allowances for doubtful debts"
+  },
+  {
+    "glAccount": "21110000",
+    "glName": "Buildings",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Buildings (Refer Note b)"
+  },
+  {
+    "glAccount": "21110005",
+    "glName": "BUILDING & STRUCTURE-COST",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": " Leasehold improvements"
+  },
+  {
+    "glAccount": "21110006",
+    "glName": "BUILDING EQUIPMENT-COST",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21120000",
+    "glName": "Buildings_lease",
+    "Level 1 Desc": "Right of Use Assets",
+    "Level 2 Desc": "Buildings"
+  },
+  {
+    "glAccount": "21160000",
+    "glName": "Accumulated depreciation_buildings",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Buildings (Refer Note b)"
+  },
+  {
+    "glAccount": "21160003",
+    "glName": "BUILDING AND STRUCTURE-ACCUM DEPN",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": " Leasehold improvements"
+  },
+  {
+    "glAccount": "21160004",
+    "glName": "BUILDING EQUIPMENT-ACCUM DEPN",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21170000",
+    "glName": "Acc.Dep_Build_lease",
+    "Level 1 Desc": "Right of Use Assets",
+    "Level 2 Desc": "Accumulated Depreciation-Buildings"
+  },
+  {
+    "glAccount": "21210000",
+    "glName": "Structures",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Buildings (Refer Note b)"
+  },
+  {
+    "glAccount": "21260000",
+    "glName": "Accumulated depreciation_structures",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Buildings (Refer Note b)"
+  },
+  {
+    "glAccount": "21310004",
+    "glName": "PLANT & MACHINERY-COST",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21320000",
+    "glName": "Machinery_lease",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21360002",
+    "glName": "PLANT AND MACHINERY-ACCUM DEPN",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21370000",
+    "glName": "Acc.Dep.Machi_leas",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Plant and equipment"
+  },
+  {
+    "glAccount": "21510000",
+    "glName": "Vehicles/transportation equipment",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Vehicles"
+  },
+  {
+    "glAccount": "21520000",
+    "glName": "Vehic/Transp_lease",
+    "Level 1 Desc": "Right of Use Assets",
+    "Level 2 Desc": "Vehicles- ROU"
+  },
+  {
+    "glAccount": "21560000",
+    "glName": "Acc.Dep.Veh/trans.",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Vehicles"
+  },
+  {
+    "glAccount": "21570000",
+    "glName": "Acc.Dep.Car_lease",
+    "Level 1 Desc": "Right of Use Assets",
+    "Level 2 Desc": "Accumulated Depreciation-Vehicles"
+  },
+  {
+    "glAccount": "21610001",
+    "glName": "Furniture & Fixtures",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Furniture and fixtures"
+  },
+  {
+    "glAccount": "21610002",
+    "glName": "Computer Equipment",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "21610003",
+    "glName": "Demo Equipment",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "21610012",
+    "glName": "OFFICE EQUIPT-COST",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "21660001",
+    "glName": "Acc. Dep._Furn&Fixt",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Furniture and fixtures"
+  },
+  {
+    "glAccount": "21660002",
+    "glName": "Acc. Dep._Computer",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "21660003",
+    "glName": "Acc. Dep._Demo",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "21660009",
+    "glName": "OFFICE EQUIPMENT-ACC DEPN",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Office equipment"
+  },
+  {
+    "glAccount": "22110000",
+    "glName": "Land",
+    "Level 1 Desc": "Property, plant and equipment",
+    "Level 2 Desc": "Freehold land (Refer Note b)"
+  },
+  {
+    "glAccount": "22710000",
+    "glName": "CIP_Tangible",
+    "Level 1 Desc": "Capital work in progress",
+    "Level 2 Desc": "Capital work in progress"
+  },
+  {
+    "glAccount": "22710007",
+    "glName": "CIP-Transmitter",
+    "Level 1 Desc": "Capital work in progress",
+    "Level 2 Desc": "Capital work in progress"
+  },
+  {
+    "glAccount": "24510000",
+    "glName": "Software",
+    "Level 1 Desc": "Intangible assets",
+    "Level 2 Desc": "Computer Software"
+  },
+  {
+    "glAccount": "24560000",
+    "glName": "Accumulated amortization_software",
+    "Level 1 Desc": "Intangible assets",
+    "Level 2 Desc": "Computer Software"
+  },
+  {
+    "glAccount": "27110001",
+    "glName": "Refundable Deposits",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Security deposits"
+  },
+  {
+    "glAccount": "27110009",
+    "glName": "Security Deposits",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Security deposits"
+  },
+  {
+    "glAccount": "27110010",
+    "glName": "EMD paid to Customers",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Earnest money deposits with customers"
+  },
+  {
+    "glAccount": "27110010R",
+    "glName": "EMD paid to Customers",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Earnest money deposits with customers"
+  },
+  {
+    "glAccount": "27120004",
+    "glName": "Leasehold deposits",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Security deposits"
+  },
+  {
+    "glAccount": "27310000",
+    "glName": "Deferred tax assets_long-term",
+    "Level 1 Desc": "Deferred tax assets (net)",
+    "Level 2 Desc": "Deferred tax assets (net)"
+  },
+  {
+    "glAccount": "29210002",
+    "glName": "Net Invt in lease",
+    "Level 1 Desc": "Other Non current financial assets ",
+    "Level 2 Desc": "Net Investment in Lease- Non Current"
+  },
+  {
+    "glAccount": "41210000",
+    "glName": "Accounts payable_trade",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41210000-R",
+    "glName": "Regrouping of related party payable",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Dues to related parties"
+  },
+  {
+    "glAccount": "41210000-RR",
+    "glName": "AP Reclass-LVO Account",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41210013",
+    "glName": "Accounts payable_trade_MSME",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41210013-R",
+    "glName": "MSME Interest Payable",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41220000",
+    "glName": "Accounts payable_trade_Adjustment",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41220010",
+    "glName": "ESIC Recoveries",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "41220011",
+    "glName": "ESI Recoveries from Contractors",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41230000",
+    "glName": "GR/IR Cl_Product/FG",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41230002",
+    "glName": "GR/IR Return Cl_Prod",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41240000",
+    "glName": "GR/IR Cl_SFP/Parts",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41250000",
+    "glName": "GR/IR clearing_Raw Materials",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41260000",
+    "glName": "GR/IR clearing_Sub-Contract Expense",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41270000",
+    "glName": "GR/IR clearing_Tangible Fixed Assets",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41280000",
+    "glName": "GR/IR clearing_Intangible Fixed Assets",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41290000",
+    "glName": "GR/IR clearing_Expense Procurement",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41320000",
+    "glName": "Clearing account for Commission",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41390000",
+    "glName": "GR/IR clearing_Adjustment",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41510000",
+    "glName": "Accounts payable_non trade_Others",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41510032",
+    "glName": "AP_NT_Stat Vendors",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41520000",
+    "glName": "Accounts payable-non trade_adjustment",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41520002",
+    "glName": "AP_non trade_Lease Expense",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41540000",
+    "glName": "Accrued dividend payable",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Unpaid dividends"
+  },
+  {
+    "glAccount": "41540003",
+    "glName": "Unpaid Dividend Account2016-17",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Unpaid dividends"
+  },
+  {
+    "glAccount": "41550000",
+    "glName": "AP_non trade_Tangible assets",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Capital creditors"
+  },
+  {
+    "glAccount": "41550000-R",
+    "glName": "Capital creditors reclass",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Prepaid expenses"
+  },
+  {
+    "glAccount": "41560000",
+    "glName": "AP_non trade_Intangible assets",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Capital creditors"
+  },
+  {
+    "glAccount": "41590000",
+    "glName": "AP_NT_Adj.TngibleFA",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Capital creditors"
+  },
+  {
+    "glAccount": "41590000-R",
+    "glName": "Capital creditors reclass",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Prepaid expenses"
+  },
+  {
+    "glAccount": "41600000",
+    "glName": "AP_NT_Adj.IntangblFA",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41610000",
+    "glName": "AP-non trade_ad.sec",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Amount payable on Capital reduction"
+  },
+  {
+    "glAccount": "41630000",
+    "glName": "GR/IR Cl_Adj_T FA",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41640000",
+    "glName": "GR/IR Cl_Adj_IT FA",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41650000",
+    "glName": "Accrued expense",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41650000-R",
+    "glName": "Accrued expense- Provision for custom duty interest",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for Interest on customs duty"
+  },
+  {
+    "glAccount": "41650023",
+    "glName": "Payroll Clearing",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "41650066",
+    "glName": "Payroll payable-hous",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Statutory dues ( Including PF, ESI, GST (Net),withholding taxes, etc.)"
+  },
+  {
+    "glAccount": "41670000",
+    "glName": "Short-term lease obligations",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Short term Lease obligation"
+  },
+  {
+    "glAccount": "41710000",
+    "glName": "Advances received",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Advances from customers"
+  },
+  {
+    "glAccount": "41730000",
+    "glName": "Advances received Adj",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Advances from customers"
+  },
+  {
+    "glAccount": "41810000",
+    "glName": "Deposits received",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "41810043",
+    "glName": "Car Advance (under Co. Car Scheme)",
+    "Level 1 Desc": "Other current financial liabilities",
+    "Level 2 Desc": "Payable to employees"
+  },
+  {
+    "glAccount": "41820000",
+    "glName": "Deposits received_withholding tax",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Statutory dues ( Including PF, ESI, GST (Net),withholding taxes, etc.)"
+  },
+  {
+    "glAccount": "41820002",
+    "glName": "TDS - Salary",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Statutory dues ( Including PF, ESI, GST (Net),withholding taxes, etc.)"
+  },
+  {
+    "glAccount": "41820003",
+    "glName": "TDS - BANGALADESH",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Statutory dues ( Including PF, ESI, GST (Net),withholding taxes, etc.)"
+  },
+  {
+    "glAccount": "41820004",
+    "glName": "TCS - Scrap Sales",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Statutory dues ( Including PF, ESI, GST (Net),withholding taxes, etc.)"
+  },
+  {
+    "glAccount": "42120000",
+    "glName": "Revenue received in advance (RA)",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Income received in advance (Unearned revenue)"
+  },
+  {
+    "glAccount": "42130000",
+    "glName": "Revenue received in advance (MC)",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Income received in advance (Unearned revenue)"
+  },
+  {
+    "glAccount": "42140000",
+    "glName": "Revenue received in advance_adjustment",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Income received in advance (Unearned revenue)"
+  },
+  {
+    "glAccount": "42190000",
+    "glName": "R.Rec_in Adv.RA_All",
+    "Level 1 Desc": "Other current liabilities",
+    "Level 2 Desc": "Income received in advance (Unearned revenue)"
+  },
+  {
+    "glAccount": "42220000",
+    "glName": "Suspense receipt for VAT-GST",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for Service Tax"
+  },
+  {
+    "glAccount": "42220000-R",
+    "glName": "Suspense receipt for VAT-GST Regrouping",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42510033",
+    "glName": "AP_NT_Employees",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "42520054",
+    "glName": "SGST Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520055",
+    "glName": "SGST RCM Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520056",
+    "glName": "CGST Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520057",
+    "glName": "CGST RCM Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520058",
+    "glName": "IGST Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520059",
+    "glName": "Advance Clearing A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520060",
+    "glName": "IGST RCM Payable A/c",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520061",
+    "glName": "GST Payable Singapore Branch",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42520062",
+    "glName": "VAT PYBLE-BANGLADESH",
+    "Level 1 Desc": "Other current assets B",
+    "Level 2 Desc": "Balances with Government authorities-B"
+  },
+  {
+    "glAccount": "42530000",
+    "glName": "Corporate tax payable",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530014",
+    "glName": "Provision For Taxation - AY 04-05",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530015",
+    "glName": "Provision For Taxation - AY 06-07",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530016",
+    "glName": "Provision For Taxation - AY 07-08",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530017",
+    "glName": "Provision For Taxation - AY 08-09",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530018",
+    "glName": "Provision For Taxation - AY 09-10",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530019",
+    "glName": "Provision For Taxation - AY 10-11",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530020",
+    "glName": "Provision For Taxation - AY 11-12",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530021",
+    "glName": "Provision For Taxation - AY 12-13",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530022",
+    "glName": "Provision For Taxation - AY 13-14",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530023",
+    "glName": "Provision For Taxation - AY 14-15",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530024",
+    "glName": "Provision For Taxation - AY 15-16",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530025",
+    "glName": "Provision For Taxation - AY 16-17",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530029",
+    "glName": "Provision For Tax-AY 1920",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530031",
+    "glName": "Provision For Tax-AY 2021",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530032",
+    "glName": "Provision For Tax-AY 2022",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530033",
+    "glName": "IT Prov-FY 24-25",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "42530034",
+    "glName": "IT Prov-FY 25-26",
+    "Level 1 Desc": "Non current tax asset ",
+    "Level 2 Desc": "Provision for tax"
+  },
+  {
+    "glAccount": "43510000",
+    "glName": "Accrued bonus",
+    "Level 1 Desc": "Trade payables",
+    "Level 2 Desc": "Total outstanding dues of creditors other than micro enterprises and small enterprises"
+  },
+  {
+    "glAccount": "43810000",
+    "glName": "Product warranty_Product",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for product support  (Warranty)"
+  },
+  {
+    "glAccount": "43820000",
+    "glName": "Product warranty_Project",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for product support  (Warranty)"
+  },
+  {
+    "glAccount": "44010000",
+    "glName": "Accrued paid leave",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Others : Provision for compensated absences"
+  },
+  {
+    "glAccount": "44010000-R",
+    "glName": "Provision for compensated absences",
+    "Level 1 Desc": "Other Current financial assets",
+    "Level 2 Desc": "Others : Provision for compensated absences"
+  },
+  {
+    "glAccount": "44110000",
+    "glName": "Provision for Construction Loss",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for construction contracts"
+  },
+  {
+    "glAccount": "44110000-R",
+    "glName": "Provision for Construction Loss-Onerous",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for estimated losses on onerous contracts"
+  },
+  {
+    "glAccount": "44410014",
+    "glName": "Prov for Liquidated Damages",
+    "Level 1 Desc": "Provisions- Current",
+    "Level 2 Desc": "Provision for liquidated damages"
+  },
+  {
+    "glAccount": "51310000",
+    "glName": "Deferred tax liabilities_long-term",
+    "Level 1 Desc": "Deferred tax assets (net)",
+    "Level 2 Desc": "Deferred tax assets (net)"
+  },
+  {
+    "glAccount": "51540000",
+    "glName": "Long-term lease obligations",
+    "Level 1 Desc": "Other Non current financial liabilities",
+    "Level 2 Desc": "Long term  Lease obligation"
+  },
+  {
+    "glAccount": "53130000",
+    "glName": "Provision for retirement",
+    "Level 1 Desc": "Provisions- Non Current",
+    "Level 2 Desc": "Provision for gratuity"
+  },
+  {
+    "glAccount": "53130000-RA",
+    "glName": "Regrouping provision for gratuity",
+    "Level 1 Desc": "Other non current assets",
+    "Level 2 Desc": "Others"
+  },
+  {
+    "glAccount": "61110000",
+    "glName": "Capital stock",
+    "Level 1 Desc": "Equity",
+    "Level 2 Desc": "Equity share capital"
+  },
+  {
+    "glAccount": "61310000",
+    "glName": "Capital surplus",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Capital reserve"
+  },
+  {
+    "glAccount": "61310010",
+    "glName": "premium on capital stock",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Securities premium"
+  },
+  {
+    "glAccount": "61420005",
+    "glName": "General reserve",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "General reserve"
+  },
+  {
+    "glAccount": "61510000",
+    "glName": "Retained earnings_Beginning balance",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Retained earnings"
+  },
+  {
+    "glAccount": "61510000-R",
+    "glName": "Retained Earning-Waiver of PY Service fees upto 31st march 22",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Retained earnings"
+  },
+  {
+    "glAccount": "62410000",
+    "glName": "Mnm-pension liab Adj",
+    "Level 1 Desc": "Provisions- Non Current",
+    "Level 2 Desc": "Provision for gratuity"
+  },
+  {
+    "glAccount": "62410001",
+    "glName": "Other Comprehensive Income",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Items of other comprehensive income"
+  },
+  {
+    "glAccount": "71110000",
+    "glName": "Sales",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71120000",
+    "glName": "Sales",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71130000",
+    "glName": "Sales_adjustment",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71130009",
+    "glName": "SALES-SAF",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71130010",
+    "glName": "Rev_Leased Assets",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71150000",
+    "glName": "Sales_SAF",
+    "Level 1 Desc": "Other operating revenue ",
+    "Level 2 Desc": "Commission (sales activity fee)"
+  },
+  {
+    "glAccount": "71930000",
+    "glName": "Sales_POC_allocation",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71939001",
+    "glName": "Sales adjustment_for Acctg",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "71939002",
+    "glName": "Sales adj. for PM",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "72110000",
+    "glName": "Cost of goods sold",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72120000",
+    "glName": "Cost of goods sold",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72140000",
+    "glName": "COGS_cost var.Adj.",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72140017",
+    "glName": "COGS_Leased Asse",
+    "Level 1 Desc": "Cost of Material Consumed",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72160000",
+    "glName": "Allowance for Construction loss",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Provision for estimated losses on construction contracts /(provision written back)"
+  },
+  {
+    "glAccount": "72160000-R",
+    "glName": "Allowance for Construction loss",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Provision for expected loss on onerous contracts"
+  },
+  {
+    "glAccount": "72170000",
+    "glName": "COGS_cost var.Adj_CO",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72180000",
+    "glName": "COGS_cost var. G",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72190000",
+    "glName": "COGS adjustment_for Acctg(3rd)",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72200000",
+    "glName": "COGS adjustment_for Acctg(Internal)",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72220000",
+    "glName": "COGS_invent. scrap",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72250000",
+    "glName": "COGS_loss invent",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72290000",
+    "glName": "COGS_internal_Adjust",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72310000",
+    "glName": "Procur.PriceVar.P&F",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72320000",
+    "glName": "Procur.PriceVar.SFP",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72330000",
+    "glName": "Procur.PriceVar.RawM",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72340000",
+    "glName": "PlntTran.Var.Prdct&F",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72350000",
+    "glName": "PlntTran.Var._SFP/P",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72370000",
+    "glName": "S.Cost rev.var.Prdct",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72380000",
+    "glName": "S.Cost rev.var.SFP",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72390000",
+    "glName": "S.Cost rev.var.RawM",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72400000",
+    "glName": "Production var.Prdct",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72410000",
+    "glName": "Production var.SFP/P",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72440000",
+    "glName": "Inventories difference variance",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "72470000",
+    "glName": "Prd.var.tr.cost Adj",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73110000",
+    "glName": "Product/FG usage_Yokogawa product",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73110001",
+    "glName": "Prd./FG use_subcon",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73120000",
+    "glName": "SFP/parts usage_Yokogawa product",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73130000",
+    "glName": "Raw materials usage_Yokogawa product",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73150000",
+    "glName": "Product/FG usage_third party",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "73420000",
+    "glName": "SFP/parts usage_third party P.sur ex",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "74110000",
+    "glName": "Directors' remuneration",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74210000",
+    "glName": "Provision for Accrued paid leave",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74220000",
+    "glName": "Salaries_Base salary",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74220001",
+    "glName": "Salaries_Contract employee",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74250000",
+    "glName": "Salaries_Other allowance",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74250017",
+    "glName": "Other allowance_05",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74250018",
+    "glName": "Salaries_Other a",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74250043",
+    "glName": "House Rent Allowance",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74270004",
+    "glName": "Expatriate Tax Adjustment",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74270028",
+    "glName": "Personal Pay",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74310000",
+    "glName": "Employee bonuses",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74310010",
+    "glName": "Exgratia",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74320004",
+    "glName": "Bonus_incentive bonus Mgr",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74330000",
+    "glName": "Prov. for bonuse",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74410000",
+    "glName": "Employee retirement expense",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74410000-R",
+    "glName": "Employee retirement expense",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Items of other comprehensive income"
+  },
+  {
+    "glAccount": "74420001",
+    "glName": "Co's Cont gart-",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74450000",
+    "glName": "Legal welfare expense",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74450049",
+    "glName": "Co's Contribution to PF",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74450050",
+    "glName": "PF EDLI IF Admin Expenses",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74450051",
+    "glName": "Co's Contribution to Pension",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74450052",
+    "glName": "Co's Contribution to ESIC",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Contributions to provident and other funds"
+  },
+  {
+    "glAccount": "74460000",
+    "glName": "Welfare expense",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460002",
+    "glName": "Relocation",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460003",
+    "glName": "Relocation Allowances",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460014",
+    "glName": "Welfare expense_Rent",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460018",
+    "glName": "Medical & Dental",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460026",
+    "glName": "Welfare expense_food charge",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460032",
+    "glName": "Welfare expense_cafeteria",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "74460043",
+    "glName": "Insurance Medical",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Salaries and wages"
+  },
+  {
+    "glAccount": "74470000",
+    "glName": "Sickness reimbursement",
+    "Level 1 Desc": "Employee benefits expense",
+    "Level 2 Desc": "Staff welfare expenses"
+  },
+  {
+    "glAccount": "75510000",
+    "glName": "Depreciation_buildings",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75510001",
+    "glName": "Depreciation_buildings_lease",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation on ROU Asset"
+  },
+  {
+    "glAccount": "75510003",
+    "glName": "Depr - Building & Structure",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75510004",
+    "glName": "Depr - Building Equipment",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75530001",
+    "glName": "Dep.Machinery Le",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75530003",
+    "glName": "Depr - Plant & Machinery",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75540000",
+    "glName": "Dep.vehicles/tran.",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75540001",
+    "glName": "Dep.vehicles/tran.L",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation on ROU Asset"
+  },
+  {
+    "glAccount": "75550002",
+    "glName": "Depreciation Computer Equipment",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75550003",
+    "glName": "Depreciation Demo Equip",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75550005",
+    "glName": "Dep.Furniture & Fixture",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75550009",
+    "glName": "Depr - Office Equipment",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Depreciation for the year on property, plant and equipment"
+  },
+  {
+    "glAccount": "75650000",
+    "glName": "Amortization_software",
+    "Level 1 Desc": "Depreciation Expense",
+    "Level 2 Desc": "Amortization for the year on intangible assets"
+  },
+  {
+    "glAccount": "76110000",
+    "glName": "Sub-contract expense_internal",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "76130000",
+    "glName": "Sub-contract expense_external",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "76130001",
+    "glName": "Sub-contract expense_external_Subcon",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "76210002",
+    "glName": "Land rent (domestic)",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Rent including lease rentals"
+  },
+  {
+    "glAccount": "76220003",
+    "glName": "Rental Exp.Movable L",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Rent including lease rentals"
+  },
+  {
+    "glAccount": "76220005",
+    "glName": "Rental of Equipment",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Rent including lease rentals"
+  },
+  {
+    "glAccount": "76310000",
+    "glName": "Insurance expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Insurance"
+  },
+  {
+    "glAccount": "76310001",
+    "glName": "Property Insurance",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Insurance"
+  },
+  {
+    "glAccount": "76310004",
+    "glName": "Tax and associate charge",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Rates and taxes"
+  },
+  {
+    "glAccount": "76410000",
+    "glName": "Expenses for con",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Sub-contract expenses"
+  },
+  {
+    "glAccount": "76510000",
+    "glName": "Maintenance expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Repairs and maintenance - Others"
+  },
+  {
+    "glAccount": "76510000-R",
+    "glName": "Repairs and maintenance - Machinery",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Repairs and maintenance - Machinery"
+  },
+  {
+    "glAccount": "76510001",
+    "glName": "Office Upkeep",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Repairs and maintenance - Buildings"
+  },
+  {
+    "glAccount": "76510017",
+    "glName": "Repair & Maintenance-IT",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Repairs and maintenance - Others"
+  },
+  {
+    "glAccount": "76520000",
+    "glName": "System Usage Fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "System usage fee (YGS implementation cost)"
+  },
+  {
+    "glAccount": "76710000",
+    "glName": "Travel expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710001",
+    "glName": "Lodging & Transportation Expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710002",
+    "glName": "Travel - Food & Beverage",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710004",
+    "glName": "Travel expense Domestic",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710005",
+    "glName": "Travel expense Abroad",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710008",
+    "glName": "Business Trip-Oversea",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710015",
+    "glName": "Local Travel -Mileage",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710041",
+    "glName": "Travel Exp Safety Cm",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710042",
+    "glName": "Travel Exp Outfit",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710043",
+    "glName": "Travel Exp Air Fares",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710044",
+    "glName": "Travel Abroad Reimbursable - DA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710045",
+    "glName": "Travel Exp Conv Taxi",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710046",
+    "glName": "Travel Exp NON-Break",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710047",
+    "glName": "Travel Exp Hotel",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710049",
+    "glName": "Travel Exp Other",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76710050",
+    "glName": "Travel Exp Hardship",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Travelling and conveyance"
+  },
+  {
+    "glAccount": "76810001",
+    "glName": "Gas",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Power and fuel"
+  },
+  {
+    "glAccount": "76810002",
+    "glName": "Water",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Power and fuel"
+  },
+  {
+    "glAccount": "76810003",
+    "glName": "Electric",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Power and fuel"
+  },
+  {
+    "glAccount": "76810006",
+    "glName": "Fuel expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Power and fuel"
+  },
+  {
+    "glAccount": "76820000",
+    "glName": "Communication and mail expenses",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Communication"
+  },
+  {
+    "glAccount": "76820000-R",
+    "glName": "Prism Usage Fees",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Prism Usage Fees"
+  },
+  {
+    "glAccount": "76820001",
+    "glName": "Communication expense_Postal Service",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Communication"
+  },
+  {
+    "glAccount": "76910000",
+    "glName": "Expendable supplies expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Printing and stationery"
+  },
+  {
+    "glAccount": "76910003",
+    "glName": "EDP Supplies",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Printing and stationery"
+  },
+  {
+    "glAccount": "76910005",
+    "glName": "Test & Cal Equip&Sup",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "76910012",
+    "glName": "Consumable Tools & Accessories",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "76910013",
+    "glName": "Non-Capitalised Assets",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "76920000",
+    "glName": "Stationary expenses",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Printing and stationery"
+  },
+  {
+    "glAccount": "76920001",
+    "glName": "Printing",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Printing and stationery"
+  },
+  {
+    "glAccount": "77010003",
+    "glName": "Ancillary material cost_Other",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "77110001",
+    "glName": "Education & Training ",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Education & Training "
+  },
+  {
+    "glAccount": "77110003",
+    "glName": "Seminars",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "77210000",
+    "glName": "Recruitment expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Recruitment expense"
+  },
+  {
+    "glAccount": "77310000",
+    "glName": "Freight/tran.cost",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "77310001",
+    "glName": "Freight/tran.freight",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "77310003",
+    "glName": "Handling Fees",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "77310005",
+    "glName": "Packing & Supplies",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Consumption of packing materials"
+  },
+  {
+    "glAccount": "77310008",
+    "glName": "EXP & IMP charge",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "77330000",
+    "glName": "Packaging and Freight Expense_SG&A",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "77420000",
+    "glName": "Technical fee_ESF",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Engineering service fees"
+  },
+  {
+    "glAccount": "77420000-R",
+    "glName": "Engineering support fees",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Engineering support fees"
+  },
+  {
+    "glAccount": "77420000-RR",
+    "glName": "Management Fees-YEI Singapore",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Management Fee"
+  },
+  {
+    "glAccount": "77420000-RRR",
+    "glName": "Sub-contract expenses",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Sub-contract expenses"
+  },
+  {
+    "glAccount": "77430001",
+    "glName": "Tech.fee_SSF_dept",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Support Service Fees"
+  },
+  {
+    "glAccount": "77440000",
+    "glName": "Tec.fee(man.)",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Management Fee"
+  },
+  {
+    "glAccount": "77510000",
+    "glName": "Sales commission charge",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "77530004",
+    "glName": "Sales Commission_Vendor Payment",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Sales commission"
+  },
+  {
+    "glAccount": "77540001",
+    "glName": "Serv. Exp_sub-exp.",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "77540004",
+    "glName": "Service expense_cert",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "77610000",
+    "glName": "Professional fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Legal and professional"
+  },
+  {
+    "glAccount": "77710011",
+    "glName": "Repairs expense__Structure",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Repairs and maintenance - Others"
+  },
+  {
+    "glAccount": "77730002",
+    "glName": "Maintenance expense_Warranty",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Warranty expenses"
+  },
+  {
+    "glAccount": "77730002-R",
+    "glName": "Warranty Expenses-PML",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Warranty expenses"
+  },
+  {
+    "glAccount": "77910000",
+    "glName": "Advertisement expenses",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Selling expenses"
+  },
+  {
+    "glAccount": "78010000",
+    "glName": "Expense of document manual for product",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78010001",
+    "glName": "Document fee_Sales",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78110000",
+    "glName": "Management fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Management Fee"
+  },
+  {
+    "glAccount": "78110000-R",
+    "glName": "GSMAF",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Global sales and marketing activity fee"
+  },
+  {
+    "glAccount": "78120000",
+    "glName": "Audit fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Legal and professional"
+  },
+  {
+    "glAccount": "78120000-R",
+    "glName": "Audit fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78120001",
+    "glName": "Legal Fees",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Legal and professional"
+  },
+  {
+    "glAccount": "78120002",
+    "glName": "Consulting Fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Legal and professional"
+  },
+  {
+    "glAccount": "78310000",
+    "glName": "Testing fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78410000",
+    "glName": "Entertainment",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78420000",
+    "glName": "Membership fee",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Membership Fees"
+  },
+  {
+    "glAccount": "78430000",
+    "glName": "Convention expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78430004",
+    "glName": "Convention expense_conference charge",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78430010",
+    "glName": "Convention expense_whole company",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Directors' sitting fees"
+  },
+  {
+    "glAccount": "78710000",
+    "glName": "Miscellaneous",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78710000R",
+    "glName": "Miscellaneous",
+    "Level 1 Desc": "Revenue from operations",
+    "Level 2 Desc": "Revenue from operations"
+  },
+  {
+    "glAccount": "78710014",
+    "glName": "Miscellaneous Licenses",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78710026",
+    "glName": "Payroll Services",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Legal and professional"
+  },
+  {
+    "glAccount": "78710044",
+    "glName": "Micellaneouse Expense (Order Only)",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "78710058",
+    "glName": "Bank Charges",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Bank charges "
+  },
+  {
+    "glAccount": "78710139",
+    "glName": "Bank Charges LC",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Bank charges "
+  },
+  {
+    "glAccount": "78920000",
+    "glName": "Provision for bad debts",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Provision for doubtful trade receivables/(provision written back) (net)"
+  },
+  {
+    "glAccount": "79110000",
+    "glName": "Product and finished goods Transfer",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79110001",
+    "glName": "Prd./FG Tran._subcon",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79120000",
+    "glName": "Tran. to SFP/Part",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79140000",
+    "glName": "Tran. to WIP",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79210000",
+    "glName": "Tran.RA to COGS",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79320000",
+    "glName": "Transfer to plan/actual variance",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79340000",
+    "glName": "Tran. to inter pur.v",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79350000",
+    "glName": "Tran. to car. var.",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79410000",
+    "glName": "Cl. ac. CIP_Tan",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "79430000",
+    "glName": "Cl. ac.for tran.",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "79430001",
+    "glName": "Cl. ac.for tran.FA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "79440000",
+    "glName": "Cl. ac. for T_FA sl.",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "79460000",
+    "glName": "Cl ac. for IT_FA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "79510000",
+    "glName": "Tran. to inpur. sur.",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79520000",
+    "glName": "Clearing account for carriage charge",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79610000",
+    "glName": "Single Level var._P",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79620000",
+    "glName": "Single Level var._S",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79630000",
+    "glName": "Single level variance_raw materials",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79640000",
+    "glName": "Multi Level var._P",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79650000",
+    "glName": "Multi Level var._S",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79670000",
+    "glName": "Mate Ledger var._M",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79730000",
+    "glName": "Adj. account for Indirect allocation",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79750000",
+    "glName": "Transfer Service Order cost",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "79920000",
+    "glName": "Cl.ac. Non-char.tra",
+    "Level 1 Desc": "Direct Expenses",
+    "Level 2 Desc": "Cost of materials consumed"
+  },
+  {
+    "glAccount": "81110000",
+    "glName": "Interest income",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Interest income"
+  },
+  {
+    "glAccount": "81110000-R",
+    "glName": "Interest Income- Ind AS 109",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Interest from financial assets at amortised cost"
+  },
+  {
+    "glAccount": "81110008",
+    "glName": "Int inc_Lease asse",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Interest from financial assets at amortised cost"
+  },
+  {
+    "glAccount": "81630000",
+    "glName": "FX Ev.P._S_cash eq",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81650000",
+    "glName": "FX Ev.P_S_ope. act",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81710000",
+    "glName": "FX Ev.P_E_cash eq.",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81730000",
+    "glName": "FX Ev.P_E_ope. act",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81750000",
+    "glName": "FX Ev.P_E_LT loan",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81790000",
+    "glName": "FX Ev.P_E_UnbilledAR",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81800000",
+    "glName": "Foreign exc. eval. profit_settl._T. FA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "81830000",
+    "glName": "Foreign exc. eval. profit_eval._T. FA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "82910000",
+    "glName": "Miscellaneous income",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Other non-operating income "
+  },
+  {
+    "glAccount": "82910000-R",
+    "glName": "Provisions no longer required",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Exceptional Income"
+  },
+  {
+    "glAccount": "82910015",
+    "glName": "Gain on sales of scraps",
+    "Level 1 Desc": "Other operating revenue ",
+    "Level 2 Desc": "Sale of scrap"
+  },
+  {
+    "glAccount": "83110002",
+    "glName": "Interest expense_other",
+    "Level 1 Desc": "Finance cost",
+    "Level 2 Desc": "Other Interest"
+  },
+  {
+    "glAccount": "83110002-R",
+    "glName": "Interest expense-MSME",
+    "Level 1 Desc": "Finance cost",
+    "Level 2 Desc": "MSME Interest"
+  },
+  {
+    "glAccount": "83120000",
+    "glName": "Interest expense_lease",
+    "Level 1 Desc": "Finance cost",
+    "Level 2 Desc": "Interest under IND AS-116"
+  },
+  {
+    "glAccount": "84250000",
+    "glName": "FX Ev.L_S_ope. act",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84310000",
+    "glName": "Foreign exc. eval. loss_settl._T. FA",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84410000",
+    "glName": "FX Ev.L._E_cash eq",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84430000",
+    "glName": "FX Ev.L_E_ope. act",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84450000",
+    "glName": "FX Ev.L._E_LT loan",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84490000",
+    "glName": "Foreign exc. eval. loss_eval.UnbilldAR",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Net loss on foreign currency transactions and translation"
+  },
+  {
+    "glAccount": "84820000",
+    "glName": "Donation expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Donations and contributions"
+  },
+  {
+    "glAccount": "84820000-R",
+    "glName": "Donation expense",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "84820001",
+    "glName": "Corporate Social Responsibility",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Corporate Social Responsibility"
+  },
+  {
+    "glAccount": "84820001-R",
+    "glName": "CSR",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "84910000",
+    "glName": "Miscellaneous loss",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "84910006",
+    "glName": "Miscellaneous loss",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Provision on Investment in PF Trust"
+  },
+  {
+    "glAccount": "91110000",
+    "glName": "Gain_sales_Buildin",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91130000",
+    "glName": "Gain_sales_Machine",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91140000",
+    "glName": "Gain on sales of FACar/transportation",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91150001",
+    "glName": "Gain_Sales F&F",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91150002",
+    "glName": "Gain_Sales Comp",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91150005",
+    "glName": "Gain on sales of FA_Office Equipment",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91210000",
+    "glName": "Gain_sales_Softwar",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "91910009",
+    "glName": "Oth extraord incom",
+    "Level 1 Desc": "Other income",
+    "Level 2 Desc": "Exceptional Income"
+  },
+  {
+    "glAccount": "92120000",
+    "glName": "Loss on sales of FA_Building",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92140000",
+    "glName": "Loss on sales of FA_Machinery",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92150000",
+    "glName": "Loss_sales_Car",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92160002",
+    "glName": "Loss_Sales Comp",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92310000",
+    "glName": "(blank)",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92330000",
+    "glName": "Loss on retirement of FA_Machinery",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92350001",
+    "glName": "Loss_retire_F&F",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92350002",
+    "glName": "Loss_retire_Comp",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92410000",
+    "glName": "Loss on retirement of FA_Software",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Loss on fixed assets sold / scrapped / written off "
+  },
+  {
+    "glAccount": "92930000",
+    "glName": "Loss on retirement of lease asset",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "98110008",
+    "glName": "Corporate tax, etc_Corporate tax",
+    "Level 1 Desc": "Tax expense",
+    "Level 2 Desc": "Current Tax CY"
+  },
+  {
+    "glAccount": "98110008-R",
+    "glName": "Corporate tax, etc_Corporate tax",
+    "Level 1 Desc": "Tax expense",
+    "Level 2 Desc": "Current Tax PY"
+  },
+  {
+    "glAccount": "98210000",
+    "glName": "Corporate taxes_additional",
+    "Level 1 Desc": "Other equity",
+    "Level 2 Desc": "Retained earnings"
+  },
+  {
+    "glAccount": "98910000",
+    "glName": "Deferred income tax",
+    "Level 1 Desc": "Tax expense",
+    "Level 2 Desc": "Deferred tax CY"
+  },
+  {
+    "glAccount": "98910000-R",
+    "glName": "Deferred income tax",
+    "Level 1 Desc": "Tax expense",
+    "Level 2 Desc": "Deferred tax PY"
+  },
+  {
+    "glAccount": "99970000",
+    "glName": "Clearing account for migration BS",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  },
+  {
+    "glAccount": "99980000",
+    "glName": "Zero balance adjustment",
+    "Level 1 Desc": "Other expenses",
+    "Level 2 Desc": "Miscellaneous expenses"
+  }
+]

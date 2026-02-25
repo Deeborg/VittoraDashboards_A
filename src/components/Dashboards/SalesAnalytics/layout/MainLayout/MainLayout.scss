@@ -1,0 +1,33 @@
+/* MainLayout.scss */
+#sales-dashboard-isolated {
+  
+  .main-layout {
+    display: flex !important;
+    flex-direction: row !important; /* Forces side-by-side */
+    align-items: flex-start !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    background-color: #f9fafb !important; /* Hardcoded gray background */
+  }
+
+  .main-content {
+    flex: 1 1 auto !important; /* Takes up exactly the remaining space */
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important; 
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+  }
+
+  .content-area {
+    flex: 1 !important;
+    padding: 24px !important;
+    width: 100% !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+}

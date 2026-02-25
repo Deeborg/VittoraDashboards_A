@@ -11,8 +11,8 @@ import {
   Legend,
   TimeScale,
   TimeSeriesScale,
-} from 'chart.js';
-import 'chartjs-adapter-date-fns';
+} from 'chart.js'
+import 'chartjs-adapter-date-fns'
 
 ChartJS.register(
   CategoryScale,
@@ -40,17 +40,30 @@ interface ChartProps {
 const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax }) => {
   const sortedData = [...data].sort((a, b) => a.Date.getTime() - b.Date.getTime());
 
+    const smartFormat = (val: number) => {
+    const absVal = Math.abs(val);
+    if (absVal === 0) return "0";
+    if (absVal < 500) return val.toFixed(2); // Treat as Exchange Rate
+    if (absVal >= 10000000) return (val / 10000000).toFixed(2) + ' Cr';
+    if (absVal >= 100000) return (val / 100000).toFixed(2) + ' L';
+    return val.toLocaleString('en-IN');
+  };
+
   const chartData = {
     labels: sortedData.map(item => item.Date),
     datasets: fields.map(f => ({
       label: f.label,
-      data: sortedData.map(item => item[f.label] ?? 0),
+      data: sortedData.map(item => {
+        const val = item[f.label];
+        return (val === 0 || val === undefined || val === null) ? null : val;
+      }),
       borderColor: f.color,
-      backgroundColor: f.color + '33',
-      tension: 0.4,
-      borderWidth: 2,
+      backgroundColor: f.color + '22',
+      tension: 0.3,
+      borderWidth: 3,
       pointRadius: 0,
       pointHitRadius: 10,
+      spanGaps: true,
     })),
   };
 
@@ -70,7 +83,7 @@ const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax 
         type: 'time' as const,
         time: {
           unit: 'month' as const,
-          tooltipFormat: 'MMM yyyy',
+          tooltipFormat: 'MMM d, yyyy',
         },
         title: {
           display: true,
@@ -84,6 +97,7 @@ const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax 
       y: {
         min: yMin,
         max: yMax,
+        grace: '5%',
         title: {
           display: true,
           text: 'Amount (USD in Millions)',
@@ -93,9 +107,8 @@ const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax 
       drawBorder: true, // keep the axis line
     },
         ticks: {
-          callback: function (value: number | string) {
-            const numericValue = typeof value === 'string' ? parseFloat(value) : value;
-            return `${(numericValue / 1_000_000).toFixed(1)}M`;
+          callback: function (value: any) {
+            return smartFormat(value);
           },
         },
       },
@@ -120,7 +133,8 @@ const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax 
           label: (context: any) => {
             const label = context.dataset.label || '';
             const value = context.parsed.y || 0;
-            return `${label}: $${(value / 1_000_000).toFixed(2)}M`;
+            const isRate = label.toLowerCase().includes('price') || label.toLowerCase().includes('rate');
+            return `${label}: ${isRate ? '₹' : ''}${smartFormat(value)}`;
           },
         },
       },
@@ -131,7 +145,7 @@ const MultiLineChart: React.FC<ChartProps> = ({ data, fields, title, yMin, yMax 
     <div
       style={{
         height: '520px',
-        margin: '15px auto',
+        margin: '20px auto',
         backgroundColor: 'white',
         padding: '39px',
         color: 'black',

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import styles from './LoadingMobiusStrip.module.css';
 import { ParametricGeometry } from 'three-stdlib';
@@ -7,170 +7,105 @@ const LoadingMobiusStrip: React.FC = () => {
     const mountRef = useRef<HTMLDivElement>(null);
     const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
     const animationFrameIdRef = useRef<number | null>(null);
-    const sceneRef = useRef<THREE.Scene | null>(null);
-    const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-    const mobiusStripRef = useRef<THREE.Mesh | null>(null);
-    const clockRef = useRef<THREE.Clock>(new THREE.Clock());
-    const animationStateRef = useRef({
-        rotationSpeed: { x: 100, y: 130 }, // degrees per second
-        colorChangeSpeed: 0.5, // hue cycles per minute
-        lastUpdateTime: 0
-    });
+    const [webGlError, setWebGlError] = useState(false); // Track if WebGL fails
 
     useEffect(() => {
         if (!mountRef.current) return;
 
-        const currentMount = mountRef.current;
+        let scene: THREE.Scene;
+        let camera: THREE.PerspectiveCamera;
+        let renderer: THREE.WebGLRenderer;
+        let mobiusStrip: THREE.Mesh;
+        const clock = new THREE.Clock();
 
-        // Initialize Three.js components
-        const scene = new THREE.Scene();
-        sceneRef.current = scene;
+        try {
+            // 1. Initialize Scene
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            camera.position.z = 3.2;
 
-        const camera = new THREE.PerspectiveCamera(
-            75,
-            currentMount.clientWidth / currentMount.clientHeight,
-            0.1,
-            1000
-        );
-        camera.position.set(0, 0, 3.2);
-        cameraRef.current = camera;
+            // 2. Initialize Renderer with Error Checking
+            renderer = new THREE.WebGLRenderer({
+                antialias: true,
+                alpha: true,
+                powerPreference: "high-performance"
+            });
 
-        const renderer = new THREE.WebGLRenderer({
-            antialias: true,
-            alpha: true,
-            powerPreference: "high-performance"
-        });
-        renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        currentMount.appendChild(renderer.domElement);
-        rendererRef.current = renderer;
+            renderer.setSize(300, 300); // Fixed size for loader
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            mountRef.current.appendChild(renderer.domElement);
+            rendererRef.current = renderer;
 
-        // Lighting - simplified for better performance
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
-        
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
-        directionalLight.position.set(5, 3, 5);
-        scene.add(directionalLight);
-
-        // Mobius Strip
-        const R = 1.3;
-        const stripWidth = 0.7;
-
-        const mobiusFunction = (u: number, v: number, target: THREE.Vector3) => {
-            u = u * stripWidth - stripWidth / 2;
-            v = v * 2 * Math.PI;
-            const x = (R + u * Math.cos(v / 2)) * Math.cos(v);
-            const y = (R + u * Math.cos(v / 2)) * Math.sin(v);
-            const z = u * Math.sin(v / 2);
-            target.set(x, y, z);
-        };
-        
-        // Optimized geometry resolution
-        const geometry = new ParametricGeometry(mobiusFunction, 120, 24);
-
-        const material = new THREE.MeshPhysicalMaterial({
-            color: 0x00aaff,
-            metalness: 0.1,
-            roughness: 0.1,
-            transmission: 0.8,
-            transparent: true,
-            side: THREE.DoubleSide,
-            ior: 1.5,
-            thickness: 0.3,
-            clearcoat: 0.5,
-            clearcoatRoughness: 0.1
-        });
-
-        const mobiusStrip = new THREE.Mesh(geometry, material);
-        mobiusStripRef.current = mobiusStrip;
-        scene.add(mobiusStrip);
-
-        // Animation system that works even when tab is inactive
-        const animate = () => {
-            animationFrameIdRef.current = requestAnimationFrame(animate);
+            // 3. Mobius Geometry
+            const mobiusFunction = (u: number, v: number, target: THREE.Vector3) => {
+                const R = 1.3;
+                const stripWidth = 0.7;
+                u = u * stripWidth - stripWidth / 2;
+                v = v * 2 * Math.PI;
+                const x = (R + u * Math.cos(v / 2)) * Math.cos(v);
+                const y = (R + u * Math.cos(v / 2)) * Math.sin(v);
+                const z = u * Math.sin(v / 2);
+                target.set(x, y, z);
+            };
             
-            const delta = clockRef.current.getDelta(); // Time since last frame in seconds
-            const state = animationStateRef.current;
+            const geometry = new ParametricGeometry(mobiusFunction, 80, 20);
+            const material = new THREE.MeshPhysicalMaterial({
+                color: 0x00aaff,
+                transmission: 0.8,
+                thickness: 0.5,
+                side: THREE.DoubleSide,
+            });
 
-            if (mobiusStripRef.current) {
-                // Convert rotation speeds from degrees to radians
-                const radPerSecX = THREE.MathUtils.degToRad(state.rotationSpeed.x);
-                const radPerSecY = THREE.MathUtils.degToRad(state.rotationSpeed.y);
-                
-                // Apply rotation
-                mobiusStripRef.current.rotation.x += radPerSecX * delta;
-                mobiusStripRef.current.rotation.y += radPerSecY * delta;
-
-                // Time-based color animation (independent of frame rate)
-                const now = Date.now();
-                const timeDiff = now - state.lastUpdateTime;
-                const hue = ((now * 0.001 * state.colorChangeSpeed / 60) % 1);
-                
-                (mobiusStripRef.current.material as THREE.MeshPhysicalMaterial).color.setHSL(
-                    hue,
-                    0.8,
-                    0.6
-                );
-                
-                state.lastUpdateTime = now;
-            }
+            mobiusStrip = new THREE.Mesh(geometry, material);
+            scene.add(mobiusStrip);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.8));
             
-            rendererRef.current?.render(sceneRef.current!, cameraRef.current!);
-        };
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 5, 5);
+            scene.add(light);
 
-        // Start animation systems
-        clockRef.current.start();
-        animationStateRef.current.lastUpdateTime = Date.now();
-        animate();
-
-        // Handle window resize
-        const handleResize = () => {
-            if (!currentMount || !rendererRef.current || !cameraRef.current) return;
-            
-            const width = currentMount.clientWidth;
-            const height = currentMount.clientHeight;
-
-            cameraRef.current.aspect = width / height;
-            cameraRef.current.updateProjectionMatrix();
-            rendererRef.current.setSize(width, height);
-        };
-        
-        const resizeObserver = new ResizeObserver(handleResize);
-        resizeObserver.observe(currentMount);
-
-        // Cleanup
-        return () => {
-            if (animationFrameIdRef.current) {
-                cancelAnimationFrame(animationFrameIdRef.current);
-            }
-            resizeObserver.disconnect();
-            
-            // Dispose of Three.js resources
-            if (mobiusStripRef.current) {
-                mobiusStripRef.current.geometry.dispose();
-                const material = mobiusStripRef.current.material;
-                if (Array.isArray(material)) {
-                    material.forEach(m => m.dispose());
-                } else {
-                    material.dispose();
+            const animate = () => {
+                animationFrameIdRef.current = requestAnimationFrame(animate);
+                const delta = clock.getDelta();
+                if (mobiusStrip) {
+                    mobiusStrip.rotation.x += 1.5 * delta;
+                    mobiusStrip.rotation.y += 1.8 * delta;
                 }
-                scene.remove(mobiusStripRef.current);
-            }
-            
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        } catch (e) {
+            console.error("WebGL initialization failed, falling back to CSS:", e);
+            setWebGlError(true);
+        }
+
+        return () => {
+            if (animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
             if (rendererRef.current) {
                 rendererRef.current.dispose();
-                if (currentMount.contains(rendererRef.current.domElement)) {
-                    currentMount.removeChild(rendererRef.current.domElement);
+                rendererRef.current.forceContextLoss();
+                if (mountRef.current && rendererRef.current.domElement) {
+                    mountRef.current.removeChild(rendererRef.current.domElement);
                 }
             }
         };
     }, []);
 
+    // FALLBACK UI if WebGL fails
+    if (webGlError) {
+        return (
+            <div className={styles.loadingContainer}>
+                <div className={styles.cssLoader}></div> {/* Add a CSS spinner in your module.css */}
+                <div className={styles.loadingText}>Vittora is Loading...</div>
+            </div>
+        );
+    }
+
     return (
         <div className={styles.loadingContainer}>
             <div ref={mountRef} className={styles.mobiusCanvasContainer}></div>
-            <div className={styles.loadingText}>Loading Vittora...</div>
+            <div className={styles.loadingText}>Initializing Vittora Engine...</div>
         </div>
     );
 };

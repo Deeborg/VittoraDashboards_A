@@ -1,8 +1,6 @@
-// Forex.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import * as XLSX from 'xlsx';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import { Box, Paper, Typography, Tabs, Tab, Stack, Divider } from '@mui/material';
 import LineChart from './Forex_linechart';
 import MultiLineChart from './Forex_multilinechart';
 import KPICard from './Forex_kpi';
@@ -10,42 +8,55 @@ import DonutChart from './Forex_donutchart';
 import SummaryTable from './Forex_Summarytable';
 import DateFilter from './Forex_datefilter';
 
+// Interface matching your EXACT Excel columns
 interface ForexData {
   Date: Date;
   'Actual Price': number;
   'Forecast Price': number;
+  'Lower CI': number;       // Fix for LineChart error
+  'Upper CI': number;       // Fix for LineChart error
   'Purchases': number;
   'Sales': number;
-  'Sum(Purchases)': number;
-  'Sum(Sales)': number;
+  'Hedge Purchases': string;
+  'Hedge Sales': string;
+  'Purchase Forward Rate': number;
+  'Sales Forward Rate': number;
   'Purchase Hedge Benefit': number;
   'Purchase Unhedged Cost': number;
-  'Sales Hedge Benefit':number;
-  'Sales Unhedged Cost':number;
-  'Hedge Purchases':string;
-  'Hedge Sales':string;
+  'Sales Hedge Benefit': number;
+  'Sales Unhedged Cost': number;
   'Purchase Hedge Outcome': string;
   'Sales Hedge Outcome': string;
+  'Purchase Decision': string; // Fix for Index error
+  'Sales Decision': string;
+  'Purchase Expiry': string;
+  'Sales Expiry': string;
   'Future Purchase Price': number;
-  'Purchase Forward Rate': number;
   'Future Sales Price': number;
-  'Sales Forward Rate': number;
-  'Lower CI': number;
-  'Upper CI': number;
-  'Payment Date': Date;
-  'Purchase Expiry':string;
-  'Receipt Date': Date;
-  'Sales Expiry':string;
-  [key: string]: any;
+  'Sum(Purchases)': number;
+  'Sum(Sales)': number;
+  // Internal logic keys
+  mtmValue: number;
+  tenorDays: number;
 }
 
 const Forex: React.FC = () => {
   const [data, setData] = useState<ForexData[]>([]);
   const [filteredData, setFilteredData] = useState<ForexData[]>([]);
+  const [activeTab, setActiveTab] = useState(0);
   const [dateRange, setDateRange] = useState<[Date, Date]>([new Date(), new Date()]);
   const [minDate, setMinDate] = useState<Date>(new Date());
   const [maxDate, setMaxDate] = useState<Date>(new Date());
   const [sliderRange, setSliderRange] = useState<[number, number]>([0, 100]);
+
+  const formatValue = (val: number) => {
+    const absVal = Math.abs(val);
+    if (absVal >= 10000000) return (val / 10000000).toFixed(2) + ' Cr';
+    if (absVal >= 100000) return (val / 100000).toFixed(2) + ' L';
+    return val.toLocaleString('en-IN');
+  };
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,281 +68,171 @@ const Forex: React.FC = () => {
         const jsonData: any[] = XLSX.utils.sheet_to_json(sheet);
 
         const parsed = jsonData.map(row => {
-          const rawDate = row.Date;
-          let date: Date | null = null;
+  const date = typeof row.Date === 'number' ? 
+    new Date((row.Date - 25569) * 86400 * 1000) : new Date(row.Date);
+  const actual = Number(row['Actual Price']) || 0;
+  const pForward = Number(row['Purchase Forward Rate']) || 0;
+  const sForward = Number(row['Sales Forward Rate']) || 0;
+  const pVolume = Number(row['Purchases']) || 0;
+  const sVolume = Number(row['Sales']) || 0;
 
-          if (rawDate instanceof Date) {
-            date = rawDate;
-          } else if (typeof rawDate === 'number') {
-            const parsedDate = XLSX.SSF.parse_date_code(rawDate);
-            date = parsedDate ? new Date(parsedDate.y, parsedDate.m - 1, parsedDate.d) : null;
-          } else if (typeof rawDate === 'string') {
-            date = new Date(rawDate);
-          }
+  // MTM Logic:
+  // If we buy: Gain if Forward < Actual (we locked a low price)
+  // If we sell: Gain if Forward > Actual (we locked a high price)
+  const pMTM = (actual - pForward) * pVolume; 
+  const sMTM = (sForward - actual) * sVolume;
+
+  const expDate = new Date(row['Sales Expiry'] || row['Purchase Expiry'] || new Date());
+  const tenor = Math.ceil((expDate.getTime() - date.getTime()) / (1000 * 3600 * 24));
+
 
           return {
-            ...row,
-            Date: date && !isNaN(date.getTime()) ? date : null,
-            'Actual Price': row['Actual Price'] || row['Actual'] || row['Price'] || 0,
-            'Forecast Price': row['Forecast Price'] || row['Forecast'] || 0,
-          };
-        }).filter(row => row.Date !== null) as ForexData[];
-
-        const dates = parsed.map(r => r.Date!.getTime());
-        const minD = new Date(Math.min(...dates));
-        const maxD = new Date(Math.max(...dates));
+    ...row,
+    Date: date,
+    // Ensure numeric defaults so charts don't crash
+    'Lower CI': row['Lower CI'] || 0,
+    'Upper CI': row['Upper CI'] || 0,
+    'Actual Price': actual,
+    'Purchase Forward Rate': pForward,
+    'Sales Forward Rate': sForward,
+    'Forecast Price': row['Forecast Price'] || 0,
+    'Purchase Decision': row['Purchase Decision'] || 'No Decision',
+    mtmValue: pMTM + sMTM, // Total Unrealized Gain/Loss
+    tenorDays: tenor > 0 ? tenor : 0
+  };
+}).filter(d => !isNaN(d.Date.getTime())) as ForexData[];
 
         setData(parsed);
         setFilteredData(parsed);
-        setMinDate(minD);
-        setMaxDate(maxD);
-        setDateRange([minD, maxD]);
-        setSliderRange([0, 100]);
-      } catch (error) {
-        console.error('Error loading data:', error);
-      }
+        const times = parsed.map(d => d.Date.getTime());
+        setMinDate(new Date(Math.min(...times)));
+        setMaxDate(new Date(Math.max(...times)));
+        setDateRange([new Date(Math.min(...times)), new Date(Math.max(...times))]);
+      } catch (e) { console.error("Data error", e); }
     };
-
     fetchData();
   }, []);
 
   useEffect(() => {
-    if (dateRange[0] && dateRange[1]) {
-      const filtered = data.filter(row =>
-        row.Date &&
-        row.Date >= dateRange[0] &&
-        row.Date <= dateRange[1]
-      );
-      setFilteredData(filtered);
-    }
+    const filtered = data.filter(row => row.Date >= dateRange[0] && row.Date <= dateRange[1]);
+    setFilteredData(filtered);
   }, [dateRange, data]);
+
+  const stats = useMemo(() => {
+    const totalMTM = filteredData.reduce((s, d) => s + d.mtmValue, 0);
+    const realizedCount = filteredData.filter(d => d['Sales Hedge Outcome'] === 'Good').length;
+    const unrealizedCount = filteredData.filter(d => d['Sales Hedge Outcome'] !== 'Good').length;
+    const hedgedExposure = filteredData.filter(d => d['Hedge Purchases'] === 'Yes').length;
+    const totalSales = filteredData.reduce((s, d) => s + (d.Sales || 0), 0);
+    const totalPurchases = filteredData.reduce((s, d) => s + (d.Purchases || 0), 0);
+    const pSavings = filteredData.reduce((s, d) => s + (d['Purchase Hedge Benefit'] || 0) - (d['Purchase Unhedged Cost'] || 0), 0);
+    const sSavings = filteredData.reduce((s, d) => s + (d['Sales Hedge Benefit'] || 0) - (d['Sales Unhedged Cost'] || 0), 0);
+
+    return { totalMTM, realizedCount, unrealizedCount, hedgedExposure,totalSales, 
+      totalPurchases, 
+      netSavings: pSavings + sSavings };
+  }, [filteredData]);
 
   const handleSliderChange = (values: [number, number]) => {
     setSliderRange(values);
     const totalTime = maxDate.getTime() - minDate.getTime();
-    const startDate = new Date(minDate.getTime() + (totalTime * values[0] / 100));
-    const endDate = new Date(minDate.getTime() + (totalTime * values[1] / 100));
-    setDateRange([startDate, endDate]);
+    setDateRange([
+        new Date(minDate.getTime() + (totalTime * values[0] / 100)),
+        new Date(minDate.getTime() + (totalTime * values[1] / 100))
+    ]);
   };
 
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }).replace(/\//g, '-');
-  };
-
-  const calculateKPIs = () => {
-  const distinctPurchases = new Set(filteredData.map(d => d['Purchases']).filter(val => typeof val === 'number' && !isNaN(val))).size;
-  const totalPurchases = +(filteredData.reduce((sum, d) => sum + (d['Purchases'] || 0), 0) / 1_000_000).toFixed(2);
-  const hedgeBenefit = +(filteredData.reduce((sum, d) => sum + (d['Purchase Hedge Benefit'] || 0), 0) / 1_000_000).toFixed(2);
-  const unhedgedCost = +(filteredData.reduce((sum, d) => sum + (d['Purchase Unhedged Cost'] || 0), 0) / 1_000_000).toFixed(2);
-  const savings = +(hedgeBenefit - unhedgedCost).toFixed(2);
-
-  const distinctSales = new Set(filteredData.map(d => d['Sales']).filter(val => typeof val === 'number' && !isNaN(val))).size;
-  const totalSales = +(filteredData.reduce((sum, d) => sum + (d['Sales'] || 0), 0) / 1_000_000).toFixed(2);
-  const salesHedgeBenefit = +(filteredData.reduce((sum, d) => sum + (d['Sales Hedge Benefit'] || 0), 0) / 1_000_000).toFixed(2);
-  const salesUnhedgedCost = +(filteredData.reduce((sum, d) => sum + (d['Sales Unhedged Cost'] || 0), 0) / 1_000_000).toFixed(2);
-  const salesSavings = +(salesHedgeBenefit - salesUnhedgedCost).toFixed(2);
-
-
-    return {
-      distinctPurchases,
-      totalPurchases,
-      hedgeBenefit,
-      unhedgedCost,
-      savings,
-      distinctSales,
-    totalSales,
-    salesHedgeBenefit,
-    salesUnhedgedCost,
-    salesSavings
-    };
-  };
-
-  const kpis = calculateKPIs();
-
-  
   return (
-    <div className="forex-container">
-      <div
-        style={{
-          background: "#fff",
-          borderRadius: "16px",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-          padding: "24px 32px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          margin: "32px auto 24px auto",
-          // maxWidth: 900,
-          width: "100%",
-          boxSizing: "border-box"
-        }}
-      >
-        <h2 style={{ margin: 0, fontWeight: 700, fontSize: "2rem", color: "#1a237e", textAlign: "center", flex: 1 }}>
-          Forex & Risk Management
-        </h2>
-        <img
-          src="./asset/vittora_grey.png"
-          alt="Vittora Logo"
-          style={{ height: 48 }}
-        />
-      </div>
-      <DateFilter
-  minDate={minDate}
-  maxDate={maxDate}
-  dateRange={dateRange}
-  sliderRange={sliderRange}
-  handleSliderChange={handleSliderChange}
-  formatDate={formatDate}
-/>
+    <Box sx={{ p: 3, bgcolor: '#f4f7f9', minHeight: '100vh' }}>
+      {/* PROFESSIONAL HEADER */}
+      <Paper elevation={0} sx={{ p: 3, mb: 3, borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #eef2f6' }}>
+        <Box>
+            <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a237e', letterSpacing: '-0.5px' }}>Forex & Risk Management</Typography>
+            <Typography variant="body2" color="text.secondary"></Typography>
+        </Box>
+        <img src="./asset/vittora_grey.png" alt="Logo" style={{ height: 40 }} />
+      </Paper>
 
-{filteredData.length > 0 && (
-  <>
-    <div style={{ flex: 2, minWidth: '500px', cursor: 'pointer' }}>
-      <LineChart data={filteredData} />
-    </div>
+      {/* FILTER STACK */}
+      <Box sx={{ mb: 4 }}>
+        <DateFilter minDate={minDate} maxDate={maxDate} dateRange={dateRange} sliderRange={sliderRange} handleSliderChange={handleSliderChange} formatDate={d => d.toLocaleDateString()} />
+      </Box>
 
-    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-      <div style={{ flex: 1, minWidth: '500px', cursor: 'pointer' }}>
-        <MultiLineChart
-          data={filteredData}
-          title="Purchases vs Payments"
-          fields={[
-            { label: 'Purchases', color: '#4bc0c0' },
-            { label: 'Sum(Purchases)', color: '#9966ff' },
-          ]}
-        />
+      {/* NAVIGATION TABS */}
+      <Tabs value={activeTab} onChange={(_, v) => setActiveTab(v)} sx={{ mb: 3, bgcolor: '#fff', borderRadius: '8px', p: 0.5 }}>
+        <Tab label="Receivables & realization" sx={{ fontWeight: 'bold' }} />
+        <Tab label="Hedging & MTM Performance" sx={{ fontWeight: 'bold' }} />
+        <Tab label="Payables & Liabilities" sx={{ fontWeight: 'bold' }} />
+      </Tabs>
 
-        {/* KPI Cards Section placed only under Purchases vs Payments */}
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          marginTop: '20px',
-        }}>
-          <KPICard title="Count of Purchases" value={kpis.distinctPurchases} color="#2563eb" />
-          <KPICard title="Purchases (USD)" value={kpis.totalPurchases.toLocaleString() + 'M'} color="#059669" />
-          <KPICard title="Purchase Hedge Benefit (INR)" value={kpis.hedgeBenefit.toLocaleString() + 'M'} color="#d97706" />
-          <KPICard title="Purchase Unhedged Cost (INR)" value={kpis.unhedgedCost.toLocaleString() + 'M'} color="#dc2626" />
-          <KPICard title="Savings on Purchase Hedge (INR)" value={kpis.savings.toLocaleString() + 'M'} color="#7c3aed" />
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '20px' }}>
-  <div style={{ flex: 1, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' }}>
-    <DonutChart
-      title="Purchases Hedge(Yes/No)"
-      data={{
-        Hedged: filteredData.filter(d => d['Hedge Purchases'] === 'Yes').length,
-        Unhedged: filteredData.filter(d => d['Hedge Purchases'] === 'No').length,
-      }}
-    />
-    <DonutChart
-      title="Purchases Hedge Outcome"
-      data={{
-        Good: filteredData.filter(d => d['Purchase Hedge Outcome'] === 'Good').length,
-        Bad: filteredData.filter(d => d['Purchase Hedge Outcome'] === 'Bad').length,
-      }}
-    />
-  </div>
-</div>
+      {/* TAB 1: RECEIVABLES (REQ 11.1 / 11.3) */}
+      {activeTab === 0 && (
+        <Stack spacing={3}>
+           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              <Box sx={{ flex: 1, minWidth: '200px' }}><KPICard title="Realized Exports" value={stats.realizedCount} color="#2e7d32" /></Box>
+              <Box sx={{ flex: 1, minWidth: '200px' }}><KPICard title="Unrealized Bills" value={stats.unrealizedCount} color="#d32f2f" /></Box>
+              <Box sx={{ flex: 1, minWidth: '200px' }}><KPICard title="Open Sales Orders" value={filteredData.length} color="#ed6c02" /></Box>
+           </Box>
+           
+           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 3 }}>
+              <Paper sx={{ flex: 2, p: 2, borderRadius: '12px' }}><LineChart data={filteredData} /></Paper>
+              <Paper sx={{ flex: 1, p: 2, borderRadius: '12px' }}>
+                <DonutChart title="Hedge Outcome Status" data={{ Good: stats.realizedCount, Bad: stats.unrealizedCount }} />
+              </Paper>
+           </Box>
 
-      </div>
-      <div style={{ flex: 1, minWidth: '300px', cursor: 'pointer' }}>
-  <MultiLineChart
-    data={filteredData}
-    title="Sales vs Receipts"
-    fields={[
-      { label: 'Sales', color: '#ff9f40' },
-      { label: 'Sum(Sales)', color: '#36a2eb' },
-    ]}
-  />
+           <SummaryTable data={filteredData.map(d => ({
+              Date: d.Date.toLocaleDateString(),
+              'Invoice Amt': d.Sales.toLocaleString(),
+              'Outcome': d['Sales Hedge Outcome'],
+              'Receipt Target': d['Sales Expiry']
+           }))} />
+        </Stack>
+      )}
 
-  {/* KPI Cards Section under Sales vs Receipts */}
-  <div style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    marginTop: '25px'
-  }}>
-    <KPICard title="Count of Sales" value={kpis.distinctSales} color="#0ea5e9" />
-    <KPICard title="Sales (USD)" value={kpis.totalSales.toLocaleString() + 'M'} color="#14b8a6" />
-    <KPICard title="Sales Hedge Benefit (INR)" value={kpis.salesHedgeBenefit.toLocaleString() + 'M'} color="#facc15" />
-    <KPICard title="Sales Unhedged Cost (INR)" value={kpis.salesUnhedgedCost.toLocaleString() + 'M'} color="#ef4444" />
-    <KPICard title="Savings on Sales Hedge (INR)" value={kpis.salesSavings.toLocaleString() + 'M'} color="#8b5cf6" />
-  </div>
-   <div style={{ flex: 1, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap' ,marginTop: '35px'}}>
-    <DonutChart
-      title="Sales Hedged(Yes/No)"
-      data={{
-        Hedged: filteredData.filter(d => d['Hedge Sales'] === 'Yes').length,
-        Unhedged: filteredData.filter(d => d['Hedge Sales'] === 'No').length,
-      }}
-    />
-    <DonutChart
-      title="Sales Hedge Outcome"
-      data={{
-        Good: filteredData.filter(d => d['Sales Hedge Outcome'] === 'Good').length,
-        Bad: filteredData.filter(d => d['Sales Hedge Outcome'] === 'Bad').length,
-      }}
-    />
-  </div>
-</div>
-<SummaryTable
-  data={filteredData.slice()
-    .sort((a, b) => (a.Date?.getTime() || 0) - (b.Date?.getTime() || 0))
-    .map(row => ({
-      Date: row.Date?.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      }) || '',
+      {/* TAB 2: HEDGING DASHBOARD (REQ 11.2) */}
+      {activeTab === 1 && (
+        <Stack spacing={3}>
+           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              <Box sx={{ flex: 1, minWidth: '250px' }}><KPICard title="MTM Gain/Loss" value={`₹ ${formatValue(stats.totalMTM)}`} color={stats.totalMTM >=0 ? 'green' : 'red'} /></Box>
+              <Box sx={{ flex: 1, minWidth: '250px' }}><KPICard title="Hedged Contracts" value={stats.hedgedExposure} color="#673ab7" /></Box>
+              <Box sx={{ flex: 1, minWidth: '250px' }}><KPICard title="Portfolio Tenor (Avg Days)" value={(filteredData.reduce((s,d)=>s+d.tenorDays,0)/filteredData.length).toFixed(0)} color="#009688" /></Box>
+           </Box>
 
-      'Forecast Price': row['Forecast Price'] ? Number(row['Forecast Price']).toFixed(2) : '0',
-      'Forecast Price on Payment date': row['Future Purchase Price'] ? Number(row['Future Purchase Price']).toFixed(2) : '0',
-      'Purchase Forward Rate': row['Purchase Forward Rate'] ? Number(row['Purchase Forward Rate']).toFixed(2) : '0',
-      'Hedge Purchases': row['Hedge Purchases'] || 'No',
-      'Forecast Price on Receipt date': row['Future Sales Price'] ? Number(row['Future Sales Price']).toFixed(2) : '0',
-      'Sales Forward Rate': row['Sales Forward Rate'] ? Number(row['Sales Forward Rate']).toFixed(2) : '0',
-      'Hedge Sales': row['Hedge Sales'] || 'No',
-    }))}
-/>
-<SummaryTable
-  data={filteredData.slice()
-    .sort((a, b) => (a.Date?.getTime() || 0) - (b.Date?.getTime() || 0))
-    .map(row => ({
-      Date: row.Date?.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric'
-      }) || '',
+           <Paper sx={{ p: 3, borderRadius: '12px' }}>
+              <Typography variant="h6" gutterBottom>Exposure by Forecast vs Forward Rate</Typography>
+              <MultiLineChart title="Forecast vs Forward Rates"
+           data={filteredData} 
+           fields={[
+             { label: 'Forecast Price', color: '#ffa726' },
+             { label: 'Purchase Forward Rate', color: '#f44336' },
+             { label: 'Sales Forward Rate', color: '#4caf50' },
+             { label: 'Actual Price', color: '#1a237e' }
+           ]} 
+         />
+           </Paper>
+        </Stack>
+      )}
 
-      'Actual Price': row['Actual Price'] ? Number(row['Actual Price']).toFixed(2) : '0',
-      'Forecast Price': row['Forecast Price'] ? Number(row['Forecast Price']).toFixed(2) : '0',
-      'Lower CI': row['Lower CI'] ? Number(row['Lower CI']).toFixed(2) : '0',
-      'Upper CI': row['Upper CI'] ? Number(row['Upper CI']).toFixed(2) : '0',
-      'Purchases': row['Purchases'] ? Number(row['Purchases']).toFixed(2) : '0',
-      'Payment Date': row['Payment Date'] ? new Date(row['Payment Date']).toLocaleDateString('en-GB') : '',
-      'Forecast Price on Payment date': row['Future Purchase Price'] ? Number(row['Future Purchase Price']).toFixed(2) : '0',
-      'Purchase Forward Rate': row['Purchase Forward Rate'] ? Number(row['Purchase Forward Rate']).toFixed(2) : '0',
-      'Hedge Purchases': row['Hedge Purchases'] || 'No',
-      'Purchase Expiry': row['Purchase Expiry'] || '',
-      'Sales': row['Sales'] ? Number(row['Sales']).toFixed(2) : '0',
-      'Receipt Date': row['Receipt Date'] ? new Date(row['Receipt Date']).toLocaleDateString('en-GB') : '',
-      'Forecast Price on date of Receipt': row['Future Sales Price'] ? Number(row['Future Sales Price']).toFixed(2) : '0',
-      'Sales Forward Rate': row['Sales Forward Rate'] ? Number(row['Sales Forward Rate']).toFixed(2) : '0',
-      'Hedge Sales': row['Hedge Sales'] || 'No',
-      'Sales Expiry': row['Sales Expiry'] || '',
-    }))}
-/>
+      {/* TAB 3: PAYABLES & LIABILITIES (REQ 11.4 / 11.5) */}
+      {activeTab === 2 && (
+        <Stack spacing={3}>
+           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+              <Box sx={{ flex: 1, minWidth: '250px' }}><KPICard title="Import Repayment Due" value={`₹ ${formatValue(filteredData.reduce((s, d) => s + (d.Purchases || 0), 0))}`} 
+ color="#1a237e" /></Box>
+              <Box sx={{ flex: 1, minWidth: '250px' }}><KPICard title="Hedge Coverage (Imports)" value={((stats.hedgedExposure/filteredData.length)*100).toFixed(1) + '%'} color="#7b1fa2" /></Box>
+           </Box>
 
-
-    </div>
-    
-  </>
-)}
-</div>
+           <SummaryTable data={filteredData.filter(d=>d.Purchases > 0).map(d => ({
+              'Liability Due Date': d['Purchase Expiry'],
+              'Repayment Amt': d.Purchases.toLocaleString(),
+              'Forward Rate': d['Purchase Forward Rate'],
+              'Outcome': d['Purchase Hedge Outcome'],
+              'Decision': d['Purchase Decision']
+           }))} />
+        </Stack>
+      )}
+    </Box>
   );
 };
 

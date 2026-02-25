@@ -5,207 +5,122 @@ interface SummaryTableProps {
 }
 
 const SummaryTable: React.FC<SummaryTableProps> = ({ data }) => {
-  const columns = data.length > 0 ? Object.keys(data[0]) : [];
+  if (!data || data.length === 0) return null;
 
-  const totals: any = {};
-  const numericCols = columns.filter(col =>
-    data.some(row => !isNaN(parseFloat(row[col])) && isFinite(row[col]))
-  );
+  const columns = Object.keys(data[0]);
 
-  columns.forEach(col => {
-    if (numericCols.includes(col)) {
-      totals[col] = data.reduce((sum, row) => sum + parseFloat(row[col] || 0), 0);
-    } else {
-      totals[col] = col === 'Date' ? 'Total' : '';
+  const formatCellValue = (val: any, colName: string) => {
+    if (val === null || val === undefined || val === '') return '-';
+    if (Array.isArray(val)) return val.join(', ');
+    if (typeof val === 'number') {
+      if (colName.toLowerCase().includes('rate') || colName.toLowerCase().includes('price')) {
+        return val.toFixed(2);
+      }
+      return val.toLocaleString('en-IN', { minimumFractionDigits: 2 });
     }
-  });
-
-//   const renderColGroup = () => (
-//     <colgroup>
-//       {columns.map((_, index) => (
-//         <col key={index} style={{ width: `${100 / columns.length}%` }} />
-//       ))}
-//     </colgroup>
-//   );
-
-//   const containerStyle: React.CSSProperties = {
-//     width: '100%',
-//     maxHeight: '500px',
-//     border: '1px solid #ccc',
-//     overflow: 'hidden',
-//     display: 'flex',
-//     flexDirection: 'column',
-//     fontFamily: 'Arial, sans-serif',
-//     fontSize: '14px',
-//     marginTop: '30px',
-//   };
-
-//   const tableStyle: React.CSSProperties = {
-//     width: '100%',
-//     borderCollapse: 'collapse',
-//     tableLayout: 'fixed',
-//   };
-
-//   const cellStyle: React.CSSProperties = {
-//     border: '1px solid #ddd',
-//     padding: '8px',
-//     textAlign: 'center',
-//     zIndex: 2,
-//   };
-
-//   const headerStyle: React.CSSProperties = {
-//     ...cellStyle,
-//     position: 'sticky',
-//     top: 0,
-//     zIndex: 2,
-//   };
-
-//   const footerStyle: React.CSSProperties = {
-//     ...cellStyle,
-//     fontWeight: 'bold',
-//     position: 'sticky',
-//     bottom: 0,
-//     zIndex: 2,
-//   };
-
-//   const scrollContainerStyle: React.CSSProperties = {
-//     overflowY: 'auto',
-//     flex: 1,
-//   };
+    return String(val);
+  };
 
   return (
     <div style={styles.container}>
       <div style={styles.scrollContainer}>
         <table style={styles.table}>
-          <thead style={styles.thead}>
+          <thead>
             <tr>
               {columns.map(col => (
-                <th key={col} style={styles.th}>{col}</th>
+                <th key={col} style={styles.th}>
+                  {col}
+                </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {data.map((row, idx) => (
-              <tr key={idx} style={idx % 2 === 0 ? styles.rowEven : styles.rowOdd}>
-                {columns.map(col => (
-                  <td key={col} style={styles.td}>{row[col]}</td>
-                ))}
+              <tr key={idx} style={styles.row}>
+                {columns.map(col => {
+                  const val = row[col];
+                  const isOutcome = col.toLowerCase().includes('outcome');
+                  
+                  let bg = 'inherit';
+                  let textColor = '#000000'; // High contrast black text
+                  
+                  if (isOutcome) {
+                    if (String(val).toLowerCase() === 'good') { bg = '#e8f5e9'; textColor = '#1b5e20'; }
+                    if (String(val).toLowerCase() === 'bad') { bg = '#ffebee'; textColor = '#b71c1c'; }
+                  }
+
+                  return (
+                    <td key={col} style={{
+                      ...styles.td,
+                      backgroundColor: bg,
+                      color: textColor,
+                      fontWeight: isOutcome ? 700 : 500,
+                    }}>
+                      {formatCellValue(val, col)}
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            <tr>
-              {columns.map(col => (
-                <td key={col} style={styles.footer}>
-                  {typeof totals[col] === 'number' ? totals[col].toFixed(2) : totals[col]}
-                </td>
-              ))}
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>
   );
 };
+
 const styles: { [key: string]: React.CSSProperties } = {
-    container: {
-        width: '99%',
-    maxHeight: '500px',
+  container: {
+    width: '100%',
     borderRadius: '8px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
     backgroundColor: '#ffffff',
-    color: '#000000',
     overflow: 'hidden',
-    marginTop: '10px',
-    marginLeft:'10px'
-    // border: '1px solid #ccc',
-    // overflow: 'hidden',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // fontFamily: 'Arial, sans-serif',
-    // fontSize: '14px',
-    // marginTop: '30px',
-    },
-    scrollContainer: {
-        overflowY: 'auto',
-        overflowX: 'auto',
-        flex: 1,
-        maxHeight: '500px',
-        width: '100%',
-    },
-    table: {
-        width: '100%',
-        borderCollapse: 'collapse',
-        fontFamily: 'Segoe UI, sans-serif',
-    fontSize: '13px',
-    // tableLayout: 'auto',
-    // minWidth: '1000px',
-        tableLayout: 'fixed',
-    },
-    thead: {
-        backgroundColor: '#f4f4f4',
-    color: '#000000',
+    marginTop: '20px',
+    border: '2px solid #000000', // Solid outer border
+  },
+  scrollContainer: {
+    overflowY: 'auto', // Vertical scroll
+    overflowX: 'auto', // Horizontal scroll
+    maxHeight: '500px', // Limits height and forces scroll
+  },
+  table: {
+    width: '100%',
+    borderCollapse: 'separate', // Necessary for sticky borders
+    borderSpacing: 0,
+    fontFamily: '"Segoe UI", Roboto, sans-serif',
+  },
+  th: {
+    // STICKY HEADER LOGIC
     position: 'sticky',
     top: 0,
-    zIndex: 5,
-    lineHeight: '1.4',
-    },
-    th: {
-        // border: '1px solid #ddd',
-        // padding: '8px',
-        // textAlign: 'center',
-        // position: 'sticky',
-        // top: 0,
-        // zIndex: 2,
-    padding: '10px',
-    textAlign: 'center',
-    borderBottom: '1px solid #eee',
-    // whiteSpace: 'nowrap',
-    whiteSpace: 'normal',            // Allow wrapping
-  wordWrap: 'break-word',          // Break long words
-  maxWidth: '150px',               // Optional: Limit column width
-  overflowWrap: 'break-word',
-  fontWeight: 600,
-  fontSize: '13px',
-    },
-    td: {
-        // border: '1px solid #eee',
-        // padding: '10px',
-        // textAlign: 'center',
-        padding: '10px',
-    textAlign: 'center',
-    borderBottom: '1px solid #333',
-    whiteSpace: 'nowrap',
-    transition: 'background-color 0.3s ease',
-    },
-    rowEven: {
-        backgroundColor: '#ffffff',
-        transition: 'background-color 0.3s ease',
-  cursor: 'pointer',
-    },
-    rowOdd: {
-        backgroundColor: '#f9f9f9',
-        transition: 'background-color 0.3s ease',
-  cursor: 'pointer',
-    },
-    hoveredRow: {
-  backgroundColor: '#e6f2ff',
-},
-    footer: {
-        // borderTop: '2px solid #ddd',
-        // fontWeight: 'bold',
-        // textAlign: 'center',
-    padding: '10px',
-    fontWeight: 'bold',
-    backgroundColor: '#f1f1f1',
-    borderTop: '2px solid #ccc',
-    textAlign: 'center',
-    position: 'sticky',
-    bottom: 0,
-    zIndex: 4,
-    whiteSpace: 'nowrap',
-    },
-    };
+    zIndex: 10,
+    backgroundColor: '#000000', // Pure black background
+    color: '#ffffff',           // White text
     
+    padding: '16px 12px',
+    textAlign: 'center',
+    fontWeight: 700,
+    textTransform: 'uppercase',
+    fontSize: '13px',
+    letterSpacing: '1px',
+    borderBottom: '2px solid #444',
+    borderRight: '1px solid #333',
+    whiteSpace: 'nowrap',
+  },
+  td: {
+    padding: '14px 12px',
+    textAlign: 'center',
+    borderBottom: '1px solid #000000', // Black line between rows for clarity
+    borderRight: '1px solid #f0f0f0',
+    whiteSpace: 'normal',
+    lineHeight: '1.4',
+    fontSize: '14px',
+    minWidth: '140px',
+  },
+  row: {
+    backgroundColor: '#ffffff',
+  },
+};
 
 export default SummaryTable;

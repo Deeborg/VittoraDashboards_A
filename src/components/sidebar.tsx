@@ -13,7 +13,9 @@ import {
   FaTools,
   FaLayerGroup,
   FaTruck,
-  FaHome
+  FaHome,
+  FaTachometerAlt, // Ensure this is exactly here
+  FaThLarge        // Adding this as a backup dashboard icon
 } from "react-icons/fa";
 
 interface Props {
@@ -29,14 +31,16 @@ export default function ResponsiveSidebar({ children }: Props) {
   const isSummaryPage = location.pathname === "/summary" || location.pathname === "/summary/";
   const shouldHideSidebar = isHomePage || isSummaryPage;
 
-  // Main menu items before Modules
+  // Main menu items
   const mainMenu = [
     { path: "/", icon: <FaHome />, label: "Home" },
     { path: "/summary", icon: <FaChartBar />, label: "Financial Snapshot" },
     { path: "/modules", icon: <FaBook />, label: "Key Modules" },
+    { path: "/trial-balance", icon: <FaMoneyBillWave />, label: "Trial Balance" },
+    { path: "/analytics", icon: <FaTachometerAlt />, label: "Financial Dashboards" },
   ];
 
-  // Modules submenu with icons and moduleId for scroll
+  // Modules submenu
   const modulesMenu = [
     { moduleId: "finance", icon: <FaProjectDiagram />, label: "FP&A" },
     { moduleId: "autm", icon: <FaTools />, label: "AuTM" },
@@ -44,20 +48,10 @@ export default function ResponsiveSidebar({ children }: Props) {
     { moduleId: "scm", icon: <FaTruck />, label: "SCM" },
   ];
 
-  // Other menu items after Modules
-  // const afterModulesMenu = [
-  //   { path: "/dashboard", icon: <FaMoneyBillWave />, label: "Working Capital" },
-  //   { path: "/flux", icon: <FaChartLine />, label: "Flux Analysis" },
-  //   { path: "/scenario", icon: <FaChartLine />, label: "Scenario Analysis" },
-  //   { path: "/bankefficiency", icon: <FaChartLine />, label: "SBU Efficiency Analysis" },
-  // ];
-
-  // Handler for module menu click: navigate to /modules and pass moduleId in state
   const handleModuleMenuClick = (moduleId: string) => {
     navigate("/modules", { state: { scrollToModule: moduleId } });
   };
 
-  // Helper to determine if a module is active
   const isModuleActive = (moduleId: string) => {
     if (location.pathname === "/modules") {
       if (location.state && location.state.scrollToModule === moduleId) return true;
@@ -88,7 +82,6 @@ export default function ResponsiveSidebar({ children }: Props) {
           </div>
 
           <nav className="sidebar-nav">
-            {/* Main menu */}
             {mainMenu.map((item) => (
               <Link
                 key={item.path}
@@ -101,7 +94,6 @@ export default function ResponsiveSidebar({ children }: Props) {
               </Link>
             ))}
 
-            {/* Modules Section */}
             <div
               style={{
                 border: "1px solid #e0e0e0",
@@ -141,14 +133,7 @@ export default function ResponsiveSidebar({ children }: Props) {
                     cursor: "pointer",
                     transition: "opacity 0.2s, font-size 0.2s, justify-content 0.2s",
                   }}
-                  tabIndex={0}
-                  aria-label={mod.label}
                   onClick={() => handleModuleMenuClick(mod.moduleId)}
-                  onKeyDown={e => {
-                    if (e.key === "Enter" || e.key === " ") handleModuleMenuClick(mod.moduleId);
-                  }}
-                  onMouseOver={e => e.currentTarget.classList.add("hover")}
-                  onMouseOut={e => e.currentTarget.classList.remove("hover")}
                 >
                   <div className="nav-icon">{mod.icon}</div>
                   {expanded && <span style={{ marginLeft: 8 }}>{mod.label}</span>}
@@ -156,20 +141,8 @@ export default function ResponsiveSidebar({ children }: Props) {
                 </div>
               ))}
             </div>
-
-            {/* Other menu items */}
-            {/* {afterModulesMenu.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`nav-item ${location.pathname === item.path ? "active" : ""}`}
-              >
-                <div className="nav-icon">{item.icon}</div>
-                {expanded && <span className="nav-label">{item.label}</span>}
-                {!expanded && <div className="nav-tooltip">{item.label}</div>}
-              </Link>
-            ))} */}
           </nav>
+          
           <div className="sidebar-footer">
             <a
               href="https://www.ajalabs.ai/"
@@ -193,11 +166,6 @@ export default function ResponsiveSidebar({ children }: Props) {
       )}
 
       <div className="main-content" style={{ marginLeft: shouldHideSidebar ? '0' : (expanded ? '250px' : '80px'), transition: 'margin-left 0.3s ease' }}>
-        {/* <img
-          src=".\asset\ajalabs_black.png"
-          alt="Logo"
-          className="global-logo"
-        /> */}
         <div className="content">{children}</div>
       </div>
     </div>

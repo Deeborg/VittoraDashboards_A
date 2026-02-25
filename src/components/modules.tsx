@@ -93,7 +93,7 @@ const KeyModulesPage: React.FC = () => {
 
   ];
 
-  const moduleRefsMap: Record<string, React.RefObject<HTMLDivElement | null>> = {
+  const moduleRefsMap: Record<string, React.RefObject<HTMLDivElement>> = {
     finance: fpaRef,
     commercial: cpxRef,
     scm: scmRef,
