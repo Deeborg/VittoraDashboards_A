@@ -90,7 +90,7 @@ const Sidebar: React.FC = () => {
         ))}
       </nav>
 
-      {!collapsed && (
+      {/* {!collapsed && (
         <div className="sidebar-footer">
           <div className="user-profile">
             <div className="user-avatar">SS</div>
@@ -104,7 +104,7 @@ const Sidebar: React.FC = () => {
             {!collapsed && <span>Logout</span>}
           </button>
         </div>
-      )}
+      )} */}
     </aside>
   );
 };

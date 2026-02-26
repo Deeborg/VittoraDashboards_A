@@ -19,6 +19,7 @@ import TrialBalanceHome from "./modules/trial-balance/Pages/HomePage";
 import DashboardPortal from "./components/DashboardPortal";
 
 import SalesRoot from "./components/Dashboards/SalesAnalytics/SalesRoot"; 
+import ExceptionRoot from './components/Dashboards/ExceptionReporting/ExceptionRoot';
 
 
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -49,6 +50,7 @@ export default function App() {
           <Route path="/trial-balance/user" element={<TrialBalanceUser />} />
           <Route path="/analytics" element={<DashboardPortal />} />
           <Route path="/analytics/sales/*" element={<SalesRoot />} />
+          <Route path="/analytics/exceptions/*" element={<ExceptionRoot />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>
