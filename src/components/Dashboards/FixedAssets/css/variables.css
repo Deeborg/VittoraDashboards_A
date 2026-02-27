@@ -1,0 +1,166 @@
+/**
+ * VARIABLES.CSS
+ * 
+ * Design tokens for the entire dashboard.
+ * 
+ * Think of this as the "brand guidelines" for the application.
+ * Instead of writing "#2c3e50" 50 times, we write "var(--color-primary)"
+ * and change it once here if needed.
+ */
+
+:root {
+    /* ========================================
+       COLOR PALETTE - Vittora Dark Theme
+       ======================================== */
+    
+    /* Base dark theme - Deep dark navy/charcoal */
+    --color-bg-base: #0D1117;          /* Deep dark navy base */
+    --color-bg-base-lighter: #0F1923;  /* Slightly lighter base */
+    
+    /* Cards and panels - Slightly lighter dark navy */
+    --color-bg-card: #0E1C2F;          /* Card backgrounds */
+    --color-bg-card-hover: #112240;    /* Card hover state */
+    
+    /* Accent colors - Vivid cyan/teal for highlights */
+    --color-accent-cyan: #00BFFF;      /* Vivid cyan */
+    --color-accent-cyan-bright: #00E5FF; /* Bright cyan */
+    --color-accent-teal: #00897B;      /* Teal-green */
+    --color-accent-teal-light: #26A69A; /* Light teal-green */
+    
+    /* Interactive elements - Electric blue */
+    --color-interactive-blue: #1565C0;   /* Electric blue */
+    --color-interactive-blue-light: #1976D2; /* Light electric blue */
+    
+    /* Chart segment colors */
+    --color-chart-purple: #4A148C;     /* Deep purple */
+    --color-chart-purple-light: #6A1B9A; /* Light purple */
+    
+    /* Status colors */
+    --color-success: #26A69A;          /* Teal for success */
+    --color-success-light: #4DB8A8;    
+    --color-success-bg: rgba(38, 166, 154, 0.1); /* Teal background */
+    
+    --color-warning: #FFA726;          /* Orange for warning */
+    --color-warning-light: #FFB74D;
+    --color-warning-bg: rgba(255, 167, 38, 0.1); /* Orange background */
+    
+    --color-danger: #B71C1C;           /* Deep red for negative only */
+    --color-danger-light: #E53935;
+    --color-danger-bg: rgba(183, 28, 28, 0.1); /* Red background */
+    
+    --color-info: #1976D2;             /* Blue info */
+    --color-info-light: #42A5F5;
+    --color-info-bg: rgba(25, 118, 210, 0.1); /* Blue background */
+    
+    /* Text colors */
+    --color-text-primary: #FFFFFF;     /* White - main text */
+    --color-text-secondary: #B0BEC5;   /* Light gray - supporting */
+    --color-text-tertiary: #78909C;    /* Muted gray - labels */
+    --color-text-inverse: #0D1117;     /* Dark - on light backgrounds */
+    
+    /* Primary colors for nav and interactive */
+    --color-primary: #1976D2;          /* Electric blue - primary */
+    --color-primary-light: #42A5F5;    /* Light blue */
+    --color-primary-dark: #1565C0;     /* Dark blue */
+    
+    /* Secondary colors */
+    --color-secondary: #00BFFF;        /* Cyan accent */
+    --color-secondary-light: #00E5FF;  /* Bright cyan */
+    --color-secondary-dark: #0097A7;   /* Dark cyan */
+    
+    /* Background colors mapped to new theme */
+    --color-bg-primary: #0E1C2F;       /* Card backgrounds */
+    --color-bg-secondary: #112240;     /* Hover/alt backgrounds */
+    --color-bg-tertiary: #1A2F3F;      /* Tertiary backgrounds */
+    --color-bg-dark: #0D1117;          /* Dark backgrounds */
+    
+    /* Border colors - subtle, dark theme appropriate */
+    --color-border-light: rgba(255, 255, 255, 0.08); /* Very subtle border */
+    --color-border-medium: rgba(255, 255, 255, 0.12); /* Medium subtle */
+    --color-border-dark: rgba(255, 255, 255, 0.16);   /* Darker subtle */
+    
+    /* ========================================
+       SPACING SYSTEM
+       ======================================== */
+    
+    /* 
+     * Using multiples of 4px for consistency
+     * (Google Material Design principle)
+     */
+    --space-xs: 4px;      /* Tiny gaps */
+    --space-sm: 8px;      /* Small gaps */
+    --space-md: 16px;     /* Medium gaps (most common) */
+    --space-lg: 24px;     /* Large gaps */
+    --space-xl: 32px;     /* Extra large gaps */
+    --space-xxl: 48px;    /* Section spacing */
+    
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+    
+    /* Font sizes - Using rem (relative to root 16px) */
+    --font-size-xs: 0.75rem;    /* 12px - tiny labels */
+    --font-size-sm: 0.875rem;   /* 14px - secondary text */
+    --font-size-base: 1rem;     /* 16px - body text */
+    --font-size-lg: 1.125rem;   /* 18px - subheadings */
+    --font-size-xl: 1.25rem;    /* 20px - headings */
+    --font-size-xxl: 1.5rem;    /* 24px - page titles */
+    --font-size-xxxl: 2rem;     /* 32px - large numbers (KPIs) */
+    
+    /* Font weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* Line heights */
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-loose: 1.75;
+    
+    /* ========================================
+       LAYOUT DIMENSIONS
+       ======================================== */
+    
+    --sidebar-width: 240px;       /* Left navigation width */
+    --header-height: 64px;        /* Top header height */
+    --content-max-width: 1400px;  /* Max content width (prevents ultra-wide) */
+    
+    /* ========================================
+       SHADOWS & DEPTH
+       ======================================== */
+    
+    /* Subtle shadows for dark theme (not too dramatic) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+    
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    
+    --radius-sm: 8px;    /* Subtle rounding */
+    --radius-md: 12px;   /* Standard rounding (Vittora spec) */
+    --radius-lg: 16px;   /* Larger rounding (Vittora spec) */
+    
+    /* ========================================
+       TRANSITIONS
+       ======================================== */
+    
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-slow: 350ms ease;
+    
+    /* ========================================
+       Z-INDEX LAYERS
+       ======================================== */
+    
+    /* 
+     * Prevents z-index chaos by defining layers upfront
+     */
+    --z-base: 1;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-modal: 300;
+    --z-tooltip: 400;
+}

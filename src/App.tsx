@@ -27,6 +27,7 @@ import ExpenseRoot from "./components/Dashboards/expense-analytics-dashboard/Exp
 import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRoot";
 import AgeRoot from "./components/Dashboards/Ageing/AgeRoot";
 import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
+import FixedRoot from "./components/Dashboards/FixedAssets/FixedRoot";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -64,6 +65,7 @@ export default function App() {
           <Route path="/analytics/risk/*" element={<CompilanseRoot />} />
           <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
          <Route path="/analytics/Loans/*" element={<LoanRoot />} />
+         <Route path="/analytics/assets/*" element={<FixedRoot />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

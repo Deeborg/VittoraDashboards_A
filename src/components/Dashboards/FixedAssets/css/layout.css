@@ -1,0 +1,662 @@
+/**
+ * LAYOUT.CSS
+ * 
+ * Defines the structural layout of the dashboard.
+ * 
+ * Page structure:
+ * ┌─────────────────────────────────────┐
+ * │          HEADER (fixed top)         │
+ * ├──────────┬──────────────────────────┤
+ * │          │                          │
+ * │ SIDEBAR  │    MAIN CONTENT          │
+ * │ (fixed)  │    (scrollable)          │
+ * │          │                          │
+ * └──────────┴──────────────────────────┘
+ */
+
+/* ========================================
+   MAIN APP CONTAINER
+   ======================================== */
+
+#app {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar content";
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: var(--header-height) 1fr;
+    min-height: 100vh; /* Full viewport height */
+}
+
+/*
+ * CSS Grid explanation:
+ * 
+ * grid-template-areas defines the layout visually:
+ * - "header header" = header spans both columns
+ * - "sidebar content" = two columns below
+ * 
+ * grid-template-columns: 240px 1fr
+ * - Sidebar is fixed 240px
+ * - Content takes remaining space (1fr = 1 fraction)
+ * 
+ * grid-template-rows: 64px 1fr
+ * - Header is fixed 64px
+ * - Content takes remaining height
+ */
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+#header {
+    grid-area: header;
+    background: var(--color-bg-dark);
+    color: var(--color-text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    position: sticky; /* Stays at top when scrolling */
+    top: 0;
+    z-index: var(--z-sticky);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.header__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+}
+
+.header__brand-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 191, 255, 0.15);
+    border: 2px solid var(--color-secondary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary);
+    font-size: 18px;
+}
+
+.header__title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, #00BFFF 0%, #00E5FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+}
+
+.header__logo {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-secondary);
+    letter-spacing: 1px;
+}
+
+.header__user {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.header__user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 191, 255, 0.2);
+    border: 1px solid var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+}
+
+.header__user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+
+#sidebar {
+    grid-area: sidebar;
+    background: var(--color-bg-dark);
+    border-right: 1px solid var(--color-border-light);
+    padding: var(--space-lg) 0;
+    overflow-y: auto; /* Scrollable if content overflows */
+}
+
+.sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: 0 var(--space-md);
+}
+
+.sidebar__nav-item {
+    padding: var(--space-md) var(--space-lg);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/*
+ * Hover state - provides visual feedback
+ */
+.sidebar__nav-item:hover {
+    background: rgba(25, 118, 210, 0.1);
+    color: var(--color-text-primary);
+}
+
+/*
+ * Active state - shows current section with blue pill highlight
+ */
+.sidebar__nav-item.active {
+    background: var(--color-interactive-blue);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
+   MAIN CONTENT AREA
+   ======================================== */
+
+#content {
+    grid-area: content;
+    background: var(--color-bg-base);
+    padding: var(--space-xl);
+    overflow-y: auto; /* Content area scrolls independently */
+    max-height: calc(100vh - var(--header-height));
+}
+
+/*
+ * calc() explanation:
+ * 
+ * max-height: calc(100vh - 64px)
+ * 
+ * 100vh = full viewport height
+ * Subtract header height so content doesn't overflow
+ */
+
+/* ========================================
+   SECTION CONTAINER
+   ======================================== */
+
+.section {
+    max-width: var(--content-max-width);
+    margin: 0 auto; /* Centers the content */
+}
+
+.section__header {
+    margin-bottom: var(--space-xl);
+}
+
+.section__title {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+    background: linear-gradient(135deg, #00BFFF 0%, #1976D2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-sm);
+}
+
+.section__subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ========================================
+   CONTROL PANEL (for financial metrics)
+   ======================================== */
+
+.control-panel {
+    background: var(--color-bg-card);
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.control-panel__title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.control-panel__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+/*
+ * repeat(auto-fit, minmax(250px, 1fr)) explanation:
+ * 
+ * Creates responsive columns that:
+ * - Are at least 250px wide
+ * - Automatically wrap to new rows
+ * - Share remaining space equally
+ * 
+ * On wide screens: 3 columns
+ * On medium screens: 2 columns
+ * On narrow screens: 1 column
+ */
+
+/* ========================================
+   METRIC CARD
+   ======================================== */
+
+.metric-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.metric-card__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.metric-card__value {
+    font-size: var(--font-size-xxxl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.metric-card__progress {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.metric-card__progress-bar {
+    height: 100%;
+    background: var(--color-interactive-blue);
+    transition: width var(--transition-base);
+    border-radius: var(--radius-lg);
+}
+
+/*
+ * Progress bar color variants
+ */
+.metric-card__progress-bar--success {
+    background: var(--color-success);
+}
+
+.metric-card__progress-bar--warning {
+    background: var(--color-warning);
+}
+
+.metric-card__progress-bar--danger {
+    background: var(--color-danger);
+}
+
+.metric-card__description {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-tertiary);
+}
+
+/* ========================================
+   KPI STRIP (Key Performance Indicators)
+   ======================================== */
+
+.kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.kpi-card {
+    background: var(--color-bg-card);
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+}
+
+.kpi-card:hover {
+    background: var(--color-bg-card-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.kpi-card__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.kpi-card__value {
+    font-size: var(--font-size-xxxl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+}
+
+.kpi-card__change {
+    font-size: var(--font-size-sm);
+    margin-top: var(--space-xs);
+}
+
+.kpi-card__change--positive {
+    color: var(--color-success);
+}
+
+.kpi-card__change--negative {
+    color: var(--color-danger);
+}
+
+/* ========================================
+   CONTENT GRID
+   ======================================== */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+/*
+ * Column span utilities
+ * 
+ * .col-6 = takes 6 out of 12 columns (half width)
+ * .col-4 = takes 4 out of 12 columns (one third)
+ * .col-12 = takes all 12 columns (full width)
+ */
+
+.col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; }
+.col-6 { grid-column: span 6; }
+.col-4 { grid-column: span 4; }
+.col-3 { grid-column: span 3; }
+
+/* Responsive: Stack on smaller screens */
+@media (max-width: 768px) {
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-3 {
+        grid-column: span 12; /* Full width on mobile */
+    }
+}
+
+/* ========================================
+   CARD COMPONENT
+   ======================================== */
+
+.card {
+    background: var(--color-bg-card);
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden; /* Ensures rounded corners on child elements */
+}
+
+.card__header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-secondary);
+}
+
+.card__actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.card__body {
+    padding: var(--space-lg);
+}
+
+.card__footer {
+    padding: var(--space-md) var(--space-lg);
+    background: var(--color-bg-card-hover);
+    border-top: 1px solid var(--color-border-light);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* ========================================
+   EXCEPTION WIDGET (fixed right sidebar)
+   ======================================== */
+
+.exception-widget {
+    position: fixed;
+    right: var(--space-lg);
+    top: calc(var(--header-height) + var(--space-lg));
+    width: 320px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    max-height: calc(100vh - var(--header-height) - var(--space-xxl));
+    overflow: hidden;
+    z-index: var(--z-dropdown);
+    display: flex;
+    flex-direction: row;
+    transition: all var(--transition-base);
+}
+
+/* Collapsed state - slide out to the right */
+.exception-widget.collapsed {
+    width: 50px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.exception-widget.collapsed .exception-widget__panel {
+    display: none;
+}
+
+.exception-widget.collapsed .exception-widget__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Toggle button - appears when collapsed */
+.exception-widget__toggle {
+    display: none;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #FFA726 0%, #FF7043 100%);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-md);
+    border: none;
+    padding: 0;
+}
+
+.exception-widget__toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%);
+}
+
+.exception-widget__toggle:active {
+    transform: scale(0.95);
+}
+
+/* Panel - main content */
+.exception-widget__panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: opacity var(--transition-base);
+}
+
+.exception-widget__header {
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255, 167, 38, 0.1);
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-warning);
+    flex-shrink: 0;
+    user-select: none;
+}
+
+.exception-widget__collapse {
+    background: none;
+    border: none;
+    color: var(--color-warning);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    opacity: 0.7;
+}
+
+.exception-widget__collapse:hover {
+    transform: scale(1.3);
+    opacity: 1;
+}
+
+.exception-widget__body {
+    padding: var(--space-md);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.exception-group {
+    margin-bottom: var(--space-lg);
+}
+
+.exception-group:last-child {
+    margin-bottom: 0;
+}
+
+.exception-group__title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.exception-item {
+    padding: var(--space-sm);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.exception-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.exception-item:last-child {
+    margin-bottom: 0;
+}
+
+/* MAIN LAYOUT */
+.fa-dashboard {
+  display: flex;
+  background: #0b1220;
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* SIDEBAR */
+.fa-sidebar {
+  width: 220px;
+  background: #0f1b2d;
+  padding: 30px 0;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+/* MENU ITEMS */
+.fa-menu-item {
+  padding: 14px 24px;
+  cursor: pointer;
+  color: #9aa4b2;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.fa-menu-item:hover {
+  background: rgba(255,255,255,0.05);
+  color: #ffffff;
+}
+
+/* ACTIVE MENU */
+.fa-menu-item.active {
+  background: #1f4ed8;
+  color: #ffffff;
+  border-radius: 6px;
+  margin: 0 12px;
+}
+
+/* CONTENT AREA */
+.fa-content {
+  flex: 1;
+  padding: 40px;
+}
