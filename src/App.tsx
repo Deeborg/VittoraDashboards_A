@@ -24,7 +24,7 @@ import InvestorRoot from "./components/Dashboards/InvestorRelations/InvestorRoot
 import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot"; 
 import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot"; 
 import ExpenseRoot from "./components/Dashboards/expense-analytics-dashboard/ExpenseRoot";
-import CompilanseRoot from "./components/Dashboards/CR/CompilanseRoot";
+import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRoot";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
