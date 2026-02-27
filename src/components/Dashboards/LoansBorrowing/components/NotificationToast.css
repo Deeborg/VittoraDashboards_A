@@ -1,0 +1,45 @@
+.notification-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #0f0f23;
+  color: white;
+  padding: 16px 28px;
+  border-radius: 30px;
+  border: 1px solid #1e1e4a;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: none;
+}
+
+.notification-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  display: block;
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toast-content i {
+  color: #4d4dff;
+}
+
+.toast-content i.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

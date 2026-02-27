@@ -1,0 +1,69 @@
+.chart-card {
+  background: #0f0f23;
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 1px solid #1e1e4a;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chart-title i {
+  color: #4d4dff;
+  font-size: 20px;
+  background: rgba(77, 77, 255, 0.1);
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.chart-title h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.chart-container {
+  height: 250px;
+  position: relative;
+}
+
+.chart-tabs {
+  display: flex;
+  gap: 4px;
+  background: #1a1a3a;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.tab-btn {
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #a0a0d0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #0f0f23;
+  color: #4d4dff;
+  border: 1px solid #4d4dff;
+}
+
+.tab-btn:hover:not(.active) {
+  color: white;
+}

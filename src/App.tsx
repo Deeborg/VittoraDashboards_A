@@ -25,6 +25,8 @@ import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot";
 import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot"; 
 import ExpenseRoot from "./components/Dashboards/expense-analytics-dashboard/ExpenseRoot";
 import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRoot";
+import AgeRoot from "./components/Dashboards/Ageing/AgeRoot";
+import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -60,6 +62,8 @@ export default function App() {
           <Route path="/analytics/rpt/*" element={<RptRoot />} />
           <Route path="/analytics/expense/*" element={<ExpenseRoot />} />
           <Route path="/analytics/risk/*" element={<CompilanseRoot />} />
+          <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
+         <Route path="/analytics/Loans/*" element={<LoanRoot />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

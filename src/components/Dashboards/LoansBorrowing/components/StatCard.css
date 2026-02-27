@@ -1,0 +1,134 @@
+.stat-card {
+  background: #0f0f23;
+  border-radius: 28px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #1e1e4a;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 30px -12px rgba(77, 77, 255, 0.3);
+  border-color: #4d4dff;
+}
+
+.card-decoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(
+    135deg,
+    transparent 50%,
+    rgba(77, 77, 255, 0.1) 50%
+  );
+  border-radius: 0 28px 0 100px;
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: white;
+  font-size: 24px;
+}
+
+.card-blue .stat-icon {
+  background: #4d4dff;
+}
+
+.card-orange .stat-icon {
+  background: #ff8c4d;
+}
+
+.card-green .stat-icon {
+  background: #4dffb8;
+}
+
+.card-purple .stat-icon {
+  background: #b84dff;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.stat-header h3 {
+  font-size: 15px;
+  color: #a0a0d0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-trend {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-trend.positive {
+  background: rgba(77, 255, 184, 0.2);
+  color: #4dffb8;
+}
+
+.stat-trend.negative {
+  background: rgba(255, 77, 77, 0.2);
+  color: #ff4d4d;
+}
+
+.stat-value {
+  font-size: 34px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.stat-description {
+  color: #a0a0d0;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #1a1a3a;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 30px;
+}
+
+.card-blue .progress-fill {
+  background: #4d4dff;
+}
+
+.card-orange .progress-fill {
+  background: #ff8c4d;
+}
+
+.card-green .progress-fill {
+  background: #4dffb8;
+}
+
+.card-purple .progress-fill {
+  background: #b84dff;
+}
