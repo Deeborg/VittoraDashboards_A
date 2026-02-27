@@ -155,7 +155,7 @@ const SalesAnalytics: React.FC = () => {
             <span className="metric-title">Total Revenue</span>
             <span className="metric-change positive">+12.5%</span>
           </div>
-          <div className="metric-value">$2,847,500</div>
+          <div className="metric-value">₹2,847,500</div>
           <div className="metric-trend">
             <div className="trend-line up"></div>
           </div>
@@ -166,7 +166,7 @@ const SalesAnalytics: React.FC = () => {
             <span className="metric-title">Avg Order Value</span>
             <span className="metric-change positive">+8.2%</span>
           </div>
-          <div className="metric-value">$1,248</div>
+          <div className="metric-value">₹1,248</div>
           <div className="metric-trend">
             <div className="trend-line up"></div>
           </div>
@@ -188,7 +188,7 @@ const SalesAnalytics: React.FC = () => {
             <span className="metric-title">Customer LTV</span>
             <span className="metric-change positive">+15.7%</span>
           </div>
-          <div className="metric-value">$4,582</div>
+          <div className="metric-value">₹4,582</div>
           <div className="metric-trend">
             <div className="trend-line up"></div>
           </div>

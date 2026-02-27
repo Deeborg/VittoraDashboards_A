@@ -107,7 +107,7 @@ const Customers: React.FC = () => {
                 <h3>{customer.name}</h3>
                 <p>{customer.email}</p>
               </div>
-              <span className={`customer-status ${customer.status.toLowerCase()}`}>
+              <span className={`customer-status ₹{customer.status.toLowerCase()}`}>
                 {customer.status}
               </span>
             </div>
@@ -141,7 +141,7 @@ const Customers: React.FC = () => {
               <div className="metric">
                 <span className="metric-label">Margin</span>
                 <span className="metric-value">
-                  <span className={`margin-badge ${customer.margin > 30 ? 'high' : 'low'}`}>
+                  <span className={`margin-badge ₹{customer.margin > 30 ? 'high' : 'low'}`}>
                     {customer.margin}%
                   </span>
                 </span>

@@ -3,11 +3,11 @@ import './Entities.scss';
 
 const Entities: React.FC = () => {
   const entities = [
-    { id: 'ENT-001', name: 'Entity A', location: 'New York, USA', manager: 'John Smith', revenue: '$4.2M', growth: '+12.5%' },
-    { id: 'ENT-002', name: 'Entity B', location: 'London, UK', manager: 'Emma Johnson', revenue: '$3.8M', growth: '+8.7%' },
-    { id: 'ENT-003', name: 'Entity C', location: 'Tokyo, Japan', manager: 'Kenji Tanaka', revenue: '$5.1M', growth: '+15.3%' },
-    { id: 'ENT-004', name: 'Entity D', location: 'Singapore', manager: 'Wei Chen', revenue: '$2.9M', growth: '+5.2%' },
-    { id: 'ENT-005', name: 'Entity E', location: 'Dubai, UAE', manager: 'Ahmed Hassan', revenue: '$1.8M', growth: '+21.4%' },
+    { id: 'ENT-001', name: 'Entity A', location: 'New York, USA', manager: 'John Smith', revenue: '₹4.2M', growth: '+12.5%' },
+    { id: 'ENT-002', name: 'Entity B', location: 'London, UK', manager: 'Emma Johnson', revenue: '₹3.8M', growth: '+8.7%' },
+    { id: 'ENT-003', name: 'Entity C', location: 'Tokyo, Japan', manager: 'Kenji Tanaka', revenue: '₹5.1M', growth: '+15.3%' },
+    { id: 'ENT-004', name: 'Entity D', location: 'Singapore', manager: 'Wei Chen', revenue: '₹2.9M', growth: '+5.2%' },
+    { id: 'ENT-005', name: 'Entity E', location: 'Dubai, UAE', manager: 'Ahmed Hassan', revenue: '₹1.8M', growth: '+21.4%' },
   ];
 
   return (
@@ -34,7 +34,7 @@ const Entities: React.FC = () => {
           <div className="stat-icon">💰</div>
           <div className="stat-content">
             <h3>Total Revenue</h3>
-            <div className="stat-value">$17.8M</div>
+            <div className="stat-value">₹17.8M</div>
           </div>
         </div>
         <div className="stat-card">
@@ -86,7 +86,7 @@ const Entities: React.FC = () => {
               <div className="performance-bar">
                 <div 
                   className="performance-fill"
-                  style={{ width: `${parseInt(entity.growth) * 5}%` }}
+                  style={{ width: `₹{parseInt(entity.growth) * 5}%` }}
                 ></div>
               </div>
               <div className="performance-label">

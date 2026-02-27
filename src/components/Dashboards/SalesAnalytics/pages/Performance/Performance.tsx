@@ -38,11 +38,11 @@ const Performance: React.FC = () => {
           <div className="kpi-icon">🎯</div>
           <div className="kpi-content">
             <h3>Revenue Target</h3>
-            <div className="kpi-value">$8.2M <span className="kpi-change positive">+12%</span></div>
+            <div className="kpi-value">₹8.2M <span className="kpi-change positive">+12%</span></div>
             <div className="kpi-progress">
               <div className="progress-bar" style={{ width: '82%' }}></div>
             </div>
-            <div className="kpi-target">Target: $10M</div>
+            <div className="kpi-target">Target: ₹10M</div>
           </div>
         </div>
 
@@ -111,10 +111,10 @@ const Performance: React.FC = () => {
           </thead>
           <tbody>
             {[
-              { quarter: 'Q1 2024', revenue: '$2.1M', growth: '15%', margin: '32%', customers: '+12%', status: 'Exceeded' },
-              { quarter: 'Q2 2024', revenue: '$2.4M', growth: '18%', margin: '34%', customers: '+15%', status: 'Exceeded' },
-              { quarter: 'Q3 2024', revenue: '$2.7M', growth: '21%', margin: '35%', customers: '+18%', status: 'On Track' },
-              { quarter: 'Q4 2024', revenue: '$3.0M', growth: '25%', margin: '36%', customers: '+22%', status: 'Projected' },
+              { quarter: 'Q1 2024', revenue: '₹2.1M', growth: '15%', margin: '32%', customers: '+12%', status: 'Exceeded' },
+              { quarter: 'Q2 2024', revenue: '₹2.4M', growth: '18%', margin: '34%', customers: '+15%', status: 'Exceeded' },
+              { quarter: 'Q3 2024', revenue: '₹2.7M', growth: '21%', margin: '35%', customers: '+18%', status: 'On Track' },
+              { quarter: 'Q4 2024', revenue: '₹3.0M', growth: '25%', margin: '36%', customers: '+22%', status: 'Projected' },
             ].map((row, index) => (
               <tr key={index}>
                 <td><strong>{row.quarter}</strong></td>
@@ -123,7 +123,7 @@ const Performance: React.FC = () => {
                 <td>{row.margin}</td>
                 <td>{row.customers}</td>
                 <td>
-                  <span className={`status-badge ${row.status.toLowerCase().replace(' ', '-')}`}>
+                  <span className={`status-badge ₹{row.status.toLowerCase().replace(' ', '-')}`}>
                     {row.status}
                   </span>
                 </td>

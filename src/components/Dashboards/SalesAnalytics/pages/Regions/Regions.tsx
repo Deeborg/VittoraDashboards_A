@@ -3,12 +3,12 @@ import './Regions.scss';
 
 const Regions: React.FC = () => {
   const regions = [
-    { name: 'North America', revenue: '$8.2M', growth: '+12.5%', customers: 245, orders: 1240 },
-    { name: 'Asia Pacific', revenue: '$7.8M', growth: '+15.3%', customers: 312, orders: 1560 },
-    { name: 'Europe', revenue: '$6.5M', growth: '+8.7%', customers: 187, orders: 980 },
-    { name: 'Middle East', revenue: '$3.2M', growth: '+21.4%', customers: 89, orders: 420 },
-    { name: 'Latin America', revenue: '$2.1M', growth: '+5.2%', customers: 76, orders: 310 },
-    { name: 'Africa', revenue: '$1.4M', growth: '+18.9%', customers: 45, orders: 190 },
+    { name: 'North America', revenue: '₹8.2M', growth: '+12.5%', customers: 245, orders: 1240 },
+    { name: 'Asia Pacific', revenue: '₹7.8M', growth: '+15.3%', customers: 312, orders: 1560 },
+    { name: 'Europe', revenue: '₹6.5M', growth: '+8.7%', customers: 187, orders: 980 },
+    { name: 'Middle East', revenue: '₹3.2M', growth: '+21.4%', customers: 89, orders: 420 },
+    { name: 'Latin America', revenue: '₹2.1M', growth: '+5.2%', customers: 76, orders: 310 },
+    { name: 'Africa', revenue: '₹1.4M', growth: '+18.9%', customers: 45, orders: 190 },
   ];
 
   return (
@@ -48,12 +48,12 @@ const Regions: React.FC = () => {
                 <div 
                   className="performance-fill"
                   style={{ 
-                    width: `${(parseInt(region.revenue.replace('$', '').replace('M', '')) / 10) * 100}%` 
+                    width: `₹{(parseInt(region.revenue.replace('₹', '').replace('M', '')) / 10) * 100}%` 
                   }}
                 ></div>
               </div>
               <div className="performance-label">
-                Market Share: {Math.floor((parseInt(region.revenue.replace('$', '').replace('M', '')) / 30) * 100)}%
+                Market Share: {Math.floor((parseInt(region.revenue.replace('₹', '').replace('M', '')) / 30) * 100)}%
               </div>
             </div>
 
@@ -64,7 +64,7 @@ const Regions: React.FC = () => {
                     key={i}
                     className="trend-dot"
                     style={{
-                      height: `${20 + Math.sin(i * 0.5) * 15}px`,
+                      height: `₹{20 + Math.sin(i * 0.5) * 15}px`,
                       backgroundColor: '#3b82f6',
                       opacity: 0.3 + (Math.sin(i * 0.5 + 1) * 0.3),
                     }}
@@ -87,7 +87,7 @@ const Regions: React.FC = () => {
                   <div 
                     className="bar-fill"
                     style={{ 
-                      height: `${(parseInt(region.revenue.replace('$', '').replace('M', '')) / 10) * 100}%`,
+                      height: `₹{(parseInt(region.revenue.replace('₹', '').replace('M', '')) / 10) * 100}%`,
                       background: `linear-gradient(180deg, var(--color-primary), var(--color-accent))`
                     }}
                   ></div>

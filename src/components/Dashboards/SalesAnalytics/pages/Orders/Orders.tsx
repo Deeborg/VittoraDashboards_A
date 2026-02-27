@@ -3,14 +3,14 @@ import './Orders.scss';
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState([
-    { id: 'ORD-001', customer: 'Global Motors', amount: '$25,000', date: '2024-01-15', status: 'Completed', payment: 'Paid' },
-    { id: 'ORD-002', customer: 'TechNova Solutions', amount: '$18,500', date: '2024-01-18', status: 'Processing', payment: 'Paid' },
-    { id: 'ORD-003', customer: 'MediCare Group', amount: '$42,000', date: '2024-01-20', status: 'Pending', payment: 'Pending' },
-    { id: 'ORD-004', customer: 'Green Energy Corp', amount: '$12,300', date: '2024-01-22', status: 'Completed', payment: 'Paid' },
-    { id: 'ORD-005', customer: 'Urban Builders', amount: '$31,500', date: '2024-01-25', status: 'Shipped', payment: 'Paid' },
-    { id: 'ORD-006', customer: 'FoodPlus Retail', amount: '$8,750', date: '2024-01-26', status: 'Processing', payment: 'Partial' },
-    { id: 'ORD-007', customer: 'Sky Airlines', amount: '$67,800', date: '2024-01-28', status: 'Pending', payment: 'Pending' },
-    { id: 'ORD-008', customer: 'DataFlow Systems', amount: '$23,400', date: '2024-01-29', status: 'Completed', payment: 'Paid' },
+    { id: 'ORD-001', customer: 'Global Motors', amount: '₹25,000', date: '2024-01-15', status: 'Completed', payment: 'Paid' },
+    { id: 'ORD-002', customer: 'TechNova Solutions', amount: '₹18,500', date: '2024-01-18', status: 'Processing', payment: 'Paid' },
+    { id: 'ORD-003', customer: 'MediCare Group', amount: '₹42,000', date: '2024-01-20', status: 'Pending', payment: 'Pending' },
+    { id: 'ORD-004', customer: 'Green Energy Corp', amount: '₹12,300', date: '2024-01-22', status: 'Completed', payment: 'Paid' },
+    { id: 'ORD-005', customer: 'Urban Builders', amount: '₹31,500', date: '2024-01-25', status: 'Shipped', payment: 'Paid' },
+    { id: 'ORD-006', customer: 'FoodPlus Retail', amount: '₹8,750', date: '2024-01-26', status: 'Processing', payment: 'Partial' },
+    { id: 'ORD-007', customer: 'Sky Airlines', amount: '₹67,800', date: '2024-01-28', status: 'Pending', payment: 'Pending' },
+    { id: 'ORD-008', customer: 'DataFlow Systems', amount: '₹23,400', date: '2024-01-29', status: 'Completed', payment: 'Paid' },
   ]);
 
   const [statusFilter, setStatusFilter] = useState('all');
@@ -108,7 +108,7 @@ const Orders: React.FC = () => {
                   <span 
                     className="status-badge"
                     style={{ 
-                      backgroundColor: `${getStatusColor(order.status)}20`,
+                      backgroundColor: `₹{getStatusColor(order.status)}20`,
                       color: getStatusColor(order.status)
                     }}
                   >
@@ -119,7 +119,7 @@ const Orders: React.FC = () => {
                   <span 
                     className="payment-badge"
                     style={{ 
-                      backgroundColor: `${getPaymentColor(order.payment)}20`,
+                      backgroundColor: `₹{getPaymentColor(order.payment)}20`,
                       color: getPaymentColor(order.payment)
                     }}
                   >
@@ -142,7 +142,7 @@ const Orders: React.FC = () => {
       <div className="orders-summary">
         <div className="summary-card">
           <h3>Revenue Summary</h3>
-          <div className="summary-value">$228,250</div>
+          <div className="summary-value">₹228,250</div>
           <div className="summary-details">
             <div className="detail">
               <span className="label">Completed Orders</span>
@@ -154,7 +154,7 @@ const Orders: React.FC = () => {
             </div>
             <div className="detail">
               <span className="label">Avg Order Value</span>
-              <span className="value">$28,531</span>
+              <span className="value">₹28,531</span>
             </div>
           </div>
         </div>

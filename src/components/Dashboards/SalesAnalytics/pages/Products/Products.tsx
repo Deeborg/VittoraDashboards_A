@@ -38,7 +38,7 @@ const Products: React.FC = () => {
           
           <div className="stat-content">
             <h3>Avg Price</h3>
-            <div className="stat-value">$18,688</div>
+            <div className="stat-value">₹18,688</div>
           </div>
         </div>
         <div className="stat-card">
@@ -77,15 +77,15 @@ const Products: React.FC = () => {
                 <td><strong>{product.id}</strong></td>
                 <td>{product.name}</td>
                 <td>{product.category}</td>
-                <td>${product.price.toLocaleString()}</td>
+                <td>₹{product.price.toLocaleString()}</td>
                 <td>
-                  <span className={`margin-badge ${product.margin > 35 ? 'high' : 'medium'}`}>
+                  <span className={`margin-badge ₹{product.margin > 35 ? 'high' : 'medium'}`}>
                     {product.margin}%
                   </span>
                 </td>
                 <td>{product.stock.toLocaleString()}</td>
                 <td>
-                  <span className={`stock-status ${product.status.toLowerCase().replace(' ', '-')}`}>
+                  <span className={`stock-status ₹{product.status.toLowerCase().replace(' ', '-')}`}>
                     {product.status}
                   </span>
                 </td>
@@ -113,7 +113,7 @@ const Products: React.FC = () => {
                 <p>{Math.floor(Math.random() * 50) + 10} Products</p>
               </div>
               <div className="category-stats">
-                <span className="revenue">${(Math.random() * 1000000 + 500000).toLocaleString()}</span>
+                <span className="revenue">₹{(Math.random() * 1000000 + 500000).toLocaleString()}</span>
                 <span className="growth positive">+{Math.floor(Math.random() * 20) + 5}%</span>
               </div>
             </div>

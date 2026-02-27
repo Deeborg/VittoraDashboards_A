@@ -21,7 +21,8 @@ import DashboardPortal from "./components/DashboardPortal";
 import SalesRoot from "./components/Dashboards/SalesAnalytics/SalesRoot"; 
 import ExceptionRoot from './components/Dashboards/ExceptionReporting/ExceptionRoot';
 import InvestorRoot from "./components/Dashboards/InvestorRelations/InvestorRoot";
-
+import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot"; 
+import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot"; 
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -53,6 +54,8 @@ export default function App() {
           <Route path="/analytics/sales/*" element={<SalesRoot />} />
           <Route path="/analytics/exceptions/*" element={<ExceptionRoot />} />
           <Route path="/analytics/investor/*" element={<InvestorRoot />} />
+          <Route path="/analytics/treasury/*" element={<TreasuryRoot />} />
+          <Route path="/analytics/rpt/*" element={<RptRoot />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

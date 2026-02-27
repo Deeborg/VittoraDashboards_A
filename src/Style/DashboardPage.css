@@ -85,7 +85,7 @@ body {
 .kpi-card-value {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #ffffff;
+  /* color: #ffffff; */
   margin-bottom: 10px;
   line-height: 1.2;
 }
