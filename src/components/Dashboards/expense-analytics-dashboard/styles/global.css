@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #edf0f4 !important;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+
+/* Ensure all text in white containers is dark */
+.MuiPaper-root,
+.MuiCard-root,
+.MuiPopover-paper,
+.MuiMenu-paper,
+.MuiDialog-paper {
+  color: #1e293b !important;
+}
+
+/* Headers in white containers should be black */
+.MuiPaper-root h1,
+.MuiPaper-root h2,
+.MuiPaper-root h3,
+.MuiPaper-root h4,
+.MuiPaper-root h5,
+.MuiPaper-root h6,
+.MuiCard-root h1,
+.MuiCard-root h2,
+.MuiCard-root h3,
+.MuiCard-root h4,
+.MuiCard-root h5,
+.MuiCard-root h6 {
+  color: #000000 !important;
+}
+
+/* Table text */
+.MuiTableCell-root {
+  color: #1e293b !important;
+}
+
+.MuiTableCell-head {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+/* Input text */
+.MuiInputBase-input {
+  color: #000000 !important;
+}
+
+.MuiInputBase-input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+/* Select text */
+.MuiSelect-select {
+  color: #000000 !important;
+}
+
+/* Menu items */
+.MuiMenuItem-root {
+  color: #1e293b !important;
+}
+
+/* Button text */
+.MuiButton-outlined {
+  color: #80a9fa !important;
+}
+
+.MuiButton-text {
+  color: #1e293b !important;
+}
+
+/* Toggle button text */
+.MuiToggleButton-root {
+  color: #475569 !important;
+}
+
+.MuiToggleButton-root.Mui-selected {
+  color: #ffffff !important;
+}
+
+/* Chip text */
+.MuiChip-root {
+  font-weight: 600;
+}
+
+.MuiChip-colorSuccess {
+  color: #059669 !important;
+}
+
+.MuiChip-colorError {
+  color: #b91c1c !important;
+}
+
+.MuiChip-colorWarning {
+  color: #b45309 !important;
+}
+
+.MuiChip-colorInfo {
+  color: #1e40af !important;
+}
+
+/* Breadcrumbs */
+.MuiBreadcrumbs-root {
+  color: #475569 !important;
+}
+
+.MuiBreadcrumbs-root a {
+  color: #2563eb !important;
+}
+
+/* Links */
+.MuiLink-root {
+  color: #2563eb !important;
+}
+
+/* Stats cards - ensure numbers are black */
+.MuiCard-root .MuiTypography-h4,
+.MuiCard-root .MuiTypography-h5,
+.MuiCard-root .MuiTypography-h6 {
+  color: #000000 !important;
+}
+
+/* Document chain dialog */
+.MuiDialog-paper .MuiTypography-root {
+  color: #1e293b !important;
+}
+
+.MuiDialog-paper .MuiTypography-h6 {
+  color: #000000 !important;
+}
+
+/* Custom scrollbar for light theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Chart tooltips */
+.recharts-tooltip-wrapper {
+  filter: drop-shadow(0 4px 6px -1px rgba(0, 0, 0, 0.1));
+}
+
+.recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  color: #1e293b !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-label {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-item {
+  color: #1e293b !important;
+}
+
+/* Chart legends */
+.recharts-legend-item-text {
+  color: #475569 !important;
+}
+
+.recharts-legend-item:hover .recharts-legend-item-text {
+  color: #000000 !important;
+}
+
+/* Chart axis labels */
+.recharts-text {
+  fill: #475569 !important;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: #475569 !important;
+}
+
+.recharts-cartesian-grid-line {
+  stroke: #e2e8f0 !important;
+}
+
+/* Custom classes for text colors */
+.text-primary {
+  color: #000000 !important;
+}
+
+.text-secondary {
+  color: #1e293b !important;
+}
+
+.text-success {
+  color: #059669 !important;
+}
+
+.text-error {
+  color: #b91c1c !important;
+}
+
+.text-warning {
+  color: #b45309 !important;
+}
+
+.text-info {
+  color: #1e40af !important;
+}

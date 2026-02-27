@@ -1,0 +1,231 @@
+export const theme = {
+  colors: {
+    // Dark Blue Primary Palette
+    primary: {
+      50: '#e6f0ff',
+      100: '#b3d1ff',
+      200: '#80b3ff',
+      300: '#4d94ff',
+      400: '#1a75ff',
+      500: '#0052cc',
+      600: '#0041a3',
+      700: '#00317a',
+      800: '#002052',
+      900: '#001029',
+    },
+    // Dark Blue Secondary Palette
+    secondary: {
+      50: '#e6e9f0',
+      100: '#b3bcd1',
+      200: '#8090b3',
+      300: '#4d6394',
+      400: '#1a3775',
+      500: '#0a1a4a',
+      600: '#08153b',
+      700: '#06102c',
+      800: '#040a1e',
+      900: '#02050f',
+    },
+    success: {
+      50: '#e6f7e6',
+      100: '#b3e6b3',
+      200: '#80d680',
+      300: '#4dc54d',
+      400: '#1ab51a',
+      500: '#0f8a0f',
+      600: '#0c6e0c',
+      700: '#095309',
+      800: '#063706',
+      900: '#031c03',
+    },
+    warning: {
+      50: '#fff4e6',
+      100: '#ffddb3',
+      200: '#ffc680',
+      300: '#ffaf4d',
+      400: '#ff981a',
+      500: '#e67a00',
+      600: '#b86200',
+      700: '#8a4900',
+      800: '#5c3100',
+      900: '#2e1800',
+    },
+    error: {
+      50: '#ffe6e6',
+      100: '#ffb3b3',
+      200: '#ff8080',
+      300: '#ff4d4d',
+      400: '#ff1a1a',
+      500: '#e60000',
+      600: '#b80000',
+      700: '#8a0000',
+      800: '#5c0000',
+      900: '#2e0000',
+    },
+    info: {
+      50: '#e6f4ff',
+      100: '#b3ddff',
+      200: '#80c6ff',
+      300: '#4dafff',
+      400: '#1a98ff',
+      500: '#0077e6',
+      600: '#005fb8',
+      700: '#00478a',
+      800: '#002f5c',
+      900: '#00182e',
+    },
+    purple: {
+      50: '#f0e6ff',
+      100: '#d1b3ff',
+      200: '#b280ff',
+      300: '#934dff',
+      400: '#741aff',
+      500: '#5a00e6',
+      600: '#4800b8',
+      700: '#36008a',
+      800: '#24005c',
+      900: '#12002e',
+    },
+    blue: {
+      50: '#e6f0ff',
+      100: '#b3d1ff',
+      200: '#80b3ff',
+      300: '#4d94ff',
+      400: '#1a75ff',
+      500: '#0052cc',
+      600: '#0041a3',
+      700: '#00317a',
+      800: '#002052',
+      900: '#001029',
+    },
+    gray: {
+      50: '#f8fafc',
+      100: '#f1f5f9',
+      200: '#e2e8f0',
+      300: '#cbd5e1',
+      400: '#94a3b8',
+      500: '#64748b',
+      600: '#475569',
+      700: '#334155',
+      800: '#1e293b',
+      900: '#0f172a',
+    },
+    // Dark Blue Background Colors
+    background: {
+      primary: '#0a1929',      // Deep navy blue
+      secondary: '#0f2744',    // Slightly lighter navy
+      tertiary: '#1a3552',     // Medium navy
+      card: '#1e3a5f',         // Card background
+      hover: '#2b4b7a',        // Hover state
+    },
+    text: {
+      primary: '#f8f0f0',       // White text
+      secondary: '#090909',     // Light blue-white
+      tertiary: '#e4e4e1',      // Muted blue-gray
+      inverse: '#e6e4f3',       // Dark blue for light backgrounds
+      muted: '#060606',         // Muted blue
+    },
+    border: {
+      light: '#2d4b73',         // Light border
+      medium: '#1e3a5f',        // Medium border
+      dark: '#0f2744',          // Dark border
+    },
+    chart: {
+      blue: '#3b82f6',
+      purple: '#8b5cf6',
+      pink: '#ec4899',
+      orange: '#f97316',
+      green: '#22c55e',
+      yellow: '#eab308',
+      red: '#ef4444',
+      cyan: '#06b6d4',
+      teal: '#14b8a6',
+      // Dark mode specific
+      series1: '#60a5fa',
+      series2: '#c084fc',
+      series3: '#f87171',
+      series4: '#4ade80',
+      series5: '#facc15',
+    },
+  },
+  gradients: {
+    primary: 'linear-gradient(135deg, #1e3a5f 0%, #0a1929 100%)',
+    success: 'linear-gradient(135deg, #1e4a3a 0%, #0f2f24 100%)',
+    warning: 'linear-gradient(135deg, #5f3a1e 0%, #3a240f 100%)',
+    error: 'linear-gradient(135deg, #5f1e1e 0%, #3a0f0f 100%)',
+    info: 'linear-gradient(135deg, #1e3f5f 0%, #0f263a 100%)',
+    purple: 'linear-gradient(135deg, #3a1e5f 0%, #240f3a 100%)',
+    card: 'linear-gradient(135deg, #1e3a5f 0%, #152f4a 100%)',
+    cardHover: 'linear-gradient(135deg, #23466f 0%, #1a3552 100%)',
+    header: 'linear-gradient(135deg, #0a1929 0%, #0f2744 100%)',
+    sidebar: 'linear-gradient(180deg, #0a1929 0%, #0f2744 100%)',
+  },
+  spacing: {
+    xs: '0.25rem',
+    sm: '0.5rem',
+    md: '1rem',
+    lg: '1.5rem',
+    xl: '2rem',
+    '2xl': '3rem',
+    '3xl': '4rem',
+  },
+  typography: {
+    fontFamily: {
+      sans: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+      mono: 'JetBrains Mono, monospace',
+    },
+    fontSize: {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+    },
+    fontWeight: {
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+    },
+    fontColor: {
+      primary: '#ffffff',
+      secondary: '#e0e7ff',
+      tertiary: '#0b0b0b',
+      inverse: '#0a1929',
+      muted: '#7b91b0',
+    },
+  },
+  borderRadius: {
+    none: '0',
+    sm: '0.25rem',
+    base: '0.375rem',
+    md: '0.5rem',
+    lg: '0.75rem',
+    xl: '1rem',
+    '2xl': '1.5rem',
+    '3xl': '2rem',
+    full: '9999px',
+  },
+  shadows: {
+    sm: '0 1px 2px 0 rgba(0, 0, 0, 0.3)',
+    base: '0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3)',
+    md: '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4)',
+    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5)',
+    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6)',
+    '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.7)',
+    card: '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4)',
+    'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5)',
+    inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.3)',
+  },
+  transitions: {
+    base: 'all 0.2s ease',
+    smooth: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    bounce: 'all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+  },
+};
+
+export type Theme = typeof theme;

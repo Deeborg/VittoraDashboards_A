@@ -23,6 +23,8 @@ import ExceptionRoot from './components/Dashboards/ExceptionReporting/ExceptionR
 import InvestorRoot from "./components/Dashboards/InvestorRelations/InvestorRoot";
 import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot"; 
 import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot"; 
+import ExpenseRoot from "./components/Dashboards/expense-analytics-dashboard/ExpenseRoot";
+import CompilanseRoot from "./components/Dashboards/CR/CompilanseRoot";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -56,6 +58,8 @@ export default function App() {
           <Route path="/analytics/investor/*" element={<InvestorRoot />} />
           <Route path="/analytics/treasury/*" element={<TreasuryRoot />} />
           <Route path="/analytics/rpt/*" element={<RptRoot />} />
+          <Route path="/analytics/expense/*" element={<ExpenseRoot />} />
+          <Route path="/analytics/risk/*" element={<CompilanseRoot />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>
