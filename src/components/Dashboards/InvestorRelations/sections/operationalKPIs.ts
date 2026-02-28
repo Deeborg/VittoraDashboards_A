@@ -102,84 +102,81 @@ export const OperationalKPIs = {
         `;
     },
 
-    renderCapacitySection(
-        d:         OperationalRecord,
-        capStatus: { label: string; badge: 'pos' | 'neg' | 'neu' },
-        period:    string
-    ): string {
-        const opTrend  = [...CompanyData.operationalMetrics].sort((a, b) => a.period.localeCompare(b.period));
-        const capVals  = opTrend.map(x => x.capacityUtilization);
-        const opLabels = opTrend.map(x => Formatters.formatPeriod(x.period));
+    renderCapacitySection(d: OperationalRecord, capStatus: any, period: string): string {
+    const opTrend = [...CompanyData.operationalMetrics].sort((a, b) => a.period.localeCompare(b.period));
+    const capVals = opTrend.map(x => x.capacityUtilization);
+    
+    // SVG Scaling Logic (Optimized for visibility)
+    const W = 400, H = 150;
+    const pL = 10, pR = 10, pT = 20, pB = 30;
+    const cW = W - pL - pR, cH = H - pT - pB;
 
-        const W = 280, H = 80;
-        const mn  = Math.min(...capVals) * 0.95;
-        const mx  = 100;
-        const rng = mx - mn;
+    const mn = 60, mx = 100;
+    const toX = (i: number) => pL + (i / (capVals.length - 1)) * cW;
+    const toY = (v: number) => pT + cH - ((v - mn) / (mx - mn)) * cH;
 
-        const pts = capVals.map((v, i) => ({ x: i * (W / (capVals.length - 1)), y: H - ((v - mn) / rng) * (H - 10) - 5, v }));
-        const poly    = pts.map(p => `${p.x},${p.y}`).join(' ');
-        const area    = `${pts.map(p => `${p.x},${p.y}`).join(' ')} ${W},${H} 0,${H}`;
-        const targetY = H - ((80 - mn) / rng) * (H - 10) - 5;
+    const pts = capVals.map((v, i) => ({ x: toX(i), y: toY(v) }));
+    const poly = pts.map(p => `${p.x},${p.y}`).join(' ');
+    const targetY = toY(80);
 
-        const sparkSVG = `
-            <svg width="100%" viewBox="0 0 ${W} ${H}" style="overflow:visible;display:block;">
-                <defs>
-                    <linearGradient id="capGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.15"/>
-                        <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
-                    </linearGradient>
-                </defs>
-                <line x1="0" y1="${targetY}" x2="${W}" y2="${targetY}"
-                    stroke="#ffab00" stroke-width="1" stroke-dasharray="4,3" opacity="0.6"/>
-                <text x="${W}" y="${targetY - 4}" text-anchor="end"
-                    font-size="9" fill="#ffab00" opacity="0.8">80% target</text>
-                <polygon points="${area}" fill="url(#capGrad)"/>
-                <polyline points="${poly}" fill="none" stroke="#00d4ff"
-                    stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-                ${pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="3" fill="#00d4ff" stroke="white" stroke-width="1.5"><title>${p.v}%</title></circle>`).join('')}
-            </svg>
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-soft);margin-top:4px;">
-                <span>${opLabels[0]}</span><span>${opLabels[opLabels.length - 1]}</span>
-            </div>
-        `;
+    const sparkSVG = `
+        <svg width="100%" height="100%" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="overflow:visible;">
+            <!-- 80% Dashed Target Line -->
+            <line x1="${pL}" y1="${targetY}" x2="${pL + cW}" y2="${targetY}" class="target-line" />
+            <text x="${pL + cW}" y="${targetY - 8}" text-anchor="end" class="target-text">80% target</text>
+            
+            <!-- Main Trend Line -->
+            <polyline points="${poly}" fill="none" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            
+            <!-- Data Points (Rings) -->
+            ${pts.map(p => `<circle cx="${p.x}" cy="${p.y}" r="5" fill="#00d4ff" stroke="#fff" stroke-width="2" />`).join('')}
+            
+            <!-- X-Axis Date Labels (Locked to corners) -->
+            <text x="${pL}" y="${H - 5}" fill="#5a6478" font-size="11">Q4 2022</text>
+            <text x="${pL + cW}" y="${H - 5}" fill="#5a6478" font-size="11" text-anchor="end">Q4 2024</text>
+        </svg>
+    `;
 
-        return `
-            <div class="grid-2" style="margin-bottom:20px;">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-title">Capacity Utilization · ${Formatters.formatPeriod(period)}</span>
-                    </div>
-                    <div class="card-body">
-                        <div style="height:28px;background:var(--border);border-radius:6px;overflow:hidden;position:relative;">
-                            <div style="position:absolute;left:0;top:0;bottom:0;width:${d.capacityUtilization}%;
-                                background:linear-gradient(90deg,#00d4ff,#0099cc);border-radius:6px;
-                                display:flex;align-items:center;justify-content:flex-end;padding-right:10px;
-                                transition:width 0.8s cubic-bezier(.22,.61,.36,1);">
-                                <span style="font-size:11px;font-weight:700;color:white;">${d.capacityUtilization}%</span>
-                            </div>
-                        </div>
-                        <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12px;">
-                            <span class="kpi-badge ${capStatus.badge}">${capStatus.label}</span>
-                            <span style="color:var(--text-soft);">Target: 80%+</span>
-                        </div>
-                        <div style="margin-top:16px;font-size:12px;color:var(--text-soft);line-height:1.7;">
-                            At ${d.capacityUtilization}%, the plant is running
-                            ${d.capacityUtilization >= 85 ? 'near peak efficiency, indicating strong order flow.' : 'above the 80% threshold — healthy utilization.'}
-                        </div>
-                    </div>
+    return `
+        <div class="grid-2">
+            <!-- Left Card: Capacity Utilization -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">CAPACITY UTILIZATION · ${period}</span>
                 </div>
-                <div class="card">
-                    <div class="card-header"><span class="card-title">Utilization Trend</span></div>
-                    <div class="card-body" style="padding-top:12px;overflow:hidden;">
+                <div class="card-body">
+                    <div class="util-bar-track">
+                        <div class="util-bar-fill" style="width: ${d.capacityUtilization}%">
+                            <span style="color:white; font-weight:800; font-family:monospace;">${d.capacityUtilization}%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                        <span style="font-weight:800; color:white; font-size:13px; text-transform:uppercase;">${capStatus.label}</span>
+                        <span style="color:#5a6478; font-size:11px; font-weight:600;">Target: 80%+</span>
+                    </div>
+                    <p style="color:#8b9aac; font-size:12px; margin:0; line-height:1.6;">
+                        At ${d.capacityUtilization}%, the plant is running near peak efficiency, indicating strong order flow.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Card: Utilization Trend -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">UTILIZATION TREND</span>
+                </div>
+                <div class="card-body">
+                    <div class="trend-svg-container">
                         ${sparkSVG}
-                        <div style="margin-top:12px;font-size:11px;color:var(--text-soft);line-height:1.6;">
-                            Consistent improvement reflects disciplined capacity planning and growing demand.
-                        </div>
                     </div>
+                    <p style="color:#5a6478; font-size:12px; font-style:italic; margin-top:20px; line-height:1.6;">
+                        Consistent improvement reflects disciplined capacity planning and growing demand.
+                    </p>
                 </div>
             </div>
-        `;
-    },
+        </div>
+    `;
+},
 
     renderSalesTables(): string {
         const term = AppState.searchTerm;

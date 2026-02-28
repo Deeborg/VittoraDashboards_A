@@ -30,6 +30,7 @@ import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
 import FixedRoot from "./components/Dashboards/FixedAssets/FixedRoot";
 
 import { ThemeProvider, createTheme } from "@mui/material";
+// Make sure to import the SCSS file in your main App or in AgeRoot
 
 const theme = createTheme({
   palette: { mode: 'light' } // or 'dark'
