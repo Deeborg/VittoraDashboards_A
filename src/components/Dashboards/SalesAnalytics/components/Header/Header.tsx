@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ onRefresh }) => {
 
       <div className="header-right">
         <div className="header-controls">
-          <select
+          {/* <select
             className="date-range-select"
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value)}
@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ onRefresh }) => {
                 {option.label}
               </option>
             ))}
-          </select>
+          </select> */}
 
           <button 
             className="btn btn-secondary export-btn"

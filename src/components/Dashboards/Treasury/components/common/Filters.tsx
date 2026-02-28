@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Box,
   FormControl,
@@ -7,13 +7,35 @@ import {
   MenuItem,
   Button,
   Grid,
-} from '@mui/material';
-import FilterListIcon from '@mui/icons-material/FilterList';
+  SelectChangeEvent,
+} from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
-const Filters = ({ onFilterChange, filters }) => {
-  const handleChange = (field) => (event) => {
-    onFilterChange(field, event.target.value);
-  };
+/* ✅ Define filter structure */
+export interface FilterState {
+  month: string;
+  loanType: string;
+  investmentType: string;
+}
+
+/* ✅ Define props */
+interface FiltersProps {
+  onFilterChange: (
+    field: keyof FilterState | "reset",
+    value?: string
+  ) => void;
+  filters: FilterState;
+}
+
+const Filters: React.FC<FiltersProps> = ({
+  onFilterChange,
+  filters,
+}) => {
+  const handleChange =
+    (field: keyof FilterState) =>
+    (event: SelectChangeEvent<string>) => {
+      onFilterChange(field, event.target.value);
+    };
 
   // return (
   //   <Box sx={{ mb: 3, p: 2, backgroundColor: 'white', borderRadius: 1, border: '1px solid #e0e0e0' }}>
@@ -21,7 +43,7 @@ const Filters = ({ onFilterChange, filters }) => {
   //       <Grid item>
   //         <FilterListIcon sx={{ color: '#546e7a' }} />
   //       </Grid>
-        
+  //       
   //       <Grid item xs={12} sm={3}>
   //         <FormControl fullWidth size="small">
   //           <InputLabel>Month</InputLabel>
@@ -37,7 +59,7 @@ const Filters = ({ onFilterChange, filters }) => {
   //           </Select>
   //         </FormControl>
   //       </Grid>
-        
+  //       
   //       <Grid item xs={12} sm={3}>
   //         <FormControl fullWidth size="small">
   //           <InputLabel>Loan Type</InputLabel>
@@ -53,7 +75,7 @@ const Filters = ({ onFilterChange, filters }) => {
   //           </Select>
   //         </FormControl>
   //       </Grid>
-        
+  //       
   //       <Grid item xs={12} sm={3}>
   //         <FormControl fullWidth size="small">
   //           <InputLabel>Investment Type</InputLabel>
@@ -69,7 +91,7 @@ const Filters = ({ onFilterChange, filters }) => {
   //           </Select>
   //         </FormControl>
   //       </Grid>
-        
+  //       
   //       <Grid item xs={12} sm={3}>
   //         <Button 
   //           variant="outlined" 
@@ -83,6 +105,7 @@ const Filters = ({ onFilterChange, filters }) => {
   //     </Grid>
   //   </Box>
   // );
+  return null; 
 };
 
 export default Filters;

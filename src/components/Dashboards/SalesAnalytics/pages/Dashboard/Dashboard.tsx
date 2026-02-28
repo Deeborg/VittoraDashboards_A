@@ -99,7 +99,7 @@ const Dashboard: React.FC = () => {
             title="Total Sales"
             value={summary.totalSales}
             change={summary.revenueGrowth}
-            color="#3b82f6"
+            color="#0f1e35"
             format="currency"
             titlePosition="top"
           />

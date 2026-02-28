@@ -8,31 +8,21 @@
   min-height: 100vh;
 }
 
-/* Header Styles */
 .dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background: #0c0f3d !important;
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
   margin-bottom: 2rem;
-  padding: 0 0.5rem;
-}
-
-.header-content {
-  flex: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
 .dashboard-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0 0 0.5rem 0;
-  letter-spacing: -0.02em;
+  color: #000000 !important;
+  font-weight: 700;
 }
 
 .dashboard-subtitle {
-  font-size: 0.95rem;
-  color: #64748b;
-  margin: 0;
+  color: #e1e4e7 !important;
 }
 
 .header-actions {

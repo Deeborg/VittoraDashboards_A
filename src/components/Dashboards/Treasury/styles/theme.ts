@@ -1,7 +1,8 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions } from '@mui/material/styles';
 
-// Professional corporate finance color palette
-export const theme = createTheme({
+/* ================= THEME OPTIONS ================= */
+
+const themeOptions: ThemeOptions = {
   palette: {
     primary: {
       main: '#1a237e', // Navy blue
@@ -33,28 +34,36 @@ export const theme = createTheme({
       secondary: '#546e7a',
     },
   },
+
   typography: {
-    fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily:
+      '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+
     h1: {
       fontSize: '1.5rem',
       fontWeight: 600,
     },
+
     h2: {
       fontSize: '1.25rem',
       fontWeight: 600,
     },
+
     h3: {
       fontSize: '1.1rem',
       fontWeight: 500,
     },
+
     body1: {
       fontSize: '0.875rem',
     },
+
     body2: {
       fontSize: '0.75rem',
       color: '#546e7a',
     },
   },
+
   components: {
     MuiCard: {
       styleOverrides: {
@@ -64,6 +73,7 @@ export const theme = createTheme({
         },
       },
     },
+
     MuiPaper: {
       styleOverrides: {
         elevation1: {
@@ -72,4 +82,10 @@ export const theme = createTheme({
       },
     },
   },
-});
+};
+
+/* ================= CREATE THEME ================= */
+
+export const theme = createTheme(themeOptions);
+
+export default theme;
