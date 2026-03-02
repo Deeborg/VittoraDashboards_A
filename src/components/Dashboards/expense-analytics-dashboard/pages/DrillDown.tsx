@@ -250,7 +250,11 @@ const DrillDown: React.FC = () => {
   const documentChain = getDocumentChain();
 
   return (
-    <Box sx={{ p: 3, backgroundColor: '#0a1929', minHeight: '100vh' }}>
+      <Box sx={{ 
+   
+    width: '90%',
+   
+  }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Breadcrumbs

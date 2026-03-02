@@ -6,11 +6,11 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Divider,
   Box,
   Typography,
   useTheme,
   useMediaQuery,
+  Avatar,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -42,17 +42,17 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
     {
       text: 'Expense Trends',
       icon: <TrendingUpIcon />,
-      path: 'expenses',
+      path: '/analytics/expense/expenses',
     },
     {
       text: 'Comparison',
       icon: <CompareIcon />,
-      path: 'comparison',
+      path: '/analytics/expense/comparison',
     },
     {
       text: 'Drill Down',
       icon: <DrillDownIcon />,
-      path: 'drill-down',
+      path: '/analytics/expense/drill-down',
     },
   ];
 
@@ -63,87 +63,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
     }
   };
 
-  const drawer = (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box
-        sx={{
-          p: 2.5,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderBottom: '1px solid #1e293b',
-        }}
-      >
-        <Typography variant="h6" sx={{ fontWeight: 600, color: '#ffffff' }}>
-          Expense Analytics
-        </Typography>
-        {isMobile && (
-          <ChevronLeftIcon
-            onClick={onClose}
-            sx={{ cursor: 'pointer', color: '#94a3b8' }}
-          />
-        )}
-      </Box>
-
-      <List sx={{ flexGrow: 1, px: 1, py: 2 }}>
-        {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
-            <ListItemButton
-              selected={location.pathname === item.path}
-              onClick={() => handleNavigation(item.path)}
-              sx={{
-                py: 1.2,
-                px: 2,
-                borderRadius: 1,
-                '&.Mui-selected': {
-                  backgroundColor: '#2563eb',
-                  color: '#ffffff',
-                  '&:hover': {
-                    backgroundColor: '#1d4ed8',
-                  },
-                  '& .MuiListItemIcon-root': {
-                    color: '#ffffff',
-                  },
-                },
-                '&:hover': {
-                  backgroundColor: '#1e293b',
-                },
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  color: location.pathname === item.path ? '#ffffff' : '#94a3b8',
-                  minWidth: 40,
-                }}
-              >
-                {item.icon}
-              </ListItemIcon>
-              <ListItemText
-                primary={item.text}
-                primaryTypographyProps={{
-                  fontSize: '0.875rem',
-                  fontWeight: location.pathname === item.path ? 600 : 400,
-                  color: location.pathname === item.path ? '#ffffff' : '#cbd5e1',
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-
-      <Divider sx={{ borderColor: '#1e293b' }} />
-
-      <Box sx={{ p: 2 }}>
-        <Typography variant="caption" sx={{ color: '#64748b' }}>
-          Version 1.0.0
-        </Typography>
-      </Box>
-    </Box>
-  );
-
   return (
     <Drawer
-      variant={isMobile ? 'temporary' : 'permanent'}
+      variant={isMobile ? 'temporary' : 'persistent'}
       open={open}
       onClose={onClose}
       sx={{
@@ -152,12 +74,117 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#0f172a',
+          backgroundColor: '#ffffff',
           borderRight: '1px solid #1e293b',
+          position: 'relative',
+          height: '100vh',
         },
       }}
     >
-      {drawer}
+      <Box sx={{ 
+        height: '100%', 
+        display: 'flex', 
+        flexDirection: 'column',
+      }}>
+        {/* Logo/Brand Section */}
+        <Box
+          sx={{
+            p: 2.5,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderBottom: '1px solid #1e293b',
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Avatar 
+              sx={{ 
+                bgcolor: '#2563eb', 
+                width: 36, 
+                height: 36,
+                fontSize: '0.9rem',
+                fontWeight: 600
+              }}
+            >
+              EA
+            </Avatar>
+            <Box>
+              <Typography variant="subtitle1" sx={{  fontWeight: 600, lineHeight: 1.2 }}>
+                Expense
+              </Typography>
+              <Typography variant="caption" sx={{ color: '#94a3b8', display: 'block', fontSize: '0.7rem' }}>
+                Analytics
+              </Typography>
+            </Box>
+          </Box>
+          {isMobile && (
+            <ChevronLeftIcon
+              onClick={onClose}
+              sx={{ 
+                cursor: 'pointer', 
+                color: '#94a3b8',
+                '&:hover': { color: '#ffffff' }
+              }}
+            />
+          )}
+        </Box>
+
+        {/* Navigation Menu */}
+        <List sx={{ flexGrow: 1, px: 1.5, py: 2 }}>
+          {menuItems.map((item) => {
+            const isSelected = location.pathname === item.path;
+            return (
+              <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  selected={isSelected}
+                  onClick={() => handleNavigation(item.path)}
+                  sx={{
+                    py: 1.2,
+                    px: 1.5,
+                    borderRadius: 1.5,
+                    '&.Mui-selected': {
+                      backgroundColor: '#2563eb',
+                      '&:hover': {
+                        backgroundColor: '#1d4ed8',
+                      },
+                      '& .MuiListItemIcon-root': {
+                        color: '#ffffff',
+                      },
+                      '& .MuiListItemText-primary': {
+                        color: '#ffffff',
+                        fontWeight: 600,
+                      },
+                    },
+                    '&:hover': {
+                      backgroundColor: '#1e293b',
+                      '& .MuiListItemIcon-root': {
+                        color: '#ffffff',
+                      },
+                    },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      color: isSelected ? '#ffffff' : '#94a3b8',
+                      minWidth: 36,
+                    }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    primaryTypographyProps={{
+                      fontSize: '0.9rem',
+                      fontWeight: isSelected ? 600 : 500,
+                      color: isSelected ? '#ffffff' : '#cbd5e1',
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
     </Drawer>
   );
 };

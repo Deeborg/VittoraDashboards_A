@@ -184,7 +184,7 @@
 
 /* KPI Card - WITH WHITE TEXT */
 .kpi-card {
-  background: linear-gradient(135deg, #1e293b, #0f172a); /* Dark blue gradient background */
+  background: linear-gradient(135deg, #1e293b, #0f172a);
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -200,7 +200,6 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
 }
 
-/* ALL TEXT IN CARDS - WHITE */
 .kpi-card .kpi-title {
   font-size: 0.875rem;
   font-weight: 700;
@@ -219,13 +218,12 @@
 
 .kpi-card .kpi-sub-text {
   font-size: 0.875rem;
-  color: #e2e8f0 !important; /* Light gray/white */
+  color: #e2e8f0 !important;
   margin-bottom: 0.75rem;
   font-weight: 500;
   line-height: 1.5;
 }
 
-/* Style for the rupee symbol and numbers */
 .kpi-card .kpi-sub-text span,
 .kpi-card .kpi-sub-text strong,
 .kpi-card .kpi-sub-text b {
@@ -233,7 +231,6 @@
   font-weight: 600;
 }
 
-/* Change indicators */
 .kpi-card .kpi-change {
   display: flex;
   align-items: center;
@@ -243,11 +240,11 @@
 }
 
 .kpi-card .kpi-change.up {
-  color: #4ade80 !important; /* Light green for white background */
+  color: #4ade80 !important;
 }
 
 .kpi-card .kpi-change.down {
-  color: #f87171 !important; /* Light red for white background */
+  color: #f87171 !important;
 }
 
 .kpi-card .change-icon {
@@ -256,7 +253,6 @@
   color: inherit;
 }
 
-/* Badge styling for CURRENT RATIO - Adjusted for dark background */
 .kpi-card .badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
@@ -280,7 +276,6 @@
   color: #ffffff !important;
 }
 
-/* Force ALL text in cards to be white */
 .kpi-card div,
 .kpi-card span,
 .kpi-card p,
@@ -291,7 +286,6 @@
   color: #ffffff;
 }
 
-/* Specific fixes for each card */
 .kpi-card:nth-child(1) *,
 .kpi-card:nth-child(2) *,
 .kpi-card:nth-child(3) *,
@@ -319,7 +313,6 @@
   color: #ffffff !important;
 }
 
-/* Ensure rupee symbol is white */
 .kpi-main-value::before {
   color: #ffffff !important;
 }
@@ -525,47 +518,50 @@
   margin-bottom: 2rem;
 }
 
-/* Table */
+/* Table - UPDATED WITH WHITE TEXT */
 .table-container {
-  background: white;
+  background: #0f172a !important; /* Dark background */
   border-radius: 1rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #334155 !important;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .table-container h3 {
   padding: 1.5rem;
   margin: 0;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid #334155 !important;
   font-size: 1.125rem;
   font-weight: 600;
-  color: #0f172a;
+  color: #ffffff !important; /* White text */
+  background: #1e293b !important;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  background: #0f172a !important;
 }
 
 th {
-  background: #f8fafc;
+  background: #1e293b !important;
   padding: 1rem 1.5rem;
   text-align: left;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #1e293b;
-  border-bottom: 1px solid #e2e8f0;
+  color: #ffffff !important; /* White text */
+  border-bottom: 1px solid #334155 !important;
 }
 
 td {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #f1f5f9;
-  color: #1e293b;
+  border-bottom: 1px solid #334155 !important;
+  color: #ffffff !important; /* White text */
   font-size: 0.875rem;
   font-weight: 500;
+  background: #0f172a !important;
 }
 
 tr:last-child td {
@@ -573,7 +569,7 @@ tr:last-child td {
 }
 
 tbody tr:hover td {
-  background: #f8fafc;
+  background: #1e293b !important; /* Slightly lighter on hover */
 }
 
 .color-dot {

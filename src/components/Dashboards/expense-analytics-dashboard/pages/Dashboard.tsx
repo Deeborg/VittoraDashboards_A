@@ -161,9 +161,13 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: '#0a1929', minHeight: '100vh' }}>
+       <Box sx={{ 
+
+    width: '90%', 
+    
+  }}>
       {/* Header */}
-      <Box sx={{ mb: 4 }}>
+      <Box sx={{ xs:12, mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Box>
             <Typography variant="h4" gutterBottom sx={{ fontWeight: 700, color: '#ffffff' }}>
@@ -408,7 +412,7 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         {/* Budget vs Actual */}
-        <Grid size={{ xs: 12, lg: 5 }}>
+        <Grid size={{ xs: 12, lg: 7 }}>
           <Paper sx={{ 
             p: 2.5, 
             height: 450,
@@ -428,7 +432,7 @@ const Dashboard: React.FC = () => {
         </Grid>
 
         {/* Comparison Chart */}
-        <Grid size={{ xs: 12, lg: 7 }}>
+        <Grid size={{ xs: 12, lg: 5 }}>
           <Paper sx={{ 
             p: 2.5, 
             height: 450,
@@ -481,7 +485,7 @@ const Dashboard: React.FC = () => {
                       color: item.variance > 0 ? '#dc2626' : '#059669',
                       fontWeight: 600,
                       fontSize: '0.75rem',
-                      height: 24
+                      height: 20
                     }}
                   />
                 </Box>

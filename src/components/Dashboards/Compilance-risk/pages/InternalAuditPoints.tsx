@@ -17,8 +17,11 @@ import { FaClipboardCheck, FaUserCheck } from 'react-icons/fa';
 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
+  height: 100%;
+ width: 850px;
+  background: ${theme.colors.gray[50]};
+  font-color: ${theme.colors.text.tertiary};
 `;
-
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);

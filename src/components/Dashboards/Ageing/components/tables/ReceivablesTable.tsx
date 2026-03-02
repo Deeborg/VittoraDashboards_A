@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { User, Calendar, AlertTriangle, CheckCircle } from 'lucide-react';
 
 interface ReceivablesTableProps {
@@ -12,21 +11,21 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
     const total = ageing.total;
     const percentage = (overdue / total) * 100;
     
-    if (percentage > 30) return { level: 'High', color: 'bg-danger-100 text-danger-800', icon: AlertTriangle };
-    if (percentage > 15) return { level: 'Medium', color: 'bg-warning-100 text-warning-800', icon: AlertTriangle };
-    return { level: 'Low', color: 'bg-success-100 text-success-800', icon: CheckCircle };
+    if (percentage > 30) return { level: 'High', color: 'bg-red-500/20 text-white', icon: AlertTriangle };
+    if (percentage > 15) return { level: 'Medium', color: 'bg-yellow-500/20 text-white', icon: AlertTriangle };
+    return { level: 'Low', color: 'bg-green-500/20 text-white', icon: CheckCircle };
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-200">
+    <div className="bg-[#0f172a] rounded-2xl shadow-lg overflow-hidden border border-[#334155]">
+      <div className="px-6 py-4 border-b border-[#334155]">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-bold text-gray-900">Customer-wise Receivables Ageing</h3>
-            <p className="text-gray-500 text-sm mt-1">Detailed analysis with risk assessment</p>
+            <h3 className="text-xl font-bold text-white">Customer-wise Receivables Ageing</h3>
+            <p className="text-[#94a3b8] text-sm mt-1">Detailed analysis with risk assessment</p>
           </div>
           <div className="flex items-center space-x-4">
-            <button className="text-sm text-primary-600 font-medium hover:text-primary-700">
+            <button className="text-sm text-[#60a5fa] font-medium hover:text-[#3b82f6]">
               View All Customers
             </button>
           </div>
@@ -34,49 +33,49 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
       </div>
       
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+        <table className="min-w-full divide-y divide-[#334155]">
+          <thead className="bg-[#1e293b]">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Customer
               </th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Total Amount
               </th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Ageing Distribution
               </th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Risk Level
               </th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Last Invoice
               </th>
-              <th className="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-semibold text-[#94a3b8] uppercase tracking-wider">
                 Action
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-[#0f172a] divide-y divide-[#334155]">
             {customers.map((customer) => {
               const risk = getRiskLevel(customer.ageing);
               const RiskIcon = risk.icon;
               
               return (
-                <tr key={customer.id} className="hover:bg-gray-50 transition-colors">
+                <tr key={customer.id} className="hover:bg-[#1e293b] transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                        <User className="h-5 w-5 text-primary-600" />
+                      <div className="flex-shrink-0 h-10 w-10 bg-[#3b82f6]/20 rounded-lg flex items-center justify-center">
+                        <User className="h-5 w-5 text-[#60a5fa]" />
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{customer.name}</div>
-                        <div className="text-sm text-gray-500">Customer ID: {customer.id}</div>
+                        <div className="text-sm font-medium text-white">{customer.name}</div>
+                        <div className="text-sm text-[#94a3b8]">Customer ID: {customer.id}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-lg font-bold text-gray-900">
+                    <div className="text-lg font-bold text-white">
                       {customer.totalReceivables.toLocaleString('en-IN', {
                         style: 'currency',
                         currency: 'INR',
@@ -87,14 +86,14 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
                   <td className="px-6 py-4">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-600">Current</span>
-                        <span className="font-semibold">
+                        <span className="text-[#94a3b8]">Current</span>
+                        <span className="font-semibold text-white">
                           {(customer.ageing.current / customer.ageing.total * 100).toFixed(0)}%
                         </span>
                       </div>
-                      <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-2 bg-[#1e293b] rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-success-500"
+                          className="h-full bg-[#10b981]"
                           style={{ width: `${(customer.ageing.current / customer.ageing.total) * 100}%` }}
                         />
                       </div>
@@ -107,8 +106,8 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center text-sm text-gray-900">
-                      <Calendar className="w-4 h-4 mr-2 text-gray-400" />
+                    <div className="flex items-center text-sm text-white">
+                      <Calendar className="w-4 h-4 mr-2 text-[#94a3b8]" />
                       {new Date(customer.lastInvoiceDate).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
@@ -117,7 +116,7 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <button className="text-primary-600 hover:text-primary-900 text-sm font-medium">
+                    <button className="text-[#60a5fa] hover:text-[#3b82f6] text-sm font-medium">
                       View Details
                     </button>
                   </td>
@@ -128,22 +127,22 @@ const ReceivablesTable: React.FC<ReceivablesTableProps> = ({ customers }) => {
         </table>
       </div>
       
-      <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+      <div className="px-6 py-4 bg-[#1e293b] border-t border-[#334155]">
         <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-[#94a3b8]">
             Showing {customers.length} customers
           </div>
           <div className="flex items-center space-x-2">
-            <button className="px-3 py-1 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <button className="px-3 py-1 border border-[#334155] rounded text-sm font-medium text-[#94a3b8] hover:bg-[#334155] hover:text-white">
               Previous
             </button>
-            <button className="px-3 py-1 border border-gray-300 bg-gray-100 rounded text-sm font-medium text-gray-700">
+            <button className="px-3 py-1 border border-[#334155] bg-[#334155] rounded text-sm font-medium text-white">
               1
             </button>
-            <button className="px-3 py-1 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <button className="px-3 py-1 border border-[#334155] rounded text-sm font-medium text-[#94a3b8] hover:bg-[#334155] hover:text-white">
               2
             </button>
-            <button className="px-3 py-1 border border-gray-300 rounded text-sm font-medium text-gray-700 hover:bg-gray-50">
+            <button className="px-3 py-1 border border-[#334155] rounded text-sm font-medium text-[#94a3b8] hover:bg-[#334155] hover:text-white">
               Next
             </button>
           </div>
