@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import './styles/ageing-dashboard.scss';
 
 // Import chart components
 import AgeingBarChart from './components/charts/AgeingBarChart';
+import DonutChart from './components/charts/DonutChart';
+import LineChartComponent from './components/charts/LineChart';
 
 const AgeRoot: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname.split('/').pop() || 'dashboard';
 
-  // KPI Data
+  // KPI Data - All 6 cards
   const kpiData = {
     receivables: { value: 3280000, overdue: 940000, change: -2.5 },
     payables: { value: 2380000, dueSoon: 600000, change: 1.8 },
@@ -18,77 +21,77 @@ const AgeRoot: React.FC = () => {
     currentRatio: { value: 2.0, status: 'healthy', change: 0.2 }
   };
 
-  // Aging Data for different categories with all age groups
-  const agingData = {
+  // Ageing Data for all categories
+  const ageingData = {
     receivables: {
-      title: 'Receivables Aging Analysis',
-      total: 19800000,
+      title: 'Receivables Ageing',
+      total: 3280000,
       buckets: [
-        { name: '1-30 Days', value: 8500000, percentage: 42.9, color: '#4cc9f0' },
-        { name: '31-60 Days', value: 4500000, percentage: 22.7, color: '#f39c12' },
-        { name: '61-90 Days', value: 2500000, percentage: 12.6, color: '#e67e22' },
-        { name: '91-120 Days', value: 1500000, percentage: 7.6, color: '#e74c3c' },
-        { name: '121-180 Days', value: 1200000, percentage: 6.1, color: '#c0392b' },
-        { name: '181-360 Days', value: 1000000, percentage: 5.1, color: '#9b59b6' },
-        { name: '360+ Days', value: 600000, percentage: 3.0, color: '#34495e' }
+        { name: '1-30 Days', value: 1400000, percentage: 42.7, color: '#4cc9f0' },
+        { name: '31-60 Days', value: 700000, percentage: 21.4, color: '#f39c12' },
+        { name: '61-90 Days', value: 350000, percentage: 10.7, color: '#e67e22' },
+        { name: '91-120 Days', value: 280000, percentage: 8.5, color: '#e74c3c' },
+        { name: '121-180 Days', value: 250000, percentage: 7.6, color: '#c0392b' },
+        { name: '181-360 Days', value: 200000, percentage: 6.1, color: '#9b59b6' },
+        { name: '360+ Days', value: 100000, percentage: 3.0, color: '#34495e' }
       ]
     },
     payables: {
-      title: 'Payables Aging Analysis',
-      total: 1405000,
+      title: 'Payables Ageing',
+      total: 2380000,
       buckets: [
-        { name: '1-30 Days', value: 600000, percentage: 42.7, color: '#4cc9f0' },
-        { name: '31-60 Days', value: 300000, percentage: 21.4, color: '#f39c12' },
-        { name: '61-90 Days', value: 150000, percentage: 10.7, color: '#e67e22' },
-        { name: '91-120 Days', value: 100000, percentage: 7.1, color: '#e74c3c' },
-        { name: '121-180 Days', value: 80000, percentage: 5.7, color: '#c0392b' },
-        { name: '181-360 Days', value: 90000, percentage: 6.4, color: '#9b59b6' },
-        { name: '360+ Days', value: 85000, percentage: 6.0, color: '#34495e' }
+        { name: '1-30 Days', value: 1015000, percentage: 42.7, color: '#4cc9f0' },
+        { name: '31-60 Days', value: 509000, percentage: 21.4, color: '#f39c12' },
+        { name: '61-90 Days', value: 254000, percentage: 10.7, color: '#e67e22' },
+        { name: '91-120 Days', value: 190000, percentage: 8.0, color: '#e74c3c' },
+        { name: '121-180 Days', value: 166000, percentage: 7.0, color: '#c0392b' },
+        { name: '181-360 Days', value: 142000, percentage: 6.0, color: '#9b59b6' },
+        { name: '360+ Days', value: 100000, percentage: 4.2, color: '#34495e' }
       ]
     },
     inventory: {
-      title: 'Inventory Aging Analysis',
-      total: 28500000,
+      title: 'Inventory Ageing',
+      total: 2700000,
       buckets: [
-        { name: '1-30 Days', value: 14500000, percentage: 50.9, color: '#4cc9f0' },
-        { name: '31-60 Days', value: 8000000, percentage: 28.1, color: '#f39c12' },
-        { name: '61-90 Days', value: 3500000, percentage: 12.3, color: '#e67e22' },
-        { name: '91-120 Days', value: 1000000, percentage: 3.5, color: '#e74c3c' },
-        { name: '121-180 Days', value: 600000, percentage: 2.1, color: '#c0392b' },
-        { name: '181-360 Days', value: 500000, percentage: 1.8, color: '#9b59b6' },
-        { name: '360+ Days', value: 400000, percentage: 1.4, color: '#34495e' }
+        { name: '1-30 Days', value: 1350000, percentage: 50.0, color: '#4cc9f0' },
+        { name: '31-60 Days', value: 540000, percentage: 20.0, color: '#f39c12' },
+        { name: '61-90 Days', value: 270000, percentage: 10.0, color: '#e67e22' },
+        { name: '91-120 Days', value: 216000, percentage: 8.0, color: '#e74c3c' },
+        { name: '121-180 Days', value: 162000, percentage: 6.0, color: '#c0392b' },
+        { name: '181-360 Days', value: 108000, percentage: 4.0, color: '#9b59b6' },
+        { name: '360+ Days', value: 54000, percentage: 2.0, color: '#34495e' }
       ]
     },
     liabilities: {
-      title: 'Liabilities Aging Analysis',
-      total: 82000000,
+      title: 'Liabilities Ageing',
+      total: 8000000,
       buckets: [
-        { name: '1-30 Days', value: 50000000, percentage: 61.0, color: '#4cc9f0' },
-        { name: '31-60 Days', value: 20000000, percentage: 24.4, color: '#f39c12' },
-        { name: '61-90 Days', value: 5000000, percentage: 6.1, color: '#e67e22' },
-        { name: '91-120 Days', value: 3000000, percentage: 3.7, color: '#e74c3c' },
-        { name: '121-180 Days', value: 1500000, percentage: 1.8, color: '#c0392b' },
-        { name: '181-360 Days', value: 1500000, percentage: 1.8, color: '#9b59b6' },
-        { name: '360+ Days', value: 1000000, percentage: 1.2, color: '#34495e' }
+        { name: '1-30 Days', value: 4000000, percentage: 50.0, color: '#4cc9f0' },
+        { name: '31-60 Days', value: 2000000, percentage: 25.0, color: '#f39c12' },
+        { name: '61-90 Days', value: 800000, percentage: 10.0, color: '#e67e22' },
+        { name: '91-120 Days', value: 560000, percentage: 7.0, color: '#e74c3c' },
+        { name: '121-180 Days', value: 400000, percentage: 5.0, color: '#c0392b' },
+        { name: '181-360 Days', value: 160000, percentage: 2.0, color: '#9b59b6' },
+        { name: '360+ Days', value: 80000, percentage: 1.0, color: '#34495e' }
       ]
     },
     advances: {
-      title: 'Advances Aging Analysis',
-      total: 1551000,
+      title: 'Advances Ageing',
+      total: 1500000,
       buckets: [
-        { name: '1-30 Days', value: 1000000, percentage: 64.5, color: '#4cc9f0' },
-        { name: '31-60 Days', value: 300000, percentage: 19.3, color: '#f39c12' },
-        { name: '61-90 Days', value: 150000, percentage: 9.7, color: '#e67e22' },
-        { name: '91-120 Days', value: 40000, percentage: 2.6, color: '#e74c3c' },
-        { name: '121-180 Days', value: 20000, percentage: 1.3, color: '#c0392b' },
-        { name: '181-360 Days', value: 25000, percentage: 1.6, color: '#9b59b6' },
-        { name: '360+ Days', value: 16000, percentage: 1.0, color: '#34495e' }
+        { name: '1-30 Days', value: 900000, percentage: 60.0, color: '#4cc9f0' },
+        { name: '31-60 Days', value: 300000, percentage: 20.0, color: '#f39c12' },
+        { name: '61-90 Days', value: 150000, percentage: 10.0, color: '#e67e22' },
+        { name: '91-120 Days', value: 75000, percentage: 5.0, color: '#e74c3c' },
+        { name: '121-180 Days', value: 45000, percentage: 3.0, color: '#c0392b' },
+        { name: '181-360 Days', value: 20000, percentage: 1.3, color: '#9b59b6' },
+        { name: '360+ Days', value: 10000, percentage: 0.7, color: '#34495e' }
       ]
     }
   };
 
-  // Navigation items with icons
-  const navItems = [
+  // Dashboard items
+  const dashboardItems = [
     { id: 'dashboard', label: 'Dashboard', icon: '📊', path: '' },
     { id: 'receivables', label: 'Receivables', icon: '💰', path: 'receivables' },
     { id: 'payables', label: 'Payables', icon: '💳', path: 'payables' },
@@ -106,138 +109,161 @@ const AgeRoot: React.FC = () => {
   };
 
   return (
-    <div style={styles.appContainer}>
-      {/* Left Navigation Panel - Dark Blue */}
-      <div style={styles.sidebar}>
-        <div style={styles.sidebarHeader}>
-          <h2 style={styles.sidebarTitle}>Vittora</h2>
+    <div className="ageing-container">
+      {/* Left Sidebar */}
+      <div className="ageing-sidebar">
+        <div className="sidebar-brand">
+          <div className="brand-icon">V</div>
+          <span className="brand-name">Vittora</span>
         </div>
-        
-        {/* MODULES SECTION REMOVED */}
-        
-        <nav style={styles.sidebarNav}>
-          {navItems.map((item) => {
-            const isActive = item.id === 'dashboard' 
-              ? currentPath === 'dashboard' || currentPath === ''
-              : currentPath === item.id;
-            
-            return (
-              <Link
-                key={item.id}
-                to={`/analytics/ageing/${item.path}`}
-                style={{
-                  ...styles.navItem,
-                  backgroundColor: isActive ? '#2563eb' : 'transparent',
-                }}
-              >
-                <span style={styles.navIcon}>{item.icon}</span>
-                <span style={styles.navLabel}>{item.label}</span>
-                {isActive && <span style={styles.navActive}>•</span>}
-              </Link>
-            );
-          })}
-        </nav>
 
-        <div style={styles.sidebarFooter}>
-          <div style={styles.footerLogo}>AJALABS.AI</div>
-          <div style={styles.footerEmail}>info@ajalabs.ai</div>
+        {/* Dashboard Section - ONLY SECTION NOW */}
+        <div className="sidebar-section">
+          <div className="section-title">DASHBOARD</div>
+          <nav className="sidebar-nav">
+            {dashboardItems.map((item) => {
+              const isActive = item.id === 'dashboard' 
+                ? currentPath === 'dashboard' || currentPath === ''
+                : currentPath === item.id;
+              
+              return (
+                <Link
+                  key={item.id}
+                  to={`/analytics/ageing/${item.path}`}
+                  className={`nav-link ${isActive ? 'active' : ''}`}
+                >
+                  <span className="nav-icon">{item.icon}</span>
+                  <span className="nav-label">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Footer */}
+        <div className="sidebar-footer">
+          <div className="footer-logo">AJALABS.AI</div>
+          <div className="footer-email">info@ajalabs.ai</div>
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div style={styles.mainContent}>
+      {/* Main Content */}
+      <div className="ageing-main">
         {/* Header */}
-        <div style={styles.header}>
-          <h1 style={styles.pageTitle}>Ageing Dashboard</h1>
+        <div className="page-header">
+          <h1 className="page-title">Ageing Dashboard</h1>
+          <p className="page-subtitle">Monitor outstanding balances and improve cash flow with visual insights</p>
         </div>
 
-        {/* KPI Cards - New Design */}
-        <div style={styles.kpiGrid}>
-          {/* RECEIVABLES */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>RECEIVABLES</div>
-            <div style={styles.kpiMainValue}>{formatCurrency(kpiData.receivables.value)}</div>
-            <div style={styles.kpiSubText}>overdue: {formatCurrency(kpiData.receivables.overdue)}</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#ef4444'}}>↓ {Math.abs(kpiData.receivables.change)}%</div>
+        {/* KPI Cards Grid - ALL 6 CARDS */}
+        <div className="kpi-grid">
+          {/* RECEIVABLES - Card 1 */}
+          <div className="kpi-card">
+            <div className="kpi-title">RECEIVABLES</div>
+            <div className="kpi-main-value">{formatCurrency(kpiData.receivables.value)}</div>
+            <div className="kpi-sub-text">overdue: {formatCurrency(kpiData.receivables.overdue)}</div>
+            <div className={`kpi-change ${kpiData.receivables.change < 0 ? 'down' : 'up'}`}>
+              <span className="change-icon">{kpiData.receivables.change < 0 ? '↓' : '↑'}</span>
+              <span>{Math.abs(kpiData.receivables.change)}%</span>
+            </div>
           </div>
 
-          {/* PAYABLES */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>PAYABLES</div>
-            <div style={styles.kpiMainValue}>{formatCurrency(kpiData.payables.value)}</div>
-            <div style={styles.kpiSubText}>due soon: {formatCurrency(kpiData.payables.dueSoon)}</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#10b981'}}>↑ {kpiData.payables.change}%</div>
+          {/* PAYABLES - Card 2 */}
+          <div className="kpi-card">
+            <div className="kpi-title">PAYABLES</div>
+            <div className="kpi-main-value">{formatCurrency(kpiData.payables.value)}</div>
+            <div className="kpi-sub-text">due soon: {formatCurrency(kpiData.payables.dueSoon)}</div>
+            <div className={`kpi-change ${kpiData.payables.change > 0 ? 'up' : 'down'}`}>
+              <span className="change-icon">↑</span>
+              <span>{kpiData.payables.change}%</span>
+            </div>
           </div>
 
-          {/* INVENTORY */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>INVENTORY</div>
-            <div style={styles.kpiMainValue}>{formatCurrency(kpiData.inventory.value)}</div>
-            <div style={styles.kpiSubText}>slow moving: {formatCurrency(kpiData.inventory.slowMoving)}</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#ef4444'}}>↓ {Math.abs(kpiData.inventory.change)}%</div>
+          {/* INVENTORY - Card 3 */}
+          <div className="kpi-card">
+            <div className="kpi-title">INVENTORY</div>
+            <div className="kpi-main-value">{formatCurrency(kpiData.inventory.value)}</div>
+            <div className="kpi-sub-text">slow moving: {formatCurrency(kpiData.inventory.slowMoving)}</div>
+            <div className={`kpi-change ${kpiData.inventory.change < 0 ? 'down' : 'up'}`}>
+              <span className="change-icon">↓</span>
+              <span>{Math.abs(kpiData.inventory.change)}%</span>
+            </div>
           </div>
 
-          {/* LIABILITIES */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>LIABILITIES</div>
-            <div style={styles.kpiMainValue}>{formatCurrency(kpiData.liabilities.value)}</div>
-            <div style={styles.kpiSubText}>short term: {formatCurrency(kpiData.liabilities.shortTerm)}</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#10b981'}}>↑ {kpiData.liabilities.change}%</div>
+          {/* LIABILITIES - Card 4 */}
+          <div className="kpi-card">
+            <div className="kpi-title">LIABILITIES</div>
+            <div className="kpi-main-value">{formatCurrency(kpiData.liabilities.value)}</div>
+            <div className="kpi-sub-text">short term: {formatCurrency(kpiData.liabilities.shortTerm)}</div>
+            <div className={`kpi-change ${kpiData.liabilities.change > 0 ? 'up' : 'down'}`}>
+              <span className="change-icon">↑</span>
+              <span>{kpiData.liabilities.change}%</span>
+            </div>
           </div>
 
-          {/* ADVANCES */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>ADVANCES</div>
-            <div style={styles.kpiMainValue}>{formatCurrency(kpiData.advances.value)}</div>
-            <div style={styles.kpiSubText}>pending: {formatCurrency(kpiData.advances.pending)}</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#10b981'}}>↑ {kpiData.advances.change}%</div>
+          {/* ADVANCES - Card 5 */}
+          <div className="kpi-card">
+            <div className="kpi-title">ADVANCES</div>
+            <div className="kpi-main-value">{formatCurrency(kpiData.advances.value)}</div>
+            <div className="kpi-sub-text">pending: {formatCurrency(kpiData.advances.pending)}</div>
+            <div className={`kpi-change ${kpiData.advances.change > 0 ? 'up' : 'down'}`}>
+              <span className="change-icon">↑</span>
+              <span>{kpiData.advances.change}%</span>
+            </div>
           </div>
 
-          {/* CURRENT RATIO */}
-          <div style={styles.kpiCard}>
-            <div style={styles.kpiTitle}>CURRENT RATIO</div>
-            <div style={styles.kpiMainValue}>{kpiData.currentRatio.value}</div>
-            <div style={styles.kpiSubText}>healthy</div>
-            <div style={{...styles.kpiChangeIndicator, color: '#10b981'}}>↑ {kpiData.currentRatio.change}</div>
+          {/* CURRENT RATIO - Card 6 */}
+          <div className="kpi-card">
+            <div className="kpi-title">CURRENT RATIO</div>
+            <div className="kpi-main-value">{kpiData.currentRatio.value}</div>
+            <div className="kpi-sub-text">
+              <span className={`badge badge-${kpiData.currentRatio.status === 'healthy' ? 'good' : 'warning'}`}>
+                {kpiData.currentRatio.status}
+              </span>
+            </div>
+            <div className="kpi-change up">
+              <span className="change-icon">↑</span>
+              <span>{kpiData.currentRatio.change}</span>
+            </div>
           </div>
         </div>
 
-        {/* Routes for different pages */}
+        {/* Routes */}
         <Routes>
-          <Route path="/" element={<Dashboard agingData={agingData} formatCurrency={formatCurrency} />} />
-          <Route path="dashboard" element={<Dashboard agingData={agingData} formatCurrency={formatCurrency} />} />
+          <Route path="/" element={<Dashboard ageingData={ageingData} formatCurrency={formatCurrency} />} />
+          <Route path="dashboard" element={<Dashboard ageingData={ageingData} formatCurrency={formatCurrency} />} />
           <Route path="receivables" element={
             <CategoryPage 
-              title="Receivables"
-              data={agingData.receivables}
+              title="Receivables Ageing"
+              data={ageingData.receivables}
               formatCurrency={formatCurrency}
             />
           } />
           <Route path="payables" element={
             <CategoryPage 
-              title="Payables"
-              data={agingData.payables}
+              title="Payables Ageing"
+              data={ageingData.payables}
               formatCurrency={formatCurrency}
             />
           } />
           <Route path="inventory" element={
             <CategoryPage 
-              title="Inventory"
-              data={agingData.inventory}
+              title="Inventory Ageing"
+              data={ageingData.inventory}
               formatCurrency={formatCurrency}
             />
           } />
           <Route path="liabilities" element={
             <CategoryPage 
-              title="Liabilities"
-              data={agingData.liabilities}
+              title="Liabilities Ageing"
+              data={ageingData.liabilities}
               formatCurrency={formatCurrency}
             />
           } />
           <Route path="advances" element={
             <CategoryPage 
-              title="Advances"
-              data={agingData.advances}
+              title="Advances Ageing"
+              data={ageingData.advances}
               formatCurrency={formatCurrency}
             />
           } />
@@ -249,98 +275,112 @@ const AgeRoot: React.FC = () => {
 
 // Dashboard Component
 const Dashboard: React.FC<{ 
-  agingData: any; 
+  ageingData: any; 
   formatCurrency: (value: number) => string;
-}> = ({ agingData, formatCurrency }) => {
+}> = ({ ageingData, formatCurrency }) => {
+  const [activeTab, setActiveTab] = useState<'payables' | 'receivables' | 'inventory' | 'liabilities' | 'advances'>('payables');
+
+  // Trend data
+  const trendData = [
+    { month: 'Jan', receivables: 2800000, payables: 2200000, workingCapital: 3200000 },
+    { month: 'Feb', receivables: 2950000, payables: 2300000, workingCapital: 3400000 },
+    { month: 'Mar', receivables: 3100000, payables: 2250000, workingCapital: 3600000 },
+    { month: 'Apr', receivables: 3280000, payables: 2380000, workingCapital: 3800000 },
+    { month: 'May', receivables: 3400000, payables: 2450000, workingCapital: 3950000 },
+    { month: 'Jun', receivables: 3550000, payables: 2550000, workingCapital: 4100000 },
+  ];
+
+  const trendLines = [
+    { key: 'receivables', name: 'Receivables', color: '#3b82f6' },
+    { key: 'payables', name: 'Payables', color: '#10b981' },
+    { key: 'workingCapital', name: 'Working Capital', color: '#8b5cf6' },
+  ];
+
+  const currentData = ageingData[activeTab];
+
   return (
-    <div>
-      {/* Payables Aging Section - Showing all age groups */}
-      <div style={styles.analysisSection}>
-        <h2 style={styles.sectionTitle}>Payables Aging</h2>
-        
-        {/* Charts Row */}
-        <div style={styles.chartsRow}>
-          {/* Bar Chart */}
-          <div style={styles.chartCard}>
-            <h3 style={styles.chartTitle}>Bar Chart</h3>
-            <div style={styles.barChart}>
-              {agingData.payables.buckets.map((bucket: any, index: number) => (
-                <div key={index} style={styles.barChartItem}>
-                  <div style={styles.barLabelContainer}>
-                    <span style={styles.barLabel}>{bucket.name}</span>
-                    <span style={styles.barPercentage}>{bucket.percentage}%</span>
-                  </div>
-                  <div style={styles.barContainer}>
-                    <div 
-                      style={{
-                        ...styles.barFill,
-                        width: `${bucket.percentage}%`,
-                        backgroundColor: bucket.color
-                      }}
-                    />
-                  </div>
+    <div className="dashboard-content">
+      {/* Tabs */}
+      <div className="tabs-container">
+        <button
+          className={`tab-button ${activeTab === 'payables' ? 'active' : ''}`}
+          onClick={() => setActiveTab('payables')}
+        >
+          <span className="tab-icon">📋</span>
+          <span>Payables</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'receivables' ? 'active' : ''}`}
+          onClick={() => setActiveTab('receivables')}
+        >
+          <span className="tab-icon">💰</span>
+          <span>Receivables</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'inventory' ? 'active' : ''}`}
+          onClick={() => setActiveTab('inventory')}
+        >
+          <span className="tab-icon">📦</span>
+          <span>Inventory</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'liabilities' ? 'active' : ''}`}
+          onClick={() => setActiveTab('liabilities')}
+        >
+          <span className="tab-icon">⚖️</span>
+          <span>Liabilities</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === 'advances' ? 'active' : ''}`}
+          onClick={() => setActiveTab('advances')}
+        >
+          <span className="tab-icon">📈</span>
+          <span>Advances</span>
+        </button>
+      </div>
+
+      {/* Charts Grid */}
+      <div className="charts-grid">
+        {/* Bar Chart */}
+        <div className="chart-card">
+          <h3 className="card-title">
+            <span className="card-icon">📊</span>
+            {currentData.title} - Bar Chart
+          </h3>
+          <div className="bar-chart-container">
+            {currentData.buckets.map((bucket: any, index: number) => (
+              <div key={index} className="bar-item">
+                <div className="bar-label">
+                  <span>{bucket.name}</span>
+                  <span className="bar-percentage">{bucket.percentage}%</span>
                 </div>
-              ))}
-            </div>
+                <div className="bar-track">
+                  <div 
+                    className="bar-fill"
+                    style={{ 
+                      width: `${bucket.percentage}%`, 
+                      backgroundColor: bucket.color
+                    }} 
+                  />
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
 
-          {/* Pie Chart */}
-          <div style={styles.chartCard}>
-            <h3 style={styles.chartTitle}>Pie Chart</h3>
-            <div style={styles.pieChart}>
-              <svg viewBox="0 0 100 100" style={styles.pieSvg}>
-                {agingData.payables.buckets.map((bucket: any, index: number) => {
+        {/* Donut Chart */}
+        <div className="chart-card">
+          <h3 className="card-title">
+            <span className="card-icon">🍩</span>
+            {currentData.title} Distribution
+          </h3>
+          <div className="donut-container">
+            <div className="donut-wrapper">
+              <svg viewBox="0 0 100 100" className="donut-svg">
+                {currentData.buckets.map((bucket: any, index: number) => {
                   let cumulativePercentage = 0;
                   for (let i = 0; i < index; i++) {
-                    cumulativePercentage += agingData.payables.buckets[i].percentage;
-                  }
-                  const startAngle = (cumulativePercentage * 3.6) * (Math.PI / 180);
-                  const endAngle = ((cumulativePercentage + bucket.percentage) * 3.6) * (Math.PI / 180);
-                  
-                  const x1 = 50 + 40 * Math.sin(startAngle);
-                  const y1 = 50 - 40 * Math.cos(startAngle);
-                  const x2 = 50 + 40 * Math.sin(endAngle);
-                  const y2 = 50 - 40 * Math.cos(endAngle);
-                  
-                  const largeArcFlag = bucket.percentage > 50 ? 1 : 0;
-                  
-                  const pathData = [
-                    `M 50 50`,
-                    `L ${x1} ${y1}`,
-                    `A 40 40 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-                    `Z`
-                  ].join(' ');
-                  
-                  return (
-                    <path
-                      key={index}
-                      d={pathData}
-                      fill={bucket.color}
-                      stroke="white"
-                      strokeWidth="1"
-                    />
-                  );
-                })}
-                <circle cx="50" cy="50" r="20" fill="white" />
-                <text x="50" y="45" textAnchor="middle" dominantBaseline="middle" style={styles.pieText}>
-                  {formatCurrency(agingData.payables.total)}
-                </text>
-                <text x="50" y="60" textAnchor="middle" dominantBaseline="middle" style={styles.pieSubText}>
-                  Total
-                </text>
-              </svg>
-            </div>
-          </div>
-
-          {/* Donut Chart */}
-          <div style={styles.chartCard}>
-            <h3 style={styles.chartTitle}>Donut Chart</h3>
-            <div style={styles.donutChart}>
-              <svg viewBox="0 0 100 100" style={styles.donutSvg}>
-                {agingData.payables.buckets.map((bucket: any, index: number) => {
-                  let cumulativePercentage = 0;
-                  for (let i = 0; i < index; i++) {
-                    cumulativePercentage += agingData.payables.buckets[i].percentage;
+                    cumulativePercentage += currentData.buckets[i].percentage;
                   }
                   
                   return (
@@ -359,189 +399,56 @@ const Dashboard: React.FC<{
                   );
                 })}
                 <circle cx="50" cy="50" r="25" fill="white" />
-                <text x="50" y="45" textAnchor="middle" dominantBaseline="middle" style={styles.donutText}>
-                  Total
-                </text>
-                <text x="50" y="60" textAnchor="middle" dominantBaseline="middle" style={styles.donutSubText}>
-                  {formatCurrency(agingData.payables.total)}
-                </text>
               </svg>
+              <div className="donut-center">
+                <div className="donut-total">{formatCurrency(currentData.total)}</div>
+                <div className="donut-label">Total</div>
+              </div>
+            </div>
+            
+            {/* Legend */}
+            <div className="chart-legend">
+              {currentData.buckets.map((bucket: any, index: number) => (
+                <div key={index} className="legend-item">
+                  <span className="legend-color" style={{ backgroundColor: bucket.color }} />
+                  <span className="legend-label">{bucket.name}</span>
+                  <span className="legend-value">{bucket.percentage}%</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
-        {/* Aging Details Table - All age groups */}
-        <div style={styles.tableContainer}>
-          <h3 style={styles.tableTitle}>Aging Details</h3>
-          <table style={styles.table}>
-            <thead>
-              <tr>
-                <th style={styles.th}>Age Group</th>
-                <th style={styles.th}>Amount</th>
-                <th style={styles.th}>Percentage</th>
-              </tr>
-            </thead>
-            <tbody>
-              {agingData.payables.buckets.map((bucket: any, index: number) => (
-                <tr key={index}>
-                  <td style={styles.td}>
-                    <span style={{...styles.colorDot, backgroundColor: bucket.color}}></span>
-                    {bucket.name}
-                  </td>
-                  <td style={styles.td}>{formatCurrency(bucket.value)}</td>
-                  <td style={styles.td}>{bucket.percentage}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Category Page Component - Shows all age groups
-const CategoryPage: React.FC<{ 
-  title: string; 
-  data: any; 
-  formatCurrency: (value: number) => string;
-}> = ({ title, data, formatCurrency }) => {
-  return (
-    <div>
-      <h2 style={styles.pageSectionTitle}>{title} Aging</h2>
-      
-      {/* Charts Row */}
-      <div style={styles.chartsRow}>
-        {/* Bar Chart */}
-        <div style={styles.chartCard}>
-          <h3 style={styles.chartTitle}>Bar Chart</h3>
-          <div style={styles.barChart}>
-            {data.buckets.map((bucket: any, index: number) => (
-              <div key={index} style={styles.barChartItem}>
-                <div style={styles.barLabelContainer}>
-                  <span style={styles.barLabel}>{bucket.name}</span>
-                  <span style={styles.barPercentage}>{bucket.percentage}%</span>
-                </div>
-                <div style={styles.barContainer}>
-                  <div 
-                    style={{
-                      ...styles.barFill,
-                      width: `${bucket.percentage}%`,
-                      backgroundColor: bucket.color
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Pie Chart */}
-        <div style={styles.chartCard}>
-          <h3 style={styles.chartTitle}>Pie Chart</h3>
-          <div style={styles.pieChart}>
-            <svg viewBox="0 0 100 100" style={styles.pieSvg}>
-              {data.buckets.map((bucket: any, index: number) => {
-                let cumulativePercentage = 0;
-                for (let i = 0; i < index; i++) {
-                  cumulativePercentage += data.buckets[i].percentage;
-                }
-                const startAngle = (cumulativePercentage * 3.6) * (Math.PI / 180);
-                const endAngle = ((cumulativePercentage + bucket.percentage) * 3.6) * (Math.PI / 180);
-                
-                const x1 = 50 + 40 * Math.sin(startAngle);
-                const y1 = 50 - 40 * Math.cos(startAngle);
-                const x2 = 50 + 40 * Math.sin(endAngle);
-                const y2 = 50 - 40 * Math.cos(endAngle);
-                
-                const largeArcFlag = bucket.percentage > 50 ? 1 : 0;
-                
-                const pathData = [
-                  `M 50 50`,
-                  `L ${x1} ${y1}`,
-                  `A 40 40 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-                  `Z`
-                ].join(' ');
-                
-                return (
-                  <path
-                    key={index}
-                    d={pathData}
-                    fill={bucket.color}
-                    stroke="white"
-                    strokeWidth="1"
-                  />
-                );
-              })}
-              <circle cx="50" cy="50" r="20" fill="white" />
-              <text x="50" y="45" textAnchor="middle" dominantBaseline="middle" style={styles.pieText}>
-                {formatCurrency(data.total)}
-              </text>
-              <text x="50" y="60" textAnchor="middle" dominantBaseline="middle" style={styles.pieSubText}>
-                Total
-              </text>
-            </svg>
-          </div>
-        </div>
-
-        {/* Donut Chart */}
-        <div style={styles.chartCard}>
-          <h3 style={styles.chartTitle}>Donut Chart</h3>
-          <div style={styles.donutChart}>
-            <svg viewBox="0 0 100 100" style={styles.donutSvg}>
-              {data.buckets.map((bucket: any, index: number) => {
-                let cumulativePercentage = 0;
-                for (let i = 0; i < index; i++) {
-                  cumulativePercentage += data.buckets[i].percentage;
-                }
-                
-                return (
-                  <circle
-                    key={index}
-                    cx="50"
-                    cy="50"
-                    r="35"
-                    fill="transparent"
-                    stroke={bucket.color}
-                    strokeWidth="10"
-                    strokeDasharray={`${bucket.percentage * 2.2} 220`}
-                    strokeDashoffset={-cumulativePercentage * 2.2}
-                    transform="rotate(-90 50 50)"
-                  />
-                );
-              })}
-              <circle cx="50" cy="50" r="25" fill="white" />
-              <text x="50" y="45" textAnchor="middle" dominantBaseline="middle" style={styles.donutText}>
-                Total
-              </text>
-              <text x="50" y="60" textAnchor="middle" dominantBaseline="middle" style={styles.donutSubText}>
-                {formatCurrency(data.total)}
-              </text>
-            </svg>
-          </div>
-        </div>
       </div>
 
-      {/* Aging Details Table - All age groups */}
-      <div style={styles.tableContainer}>
-        <h3 style={styles.tableTitle}>Aging Details</h3>
-        <table style={styles.table}>
+      {/* Trend Chart */}
+      <div className="trend-chart">
+        <LineChartComponent
+          title="6-Month Trend Analysis"
+          data={trendData}
+          lines={trendLines}
+        />
+      </div>
+
+      {/* Table */}
+      <div className="table-container">
+        <h3>{currentData.title} Details</h3>
+        <table>
           <thead>
             <tr>
-              <th style={styles.th}>Age Group</th>
-              <th style={styles.th}>Amount</th>
-              <th style={styles.th}>Percentage</th>
+              <th>Age Group</th>
+              <th>Amount</th>
+              <th>Percentage</th>
             </tr>
           </thead>
           <tbody>
-            {data.buckets.map((bucket: any, index: number) => (
+            {currentData.buckets.map((bucket: any, index: number) => (
               <tr key={index}>
-                <td style={styles.td}>
-                  <span style={{...styles.colorDot, backgroundColor: bucket.color}}></span>
+                <td>
+                  <span className="color-dot" style={{ backgroundColor: bucket.color }} />
                   {bucket.name}
                 </td>
-                <td style={styles.td}>{formatCurrency(bucket.value)}</td>
-                <td style={styles.td}>{bucket.percentage}%</td>
+                <td>{formatCurrency(bucket.value)}</td>
+                <td>{bucket.percentage}%</td>
               </tr>
             ))}
           </tbody>
@@ -551,292 +458,124 @@ const CategoryPage: React.FC<{
   );
 };
 
-// Styles
-const styles = {
-  appContainer: {
-    display: 'flex',
-    minHeight: '100vh',
-    backgroundColor: '#f3f4f6',
-  },
-  sidebar: {
-    width: '260px',
-    backgroundColor: '#0f172a',
-    display: 'flex',
-    flexDirection: 'column' as const,
-    position: 'fixed' as const,
-    top: 0,
-    left: 0,
-    bottom: 0,
-    boxShadow: '4px 0 10px rgba(0,0,0,0.1)',
-    zIndex: 1000,
-    color: 'white',
-  },
-  sidebarHeader: {
-    padding: '28px 24px',
-    borderBottom: '1px solid #1e293b',
-  },
-  sidebarTitle: {
-    fontSize: '26px',
-    fontWeight: '700',
-    color: 'white',
-    margin: 0,
-    letterSpacing: '-0.5px',
-    background: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    display: 'inline-block',
-  },
-  sidebarNav: {
-    flex: 1,
-    padding: '24px 0',
-  },
-  navItem: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '12px 24px',
-    textDecoration: 'none',
-    transition: 'all 0.2s ease',
-    cursor: 'pointer',
-    marginBottom: '4px',
-    color: '#e2e8f0',
-    position: 'relative' as const,
-  },
-  navIcon: {
-    fontSize: '18px',
-    marginRight: '12px',
-    width: '24px',
-  },
-  navLabel: {
-    fontSize: '14px',
-    fontWeight: '500',
-  },
-  navActive: {
-    position: 'absolute' as const,
-    right: '20px',
-    color: '#3b82f6',
-    fontSize: '20px',
-  },
-  sidebarFooter: {
-    padding: '24px',
-    borderTop: '1px solid #1e293b',
-    background: 'linear-gradient(135deg, #0a0f1a 0%, #0f172a 100%)',
-  },
-  footerLogo: {
-    fontSize: '14px',
-    fontWeight: '600',
-    color: 'white',
-    marginBottom: '4px',
-  },
-  footerEmail: {
-    fontSize: '12px',
-    color: '#94a3b8',
-  },
-  mainContent: {
-    flex: 1,
-    marginLeft: '260px',
-    padding: '30px',
-  },
-  header: {
-    marginBottom: '30px',
-  },
-  pageTitle: {
-    fontSize: '28px',
-    fontWeight: '600',
-    color: '#111827',
-    margin: 0,
-  },
-  kpiGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '20px',
-    marginBottom: '40px',
-  },
-  kpiCard: {
-    backgroundColor: 'white',
-    padding: '20px',
-    borderRadius: '12px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
-    border: '1px solid #e5e7eb',
-  },
-  kpiTitle: {
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#6b7280',
-    marginBottom: '8px',
-    letterSpacing: '0.5px',
-  },
-  kpiMainValue: {
-    fontSize: '28px',
-    fontWeight: '700',
-    color: '#111827',
-    marginBottom: '4px',
-  },
-  kpiSubText: {
-    fontSize: '13px',
-    color: '#6b7280',
-    marginBottom: '8px',
-  },
-  kpiChangeIndicator: {
-    fontSize: '14px',
-    fontWeight: '600',
-  },
-  analysisSection: {
-    marginTop: '20px',
-  },
-  sectionTitle: {
-    fontSize: '20px',
-    fontWeight: '600',
-    color: '#111827',
-    marginBottom: '20px',
-  },
-  pageSectionTitle: {
-    fontSize: '22px',
-    fontWeight: '600',
-    color: '#111827',
-    marginBottom: '24px',
-  },
-  chartsRow: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: '24px',
-    marginBottom: '30px',
-  },
-  chartCard: {
-    backgroundColor: 'white',
-    padding: '20px',
-    borderRadius: '16px',
-    border: '1px solid #f0f0f0',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-  },
-  chartTitle: {
-    fontSize: '16px',
-    fontWeight: '600',
-    color: '#111827',
-    marginBottom: '20px',
-    textAlign: 'center' as const,
-  },
-  barChart: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '12px',
-    maxHeight: '300px',
-    overflowY: 'auto' as const,
-    paddingRight: '8px',
-  },
-  barChartItem: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    gap: '4px',
-  },
-  barLabelContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  barLabel: {
-    fontSize: '12px',
-    fontWeight: '500',
-    color: '#4b5563',
-  },
-  barPercentage: {
-    fontSize: '12px',
-    fontWeight: '600',
-    color: '#111827',
-  },
-  barContainer: {
-    height: '8px',
-    backgroundColor: '#f3f4f6',
-    borderRadius: '4px',
-    overflow: 'hidden' as const,
-  },
-  barFill: {
-    height: '100%',
-    borderRadius: '4px',
-    transition: 'width 0.3s ease',
-  },
-  pieChart: {
-    width: '100%',
-    height: '200px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  pieSvg: {
-    width: '180px',
-    height: '180px',
-  },
-  pieText: {
-    fontSize: '10px',
-    fontWeight: '700',
-    fill: '#111827',
-  },
-  pieSubText: {
-    fontSize: '8px',
-    fill: '#6b7280',
-  },
-  donutChart: {
-    width: '100%',
-    height: '200px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  donutSvg: {
-    width: '180px',
-    height: '180px',
-  },
-  donutText: {
-    fontSize: '10px',
-    fontWeight: '700',
-    fill: '#111827',
-  },
-  donutSubText: {
-    fontSize: '8px',
-    fill: '#6b7280',
-  },
-  tableContainer: {
-    backgroundColor: 'white',
-    borderRadius: '16px',
-    border: '1px solid #f0f0f0',
-    overflow: 'hidden' as const,
-    marginBottom: '24px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
-  },
-  tableTitle: {
-    fontSize: '16px',
-    fontWeight: '600',
-    color: '#111827',
-    padding: '16px 24px',
-    margin: 0,
-    borderBottom: '1px solid #f0f0f0',
-    backgroundColor: '#fafafa',
-  },
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse' as const,
-  },
-  th: {
-    textAlign: 'left' as const,
-    padding: '14px 24px',
-    backgroundColor: '#fafafa',
-    borderBottom: '2px solid #f0f0f0',
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#4b5563',
-  },
-  td: {
-    padding: '12px 24px',
-    borderBottom: '1px solid #f0f0f0',
-    fontSize: '14px',
-    color: '#1f2937',
-  },
-  colorDot: {
-    width: '10px',
-    height: '10px',
-    borderRadius: '50%',
-    display: 'inline-block',
-    marginRight: '10px',
-  },
+// Category Page Component
+const CategoryPage: React.FC<{ 
+  title: string; 
+  data: any; 
+  formatCurrency: (value: number) => string;
+}> = ({ title, data, formatCurrency }) => {
+  return (
+    <div className="category-content">
+      <h2 className="category-title">{title}</h2>
+      
+      {/* Charts Grid */}
+      <div className="charts-grid">
+        {/* Bar Chart */}
+        <div className="chart-card">
+          <h3 className="card-title">
+            <span className="card-icon">📊</span>
+            {title} - Bar Chart
+          </h3>
+          <div className="bar-chart-container">
+            {data.buckets.map((bucket: any, index: number) => (
+              <div key={index} className="bar-item">
+                <div className="bar-label">
+                  <span>{bucket.name}</span>
+                  <span className="bar-percentage">{bucket.percentage}%</span>
+                </div>
+                <div className="bar-track">
+                  <div 
+                    className="bar-fill"
+                    style={{ 
+                      width: `${bucket.percentage}%`, 
+                      backgroundColor: bucket.color
+                    }} 
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Donut Chart */}
+        <div className="chart-card">
+          <h3 className="card-title">
+            <span className="card-icon">🍩</span>
+            {title} Distribution
+          </h3>
+          <div className="donut-container">
+            <div className="donut-wrapper">
+              <svg viewBox="0 0 100 100" className="donut-svg">
+                {data.buckets.map((bucket: any, index: number) => {
+                  let cumulativePercentage = 0;
+                  for (let i = 0; i < index; i++) {
+                    cumulativePercentage += data.buckets[i].percentage;
+                  }
+                  
+                  return (
+                    <circle
+                      key={index}
+                      cx="50"
+                      cy="50"
+                      r="35"
+                      fill="transparent"
+                      stroke={bucket.color}
+                      strokeWidth="10"
+                      strokeDasharray={`${bucket.percentage * 2.2} 220`}
+                      strokeDashoffset={-cumulativePercentage * 2.2}
+                      transform="rotate(-90 50 50)"
+                    />
+                  );
+                })}
+                <circle cx="50" cy="50" r="25" fill="white" />
+              </svg>
+              <div className="donut-center">
+                <div className="donut-total">{formatCurrency(data.total)}</div>
+                <div className="donut-label">Total</div>
+              </div>
+            </div>
+            
+            {/* Legend */}
+            <div className="chart-legend">
+              {data.buckets.map((bucket: any, index: number) => (
+                <div key={index} className="legend-item">
+                  <span className="legend-color" style={{ backgroundColor: bucket.color }} />
+                  <span className="legend-label">{bucket.name}</span>
+                  <span className="legend-value">{bucket.percentage}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div className="table-container">
+        <h3>{title} Details</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Age Group</th>
+              <th>Amount</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.buckets.map((bucket: any, index: number) => (
+              <tr key={index}>
+                <td>
+                  <span className="color-dot" style={{ backgroundColor: bucket.color }} />
+                  {bucket.name}
+                </td>
+                <td>{formatCurrency(bucket.value)}</td>
+                <td>{bucket.percentage}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default AgeRoot;

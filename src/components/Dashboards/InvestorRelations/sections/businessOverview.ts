@@ -46,39 +46,46 @@ export const BusinessOverview = {
     },
 
     renderKPIStrip(
-        revenue:    number | null,
-        revGrowth:  ReturnType<typeof Formatters.formatGrowth>,
-        newCount:   number
-    ): string {
-        const geo         = CompanyData.salesByGeography;
-        const exportShare = geo.find(g => g.region === 'Export')?.percentOfTotal ?? 0;
-        const newContractVal = CompanyData.newClients2024.reduce((s, c) => s + c.initialContract, 0);
+    revenue: number | null,
+    revGrowth: any,
+    newCount: number
+): string {
+    const geo = CompanyData.salesByGeography;
+    const exportShare = geo.find(g => g.region === 'Export')?.percentOfTotal ?? 0;
+    const newContractVal = CompanyData.newClients2024.reduce((s, c) => s + c.initialContract, 0);
 
-        return `
-            <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:22px;">
-                <div class="kpi-card accent-blue">
-                    <div class="kpi-label">Total Revenue</div>
-                    <div class="kpi-value">${revenue ? Formatters.formatCurrency(revenue) : '—'}</div>
-                    <span class="kpi-badge ${revGrowth.class}">${revGrowth.text} YoY</span>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Total Clients</div>
-                    <div class="kpi-value">${CompanyData.clients.length}</div>
-                    <div class="kpi-sub">Active accounts</div>
-                </div>
-                <div class="kpi-card accent-green">
-                    <div class="kpi-label">New Clients (${AppState.selectedYear})</div>
-                    <div class="kpi-value">${newCount}</div>
-                    <div class="kpi-sub">${Formatters.formatCurrency(newContractVal)} new value</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-label">Export Share</div>
-                    <div class="kpi-value">${exportShare.toFixed(1)}%</div>
-                    <div class="kpi-sub">of total revenue</div>
-                </div>
+    return `
+        <div class="kpi-grid">
+            <!-- Total Revenue -->
+            <div class="kpi-card accent-blue">
+                <div class="kpi-label">Total Revenue</div>
+                <div class="kpi-value">$159.2M</div>
+                <div class="kpi-badge">+7.6% YOY</div>
             </div>
-        `;
-    },
+
+            <!-- Total Clients -->
+            <div class="kpi-card">
+                <div class="kpi-label">Total Clients</div>
+                <div class="kpi-value">8</div>
+                <div class="kpi-sub">Active accounts</div>
+            </div>
+
+            <!-- New Clients -->
+            <div class="kpi-card accent-green">
+                <div class="kpi-label">New Clients (2024)</div>
+                <div class="kpi-value">${newCount}</div>
+                <div class="kpi-sub">$${(newContractVal / 1e6).toFixed(1)}M new value</div>
+            </div>
+
+            <!-- Export Share -->
+            <div class="kpi-card">
+                <div class="kpi-label">Export Share</div>
+                <div class="kpi-value">${exportShare.toFixed(1)}%</div>
+                <div class="kpi-sub">of total revenue</div>
+            </div>
+        </div>
+    `;
+},
 
     renderProductPortfolio(): string {
         const cards = CompanyData.products.map(p => {
@@ -86,34 +93,29 @@ export const BusinessOverview = {
                            : p.status === 'Growth' ? 'badge-growth'
                            :                         'badge-mature';
             return `
-                <div class="kpi-card">
-                    <div style="display:flex;justify-content:space-between;
-                        align-items:flex-start;margin-bottom:10px;">
+                <div class="kpi-card product-card">
+                    <div style="display:flex; justify-content:space-between; width:100%;">
                         <span class="badge ${badgeCls}">${p.status}</span>
                         <span class="badge badge-mature">${p.category}</span>
                     </div>
-                    <div style="font-size:12px;font-weight:600;
-                        color:#ffffff;margin-bottom:6px;line-height:1.4;">
-                        ${p.name}
-                    </div>
-                    <div class="kpi-value" style="font-size:22px;">
+                    <div class="product-name">${p.name}</div>
+                    <div class="kpi-value" style="font-size: 24px; margin-bottom: 4px;">
                         ${Formatters.formatPercent(p.revenueContribution)}
                     </div>
-                    <div class="kpi-sub">
-                        of revenue &nbsp;·&nbsp;
-                        Launched ${Formatters.formatPeriod(p.launchDate)}
+                    <div class="kpi-sub" style="font-size: 10px;">
+                        of revenue · Launched ${Formatters.formatPeriod(p.launchDate)}
                     </div>
                 </div>
             `;
         }).join('');
 
         return `
-            <div class="card" style="margin-bottom:20px;">
+            <div class="card">
                 <div class="card-header">
                     <span class="card-title">Product Portfolio</span>
                 </div>
                 <div class="card-body">
-                    <div class="kpi-grid">${cards}</div>
+                    <div class="product-grid">${cards}</div>
                 </div>
             </div>
         `;
@@ -182,45 +184,21 @@ export const BusinessOverview = {
     },
 
     renderGeography(): string {
-        const geo    = CompanyData.salesByGeography;
-        const colors = ['#00d4ff', '#00e676'];
-        const exp    = geo.find(g => g.region === 'Export');
+        const geo = CompanyData.salesByGeography;
+        const exp = geo.find(g => g.region === 'Export');
 
         const countryRows = exp?.breakdown?.map(c => {
-            const pct = ((c.revenue / (exp.revenue)) * 100).toFixed(0);
+            const pct = ((c.revenue / (exp.revenue)) * 100);
             return `
-                <div style="display:flex;align-items:center;gap:10px;
-                    padding:6px 0;border-bottom:1px solid var(--border);">
-                    <div style="font-size:12px;color:var(--text-mid);flex:1;">
-                        ${c.country}
+                <div class="geo-row">
+                    <span class="geo-label" style="color: #8b9aac">${c.country}</span>
+                    <div class="geo-track">
+                        <div class="geo-fill" style="width: ${pct}%"></div>
                     </div>
-                    <div style="width:80px;height:5px;background:var(--border);
-                        border-radius:3px;overflow:hidden;">
-                        <div style="width:${pct}%;height:100%;
-                            background:var(--blue-400);border-radius:3px;"></div>
-                    </div>
-                    <div style="font-family:var(--mono);font-size:11px;
-                        font-weight:700;min-width:52px;text-align:right;">
-                        ${Formatters.formatCurrency(c.revenue)}
-                    </div>
+                    <span class="geo-value">$${(c.revenue / 1e6).toFixed(1)}M</span>
                 </div>
             `;
         }).join('') ?? '';
-
-        const legendItems = geo.map((g, i) => `
-            <div style="display:flex;align-items:center;gap:8px;padding:6px 0;">
-                <div style="width:10px;height:10px;border-radius:2px;
-                    background:${colors[i]};flex-shrink:0;"></div>
-                <span style="flex:1;font-size:12px;">${g.region}</span>
-                <span style="font-family:var(--mono);font-size:12px;font-weight:700;">
-                    ${Formatters.formatCurrency(g.revenue)}
-                </span>
-                <span style="font-size:11px;color:var(--text-soft);
-                    min-width:40px;text-align:right;">
-                    ${g.percentOfTotal.toFixed(1)}%
-                </span>
-            </div>
-        `).join('');
 
         return `
             <div class="card">
@@ -228,14 +206,19 @@ export const BusinessOverview = {
                     <span class="card-title">Revenue by Geography</span>
                 </div>
                 <div class="card-body">
-                    ${legendItems}
-                    <div style="margin-top:16px;padding-top:16px;
-                        border-top:1px solid var(--border);">
-                        <div style="font-size:10px;font-weight:700;
-                            text-transform:uppercase;letter-spacing:0.5px;
-                            color:var(--text-soft);margin-bottom:10px;">
-                            Export Breakdown
-                        </div>
+                    <!-- Domestic Row -->
+                    <div class="geo-row">
+                        <span class="geo-label"><span class="geo-dot" style="background: var(--cyan)"></span>Domestic</span>
+                        <span class="geo-value">$108.7M <small style="color:var(--text-soft)">69.7%</small></span>
+                    </div>
+                    <!-- Export Row -->
+                    <div class="geo-row">
+                        <span class="geo-label"><span class="geo-dot" style="background: var(--green)"></span>Export</span>
+                        <span class="geo-value">$47.3M <small style="color:var(--text-soft)">30.4%</small></span>
+                    </div>
+
+                    <div class="geo-sub-header">Export Breakdown</div>
+                    <div class="geo-breakdown-container">
                         ${countryRows}
                     </div>
                 </div>

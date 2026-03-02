@@ -2,7 +2,7 @@
 
 .interest-rates-container {
   padding: 24px;
-  background: #f8fafc;
+  background: #ffffff;
   min-height: calc(100vh - 200px);
 }
 
@@ -32,24 +32,27 @@
 }
 
 .stat-card-small {
-  background: white;
+  background: #ffffff;
   border-radius: 12px;
   padding: 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
 }
 
 .stat-card-small .stat-icon {
   font-size: 24px;
-  background: #f1f5f9;
+  background: #f8fafc;
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  color: #334155;
+  border: 1px solid #e2e8f0;
 }
 
 .stat-card-small .stat-label {
@@ -75,10 +78,11 @@
 }
 
 .chart-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
 }
 
 .chart-card h3 {
@@ -86,6 +90,8 @@
   font-weight: 600;
   color: #0f172a;
   margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eef2f6;
 }
 
 .chart-container {
@@ -96,10 +102,11 @@
 
 /* Table Card */
 .table-card {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
   margin-bottom: 24px;
 }
 
@@ -108,6 +115,8 @@
   font-weight: 600;
   color: #0f172a;
   margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eef2f6;
 }
 
 .data-table {
@@ -117,19 +126,29 @@
 
 .data-table th {
   text-align: left;
-  padding: 12px;
+  padding: 14px 12px;
   color: #64748b;
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: #f8fafc;
   border-bottom: 2px solid #e2e8f0;
 }
 
 .data-table td {
-  padding: 16px 12px;
-  border-bottom: 1px solid #e2e8f0;
-  color: #1e293b;
+  padding: 14px 12px;
+  border-bottom: 1px solid #eef2f6;
+  color: #334155;
   font-size: 14px;
+}
+
+.data-table tr:hover td {
+  background: #f8fafc;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
 }
 
 .facility-id {
@@ -140,6 +159,7 @@
 
 .currency {
   font-weight: 600;
+  color: #0f172a;
 }
 
 .rate {
@@ -158,10 +178,11 @@
 
 /* Alerts Section */
 .alerts-section {
-  background: white;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
 }
 
 .alerts-section h3 {
@@ -169,6 +190,8 @@
   font-weight: 600;
   color: #0f172a;
   margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eef2f6;
 }
 
 .alerts-grid {
@@ -184,6 +207,7 @@
   padding: 16px;
   border-radius: 12px;
   background: #f8fafc;
+  border: 1px solid #e2e8f0;
 }
 
 .alert-item.warning {
@@ -238,5 +262,9 @@
   
   .stats-row {
     grid-template-columns: 1fr;
+  }
+  
+  .alert-item {
+    padding: 12px;
   }
 }
