@@ -1,5 +1,5 @@
 import React from 'react';
-import './Hedging.css';
+import './loanHedging.css';
 
 const Hedging: React.FC = () => {
   const hedgingData = [

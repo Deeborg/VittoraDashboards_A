@@ -1,8 +1,8 @@
 import React from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
-import './InterestRates.css';
-
+// This one is already correct:
+import './loanInterestRates.css';
 // Rest of your component code...
 
 

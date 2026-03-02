@@ -46,23 +46,15 @@ const LoanRoot: React.FC = () => {
   return (
     <DashboardProvider>
       <div className="loan-root-container">
-        {/* Header */}
-        <div className="loan-header">
-          <div className="header-left">
-            <h1>Vittora</h1>
-            <p className="loan-subtitle">Loans & Borrowing Dashboard</p>
-          </div>
-          <div className="header-right">
-            <span className="date-badge">Friday, February 27, 2026</span>
-          </div>
-        </div>
-
         {/* Main content with left panel and right content */}
         <div className="dashboard-layout">
-          {/* Left Panel - Menu */}
+          {/* Left Panel - Simple with just Vittora */}
           <div className="left-panel">
+            <div className="panel-brand">
+              <h1>Vittora</h1>
+            </div>
             <div className="panel-header">
-              <h3>Analytics</h3>
+              <h3>ANALYTICS</h3>
               <span className="panel-count">{menuItems.length} modules</span>
             </div>
             <ul className="menu-list">
@@ -87,23 +79,27 @@ const LoanRoot: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Area */}
+          {/* Right Content Area with Dashboard Header */}
           <div className="right-content">
-            {renderContent()}
+            <div className="dashboard-header">
+              <h2>Loans & Borrowing Dashboard</h2>
+              <p>Monitor outstanding loans and improve borrowing strategy with visual insights</p>
+            </div>
+            <div className="content-area">
+              {renderContent()}
+            </div>
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Simple Footer */}
         <div className="dashboard-footer">
           <div className="footer-left">
-            <span>© 2026 Vittora</span>
+            <span>AJALABS.AI</span>
             <span>•</span>
-            <span>All rights reserved</span>
+            <span>info@ajalabs.ai</span>
           </div>
           <div className="footer-right">
-            <span>ENG</span>
-            <span>11:34 AM</span>
-            <span>27-02-2026</span>
+            <span>Friday, February 27, 2026</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Pie, Line } from 'react-chartjs-2';
 import { useDashboard } from '../context/DashboardContext'; // Fixed path - go up 2 levels
-import './CurrencyExposure.css';
+import './loanCurrencyExposure.css';
 
 // Define the type for currency data
 interface CurrencyExposureRow {

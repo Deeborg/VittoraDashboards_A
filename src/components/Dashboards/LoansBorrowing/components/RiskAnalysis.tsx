@@ -1,6 +1,6 @@
 import React from 'react';
-import './RiskAnalysis.css';
-
+// This one is already correct:
+import './loanRiskAnalysis.css';
 const RiskAnalysis: React.FC = () => {
   const riskData = [
     { category: 'Interest Rate Risk', exposure: '$2.1B', probability: 'Medium', impact: 'High', score: 85, mitigation: 'Fixed rate swaps', owner: 'Treasury', trend: 'stable' },

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Covenants.css';
+import './loanCovenants.css';
 
 const Covenants: React.FC = () => {
   const covenantData = [

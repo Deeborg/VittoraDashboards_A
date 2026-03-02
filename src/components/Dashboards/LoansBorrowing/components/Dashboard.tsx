@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Dashboard.css';
-
+import './loanDashboard.css';
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import './PaymentSchedule.css';
-
+// This one is already correct:
+import './loanPaymentSchedule.css';
 const PaymentSchedule: React.FC = () => {
   const paymentData = [
     { facility: 'ECB-2023-001', currency: 'USD', principal: '$50M', interest: '$2.1M', total: '$52.1M', dueDate: '2024-03-15', status: 'Upcoming', daysLeft: 15 },
