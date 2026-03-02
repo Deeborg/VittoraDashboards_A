@@ -13,21 +13,62 @@ import PieChart from '../components/charts/PieChart';
 import { theme } from '../styles/theme';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AuditFinding } from '../types';
-import { FaClipboardCheck, FaUserCheck } from 'react-icons/fa';
+import { FaClipboardCheck, FaUserCheck, FaDownload, FaChartLine } from 'react-icons/fa';
 
+// Local styled components (not imported)
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
- width: 850px;
+  overflow-y: auto;
   background: ${theme.colors.gray[50]};
-  font-color: ${theme.colors.text.tertiary};
 `;
+
+const MetricGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: ${theme.spacing.lg};
+  margin-bottom: ${theme.spacing.xl};
+`;
+
+const MetricCard = styled.div`
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
+  padding: ${theme.spacing.lg};
+  box-shadow: ${theme.shadows.sm};
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${theme.shadows.md};
+  }
+`;
+
+const MetricValue = styled.div<{ $color?: string }>`
+  font-size: ${theme.typography.fontSize['2xl']};
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${props => props.$color || theme.colors.gray[900]};
+  margin-bottom: ${theme.spacing.xs};
+`;
+
+const MetricLabel = styled.div`
+  font-size: ${theme.typography.fontSize.sm};
+  color: ${theme.colors.gray[500]};
+  margin-bottom: ${theme.spacing.xs};
+`;
+
+const MetricSubtext = styled.div`
+  font-size: ${theme.typography.fontSize.xs};
+  color: ${theme.colors.gray[400]};
+`;
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
 `;
+
 const ChartCard = styled.div<{ $colspan?: number }>`
   grid-column: span ${props => props.$colspan || 6};
   background: white;
@@ -46,47 +87,25 @@ const ChartCard = styled.div<{ $colspan?: number }>`
   }
 `;
 
+const ChartHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: ${theme.spacing.lg};
+  flex-shrink: 0;
+`;
+
 const ChartTitle = styled.h3`
   font-size: ${theme.typography.fontSize.lg};
   font-weight: ${theme.typography.fontWeight.semibold};
   color: ${theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.lg};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  margin: 0;
 `;
 
-const MetricGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${theme.spacing.lg};
-  margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
-`;
-
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
-  margin-top: ${theme.spacing.xs};
+const ChartBody = styled.div`
+  flex: 1;
+  min-height: 250px;
+  position: relative;
 `;
 
 const DepartmentTag = styled.span`
@@ -102,11 +121,12 @@ const DepartmentTag = styled.span`
 
 const ProgressBar = styled.div<{ $percentage: number }>`
   width: 100%;
-  height: 4px;
+  height: 8px;
   background: ${theme.colors.gray[200]};
   border-radius: ${theme.borderRadius.full};
   position: relative;
   overflow: hidden;
+  margin: ${theme.spacing.sm} 0;
 
   &::after {
     content: '';
@@ -117,7 +137,99 @@ const ProgressBar = styled.div<{ $percentage: number }>`
     width: ${props => props.$percentage}%;
     background: ${theme.colors.success[500]};
     border-radius: ${theme.borderRadius.full};
+    transition: width 0.3s ease;
   }
+`;
+
+const LegendContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.sm};
+  margin-top: ${theme.spacing.lg};
+  padding: ${theme.spacing.md};
+  background: ${theme.colors.gray[50]};
+  border-radius: ${theme.borderRadius.lg};
+`;
+
+const LegendItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${theme.spacing.xs} 0;
+`;
+
+const LegendLabel = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+`;
+
+const LegendColor = styled.div<{ $color: string }>`
+  width: 12px;
+  height: 12px;
+  border-radius: ${theme.borderRadius.sm};
+  background: ${props => props.$color};
+`;
+
+const LegendValue = styled.span`
+  font-weight: ${theme.typography.fontWeight.medium};
+  color: ${theme.colors.gray[900]};
+`;
+
+const LegendPercentage = styled.span`
+  color: ${theme.colors.gray[500]};
+  font-size: ${theme.typography.fontSize.sm};
+  margin-left: ${theme.spacing.xs};
+`;
+
+const SummaryCard = styled.div`
+  background: ${theme.colors.gray[50]};
+  border-radius: ${theme.borderRadius.lg};
+  padding: ${theme.spacing.lg};
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const SummaryItem = styled.div`
+  margin-bottom: ${theme.spacing.lg};
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const SummaryLabel = styled.div`
+  font-size: ${theme.typography.fontSize.sm};
+  color: ${theme.colors.gray[600]};
+  margin-bottom: ${theme.spacing.xs};
+`;
+
+const SummaryValue = styled.div`
+  font-size: ${theme.typography.fontSize.lg};
+  font-weight: ${theme.typography.fontWeight.bold};
+  color: ${theme.colors.gray[900]};
+`;
+
+const FindingItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${theme.spacing.sm};
+  padding: ${theme.spacing.sm};
+  background: ${theme.colors.gray[50]};
+  border-radius: ${theme.borderRadius.base};
+  margin-bottom: ${theme.spacing.xs};
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${theme.colors.gray[100]};
+    transform: translateX(4px);
+  }
+`;
+
+const FilterSection = styled.div`
+  margin-bottom: ${theme.spacing.lg};
 `;
 
 const InternalAuditPoints: React.FC = () => {
@@ -163,7 +275,8 @@ const InternalAuditPoints: React.FC = () => {
     direction: 'desc',
   });
 
-  const { paginatedData, pagination } = usePagination(sortedData, 5);
+  const { paginatedData, pagination } = usePagination(sortedData, 10);
+
   // Calculate metrics
   const metrics = useMemo(() => {
     const now = new Date();
@@ -181,7 +294,7 @@ const InternalAuditPoints: React.FC = () => {
       overdueFindings: auditFindings.filter(f => {
         return f.status !== 'Closed' && new Date(f.targetClosureDate) < now;
       }).length,
-      avgClosureDays: 18, // Mocked value
+      avgClosureDays: 18,
       departments: Array.from(new Set(auditFindings.map(f => f.department))).length,
     };
   }, [auditFindings]);
@@ -214,18 +327,9 @@ const InternalAuditPoints: React.FC = () => {
     });
     return Object.entries(deptCounts)
       .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value);
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
   }, [auditFindings]);
-
-  // Chart data - Monthly trend
-  const monthlyTrendData = useMemo(() => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-    return months.map(month => {
-      const opened = Math.floor(Math.random() * 8) + 2;
-      const closed = Math.floor(Math.random() * 6) + 1;
-      return { month, opened, closed };
-    });
-  }, []);
 
   // Calculate closure rate
   const closureRate = useMemo(() => {
@@ -306,22 +410,36 @@ const InternalAuditPoints: React.FC = () => {
     setIsModalOpen(true);
   };
 
+  const handleSearch = (value: string) => {
+    updateFilter('search', value);
+  };
+
+  const handleExport = () => {
+    console.log('Exporting audit findings...');
+  };
+
   return (
     <PageContainer>
       <PageHeader
         title="Internal Audit Points"
-        subtitle="Track and manage audit findings and resolutions"
+        subtitle="Track and manage audit findings and resolutions across departments"
         actions={[
           {
-            label: 'Generate Report',
-            onClick: () => console.log('Generate report'),
-            variant: 'primary',
-            icon: <FaClipboardCheck />,
+            label: 'Export Report',
+            onClick: handleExport,
+            variant: 'secondary',
+            icon: <FaDownload />,
+          },
+          {
+            label: 'Analytics',
+            onClick: () => console.log('View analytics'),
+            variant: 'outline',
+            icon: <FaChartLine />,
           },
           {
             label: 'Assign Owners',
             onClick: () => console.log('Assign owners'),
-            variant: 'secondary',
+            variant: 'primary',
             icon: <FaUserCheck />,
           },
         ]}
@@ -331,11 +449,11 @@ const InternalAuditPoints: React.FC = () => {
         <MetricCard>
           <MetricValue>{metrics.totalFindings}</MetricValue>
           <MetricLabel>Total Findings</MetricLabel>
-          <MetricSubtext>YTD</MetricSubtext>
+          <MetricSubtext>Year to date</MetricSubtext>
         </MetricCard>
         <MetricCard>
           <MetricValue $color={theme.colors.error[600]}>{metrics.openFindings}</MetricValue>
-          <MetricLabel>Open</MetricLabel>
+          <MetricLabel>Open Findings</MetricLabel>
           <MetricSubtext>{metrics.criticalFindings} critical</MetricSubtext>
         </MetricCard>
         <MetricCard>
@@ -352,129 +470,159 @@ const InternalAuditPoints: React.FC = () => {
 
       <GridContainer>
         <ChartCard $colspan={6}>
-          <ChartTitle>Findings by Severity</ChartTitle>
-          <PieChart
-            data={severityData}
-            colors={[
-              theme.colors.error[500],
-              theme.colors.error[400],
-              theme.colors.warning[500],
-              theme.colors.success[500],
-            ]}
-            height={250}
-          />
+          <ChartHeader>
+            <ChartTitle>Findings by Severity</ChartTitle>
+          </ChartHeader>
+          <ChartBody>
+            <PieChart
+              data={severityData}
+              colors={[
+                theme.colors.error[500],
+                theme.colors.error[400],
+                theme.colors.warning[500],
+                theme.colors.success[500],
+              ]}
+              height={250}
+            />
+          </ChartBody>
+          <LegendContainer>
+            {severityData.map((item, index) => {
+              const colors = [
+                theme.colors.error[500],
+                theme.colors.error[400],
+                theme.colors.warning[500],
+                theme.colors.success[500],
+              ];
+              const total = severityData.reduce((sum, i) => sum + i.value, 0);
+              const percentage = total > 0 ? ((item.value / total) * 100).toFixed(0) : '0';
+              return (
+                <LegendItem key={item.name}>
+                  <LegendLabel>
+                    <LegendColor $color={colors[index]} />
+                    <span>{item.name}</span>
+                  </LegendLabel>
+                  <div>
+                    <LegendValue>{item.value}</LegendValue>
+                    <LegendPercentage>({percentage}%)</LegendPercentage>
+                  </div>
+                </LegendItem>
+              );
+            })}
+          </LegendContainer>
         </ChartCard>
-        <ChartCard $colspan={6}>
-          <ChartTitle>Status Distribution</ChartTitle>
-          <PieChart
-            data={statusData}
-            colors={[
-              theme.colors.error[500],
-              theme.colors.warning[500],
-              theme.colors.success[500],
-              theme.colors.purple[500],
-            ]}
-            height={250}
-          />
-        </ChartCard>
-        <ChartCard $colspan={6}>
-          <ChartTitle>By Department</ChartTitle>
-          <BarChart
-            data={departmentData.slice(0, 5)}
-            xAxisKey="name"
-            series={[{ key: 'value', name: 'Findings', color: theme.colors.primary[500] }]}
-            height={250}
-          />
-        </ChartCard>
-        <ChartCard $colspan={6}>
-          <ChartTitle>Resolution Progress</ChartTitle>
-          <div style={{ padding: theme.spacing.md }}>
-            <div style={{ marginBottom: theme.spacing.lg }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: theme.spacing.xs }}>
-                <span style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[600] }}>
-                  Overall Completion
-                </span>
-                <span style={{ fontSize: theme.typography.fontSize.sm, fontWeight: theme.typography.fontWeight.medium }}>
-                  {closureRate}%
-                </span>
-              </div>
-              <ProgressBar $percentage={parseFloat(closureRate)} />
-            </div>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: theme.spacing.lg }}>
-              <div>
-                <div style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[600], marginBottom: theme.spacing.xs }}>
-                  Average Closure Time
-                </div>
-                <div style={{ fontSize: theme.typography.fontSize.xl, fontWeight: theme.typography.fontWeight.bold }}>
-                  {metrics.avgClosureDays} days
-                </div>
-              </div>
-              <div>
-                <div style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[600], marginBottom: theme.spacing.xs }}>
-                  Departments Involved
-                </div>
-                <div style={{ fontSize: theme.typography.fontSize.xl, fontWeight: theme.typography.fontWeight.bold }}>
-                  {metrics.departments}
-                </div>
-              </div>
-            </div>
 
-            <div style={{ marginTop: theme.spacing.lg }}>
-              <div style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[600], marginBottom: theme.spacing.sm }}>
-                Top Findings
-              </div>
-              {auditFindings.slice(0, 3).map((finding) => (
-                <div key={finding.id} style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  gap: theme.spacing.sm,
-                  padding: theme.spacing.sm,
-                  background: theme.colors.gray[50],
-                  borderRadius: theme.borderRadius.base,
-                  marginBottom: theme.spacing.xs
-                }}>
-                  <RiskBadge level={finding.severity} />
-                  <span style={{ fontSize: theme.typography.fontSize.sm }}>
-                    {finding.findingTitle}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <ChartCard $colspan={6}>
+          <ChartHeader>
+            <ChartTitle>Status Distribution</ChartTitle>
+          </ChartHeader>
+          <ChartBody>
+            <PieChart
+              data={statusData}
+              colors={[
+                theme.colors.error[500],
+                theme.colors.warning[500],
+                theme.colors.success[500],
+                theme.colors.purple[500],
+              ]}
+              height={250}
+            />
+          </ChartBody>
+          <LegendContainer>
+            {statusData.map((item, index) => {
+              const colors = [
+                theme.colors.error[500],
+                theme.colors.warning[500],
+                theme.colors.success[500],
+                theme.colors.purple[500],
+              ];
+              const total = statusData.reduce((sum, i) => sum + i.value, 0);
+              const percentage = total > 0 ? ((item.value / total) * 100).toFixed(0) : '0';
+              return (
+                <LegendItem key={item.name}>
+                  <LegendLabel>
+                    <LegendColor $color={colors[index]} />
+                    <span>{item.name}</span>
+                  </LegendLabel>
+                  <div>
+                    <LegendValue>{item.value}</LegendValue>
+                    <LegendPercentage>({percentage}%)</LegendPercentage>
+                  </div>
+                </LegendItem>
+              );
+            })}
+          </LegendContainer>
         </ChartCard>
       </GridContainer>
 
       <GridContainer>
-        <ChartCard $colspan={12}>
-          <ChartTitle>
-            Monthly Trend
-            <span style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[500] }}>
-              Opened vs Closed
-            </span>
-          </ChartTitle>
-          <BarChart
-            data={monthlyTrendData}
-            xAxisKey="month"
-            series={[
-              { key: 'opened', name: 'Opened', color: theme.colors.warning[500] },
-              { key: 'closed', name: 'Closed', color: theme.colors.success[500] },
-            ]}
-            height={250}
-          />
+        <ChartCard $colspan={6}>
+          <ChartHeader>
+            <ChartTitle>Top Departments</ChartTitle>
+          </ChartHeader>
+          <ChartBody>
+            <BarChart
+              data={departmentData}
+              xAxisKey="name"
+              series={[{ key: 'value', name: 'Findings', color: theme.colors.primary[500] }]}
+              height={250}
+            />
+          </ChartBody>
         </ChartCard>
-        
+
+        <ChartCard $colspan={6}>
+          <ChartHeader>
+            <ChartTitle>Resolution Summary</ChartTitle>
+          </ChartHeader>
+          <ChartBody>
+            <SummaryCard>
+              <SummaryItem>
+                <SummaryLabel>Overall Completion</SummaryLabel>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <SummaryValue>{closureRate}%</SummaryValue>
+                  <span style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[500] }}>
+                    {metrics.closedFindings}/{metrics.totalFindings} closed
+                  </span>
+                </div>
+                <ProgressBar $percentage={parseFloat(closureRate)} />
+              </SummaryItem>
+              
+              <SummaryItem>
+                <SummaryLabel>Average Closure Time</SummaryLabel>
+                <SummaryValue>{metrics.avgClosureDays} days</SummaryValue>
+              </SummaryItem>
+              
+              <SummaryItem>
+                <SummaryLabel>Departments Involved</SummaryLabel>
+                <SummaryValue>{metrics.departments}</SummaryValue>
+              </SummaryItem>
+
+              <SummaryItem>
+                <SummaryLabel>Top Critical Findings</SummaryLabel>
+                {auditFindings.filter(f => f.severity === 'Critical').slice(0, 3).map((finding) => (
+                  <FindingItem key={finding.id}>
+                    <RiskBadge level={finding.severity} />
+                    <span style={{ fontSize: theme.typography.fontSize.sm }}>
+                      {finding.findingTitle}
+                    </span>
+                  </FindingItem>
+                ))}
+              </SummaryItem>
+            </SummaryCard>
+          </ChartBody>
+        </ChartCard>
       </GridContainer>
 
-      <FilterBar
-        filters={filters}
-        onFilterChange={updateFilter}
-        onClearFilters={clearFilters}
-        filterConfig={filterConfig}
-        showSearch={true}
-        onSearch={(value) => updateFilter('search', value)}
-        searchPlaceholder="Search audit findings..."
-      />
+      <FilterSection>
+        <FilterBar
+          filters={filters}
+          onFilterChange={updateFilter}
+          onClearFilters={clearFilters}
+          filterConfig={filterConfig}
+          showSearch={true}
+          onSearch={handleSearch}
+          searchPlaceholder="Search audit findings by title or description..."
+        />
+      </FilterSection>
 
       <DataTable
         columns={columns}

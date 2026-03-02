@@ -19,7 +19,7 @@ import { FaShieldAlt } from 'react-icons/fa';
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
- width: 900px;
+
   background: ${theme.colors.gray[50]};
   font-color: ${theme.colors.text.tertiary};
 `;
