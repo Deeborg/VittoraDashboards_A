@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Box, CssBaseline, Container, Typography } from '@mui/material';
-import { theme } from './styles/theme';
+import { theme } from './styles/theme_treasury';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 import KPICards from './components/dashboard/KPICards';
@@ -9,7 +9,7 @@ import NetDebtSummary from './components/dashboard/NetDebtSummary';
 import BorrowingsDashboard from './components/dashboard/BorrowingsDashboard';
 import InvestmentsDashboard from './components/dashboard/InvestmentsDashboard';
 import Filters from './components/common/Filters';
-import './styles/global.css';
+
 /* ================= TYPES ================= */
 
 type ModuleType =
