@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaFilter, FaTimes } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 import DateRangePicker from './DateRangePicker';
 import SearchInput from './SearchInput';
 

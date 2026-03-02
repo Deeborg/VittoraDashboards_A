@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaUser, FaShieldAlt, FaDatabase } from 'react-icons/fa';
 import { AccessPermission } from '../../types';
 import StatusBadge from '../common/StatusBadge';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 const Container = styled.div`
   display: flex;
   flex-direction: column;

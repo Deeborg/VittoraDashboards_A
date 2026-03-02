@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaSearch, FaTimes } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const SearchContainer = styled.div`
   position: relative;

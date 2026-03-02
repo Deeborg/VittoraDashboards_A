@@ -6,8 +6,8 @@ import { NavigationProvider } from './context/NavigationContext';
 import { DataProvider } from './context/DataContext';
 import Sidebar from './components/common/Sidebar';
 import Header from './components/common/Header';
-import GlobalStyles from './styles/GlobalStyles';
-import { theme } from './styles/theme';
+import GlobalStyles from './styles/Gs';
+import { theme } from './styles/theme_cr';
 
 // Import pages
 import Dashboard from './pages/Dashboard';

@@ -9,7 +9,7 @@ import Modal from '../components/common/Modal';
 import FilingDetail from '../components/modals/FilingDetail';
 import BarChart from '../components/charts/BarChart';
 import LineChart from '../components/charts/LineChart';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { StatutoryFiling } from '../types';
 import { FaCalendarCheck, FaDownload, FaExclamationTriangle } from 'react-icons/fa'; // Added FaExclamationTriangle

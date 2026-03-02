@@ -11,7 +11,7 @@ import PermissionMatrix from '../components/charts/PermissionMatrix';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
 import LineChart from '../components/charts/LineChart';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AccessPermission } from '../types';
 import { FaShieldAlt } from 'react-icons/fa';

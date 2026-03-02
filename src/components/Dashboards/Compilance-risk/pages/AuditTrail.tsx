@@ -9,7 +9,7 @@ import Modal from '../components/common/Modal';
 import AuditLogDetail from '../components/modals/AuditLogDetail';
 
 import BarChart from '../components/charts/BarChart';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AuditLog } from '../types';
 import { FaDownload, FaChartLine } from 'react-icons/fa';

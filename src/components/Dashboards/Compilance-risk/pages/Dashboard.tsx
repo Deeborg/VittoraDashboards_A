@@ -8,7 +8,7 @@ import PieChart from '../components/charts/PieChart';
 import { ScrollableTable } from '../components/common/ScrollableTable';
 import StatusBadge from '../components/common/StatusBadge';
 import RiskBadge from '../components/common/RiskBadge';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 
 import { 
   FaExclamationTriangle, 

@@ -10,7 +10,7 @@ import Modal from '../components/common/Modal';
 import AuditFindingDetail from '../components/modals/AuditFindingDetail';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AuditFinding } from '../types';
 import { FaClipboardCheck, FaUserCheck, FaDownload, FaChartLine } from 'react-icons/fa';

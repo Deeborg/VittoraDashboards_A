@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaCheck, FaTimes, FaMinus } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const MatrixContainer = styled.div`
   width: 100%;

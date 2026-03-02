@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 interface BarChartProps {
   data: any[];

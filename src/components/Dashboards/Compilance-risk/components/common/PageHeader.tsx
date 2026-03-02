@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaArrowLeft } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 // ... rest of the component remains the same
 

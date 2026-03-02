@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { format, isValid, parse } from 'date-fns';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const Container = styled.div`
   position: relative;

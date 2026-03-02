@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaBell, FaUserCircle, FaCog, FaSearch, FaShieldAlt } from 'react-icons/fa';
 import { useData } from '../../context/DataContext';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const HeaderContainer = styled.header`
   background: ${theme.colors.background.card};

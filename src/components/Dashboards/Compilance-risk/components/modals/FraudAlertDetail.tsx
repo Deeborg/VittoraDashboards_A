@@ -4,7 +4,7 @@ import { FaExclamationTriangle, FaChartLine } from 'react-icons/fa';
 import { FraudAlert } from '../../types';
 import RiskBadge from '../common/RiskBadge';
 import StatusBadge from '../common/StatusBadge';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const Container = styled.div`
   display: flex;

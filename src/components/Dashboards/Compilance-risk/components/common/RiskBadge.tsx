@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaExclamationTriangle, FaExclamationCircle, FaInfoCircle } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const Badge = styled.span<{ $level: string }>`
   display: inline-flex;

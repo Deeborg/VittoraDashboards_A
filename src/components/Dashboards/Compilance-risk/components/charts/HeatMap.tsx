@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const HeatMapContainer = styled.div`
   width: 100%;

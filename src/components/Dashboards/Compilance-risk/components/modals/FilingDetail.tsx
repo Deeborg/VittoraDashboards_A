@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaFileAlt, FaPaperclip } from 'react-icons/fa';
 import { StatutoryFiling } from '../../types';
 import StatusBadge from '../common/StatusBadge';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 const Container = styled.div`
   display: flex;
   flex-direction: column;

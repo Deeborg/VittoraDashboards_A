@@ -9,7 +9,7 @@ import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import SODViolationDetail from '../components/modals/SODViolationDetail';
 import { BarChart, PieChart } from '../components/charts';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { SODViolation } from '../types';
 

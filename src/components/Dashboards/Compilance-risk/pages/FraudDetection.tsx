@@ -11,7 +11,7 @@ import FraudAlertDetail from '../components/modals/FraudAlertDetail';
 
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
-import { theme } from '../styles/theme';
+import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { FraudAlert } from '../types';
 import { FaExclamationTriangle, FaChartLine } from 'react-icons/fa';

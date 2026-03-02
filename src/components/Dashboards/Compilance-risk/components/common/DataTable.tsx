@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaSort, FaSortUp, FaSortDown, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const TableScrollWrapper = styled.div`
   overflow-x: auto;

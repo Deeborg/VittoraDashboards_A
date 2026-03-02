@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaChevronLeft, FaChevronRight, FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const PaginationContainer = styled.div`
   display: flex;

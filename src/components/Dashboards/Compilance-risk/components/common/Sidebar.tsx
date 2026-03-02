@@ -11,7 +11,7 @@ import {
   FaClipboardCheck,
   FaSignOutAlt,
 } from 'react-icons/fa';
-import { theme } from '../../styles/theme';
+import { theme } from '../../styles/theme_cr';
 
 const SidebarContainer = styled.aside`
   width: 275px;
