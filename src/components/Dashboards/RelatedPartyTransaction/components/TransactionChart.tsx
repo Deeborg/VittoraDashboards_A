@@ -32,7 +32,7 @@ const TransactionChart: React.FC<TransactionChartProps> = ({ data, period }) => 
 
   return (
     <div style={{ height: '350px', animation: 'fadeIn 0.8s ease-out both' }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="80%">
         <LineChart
           data={data}
           margin={{ top: 10, right: 10, left: 0, bottom: 0 }}

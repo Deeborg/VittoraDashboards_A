@@ -117,7 +117,7 @@ const InvestmentsDashboard: React.FC = () => {
                 <TableCell align="right" sx={{ fontWeight: 600 }}>
                   Maturity
                 </TableCell>
-                <TableCell sx={{ fontWeight: 600 }}>Category</TableCell>
+                <TableCell sx={{ fontWeight: 600 }}> styleCategory</TableCell>
                 <TableCell sx={{ fontWeight: 600 }}>
                   Credit Rating
                 </TableCell>
@@ -131,7 +131,7 @@ const InvestmentsDashboard: React.FC = () => {
                     {investment.instrument}
                     <Typography
                       variant="caption"
-                      sx={{ color: '#90a4ae', display: 'block' }}
+                      sx={{ color: '#ffffff', display: 'block' }}
                     >
                       {investment.folioNumber}
                     </Typography>

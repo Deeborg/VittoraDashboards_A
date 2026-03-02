@@ -16,6 +16,7 @@ import {
   summaryStats,
 } from './data/mockData';
 import './styles/dashboard.css';
+import { color } from '@amcharts/amcharts4/core';
 
 interface TransactionData {
   period: string;
@@ -157,7 +158,7 @@ const App: React.FC = () => {
             {/* Transaction Analysis */}
             <div className="chart-container">
               <div className="chart-title">
-                <span>Transaction Trends</span>
+                <span><h1 style={{ color: 'white' }}>Transaction Trends</h1></span>
                 <div className="chart-period-selector">
                   <button
                     className={`chart-period-button ${chartPeriod === 'monthly' ? 'active' : ''}`}
@@ -185,7 +186,7 @@ const App: React.FC = () => {
             {/* Compliance Tracking */}
             <div className="chart-container">
               <div className="chart-title">
-                <span>Compliance Health</span>
+                <span><h1 style={{ color: 'white' }}>Compliance Health</h1></span>
                 <span style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: '600' }}>
                   Rate: {summaryStats.complianceRate}%
                 </span>
@@ -196,7 +197,7 @@ const App: React.FC = () => {
             {/* Outstanding Balances */}
             <div className="chart-container" style={{ gridColumn: balanceZoom ? '1 / -1' : 'span 2' }}>
               <div className="chart-title">
-                <span>Party-wise Exposure</span>
+                <span><h1 style={{ color: 'white' }}>Party-wise Exposure</h1></span>
                 <button
                   className="chart-period-button"
                   onClick={() => setBalanceZoom(!balanceZoom)}

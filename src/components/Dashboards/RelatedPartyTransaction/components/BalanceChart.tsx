@@ -134,7 +134,7 @@ const BalanceChart: React.FC<BalanceChartProps> = ({ data, zoomMode = false }) =
       position: 'relative',
       animation: 'fadeIn 0.8s ease-out both'
     }}>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="90%">
         <BarChart
           data={sortedData}
           margin={zoomMode ? { top: 10, right: 10, left: 0, bottom: 100 } : { top: 10, right: 10, left: 0, bottom: 80 }}
