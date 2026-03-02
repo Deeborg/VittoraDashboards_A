@@ -125,7 +125,7 @@ export const borrowingsData: BorrowingItem[] = [
   {
     id: 1,
     facility: 'Cash Credit',
-    bank: 'State Bank of India',
+    bank: 'SOB',
     accountNumber: 'CC-2001-4532',
     sanctionedLimit: 500000000,
     utilizedAmount: 320000000,
@@ -139,7 +139,7 @@ export const borrowingsData: BorrowingItem[] = [
   {
     id: 2,
     facility: 'Term Loan',
-    bank: 'HDFC Bank',
+    bank: 'ABC Bank',
     accountNumber: 'TL-1805-7890',
     sanctionedLimit: 750000000,
     utilizedAmount: 750000000,
@@ -153,7 +153,7 @@ export const borrowingsData: BorrowingItem[] = [
   {
     id: 3,
     facility: 'Overdraft',
-    bank: 'ICICI Bank',
+    bank: 'IBIB Bank',
     accountNumber: 'OD-2203-1125',
     sanctionedLimit: 300000000,
     utilizedAmount: 185000000,
@@ -167,7 +167,7 @@ export const borrowingsData: BorrowingItem[] = [
   {
     id: 4,
     facility: "Buyer's Credit",
-    bank: 'Axis Bank',
+    bank: 'AMIS Bank',
     accountNumber: 'BC-2308-3341',
     sanctionedLimit: 400000000,
     utilizedAmount: 400000000,
@@ -181,7 +181,7 @@ export const borrowingsData: BorrowingItem[] = [
   {
     id: 5,
     facility: 'Lease Liability',
-    lessor: 'Shapoorji Pallonji Real Estate',
+    lessor: 'ABSAB Estates',
     accountNumber: 'LL-2101-5567',
     sanctionedLimit: 450000000,
     utilizedAmount: 380000000,
@@ -207,7 +207,7 @@ export const investmentsData: InvestmentItem[] = [
   {
     id: 1,
     instrument: 'Liquid Mutual Fund',
-    issuer: 'HDFC AMC',
+    issuer: 'ABC AMC',
     folioNumber: 'MF-1001-7890',
     amount: 185000000,
     yield: 6.8,
@@ -218,7 +218,7 @@ export const investmentsData: InvestmentItem[] = [
   {
     id: 2,
     instrument: 'Corporate Bond',
-    issuer: 'Reliance Industries',
+    issuer: 'XYZ',
     folioNumber: 'CB-2002-4567',
     amount: 75000000,
     yield: 7.9,
@@ -229,7 +229,7 @@ export const investmentsData: InvestmentItem[] = [
   {
     id: 3,
     instrument: 'Inter-Corporate Deposit',
-    issuer: 'Tata Motors',
+    issuer: 'TOS Motors',
     folioNumber: 'ICD-3003-1234',
     amount: 120000000,
     yield: 8.5,
@@ -240,7 +240,7 @@ export const investmentsData: InvestmentItem[] = [
   {
     id: 4,
     instrument: 'Treasury Bill',
-    issuer: 'Government of India',
+    issuer: 'GMW OF INDIA',
     folioNumber: 'TB-4004-5678',
     amount: 95000000,
     yield: 6.2,

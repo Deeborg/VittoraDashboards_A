@@ -71,85 +71,51 @@ const NetDebtSummary: React.FC = () => {
               Net Debt Position
             </Typography>
 
-            <TableContainer
-              component={Paper}
-              elevation={0}
-              sx={{ border: '1px solid #e0e0e0' }}
-            >
-              <Table size="small">
-                <TableHead>
-                  <TableRow
-                    sx={{ backgroundColor: '#f5f7fa' }}
-                  >
-                    <TableCell sx={{ fontWeight: 600 }}>
-                      Component
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      sx={{ fontWeight: 600 }}
-                    >
-                      Amount (₹)
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
+<TableContainer
+  component={Paper}
+  elevation={0}
+  sx={{
+    borderRadius: 2,
+    border: "1px solid #e0e0e0",
+  }}
+>
+  <Table size="small">
+    <TableHead>
+      <TableRow>
+        <TableCell sx={{ fontWeight: 600 }}>
+          Component
+        </TableCell>
+        <TableCell align="right" sx={{ fontWeight: 600 }}>
+          Amount (₹)
+        </TableCell>
+      </TableRow>
+    </TableHead>
 
-                <TableBody>
-                  {components.map(
-                    (
-                      row: NetDebtComponent,
-                      index: number
-                    ) => (
-                      <TableRow
-                        key={row.label}
-                        sx={{
-                          borderTop:
-                            row.isTotal || row.isFinal
-                              ? '2px solid #e0e0e0'
-                              : 'none',
-                          backgroundColor: row.isFinal
-                            ? '#f0f4ff'
-                            : 'inherit',
-                        }}
-                      >
-                        <TableCell
-                          sx={{
-                            fontWeight:
-                              row.isTotal || row.isFinal
-                                ? 600
-                                : 400,
-                            pl: row.isSubtraction ? 4 : 2,
-                          }}
-                        >
-                          {row.isSubtraction
-                            ? `Less: ${row.label}`
-                            : row.label}
-                        </TableCell>
+    <TableBody>
+      {components.map((row) => (
+        <TableRow key={row.label}>
+          <TableCell>
+            {row.isSubtraction
+              ? `Less: ${row.label}`
+              : row.label}
+          </TableCell>
 
-                        <TableCell
-                          align="right"
-                          sx={{
-                            fontWeight:
-                              row.isTotal || row.isFinal
-                                ? 600
-                                : 400,
-                            color:
-                              row.amount < 0
-                                ? '#d32f2f'
-                                : 'inherit',
-                          }}
-                        >
-                          {formatCurrency(
-                            Math.abs(row.amount)
-                          )}
-                          {row.amount < 0 && ' (Cr)'}
-                        </TableCell>
-                      </TableRow>
-                    )
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-
+          <TableCell
+  align="right"
+  sx={{
+    color: (theme) =>
+      row.amount < 0
+        ? theme.palette.error.main
+        : theme.palette.text.primary,
+  }}
+>
+            {formatCurrency(Math.abs(row.amount))}
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
             <Box sx={{ mt: 2 }}>
               <Typography
                 variant="body2"

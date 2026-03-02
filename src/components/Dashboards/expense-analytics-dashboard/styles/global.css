@@ -46,11 +46,11 @@ body {
 
 /* Table text */
 .MuiTableCell-root {
-  color: #1e293b !important;
+  color: #fcfcfc !important;
 }
 
 .MuiTableCell-head {
-  color: #000000 !important;
+  color: #ffffff !important;
   font-weight: 600 !important;
 }
 

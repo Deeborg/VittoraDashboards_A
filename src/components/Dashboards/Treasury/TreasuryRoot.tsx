@@ -9,7 +9,7 @@ import NetDebtSummary from './components/dashboard/NetDebtSummary';
 import BorrowingsDashboard from './components/dashboard/BorrowingsDashboard';
 import InvestmentsDashboard from './components/dashboard/InvestmentsDashboard';
 import Filters from './components/common/Filters';
-
+import './styles/global.css';
 /* ================= TYPES ================= */
 
 type ModuleType =
@@ -120,8 +120,8 @@ const App: React.FC = () => {
   };
 
   return (
-    // <ThemeProvider theme={theme}>
-    //   <CssBaseline />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
       <Box sx={{ display: 'flex' }}>
         {/* <Header title="Treasury Management Console" /> */}
@@ -139,7 +139,7 @@ const App: React.FC = () => {
             p: 3,
             width: { sm: `calc(100% - ${drawerWidth}px)` },
             // mt: '64px',
-            backgroundColor: '#f5f7fa',
+            backgroundColor: 'background.default',
             minHeight: '100vh',
           }}
         >
@@ -173,7 +173,7 @@ const App: React.FC = () => {
           </Container>
         </Box>
       </Box>
-    // </ThemeProvider>
+    </ThemeProvider>
   );
 };
 
