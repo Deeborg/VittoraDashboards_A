@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, useTheme, useMediaQuery } from '@mui/material';
+import { Outlet } from "react-router-dom";
+
 import Header from './Header';
 import Sidebar from './Sidebar';
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
+  const drawerWidth = 250; // Increased from 150 to proper width
 
-  const drawerWidth = 260;
+  useEffect(() => {
+    setSidebarOpen(!isMobile);
+  }, [isMobile]);
 
   const handleMenuClick = () => {
     setSidebarOpen(!sidebarOpen);
@@ -23,24 +24,54 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
-      <Header onMenuClick={handleMenuClick} />
+    <Box sx={{ 
+      display: 'flex',
+      height: '100vh',
+      width: '100vw',
+      overflow: 'hidden',
+      backgroundColor: '#0a1929',
+    }}>
+      {/* Sidebar - Fixed width */}
       <Sidebar
         open={sidebarOpen}
         onClose={handleSidebarClose}
         drawerWidth={drawerWidth}
       />
+
+      {/* Main Content Area */}
       <Box
-        component="main"
         sx={{
           flexGrow: 1,
-          width: { md: `calc(100% - ${drawerWidth}px)` },
-          mt: '64px',
-          backgroundColor: '#0a1929',
-          minHeight: 'calc(100vh - 64px)',
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100vh',
+          overflow: 'hidden',
+          transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+          }),
+          marginLeft: sidebarOpen ? 0 : `-${drawerWidth}px`,
+          width: sidebarOpen ? `calc(100% - ${drawerWidth}px)` : '100%',
         }}
       >
-        {children}
+        {/* Header - Fixed at top */}
+        <Box sx={{ 
+          flexShrink: 0,
+        }}>
+          <Header onMenuClick={handleMenuClick} />
+        </Box>
+
+        {/* Page Content - Scrollable */}
+        <Box
+          sx={{
+            flexGrow: 1,
+            overflow: 'auto',
+            p: 3,
+            backgroundColor: '#0a1929',
+          }}
+        >
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );

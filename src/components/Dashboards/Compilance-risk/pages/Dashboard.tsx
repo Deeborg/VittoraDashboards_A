@@ -23,7 +23,7 @@ import {
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
- width: 900px;
+ width: 850px;
   background: ${theme.colors.gray[50]};
   font-color: ${theme.colors.text.tertiary};
 `;
@@ -594,19 +594,7 @@ const Dashboard: React.FC = () => {
   </ChartCard>
 </GridContainer>
 
-      <QuickActionGrid>
-        {quickActions.map((action, index) => (
-          <QuickActionCard key={index} onClick={action.onClick}>
-            <QuickActionIcon $bgColor={action.bgColor}>
-              {action.icon}
-            </QuickActionIcon>
-            <QuickActionContent>
-              <QuickActionTitle>{action.title}</QuickActionTitle>
-              <QuickActionDescription>{action.description}</QuickActionDescription>
-            </QuickActionContent>
-          </QuickActionCard>
-        ))}
-      </QuickActionGrid>
+      
     </PageContainer>
   );
 };

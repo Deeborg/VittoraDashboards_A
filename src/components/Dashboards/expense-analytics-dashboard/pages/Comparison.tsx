@@ -162,8 +162,13 @@ const Comparison: React.FC = () => {
   const bestPerformer = getBestPerformer();
   const worstPerformer = getWorstPerformer();
 
-  return (
-    <Box sx={{ backgroundColor: '#0a1929', minHeight: '100vh', p: 3 }}>
+ 
+    return (
+    <Box sx={{ 
+    
+    width: '90%',
+   
+  }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>

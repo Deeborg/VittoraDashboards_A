@@ -40,8 +40,12 @@ const Expenses: React.FC = () => {
   const totalBudget = mockTrendData.reduce((sum, item) => sum + item.budget, 0);
   const avgVariance = ((totalExpense - totalBudget) / totalBudget) * 100;
 
-  return (
-    <Box sx={{ p: 3, backgroundColor: '#0a1929', minHeight: '100vh' }}>
+ return (
+      <Box sx={{ 
+   
+    width: '90%',
+    
+  }}>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>

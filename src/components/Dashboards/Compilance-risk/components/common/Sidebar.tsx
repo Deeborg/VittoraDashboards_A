@@ -17,7 +17,7 @@ const SidebarContainer = styled.aside`
   width: 275px;
   background: ${theme.colors.background.card};
   border-right: 1px solid ${theme.colors.border.medium};
-  height: 100vh;
+  height: 93vh;
   position: sticky;
   top: 0;
   display: flex;
