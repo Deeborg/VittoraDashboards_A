@@ -112,13 +112,8 @@ const AgeRoot: React.FC = () => {
     <div className="ageing-container">
       {/* Left Sidebar */}
       <div className="ageing-sidebar">
-        <div className="sidebar-brand">
-          <div className="brand-icon">V</div>
-          <span className="brand-name">Vittora</span>
-        </div>
-
         {/* Dashboard Section - ONLY SECTION NOW */}
-        <div className="sidebar-section">
+        <div className="sidebar-section" style={{ paddingTop: '24px' }}>
           <div className="section-title">DASHBOARD</div>
           <nav className="sidebar-nav">
             {dashboardItems.map((item) => {
@@ -138,12 +133,6 @@ const AgeRoot: React.FC = () => {
               );
             })}
           </nav>
-        </div>
-
-        {/* Footer */}
-        <div className="sidebar-footer">
-          <div className="footer-logo">AJALABS.AI</div>
-          <div className="footer-email">info@ajalabs.ai</div>
         </div>
       </div>
 
