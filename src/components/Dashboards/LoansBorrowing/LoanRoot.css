@@ -1,4 +1,4 @@
-/* LoanRoot.css - Updated with white header title */
+/* LoanRoot.css - Updated with square header (definitely no curves) */
 
 * {
   margin: 0;
@@ -38,7 +38,7 @@
   flex-shrink: 0;
   color: white;
   overflow: hidden;
-  border-radius: 0;
+  border-radius: 0 !important; /* Force square corners */
 }
 
 /* Scrollable content inside left panel */
@@ -48,6 +48,7 @@
   padding: 0;
   scrollbar-width: thin;
   scrollbar-color: #4f5b7a #1e293b;
+  border-radius: 0 !important;
 }
 
 /* Custom scrollbar for left panel */
@@ -57,10 +58,12 @@
 
 .left-panel-content::-webkit-scrollbar-track {
   background: #1e293b;
+  border-radius: 0 !important;
 }
 
 .left-panel-content::-webkit-scrollbar-thumb {
   background: #4f5b7a;
+  border-radius: 0 !important;
 }
 
 .left-panel-content::-webkit-scrollbar-thumb:hover {
@@ -74,6 +77,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #1e293b;
+  border-radius: 0 !important;
 }
 
 .panel-header h3 {
@@ -83,6 +87,7 @@
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  border-radius: 0 !important;
 }
 
 .panel-count {
@@ -90,8 +95,8 @@
   color: #cbd5e1;
   background: #1e293b;
   padding: 4px 10px;
-  border-radius: 20px;
   font-weight: 500;
+  border-radius: 0 !important; /* Force square corners */
 }
 
 /* Menu List */
@@ -99,10 +104,12 @@
   list-style: none;
   padding: 16px 16px 24px 16px;
   margin: 0;
+  border-radius: 0 !important;
 }
 
 .menu-list li {
   margin-bottom: 4px;
+  border-radius: 0 !important;
 }
 
 .menu-item {
@@ -118,17 +125,19 @@
   text-align: left;
   position: relative;
   color: #e2e8f0;
-  border-radius: 8px;
+  border-radius: 0 !important; /* Force square corners */
 }
 
 .menu-item:hover {
   background: #1e293b;
   color: white;
+  border-radius: 0 !important;
 }
 
 .menu-item.active {
   background: #2563eb;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  border-radius: 0 !important;
 }
 
 .menu-item.active .menu-icon,
@@ -140,6 +149,7 @@
   font-size: 20px;
   color: #94a3b8;
   width: 24px;
+  border-radius: 0 !important;
 }
 
 .menu-name {
@@ -147,12 +157,14 @@
   font-weight: 500;
   color: #e2e8f0;
   flex: 1;
+  border-radius: 0 !important;
 }
 
 .menu-indicator {
   color: white;
   font-size: 8px;
   animation: pulse 2s infinite;
+  border-radius: 0 !important;
 }
 
 @keyframes pulse {
@@ -171,36 +183,41 @@
   flex-direction: column;
   height: 100vh;
   position: relative;
-  border-radius: 0;
+  border-radius: 0 !important; /* Force square corners */
 }
 
-/* Dashboard Header - Clean white background with white title */
+/* Dashboard Header - Square box style - DEFINITELY NO CURVES */
 .dashboard-header {
-  padding: 28px 32px 16px 32px;
-  background: #1a1a3a; /* Dark blue background */
-  border-bottom: 1px solid #2a2a4a;
+  padding: 36px 32px 28px 32px;
+  background: #0f172a;
+  border-bottom: 1px solid #1e293b;
   flex-shrink: 0;
+  border-radius: 0 !important; /* CRITICAL: Force square corners */
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .dashboard-header h2 {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 600;
-  color: white; /* White title */
-  margin: 0 0 8px 0;
-  letter-spacing: -0.3px;
+  color: white;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  border-radius: 0 !important;
 }
 
 .header-description {
-  font-size: 15px;
-  color: #a0a0d0; /* Light purple/blue for description */
-  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #a0a0d0;
+  margin: 0;
   line-height: 1.5;
-}
-
-.header-date {
-  font-size: 14px;
-  color: #a0a0d0; /* Light purple/blue for date */
-  font-weight: 500;
+  max-width: 800px;
+  border-radius: 0 !important;
 }
 
 /* Content Area - Scrollable */
@@ -211,6 +228,7 @@
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 #f1f5f9;
   background: #f5f7fc;
+  border-radius: 0 !important; /* Force square corners */
 }
 
 .content-area::-webkit-scrollbar {
@@ -219,14 +237,33 @@
 
 .content-area::-webkit-scrollbar-track {
   background: #f1f5f9;
+  border-radius: 0 !important;
 }
 
 .content-area::-webkit-scrollbar-thumb {
   background: #cbd5e1;
+  border-radius: 0 !important;
 }
 
 .content-area::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Module Cards - For dashboard content */
+.module-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-radius: 0 !important; /* Force square corners */
+}
+
+.module-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 16px;
+  border-radius: 0 !important;
 }
 
 /* Responsive Design */
@@ -236,15 +273,11 @@
   }
   
   .dashboard-header h2 {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .header-description {
-    font-size: 14px;
-  }
-  
-  .header-date {
-    font-size: 13px;
+    font-size: 15px;
   }
 }
 
@@ -283,23 +316,24 @@
   .menu-item {
     padding: 12px;
   }
+  
+  .dashboard-header {
+    padding: 28px 24px 20px 24px;
+  }
 }
 
 @media (max-width: 768px) {
   .dashboard-header {
-    padding: 20px 24px;
+    padding: 24px 20px 16px 20px;
   }
   
   .dashboard-header h2 {
-    font-size: 22px;
+    font-size: 24px;
+    margin-bottom: 12px;
   }
   
   .header-description {
-    font-size: 13px;
-  }
-  
-  .header-date {
-    font-size: 12px;
+    font-size: 14px;
   }
   
   .menu-list li {
@@ -319,10 +353,12 @@
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
+  border-radius: 0 !important;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #cbd5e1;
+  border-radius: 0 !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {

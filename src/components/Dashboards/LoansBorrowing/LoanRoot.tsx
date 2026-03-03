@@ -76,12 +76,11 @@ const LoanRoot: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Area with Dashboard Header */}
+          {/* Right Content Area with Square Dark Blue Header */}
           <div className="right-content">
             <div className="dashboard-header">
               <h2>Loans & Borrowing Dashboard</h2>
               <p className="header-description">Monitor outstanding loans and improve borrowing strategy with visual insights</p>
-              <div className="header-date">Friday, February 27, 2026</div>
             </div>
             <div className="content-area">
               {renderContent()}
