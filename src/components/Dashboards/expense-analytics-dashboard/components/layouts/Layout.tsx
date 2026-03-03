@@ -55,11 +55,7 @@ const Layout: React.FC = () => {
         }}
       >
         {/* Header - Fixed at top */}
-        <Box sx={{ 
-          flexShrink: 0,
-        }}>
-          <Header onMenuClick={handleMenuClick} />
-        </Box>
+        
 
         {/* Page Content - Scrollable */}
         <Box

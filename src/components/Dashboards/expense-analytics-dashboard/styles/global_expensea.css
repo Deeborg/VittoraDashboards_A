@@ -34,7 +34,8 @@ html {
   color: #000000 !important;
 }
 
-.expense-dashboard .MuiTableCell-root {
+/* Table text */
+.MuiTableCell-root {
   color: #fcfcfc !important;
 }
 

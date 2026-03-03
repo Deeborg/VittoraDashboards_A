@@ -8,19 +8,22 @@ import RiskBadge from '../components/common/RiskBadge';
 import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import FraudAlertDetail from '../components/modals/FraudAlertDetail';
-
+import MetricCard from '../components/common/MetricCard';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
 import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { FraudAlert } from '../types';
-import { FaExclamationTriangle, FaChartLine } from 'react-icons/fa';
+import { FaExclamationTriangle, FaChartLine, FaShieldAlt, FaRupeeSign, FaClock, FaCheckCircle } from 'react-icons/fa';
 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
   overflow-y: auto;
-  background: ${theme.colors.gray[50]};
+  background: ${theme.colors.background.primary};
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 `;
 
 const MetricGrid = styled.div`
@@ -28,61 +31,6 @@ const MetricGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div<{ $severity?: string }>`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-  position: relative;
-  overflow: hidden;
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.md};
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: ${props => {
-      switch (props.$severity) {
-        case 'critical': return theme.colors.error[500];
-        case 'high': return theme.colors.error[500];
-        case 'medium': return theme.colors.warning[500];
-        case 'low': return theme.colors.success[500];
-        default: return theme.colors.primary[500];
-      }
-    }};
-  }
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.xs};
 `;
 
 const GridContainer = styled.div`
@@ -123,8 +71,6 @@ const ChartTitle = styled.h3`
   color: ${theme.colors.gray[900]};
   margin: 0;
 `;
-
-
 
 const ChartBody = styled.div`
   flex: 1;
@@ -230,6 +176,20 @@ const FraudDetection: React.FC = () => {
 
   // Calculate metrics
   const metrics = useMemo(() => {
+    const now = new Date();
+    const weekAgo = new Date(now);
+    weekAgo.setDate(weekAgo.getDate() - 7);
+
+    const lastWeekAlerts = fraudAlerts.filter(a => new Date(a.timestamp) > weekAgo);
+    const previousWeekAlerts = fraudAlerts.filter(a => {
+      const alertDate = new Date(a.timestamp);
+      return alertDate <= weekAgo && alertDate > new Date(weekAgo.setDate(weekAgo.getDate() - 7));
+    });
+
+    const weeklyTrend = previousWeekAlerts.length > 0 
+      ? ((lastWeekAlerts.length - previousWeekAlerts.length) / previousWeekAlerts.length * 100).toFixed(1)
+      : '0';
+
     return {
       totalAlerts: fraudAlerts.length,
       criticalAlerts: fraudAlerts.filter(a => a.severity === 'Critical').length,
@@ -244,6 +204,11 @@ const FraudDetection: React.FC = () => {
         ? Math.round(fraudAlerts.reduce((sum, a) => sum + a.confidence, 0) / fraudAlerts.length)
         : 0,
       totalAmount: fraudAlerts.reduce((sum, a) => sum + (a.amount || 0), 0),
+      lastWeekAlerts: lastWeekAlerts.length,
+      weeklyTrend: weeklyTrend,
+      detectionRate: fraudAlerts.length > 0
+        ? ((fraudAlerts.filter(a => a.status === 'Confirmed').length / fraudAlerts.length) * 100).toFixed(1)
+        : '0',
     };
   }, [fraudAlerts]);
 
@@ -257,48 +222,6 @@ const FraudDetection: React.FC = () => {
     ];
   }, [metrics]);
 
-  // Chart data - Alerts over time (last 30 days)
-  // Replace the timelineData useMemo with this enhanced version
-const timelineData = useMemo(() => {
- 
-  const today = new Date();
-  
-  // Create a map of dates to counts
-  const alertsByDate = new Map();
-  
-  // Initialize all dates in the last 30 days with 0
-  for (let i = 29; i >= 0; i--) {
-    const date = new Date(today);
-    date.setDate(date.getDate() - i);
-    const dateStr = date.toISOString().split('T')[0];
-    const displayDate = date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric' 
-    });
-    alertsByDate.set(dateStr, { date: displayDate, count: 0, fullDate: dateStr });
-  }
-  
-  // Count alerts for each date
-  fraudAlerts.forEach(alert => {
-    const alertDate = new Date(alert.timestamp).toISOString().split('T')[0];
-    if (alertsByDate.has(alertDate)) {
-      const entry = alertsByDate.get(alertDate);
-      entry.count += 1;
-      alertsByDate.set(alertDate, entry);
-    }
-  });
-  
-  // Convert map to array
-  return Array.from(alertsByDate.values()).map(entry => ({
-    date: entry.date,
-    alerts: entry.count,
-    fullDate: entry.fullDate
-  }));
-}, [fraudAlerts]);
-
-// Add debug logging to verify data
-console.log('Fraud Alerts:', fraudAlerts);
-console.log('Timeline Data:', timelineData);
   // Chart data - Alert types distribution
   const alertTypeData = useMemo(() => {
     const typeCounts: Record<string, number> = {};
@@ -391,7 +314,6 @@ console.log('Timeline Data:', timelineData);
     setIsModalOpen(true);
   };
 
-  
   return (
     <PageContainer>
       <PageHeader
@@ -414,35 +336,34 @@ console.log('Timeline Data:', timelineData);
       />
 
       <MetricGrid>
-        <MetricCard $severity="critical">
-          <MetricValue $color={theme.colors.error[600]}>
-            {metrics.criticalAlerts}
-          </MetricValue>
-          <MetricLabel>Critical Alerts</MetricLabel>
-          <MetricSubtext>
-            <FaExclamationTriangle size={12} />
-            Requires immediate action
-          </MetricSubtext>
-        </MetricCard>
-        <MetricCard $severity="high">
-          <MetricValue $color={theme.colors.error[600]}>
-            {metrics.highAlerts}
-          </MetricValue>
-          <MetricLabel>High Risk</MetricLabel>
-          <MetricSubtext>Investigate within 24h</MetricSubtext>
-        </MetricCard>
-        <MetricCard $severity="medium">
-          <MetricValue $color={theme.colors.warning[600]}>
-            {metrics.mediumAlerts}
-          </MetricValue>
-          <MetricLabel>Medium Risk</MetricLabel>
-          <MetricSubtext>Review this week</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue>₹{(metrics.totalAmount / 100000).toFixed(1)}L</MetricValue>
-          <MetricLabel>Total Amount at Risk</MetricLabel>
-          <MetricSubtext>Across all alerts</MetricSubtext>
-        </MetricCard>
+        <MetricCard
+          label="Total Alerts"
+          value={metrics.totalAlerts}
+          icon={<FaExclamationTriangle />}
+          trend={{ value: parseFloat(metrics.weeklyTrend), isPositive: parseFloat(metrics.weeklyTrend) >= 0, label: 'vs last week' }}
+          color="primary"
+        />
+        <MetricCard
+          label="Critical Alerts"
+          value={metrics.criticalAlerts}
+          icon={<FaShieldAlt />}
+          subtext="Requires immediate action"
+          color="error"
+        />
+        <MetricCard
+          label="Amount at Risk"
+          value={`₹${(metrics.totalAmount / 100000).toFixed(1)}L`}
+          icon={<FaRupeeSign />}
+          subtext="Across all alerts"
+          color="warning"
+        />
+        <MetricCard
+          label="Detection Rate"
+          value={`${metrics.detectionRate}%`}
+          icon={<FaCheckCircle />}
+          subtext={`${metrics.confirmedAlerts} confirmed`}
+          color="success"
+        />
       </MetricGrid>
 
       <GridContainer>
@@ -495,45 +416,43 @@ console.log('Timeline Data:', timelineData);
         </ChartCard>
       </GridContainer>
       
-<GridContainer
-        style={{ marginTop: theme.spacing.xl }}
-      >
+      <GridContainer style={{ marginTop: theme.spacing.xl }}>
         <ChartCard $colspan={12}>
-      <FilterBar
-        filters={filters}
-        onFilterChange={updateFilter}
-        onClearFilters={clearFilters}
-        filterConfig={filterConfig}
-        showSearch={true}
-        onSearch={(value) => updateFilter('search', value)}
-        searchPlaceholder="Search fraud alerts..."
-      />
-
-      <DataTable
-        columns={columns}
-        data={paginatedData}
-        onRowClick={handleRowClick}
-        pagination={pagination}
-        sortConfig={{
-          key: sortConfig.key,
-          direction: sortConfig.direction,
-          onSort: handleSort,
-        }}
-      />
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Fraud Alert Details"
-        size="lg"
-      >
-        {selectedAlert && (
-          <FraudAlertDetail
-            alert={selectedAlert}
-            onClose={() => setIsModalOpen(false)}
+          <FilterBar
+            filters={filters}
+            onFilterChange={updateFilter}
+            onClearFilters={clearFilters}
+            filterConfig={filterConfig}
+            showSearch={true}
+            onSearch={(value) => updateFilter('search', value)}
+            searchPlaceholder="Search fraud alerts..."
           />
-        )}
-      </Modal>
+
+          <DataTable
+            columns={columns}
+            data={paginatedData}
+            onRowClick={handleRowClick}
+            pagination={pagination}
+            sortConfig={{
+              key: sortConfig.key,
+              direction: sortConfig.direction,
+              onSort: handleSort,
+            }}
+          />
+
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            title="Fraud Alert Details"
+            size="lg"
+          >
+            {selectedAlert && (
+              <FraudAlertDetail
+                alert={selectedAlert}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
+          </Modal>
         </ChartCard>
       </GridContainer>
     </PageContainer>

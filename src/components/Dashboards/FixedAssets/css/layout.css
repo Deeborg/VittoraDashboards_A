@@ -1,38 +1,75 @@
+/**
+ * LAYOUT.CSS
+ * 
+ * Defines the structural layout of the dashboard.
+ * 
+ * Page structure:
+ * ┌─────────────────────────────────────┐
+ * │          HEADER (fixed top)         │
+ * ├──────────┬──────────────────────────┤
+ * │          │                          │
+ * │ SIDEBAR  │    MAIN CONTENT          │
+ * │ (fixed)  │    (scrollable)          │
+ * │          │                          │
+ * └──────────┴──────────────────────────┘
+ */
+
+/* ========================================
+   MAIN APP CONTAINER
+   ======================================== */
+
 #app {
     display: grid;
-    grid-template-areas:
+    grid-template-areas: 
         "header header"
         "sidebar content";
     grid-template-columns: var(--sidebar-width) 1fr;
     grid-template-rows: var(--header-height) 1fr;
-    min-height: 100vh;
+    min-height: 100vh; /* Full viewport height */
 }
 
-#header {
+/*
+ * CSS Grid explanation:
+ * 
+ * grid-template-areas defines the layout visually:
+ * - "header header" = header spans both columns
+ * - "sidebar content" = two columns below
+ * 
+ * grid-template-columns: 240px 1fr
+ * - Sidebar is fixed 240px
+ * - Content takes remaining space (1fr = 1 fraction)
+ * 
+ * grid-template-rows: 64px 1fr
+ * - Header is fixed 64px
+ * - Content takes remaining height
+ */
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.fa-header {
     grid-area: header;
-    background: var(--color-bg-dark);
-    color: var(--color-text-primary);
+    background: #112240;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 var(--space-lg);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-    position: sticky;
+    position: sticky; /* Stays at top when scrolling */
     top: 0;
-    z-index: var(--z-sticky);
-    border-bottom: 1px solid var(--color-border-light);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .fa-header__brand {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
-    cursor: pointer;
+    gap: 12px;
 }
 
-.fa-header__brand-icon {
+.header__brand-icon {
     width: 32px;
     height: 32px;
     background: rgba(0, 191, 255, 0.15);
@@ -41,12 +78,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-secondary);
-    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
 }
 
-.fa-header__title {
+.header__title {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -64,7 +101,7 @@
     gap: var(--space-lg);
 }
 
-.fa-header__logo {
+.header__logo {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
     color: var(--color-secondary);
@@ -79,7 +116,7 @@
     color: var(--color-text-secondary);
 }
 
-.fa-header__user-avatar {
+.header__user-avatar {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -96,82 +133,98 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--color-primary-light);
+    background: linear-gradient(135deg, #00BFFF, #1976D2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: var(--font-weight-semibold);
+    font-weight: 600;
+    color: #ffffff;
 }
 
 /* ========================================
-   SIDEBAR NAVIGATION
+   SIDEBAR - DARK (#112240)
    ======================================== */
 
-#sidebar {
+.fa-sidebar {
     grid-area: sidebar;
     background: var(--color-bg-dark);
     border-right: 1px solid var(--color-border-light);
     padding: var(--space-lg) 0;
-    overflow-y: auto;
+    overflow-y: auto; /* Scrollable if content overflows */
 }
 
 .fa-sidebar__nav {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
-    padding: 0 var(--space-md);
+    gap: 4px;
+    padding: 0 16px;
 }
 
-.fa-sidebar__nav-item {
+.sidebar__nav-item {
     padding: var(--space-md) var(--space-lg);
     color: var(--color-text-secondary);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     cursor: pointer;
-    transition: all var(--transition-fast);
-    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    border-radius: 8px;
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 12px;
 }
 
-.fa-sidebar__nav-item:hover {
+/*
+ * Hover state - provides visual feedback
+ */
+.sidebar__nav-item:hover {
     background: rgba(25, 118, 210, 0.1);
     color: var(--color-text-primary);
 }
 
-.fa-sidebar__nav-item.active {
+/*
+ * Active state - shows current section with blue pill highlight
+ */
+.sidebar__nav-item.active {
     background: var(--color-interactive-blue);
     color: var(--color-text-primary);
     font-weight: var(--font-weight-semibold);
 }
 
 /* ========================================
-   MAIN CONTENT AREA
+   MAIN CONTENT AREA - WHITE BACKGROUND
    ======================================== */
 
-#content {
+.fa-content {
     grid-area: content;
     background: var(--color-bg-base);
     padding: var(--space-xl);
-    overflow-y: auto;
+    overflow-y: auto; /* Content area scrolls independently */
     max-height: calc(100vh - var(--header-height));
 }
 
+/*
+ * calc() explanation:
+ * 
+ * max-height: calc(100vh - 64px)
+ * 
+ * 100vh = full viewport height
+ * Subtract header height so content doesn't overflow
+ */
+
 /* ========================================
-   SECTION CONTAINER
+   SECTION HEADER - WHITE BACKGROUND
    ======================================== */
 
-.fa-section {
+.section {
     max-width: var(--content-max-width);
-    margin: 0 auto;
+    margin: 0 auto; /* Centers the content */
 }
 
-.fa-section__header {
+.section__header {
     margin-bottom: var(--space-xl);
 }
 
-.fa-section__title {
+.section__title {
     font-size: var(--font-size-xxl);
     font-weight: var(--font-weight-bold);
     background: linear-gradient(135deg, #00BFFF 0%, #1976D2 100%);
@@ -181,16 +234,16 @@
     margin-bottom: var(--space-sm);
 }
 
-.fa-section__subtitle {
+.section__subtitle {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
 }
 
 /* ========================================
-   CONTROL PANEL (for financial metrics)
+   KPI CARDS - COLORFUL (KEEP EXISTING COLORS)
    ======================================== */
 
-.fa-control-panel {
+.control-panel {
     background: var(--color-bg-card);
     border: none;
     border-radius: var(--radius-lg);
@@ -199,7 +252,7 @@
     box-shadow: var(--shadow-sm);
 }
 
-.fa-control-panel__title {
+.control-panel__title {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--color-secondary);
@@ -208,77 +261,93 @@
     letter-spacing: 0.5px;
 }
 
-.fa-control-panel__metrics {
+.control-panel__metrics {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-lg);
 }
 
+/*
+ * repeat(auto-fit, minmax(250px, 1fr)) explanation:
+ * 
+ * Creates responsive columns that:
+ * - Are at least 250px wide
+ * - Automatically wrap to new rows
+ * - Share remaining space equally
+ * 
+ * On wide screens: 3 columns
+ * On medium screens: 2 columns
+ * On narrow screens: 1 column
+ */
+
 /* ========================================
-   METRIC CARD
+   TABLE STYLES - WHITE BACKGROUND
    ======================================== */
 
-.fa-metric-card {
+.metric-card {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
 }
 
-.fa-metric-card__label {
+.metric-card__label {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
     font-weight: var(--font-weight-medium);
 }
 
-.fa-metric-card__value {
+.metric-card__value {
     font-size: var(--font-size-xxxl);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
 }
 
-.fa-metric-card__progress {
+.metric-card__progress {
     height: 8px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-lg);
     overflow: hidden;
 }
 
-.fa-metric-card__progress-bar {
+.metric-card__progress-bar {
     height: 100%;
     background: var(--color-interactive-blue);
     transition: width var(--transition-base);
     border-radius: var(--radius-lg);
 }
 
-.fa-metric-card__progress-bar--success {
+/*
+ * Progress bar color variants
+ */
+.metric-card__progress-bar--success {
     background: var(--color-success);
 }
 
-.fa-metric-card__progress-bar--warning {
+.metric-card__progress-bar--warning {
     background: var(--color-warning);
 }
 
-.fa-metric-card__progress-bar--danger {
+.metric-card__progress-bar--danger {
     background: var(--color-danger);
 }
 
-.fa-metric-card__description {
+.metric-card__description {
     font-size: var(--font-size-xs);
     color: var(--color-text-tertiary);
 }
 
 /* ========================================
-   KPI STRIP (Key Performance Indicators)
+   CHART CONTAINER - COLORFUL (KEEP EXISTING)
    ======================================== */
 
-.fa-kpi-strip {
+.kpi-strip {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
 }
 
-.fa-kpi-card {
+.kpi-card {
     background: var(--color-bg-card);
     border: none;
     border-radius: var(--radius-lg);
@@ -287,77 +356,86 @@
     transition: all var(--transition-fast);
 }
 
-.fa-kpi-card:hover {
+.kpi-card:hover {
     background: var(--color-bg-card-hover);
     box-shadow: var(--shadow-md);
 }
 
-.fa-kpi-card__label {
+.kpi-card__label {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
     margin-bottom: var(--space-sm);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 
-.fa-kpi-card__value {
+.kpi-card__value {
     font-size: var(--font-size-xxxl);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
 }
 
-.fa-kpi-card__change {
+.kpi-card__change {
     font-size: var(--font-size-sm);
     margin-top: var(--space-xs);
 }
 
-.fa-kpi-card__change--positive {
+.kpi-card__change--positive {
     color: var(--color-success);
 }
 
-.fa-kpi-card__change--negative {
+.kpi-card__change--negative {
     color: var(--color-danger);
 }
 
 /* ========================================
-   CONTENT GRID
+   GRID LAYOUT FIXES
    ======================================== */
 
 .fa-content-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12, 1fr); /* 12-column grid */
     gap: var(--space-lg);
     margin-bottom: var(--space-xl);
 }
 
-.fa-col-12 { grid-column: span 12; }
-.fa-col-8 { grid-column: span 8; }
-.fa-col-6 { grid-column: span 6; }
-.fa-col-4 { grid-column: span 4; }
-.fa-col-3 { grid-column: span 3; }
+/*
+ * Column span utilities
+ * 
+ * .col-6 = takes 6 out of 12 columns (half width)
+ * .col-4 = takes 4 out of 12 columns (one third)
+ * .col-12 = takes all 12 columns (full width)
+ */
 
+.col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; }
+.col-6 { grid-column: span 6; }
+.col-4 { grid-column: span 4; }
+.col-3 { grid-column: span 3; }
+
+/* Responsive: Stack on smaller screens */
 @media (max-width: 768px) {
-    .fa-col-8,
-    .fa-col-6,
-    .fa-col-4,
-    .fa-col-3 {
-        grid-column: span 12;
+    .col-8,
+    .col-6,
+    .col-4,
+    .col-3 {
+        grid-column: span 12; /* Full width on mobile */
     }
 }
 
 /* ========================================
-   CARD COMPONENT
+   RESPONSIVE DESIGN
    ======================================== */
 
-.fa-card {
+.card {
     background: var(--color-bg-card);
     border: none;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
-    overflow: hidden;
+    overflow: hidden; /* Ensures rounded corners on child elements */
 }
 
-.fa-card__header {
+.card__header {
     padding: var(--space-lg);
     border-bottom: 1px solid var(--color-border-light);
     display: flex;
@@ -365,22 +443,22 @@
     align-items: center;
 }
 
-.fa-card__title {
+.card__title {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     color: var(--color-secondary);
 }
 
-.fa-card__actions {
+.card__actions {
     display: flex;
     gap: var(--space-sm);
 }
 
-.fa-card__body {
+.card__body {
     padding: var(--space-lg);
 }
 
-.fa-card__footer {
+.card__footer {
     padding: var(--space-md) var(--space-lg);
     background: var(--color-bg-card-hover);
     border-top: 1px solid var(--color-border-light);
@@ -392,7 +470,7 @@
    EXCEPTION WIDGET (fixed right sidebar)
    ======================================== */
 
-.fa-exception-widget {
+.exception-widget {
     position: fixed;
     right: var(--space-lg);
     top: calc(var(--header-height) + var(--space-lg));
@@ -409,24 +487,26 @@
     transition: all var(--transition-base);
 }
 
-.fa-exception-widget--collapsed {
+/* Collapsed state - slide out to the right */
+.exception-widget.collapsed {
     width: 50px;
     background: transparent;
     border: none;
     box-shadow: none;
 }
 
-.fa-exception-widget--collapsed .fa-exception-widget__panel {
+.exception-widget.collapsed .exception-widget__panel {
     display: none;
 }
 
-.fa-exception-widget--collapsed .fa-exception-widget__toggle {
+.exception-widget.collapsed .exception-widget__toggle {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.fa-exception-widget__toggle {
+/* Toggle button - appears when collapsed */
+.exception-widget__toggle {
     display: none;
     width: 50px;
     height: 50px;
@@ -442,17 +522,18 @@
     padding: 0;
 }
 
-.fa-exception-widget__toggle:hover {
+.exception-widget__toggle:hover {
     transform: scale(1.1) rotate(10deg);
     box-shadow: var(--shadow-lg);
     background: linear-gradient(135deg, #FF7043 0%, #FF5722 100%);
 }
 
-.fa-exception-widget__toggle:active {
+.exception-widget__toggle:active {
     transform: scale(0.95);
 }
 
-.fa-exception-widget__panel {
+/* Panel - main content */
+.exception-widget__panel {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -460,7 +541,7 @@
     transition: opacity var(--transition-base);
 }
 
-.fa-exception-widget__header {
+.exception-widget__header {
     padding: var(--space-md) var(--space-lg);
     background: rgba(255, 167, 38, 0.1);
     border-bottom: 1px solid var(--color-border-light);
@@ -473,7 +554,7 @@
     user-select: none;
 }
 
-.fa-exception-widget__collapse {
+.exception-widget__collapse {
     background: none;
     border: none;
     color: var(--color-warning);
@@ -489,33 +570,33 @@
     opacity: 0.7;
 }
 
-.fa-exception-widget__collapse:hover {
+.exception-widget__collapse:hover {
     transform: scale(1.3);
     opacity: 1;
 }
 
-.fa-exception-widget__body {
+.exception-widget__body {
     padding: var(--space-md);
     overflow-y: auto;
     flex: 1;
 }
 
-.fa-exception-group {
+.exception-group {
     margin-bottom: var(--space-lg);
 }
 
-.fa-exception-group:last-child {
+.exception-group:last-child {
     margin-bottom: 0;
 }
 
-.fa-exception-group__title {
+.exception-group__title {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
     margin-bottom: var(--space-sm);
 }
 
-.fa-exception-item {
+.exception-item {
     padding: var(--space-sm);
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-sm);
@@ -526,18 +607,18 @@
     transition: background var(--transition-fast);
 }
 
-.fa-exception-item:hover {
+.exception-item:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.fa-exception-item:last-child {
+.exception-item:last-child {
     margin-bottom: 0;
 }
 
 /* MAIN LAYOUT */
 .fa-dashboard {
   display: flex;
-  background: #ffffff;
+  background: #0b1220;
   min-height: 100vh;
   color: #fff;
 }
@@ -565,7 +646,7 @@
 }
 
 /* ACTIVE MENU */
-.fa-menu-item--active {
+.fa-menu-item.active {
   background: #1f4ed8;
   color: #ffffff;
   border-radius: 6px;
