@@ -1,14 +1,15 @@
 import React from 'react';
 // This one is already correct:
 import './loanRiskAnalysis.css';
+
 const RiskAnalysis: React.FC = () => {
   const riskData = [
-    { category: 'Interest Rate Risk', exposure: '$2.1B', probability: 'Medium', impact: 'High', score: 85, mitigation: 'Fixed rate swaps', owner: 'Treasury', trend: 'stable' },
-    { category: 'Currency Risk', exposure: '$1.5B', probability: 'High', impact: 'Medium', score: 75, mitigation: 'Forward contracts', owner: 'FX Desk', trend: 'increasing' },
-    { category: 'Liquidity Risk', exposure: '$0.8B', probability: 'Low', impact: 'High', score: 60, mitigation: 'Credit lines', owner: 'Treasury', trend: 'stable' },
-    { category: 'Credit Risk', exposure: '$0.5B', probability: 'Low', impact: 'Medium', score: 45, mitigation: 'Diversification', owner: 'Risk Mgmt', trend: 'decreasing' },
+    { category: 'Interest Rate Risk', exposure: '₹174.3B', probability: 'Medium', impact: 'High', score: 85, mitigation: 'Fixed rate swaps', owner: 'Treasury', trend: 'stable' },
+    { category: 'Currency Risk', exposure: '₹124.5B', probability: 'High', impact: 'Medium', score: 75, mitigation: 'Forward contracts', owner: 'FX Desk', trend: 'increasing' },
+    { category: 'Liquidity Risk', exposure: '₹66.4B', probability: 'Low', impact: 'High', score: 60, mitigation: 'Credit lines', owner: 'Treasury', trend: 'stable' },
+    { category: 'Credit Risk', exposure: '₹41.5B', probability: 'Low', impact: 'Medium', score: 45, mitigation: 'Diversification', owner: 'Risk Mgmt', trend: 'decreasing' },
     { category: 'Operational Risk', exposure: 'N/A', probability: 'Low', impact: 'Low', score: 30, mitigation: 'Process controls', owner: 'Operations', trend: 'stable' },
-    { category: 'Market Risk', exposure: '$1.2B', probability: 'Medium', impact: 'High', score: 65, mitigation: 'Hedging program', owner: 'Treasury', trend: 'increasing' },
+    { category: 'Market Risk', exposure: '₹99.6B', probability: 'Medium', impact: 'High', score: 65, mitigation: 'Hedging program', owner: 'Treasury', trend: 'increasing' },
   ];
 
   return (
@@ -24,7 +25,7 @@ const RiskAnalysis: React.FC = () => {
           <span className="metric-icon">📊</span>
           <div>
             <div className="metric-label">Value at Risk (VaR)</div>
-            <div className="metric-value">$125M</div>
+            <div className="metric-value">₹10,375M</div>
             <div className="metric-detail">95% confidence, 10-day</div>
           </div>
         </div>
@@ -32,7 +33,7 @@ const RiskAnalysis: React.FC = () => {
           <span className="metric-icon">⚠️</span>
           <div>
             <div className="metric-label">Expected Loss</div>
-            <div className="metric-value">$42M</div>
+            <div className="metric-value">₹3,486M</div>
             <div className="metric-detail">Annual projection</div>
           </div>
         </div>
@@ -40,7 +41,7 @@ const RiskAnalysis: React.FC = () => {
           <span className="metric-icon">⚖️</span>
           <div>
             <div className="metric-label">Risk Weighted Assets</div>
-            <div className="metric-value">$2.8B</div>
+            <div className="metric-value">₹232.4B</div>
             <div className="metric-detail">Under Basel III</div>
           </div>
         </div>

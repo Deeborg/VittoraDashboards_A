@@ -1,6 +1,7 @@
 import React from 'react';
 // This one is already correct:
 import './loanPaymentSchedule.css';
+
 const PaymentSchedule: React.FC = () => {
   const paymentData = [
     { facility: 'ECB-2023-001', currency: 'USD', principal: '$50M', interest: '$2.1M', total: '$52.1M', dueDate: '2024-03-15', status: 'Upcoming', daysLeft: 15 },
@@ -11,19 +12,30 @@ const PaymentSchedule: React.FC = () => {
     { facility: 'ECB-2021-001', currency: 'AUD', principal: 'A$10M', interest: 'A$0.5M', total: 'A$10.5M', dueDate: '2024-05-20', status: 'Upcoming', daysLeft: 81 },
   ];
 
-  // Calculate totals
+  // Calculate totals in INR
   const next30Days = paymentData.filter(p => p.daysLeft <= 30).reduce((sum, p) => {
     const amount = parseFloat(p.total.replace(/[^0-9.]/g, ''));
+    // Convert USD amounts to INR (assuming USD values)
+    if (p.currency === 'USD') {
+      return sum + (amount * 83);
+    }
+    // For other currencies, keep as is or add conversion logic as needed
     return sum + amount;
   }, 0);
 
   const next60Days = paymentData.filter(p => p.daysLeft <= 60).reduce((sum, p) => {
     const amount = parseFloat(p.total.replace(/[^0-9.]/g, ''));
+    if (p.currency === 'USD') {
+      return sum + (amount * 83);
+    }
     return sum + amount;
   }, 0);
 
   const next90Days = paymentData.filter(p => p.daysLeft <= 90).reduce((sum, p) => {
     const amount = parseFloat(p.total.replace(/[^0-9.]/g, ''));
+    if (p.currency === 'USD') {
+      return sum + (amount * 83);
+    }
     return sum + amount;
   }, 0);
 
@@ -34,13 +46,13 @@ const PaymentSchedule: React.FC = () => {
         <p className="subtitle">Upcoming principal and interest payments</p>
       </div>
 
-      {/* Timeline Stats */}
+      {/* Timeline Stats - Now in INR */}
       <div className="timeline-stats">
         <div className="timeline-card urgent">
           <span className="timeline-icon">🔴</span>
           <div>
             <div className="timeline-label">Next 30 Days</div>
-            <div className="timeline-value">${next30Days.toFixed(1)}M</div>
+            <div className="timeline-value">₹{(next30Days).toFixed(0)}M</div>
             <div className="timeline-detail">{paymentData.filter(p => p.daysLeft <= 30).length} payments</div>
           </div>
         </div>
@@ -48,7 +60,7 @@ const PaymentSchedule: React.FC = () => {
           <span className="timeline-icon">🟡</span>
           <div>
             <div className="timeline-label">Next 60 Days</div>
-            <div className="timeline-value">${next60Days.toFixed(1)}M</div>
+            <div className="timeline-value">₹{(next60Days).toFixed(0)}M</div>
             <div className="timeline-detail">{paymentData.filter(p => p.daysLeft <= 60).length} payments</div>
           </div>
         </div>
@@ -56,7 +68,7 @@ const PaymentSchedule: React.FC = () => {
           <span className="timeline-icon">🔵</span>
           <div>
             <div className="timeline-label">Next 90 Days</div>
-            <div className="timeline-value">${next90Days.toFixed(1)}M</div>
+            <div className="timeline-value">₹{(next90Days).toFixed(0)}M</div>
             <div className="timeline-detail">{paymentData.length} payments</div>
           </div>
         </div>
@@ -125,21 +137,21 @@ const PaymentSchedule: React.FC = () => {
         </table>
       </div>
 
-      {/* Summary */}
+      {/* Summary - Updated to INR */}
       <div className="payment-summary">
         <h3>Payment Summary</h3>
         <div className="summary-grid">
           <div className="summary-item">
             <span>Total Principal Due</span>
-            <strong>$155M</strong>
+            <strong>₹12,865M</strong>
           </div>
           <div className="summary-item">
             <span>Total Interest Due</span>
-            <strong>$6.6M</strong>
+            <strong>₹548M</strong>
           </div>
           <div className="summary-item">
             <span>Average Payment</span>
-            <strong>$26.9M</strong>
+            <strong>₹2,233M</strong>
           </div>
           <div className="summary-item">
             <span>Next Payment</span>

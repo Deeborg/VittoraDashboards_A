@@ -17,7 +17,7 @@ const Dashboard: React.FC = () => {
     { 
       title: 'TOTAL ECB EXPOSURE', 
       value: '₹36,130Cr',
-      inrValue: '₹361.3B',
+      // Removed the inrValue property
       change: '+2.3%', 
       trend: 'up',
       subtitle: 'vs last month',
@@ -79,7 +79,7 @@ const Dashboard: React.FC = () => {
           <div className="header-stat" style={{ borderRadius: 0 }}>
             <span>Total Exposure (INR)</span>
             <strong>₹36,130Cr</strong>
-            <small style={{ fontSize: '11px', color: '#94a3b8', display: 'block', marginTop: '2px' }}>₹361.3B</small>
+            {/* Removed the small tag with ₹361.3B */}
           </div>
         </div>
       </div>
@@ -102,11 +102,7 @@ const Dashboard: React.FC = () => {
             <div className="stat-content">
               <div className="stat-title">{stat.title}</div>
               <div className="stat-value">{stat.value}</div>
-              {stat.inrValue && (
-                <div className="stat-inr" style={{ fontSize: '14px', opacity: 0.9, marginTop: '4px' }}>
-                  {stat.inrValue}
-                </div>
-              )}
+              {/* Removed the conditional rendering of stat.inrValue */}
               <div className="stat-footer">
                 <span className={`stat-change ${stat.trend}`}>
                   {stat.trend === 'up' ? '↑' : '↓'} {stat.change}
@@ -208,7 +204,7 @@ const Dashboard: React.FC = () => {
       <div className="summary-card" style={{ borderRadius: 0 }}>
         <h3>Executive Summary</h3>
         <p className="summary-text">
-          Current ECB exposure stands at <strong>₹36,130Cr (₹361.3B)</strong> with an average interest rate of <strong>4.85%</strong>. 
+          Current ECB exposure stands at <strong>₹36,130Cr</strong> with an average interest rate of <strong>4.85%</strong>. 
           Hedging ratio is at <strong>68%</strong>, showing a 3% increase from last month. 
           USD remains the dominant currency with 45% exposure (₹16,256Cr), followed by EUR at 25% (₹9,562Cr).
         </p>
