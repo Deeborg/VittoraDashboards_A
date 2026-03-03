@@ -20,7 +20,23 @@ const PageContainer = styled.div`
   overflow-y: auto;
   background: ${theme.colors.gray[50]};
 `;
+// Add this styled component after the existing imports
+const TableWrapper = styled.div`
+  margin-top: ${theme.spacing.xl};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
+  overflow: hidden;
+  box-shadow: ${theme.shadows.sm};
+`;
 
+const FilterSection = styled.div`
+  margin-bottom: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
+`;
 const MetricGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -95,7 +111,7 @@ const ChartHeader = styled.div`
 const ChartTitle = styled.h3`
   font-size: ${theme.typography.fontSize.lg};
   font-weight: ${theme.typography.fontWeight.semibold};
-  color: ${theme.colors.blue[900]};
+  color: ${theme.colors.primary[900]};
   margin: 0;
 `;
 
@@ -390,26 +406,32 @@ const handleSearch = (value: string) => {
 <GridContainer>
         <ChartCard $colspan={20}>
       
-      <FilterBar
-  filters={filters}
-  onFilterChange={updateFilter}
-  onClearFilters={clearFilters}
-  filterConfig={filterConfig}
-  showSearch={true}
-  onSearch={handleSearch}
-  searchPlaceholder="Search audit logs..."
-/>
-      <DataTable 
-        columns={columns}
-        data={paginatedData}
-        onRowClick={handleRowClick}
-        pagination={pagination}
-        sortConfig={{
-          key: sortConfig.key,
-          direction: sortConfig.direction,
-          onSort: handleSort,
-        }}
-      />
+     
+<FilterSection>
+  <FilterBar
+    filters={filters}
+    onFilterChange={updateFilter}
+    onClearFilters={clearFilters}
+    filterConfig={filterConfig}
+    showSearch={true}
+    onSearch={handleSearch}
+    searchPlaceholder="Search audit logs..."
+  />
+</FilterSection>
+
+<TableWrapper>
+  <DataTable 
+    columns={columns}
+    data={paginatedData}
+    onRowClick={handleRowClick}
+    pagination={pagination}
+    sortConfig={{
+      key: sortConfig.key,
+      direction: sortConfig.direction,
+      onSort: handleSort,
+    }}
+  />
+</TableWrapper>
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

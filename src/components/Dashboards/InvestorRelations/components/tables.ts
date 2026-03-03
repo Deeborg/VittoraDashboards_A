@@ -40,9 +40,7 @@ export const TableComponent = {
         // Build body rows
         const bodyRows = data.length === 0
             ? `<tr>
-                <td colspan="${columns.length}"
-                    style="text-align:center;padding:24px;
-                    color:var(--text-soft);">
+                <td colspan="${columns.length}" style="text-align:center;padding:24px;color:#8b9aac;background-color:#0a192f;">
                     No results found
                 </td>
                </tr>`

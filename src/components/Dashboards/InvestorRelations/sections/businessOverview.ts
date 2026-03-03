@@ -15,6 +15,7 @@ import { TableComponent } from '../components/tables';
 import { AppState }       from '../app';
 import type { Client, TableColumn } from '../types/index';
 
+
 export const BusinessOverview = {
 
     render(container: HTMLElement): void {

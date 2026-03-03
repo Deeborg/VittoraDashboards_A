@@ -6,6 +6,7 @@ import { theme } from '../../styles/theme_cr';
 const TableScrollWrapper = styled.div`
   overflow-x: auto;
   width: 100%;
+  border-radius: ${theme.borderRadius.lg};
   
   &::-webkit-scrollbar {
     height: 8px;
@@ -34,25 +35,29 @@ const TableContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: ${theme.shadows.sm};
 `;
-
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px; // Ensures table doesn't shrink too much
+  min-width: 800px;
+  background: white;
 `;
 
 const Th = styled.th<{ $sortable?: boolean }>`
   padding: ${theme.spacing.md} ${theme.spacing.lg};
   background: ${theme.colors.gray[50]};
-  font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.gray[700]};
+  font-weight: ${theme.typography.fontWeight.semibold};
+  color: ${theme.colors.gray[700]}; /* Changed from gray[50] to gray[700] for dark text on light background */
   font-size: ${theme.typography.fontSize.sm};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   border-bottom: 1px solid ${theme.colors.gray[200]};
   cursor: ${props => props.$sortable ? 'pointer' : 'default'};
   user-select: none;
   white-space: nowrap;
+  transition: background-color 0.2s ease;
 
   &:hover {
     background: ${props => props.$sortable ? theme.colors.gray[100] : theme.colors.gray[50]};
@@ -61,12 +66,15 @@ const Th = styled.th<{ $sortable?: boolean }>`
 
 const Td = styled.td`
   padding: ${theme.spacing.md} ${theme.spacing.lg};
-  border-bottom: 1px solid ${theme.colors.gray[200]};
-  color: ${theme.colors.gray[700]};
+  border-bottom: 1px solid ${theme.colors.gray[100]};
+  color: ${theme.colors.gray[700]}; /* Changed from gray[50] to gray[700] for dark text on white background */
   font-size: ${theme.typography.fontSize.sm};
+  background: white;
 `;
 
 const Tr = styled.tr<{ $clickable?: boolean }>`
+  transition: background-color 0.2s ease;
+  
   &:hover {
     background: ${props => props.$clickable ? theme.colors.gray[50] : 'transparent'};
     cursor: ${props => props.$clickable ? 'pointer' : 'default'};
@@ -82,6 +90,7 @@ const SortIcon = styled.span`
   color: ${theme.colors.gray[400]};
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
 `;
 
 const PaginationContainer = styled.div`
@@ -91,6 +100,8 @@ const PaginationContainer = styled.div`
   padding: ${theme.spacing.md} ${theme.spacing.lg};
   border-top: 1px solid ${theme.colors.gray[200]};
   background: white;
+  flex-wrap: wrap;
+  gap: ${theme.spacing.md};
 `;
 
 const PaginationInfo = styled.div`
@@ -101,11 +112,14 @@ const PaginationInfo = styled.div`
 const PaginationControls = styled.div`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${theme.spacing.xs};
+  flex-wrap: wrap;
 `;
 
 const PaginationButton = styled.button<{ $active?: boolean }>`
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  min-width: 36px;
+  height: 36px;
+  padding: 0 ${theme.spacing.sm};
   border: 1px solid ${props => props.$active ? theme.colors.primary[500] : theme.colors.gray[200]};
   background: ${props => props.$active ? theme.colors.primary[500] : 'white'};
   color: ${props => props.$active ? 'white' : theme.colors.gray[700]};
@@ -113,10 +127,15 @@ const PaginationButton = styled.button<{ $active?: boolean }>`
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: ${theme.typography.fontSize.sm};
+  font-weight: ${props => props.$active ? theme.typography.fontWeight.medium : theme.typography.fontWeight.normal};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover:not(:disabled) {
     background: ${props => props.$active ? theme.colors.primary[600] : theme.colors.gray[100]};
     border-color: ${props => props.$active ? theme.colors.primary[600] : theme.colors.gray[300]};
+    transform: translateY(-1px);
   }
 
   &:disabled {
@@ -125,11 +144,17 @@ const PaginationButton = styled.button<{ $active?: boolean }>`
   }
 `;
 
+const Ellipsis = styled.span`
+  color: ${theme.colors.gray[500]};
+  padding: 0 ${theme.spacing.xs};
+`;
+
 const EmptyState = styled.div`
   padding: ${theme.spacing['3xl']};
   text-align: center;
   color: ${theme.colors.gray[500]};
   font-size: ${theme.typography.fontSize.sm};
+  background: white;
 `;
 
 interface Column<T = any> {
@@ -187,37 +212,38 @@ export function DataTable<T extends Record<string, any>>({
   return (
     <TableContainer>
       <TableScrollWrapper>
-      <Table>
-        <thead>
-          <tr>
-            {columns.map((column) => (
-              <Th
-                key={column.key}
-                $sortable={column.sortable}
-                onClick={() => column.sortable && sortConfig?.onSort(column.key)}
-              >
-                {column.header}
-                <SortIcon>{renderSortIcon(column)}</SortIcon>
-              </Th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <Tr
-              key={item.id || index}
-              $clickable={!!onRowClick}
-              onClick={() => onRowClick?.(item)}
-            >
+        <Table>
+          <thead>
+            <tr>
               {columns.map((column) => (
-                <Td key={`${item.id}-${column.key}`}>
-                  {column.render ? column.render(item) : item[column.key]}
-                </Td>
+                <Th
+                  key={column.key}
+                  $sortable={column.sortable}
+                  onClick={() => column.sortable && sortConfig?.onSort(column.key)}
+                >
+                  {column.header}
+                  <SortIcon>{renderSortIcon(column)}</SortIcon>
+                </Th>
               ))}
-            </Tr>
-          ))}
-        </tbody>
-      </Table>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <Tr
+                key={item.id || index}
+                $clickable={!!onRowClick}
+                onClick={() => onRowClick?.(item)}
+              >
+                {columns.map((column) => (
+                  <Td key={`${item.id || index}-${column.key}`}>
+                    {column.render ? column.render(item) : item[column.key]}
+                  </Td>
+                ))}
+              </Tr>
+            ))}
+          </tbody>
+        </Table>
+      </TableScrollWrapper>
 
       {pagination && (
         <PaginationContainer>
@@ -236,12 +262,11 @@ export function DataTable<T extends Record<string, any>>({
             
             {[...Array(pagination.totalPages)].map((_, i) => {
               const pageNumber = i + 1;
-              // Show current page, first, last, and adjacent pages
               if (
                 pageNumber === 1 ||
                 pageNumber === pagination.totalPages ||
-                (pageNumber >= pagination.currentPage - 2 &&
-                  pageNumber <= pagination.currentPage + 2)
+                (pageNumber >= pagination.currentPage - 1 &&
+                  pageNumber <= pagination.currentPage + 1)
               ) {
                 return (
                   <PaginationButton
@@ -253,10 +278,10 @@ export function DataTable<T extends Record<string, any>>({
                   </PaginationButton>
                 );
               } else if (
-                pageNumber === pagination.currentPage - 3 ||
-                pageNumber === pagination.currentPage + 3
+                pageNumber === pagination.currentPage - 2 ||
+                pageNumber === pagination.currentPage + 2
               ) {
-                return <span key={pageNumber}>...</span>;
+                return <Ellipsis key={pageNumber}>...</Ellipsis>;
               }
               return null;
             })}
@@ -270,7 +295,6 @@ export function DataTable<T extends Record<string, any>>({
           </PaginationControls>
         </PaginationContainer>
       )}
-      </TableScrollWrapper>
     </TableContainer>
   );
 }

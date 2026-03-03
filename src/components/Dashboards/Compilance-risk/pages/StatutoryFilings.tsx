@@ -18,7 +18,23 @@ import { isOverdue, getDaysUntil } from '../utils/dateUtils'; // Added both impo
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
 `;
+// Add this styled component after the existing imports
+const TableWrapper = styled.div`
+  margin-top: ${theme.spacing.xl};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
+  overflow: hidden;
+  box-shadow: ${theme.shadows.sm};
+`;
 
+const FilterSection = styled.div`
+  margin-bottom: ${theme.spacing.lg};
+  padding: ${theme.spacing.lg};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
+`;
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -159,11 +175,7 @@ const StatutoryFilings: React.FC = () => {
       type: 'text' as const,
       placeholder: 'Search by assignee...',
     },
-    {
-      key: 'dueDateRange',
-      label: 'Due Date',
-      type: 'dateRange' as const,
-    },
+   
   ];
 
   const { filters, filteredData, updateFilter, clearFilters } = useFilters(
@@ -206,7 +218,9 @@ const StatutoryFilings: React.FC = () => {
     });
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [statutoryFilings]);
-
+const handleSearch = (value: string) => {
+  updateFilter('search', value);
+};
   // Chart data - Status distribution
   const statusData = useMemo(() => {
     return [
@@ -407,45 +421,46 @@ const StatutoryFilings: React.FC = () => {
  </GridContainer>
  <GridContainer>
         <ChartCard $colspan={12}>
-      <FilterBar
-        filters={filters}
-        onFilterChange={updateFilter}
-        onClearFilters={clearFilters}
-        filterConfig={filterConfig}
-        showSearch={true}
-        onSearch={(value) => updateFilter('search', value)}
-        searchPlaceholder="Search filings..."
-      />
-
-      <DataTable
-        columns={columns}
-        data={paginatedData}
-        onRowClick={handleRowClick}
-        pagination={pagination}
-        sortConfig={{
-          key: sortConfig.key,
-          direction: sortConfig.direction,
-          onSort: handleSort,
-        }}
-      />
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title="Filing Details"
-        size="lg"
-      >
-        {selectedFiling && (
-          <FilingDetail
-            filing={selectedFiling}
-            onClose={() => setIsModalOpen(false)}
+          <FilterBar
+            filters={filters}
+            onFilterChange={updateFilter}
+            onClearFilters={clearFilters}
+            filterConfig={filterConfig}
+            showSearch={true}
+            onSearch={handleSearch}
+            searchPlaceholder="Search filings..."
           />
-        )}
-      </Modal>
-      </ChartCard>
+
+          <DataTable
+            columns={columns}
+            data={paginatedData}
+            onRowClick={handleRowClick}
+            pagination={pagination}
+            sortConfig={{
+              key: sortConfig.key,
+              direction: sortConfig.direction,
+              onSort: handleSort,
+            }}
+          />
+
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            title="Filing Details"
+            size="lg"
+          >
+            {selectedFiling && (
+              <FilingDetail
+                filing={selectedFiling}
+                onClose={() => setIsModalOpen(false)}
+              />
+            )}
+          </Modal>
+        </ChartCard>
       </GridContainer>
     </PageContainer>
   );
 };
 
+         
 export default StatutoryFilings;

@@ -213,6 +213,7 @@
     gap: 24px;
     align-items: start;
     margin-bottom: 30px;
+    background-color: #112240;
 }
 
 /* ── KPI GRID ── */
@@ -380,46 +381,6 @@
 
 /* ── TABLE VISIBILITY ── */
 .investor-scope .data-tbl { width: 100%; border-collapse: collapse; }
-.investor-scope .data-tbl th { background: #1a2332; color: var(--text-soft); padding: 12px 16px; text-align: left; }
-.investor-scope .data-tbl td { padding: 15px 16px; border-bottom: 1px solid var(--border); color: #ffffff !important; font-size: 13px;}
-
-.investor-scope .data-tbl tr:hover {
-    background-color: #112240 !important; /* Dark Navy Hover */
-    cursor: pointer;
-}
-
-/* Ensure the text remains white during hover */
-.investor-scope .data-tbl tr:hover td {
-    color: #ffffff !important;
-}
-
-/* --- CRITICAL FIX: TABLE HOVER VISIBILITY --- */
-
-/* 1. Target the row and the cells specifically to stop them from turning white */
-.investor-scope .data-tbl tbody tr:hover,
-.investor-scope .data-tbl tbody tr:hover td {
-    background-color: #112240 !important; /* Force Dark Navy background */
-    color: #ffffff !important;           /* Force White text */
-}
-
-/* 2. Fix for the Relationship Badge during hover */
-.investor-scope .data-tbl tr:hover .badge {
-    opacity: 1 !important;
-    /* Ensure the badge doesn't get a white border on hover */
-    border-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-/* 3. Global override for any other table hover that might exist */
-.investor-scope table tr:hover td {
-    background-color: #112240 !important;
-}
-
-/* Ensure the table buttons (Relationship) remain visible */
-.investor-scope .data-tbl td .badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
 
 /* Fix for the "Export CSV" button positioning in the card header */
 .investor-scope .card-header .tbl-btn {
@@ -431,6 +392,11 @@
     padding: 4px 10px;
     border-radius: 4px;
     font-weight: 700;
+    cursor: pointer;
+}
+
+.investor-scope .card-header .tbl-btn:hover {
+    background: #1e2f4a;
 }
 
 /* --- INCOME STATEMENT DETAIL TABLE --- */
@@ -455,7 +421,7 @@
     padding: 12px 16px;
     font-size: 13px;
     border-bottom: 1px solid var(--border);
-    color: #ffffff;
+    color: #112240;
 }
 
 /* Right align numbers */
@@ -835,4 +801,114 @@
     font-size: 16px;
     font-weight: 600;
     opacity: 0.8;
+}
+
+/* ============================================
+   TABLE FIXES - Dark blue background with white text
+   ============================================ */
+
+/* Force dark blue background on all table cells */
+.investor-scope .data-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #0a192f !important;
+}
+
+.investor-scope .data-tbl thead tr {
+    background-color: #1a2332 !important;
+}
+
+.investor-scope .data-tbl th {
+    background-color: #1a2332 !important;
+    color: #8b9aac !important;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #1e2d40 !important;
+}
+
+/* Table body cells - DARK BLUE BACKGROUND WITH WHITE TEXT */
+.investor-scope .data-tbl tbody td {
+    background-color: #0a192f !important;
+    color: #ffffff !important;
+    padding: 15px 16px;
+    border-bottom: 1px solid #1e2d40 !important;
+    font-size: 13px;
+}
+
+/* Hover state - keep dark blue but slightly lighter */
+.investor-scope .data-tbl tbody tr:hover td {
+    background-color: #1e2f4a !important;
+    color: #ffffff !important;
+}
+
+/* Right-aligned numbers */
+.investor-scope .data-tbl td.num,
+.investor-scope .data-tbl th.num {
+    text-align: right;
+}
+
+/* Badge styling within table - preserve badge colors */
+.investor-scope .data-tbl .badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.investor-scope .data-tbl .badge-new {
+    background: rgba(0, 230, 118, 0.15) !important;
+    color: #00e676 !important;
+}
+
+.investor-scope .data-tbl .badge-growth {
+    background: rgba(0, 212, 255, 0.15) !important;
+    color: #00d4ff !important;
+}
+
+.investor-scope .data-tbl .badge-mature {
+    background: rgba(139, 154, 172, 0.15) !important;
+    color: #8b9aac !important;
+}
+
+.investor-scope .data-tbl .badge-key {
+    background: rgba(0, 212, 255, 0.1) !important;
+    color: #00d4ff !important;
+    border: 1px solid rgba(0, 212, 255, 0.3) !important;
+}
+
+.investor-scope .data-tbl .badge-strategic {
+    background: rgba(0, 153, 204, 0.1) !important;
+    color: #00d4ff !important;
+    border: 1px solid rgba(0, 153, 204, 0.3) !important;
+}
+
+/* Ensure badge text stays colored on hover */
+.investor-scope .data-tbl tbody tr:hover .badge,
+.investor-scope .data-tbl tbody tr:hover .badge-new,
+.investor-scope .data-tbl tbody tr:hover .badge-growth,
+.investor-scope .data-tbl tbody tr:hover .badge-mature,
+.investor-scope .data-tbl tbody tr:hover .badge-key,
+.investor-scope .data-tbl tbody tr:hover .badge-strategic {
+    background-color: inherit !important;
+    color: inherit !important;
+}
+
+/* Empty state styling */
+.investor-scope .data-tbl td[colspan] {
+    text-align: center;
+    padding: 24px;
+    color: #8b9aac !important;
+    background-color: #0a192f !important;
+}
+
+/* Remove conflicting hover styles */
+.investor-scope .data-tbl tr:hover,
+.investor-scope .data-tbl tbody tr:hover,
+.investor-scope .data-tbl tbody tr:hover td,
+.investor-scope table tr:hover td {
+    background-color: #1e2f4a !important;
+    color: #ffffff !important;
 }

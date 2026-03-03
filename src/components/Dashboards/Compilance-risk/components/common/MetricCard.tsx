@@ -64,7 +64,7 @@ const Header = styled.div`
 
 const Label = styled.div`
   font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.text.tertiary};
+  color: ${theme.colors.gray[500]};
   font-weight: ${theme.typography.fontWeight.medium};
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -85,7 +85,7 @@ const IconWrapper = styled.div<{ $color: string }>`
 const Value = styled.div`
   font-size: ${theme.typography.fontSize['3xl']};
   font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+    color:  ${theme.colors.gray[900]};  
   line-height: 1.2;
   margin-bottom: ${theme.spacing.xs};
 `;
@@ -106,7 +106,7 @@ const Trend = styled.div<{ $positive?: boolean }>`
 
 const Subtext = styled.div`
   font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.text.muted};
+ color: ${theme.colors.gray[400]};
   margin-top: ${theme.spacing.xs};
 `;
 

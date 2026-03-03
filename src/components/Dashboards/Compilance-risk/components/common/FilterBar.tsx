@@ -24,19 +24,21 @@ interface FilterBarProps {
 }
 
 const FilterContainer = styled.div`
-  background: ${theme.colors.background.card};
-  border-radius: ${theme.borderRadius['2xl']};
-  border: 1px solid ${theme.colors.border.medium};
+  background: white;
+  border-radius: ${theme.borderRadius.lg};
+  border: 1px solid ${theme.colors.gray[200]};
   padding: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.card};
+  box-shadow: ${theme.shadows.sm};
 `;
 
 const FilterHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: ${theme.spacing.md};
+  margin-bottom: ${theme.spacing.lg};
+  flex-wrap: wrap;
+  gap: ${theme.spacing.sm};
 `;
 
 const FilterTitle = styled.div`
@@ -45,12 +47,16 @@ const FilterTitle = styled.div`
   gap: ${theme.spacing.sm};
   font-size: ${theme.typography.fontSize.sm};
   font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.text.primary};
+  color: ${theme.colors.gray[700]};
+  
+  svg {
+    color: ${theme.colors.primary[500]};
+  }
 `;
 
 const FilterGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: ${theme.spacing.md};
 `;
 
@@ -63,63 +69,73 @@ const FilterItem = styled.div`
 const FilterLabel = styled.label`
   font-size: ${theme.typography.fontSize.xs};
   font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.text.secondary};
+  color: ${theme.colors.gray[600]};
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 `;
 
 const Select = styled.select`
   padding: ${theme.spacing.sm} ${theme.spacing.md};
-  border: 1px solid ${theme.colors.border.medium};
+  border: 1px solid ${theme.colors.gray[300]};
   border-radius: ${theme.borderRadius.lg};
   font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.text.primary};
-  background: ${theme.colors.background.secondary};
+  color: ${theme.colors.gray[900]};
+  background: white;
   cursor: pointer;
   transition: all 0.2s ease;
+  height: 38px;
 
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary[500]};
-    box-shadow: 0 0 0 3px ${theme.colors.primary[900]};
+    box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
   }
   
   option {
-    background: ${theme.colors.background.card};
-    color: ${theme.colors.text.primary};
+    background: white;
+    color: ${theme.colors.gray[900]};
   }
 `;
+
 const Input = styled.input`
   padding: ${theme.spacing.sm} ${theme.spacing.md};
-  border: 1px solid ${theme.colors.border.medium};
+  border: 1px solid ${theme.colors.gray[300]};
   border-radius: ${theme.borderRadius.lg};
   font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.text.primary};
-  background: ${theme.colors.background.secondary};
+  color: ${theme.colors.gray[900]};
+  background: white;
   transition: all 0.2s ease;
+  height: 38px;
 
   &:focus {
     outline: none;
     border-color: ${theme.colors.primary[500]};
-    box-shadow: 0 0 0 3px ${theme.colors.primary[900]};
+    box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
   }
 
   &::placeholder {
-    color: ${theme.colors.text.muted};
+    color: ${theme.colors.gray[400]};
   }
 `;
+
 const ClearButton = styled.button`
   display: flex;
   align-items: center;
   gap: ${theme.spacing.xs};
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   background: transparent;
-  border: none;
-  color: ${theme.colors.gray[500]};
+  border: 1px solid ${theme.colors.gray[200]};
+  border-radius: ${theme.borderRadius.lg};
+  color: ${theme.colors.gray[600]};
   font-size: ${theme.typography.fontSize.sm};
   cursor: pointer;
   transition: all 0.2s ease;
+  height: 32px;
 
   &:hover {
-    color: ${theme.colors.error[500]};
+    background: ${theme.colors.error[50]};
+    border-color: ${theme.colors.error[300]};
+    color: ${theme.colors.error[700]};
   }
 `;
 
@@ -127,9 +143,9 @@ const ActiveFilters = styled.div`
   display: flex;
   align-items: center;
   gap: ${theme.spacing.sm};
-  margin-top: ${theme.spacing.md};
-  padding-top: ${theme.spacing.md};
-  border-top: 1px solid ${theme.colors.border.light};
+  margin-top: ${theme.spacing.lg};
+  padding-top: ${theme.spacing.lg};
+  border-top: 1px solid ${theme.colors.gray[200]};
   flex-wrap: wrap;
 `;
 
@@ -138,12 +154,12 @@ const FilterTag = styled.span`
   align-items: center;
   gap: ${theme.spacing.xs};
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
-  background: ${theme.colors.primary[900]};
-  color: ${theme.colors.primary[300]};
+  background: ${theme.colors.primary[50]};
+  color: ${theme.colors.primary[700]};
   border-radius: ${theme.borderRadius.full};
   font-size: ${theme.typography.fontSize.xs};
   font-weight: ${theme.typography.fontWeight.medium};
-  border: 1px solid ${theme.colors.primary[700]};
+  border: 1px solid ${theme.colors.primary[200]};
 `;
 
 const RemoveTag = styled.button`
@@ -153,12 +169,14 @@ const RemoveTag = styled.button`
   padding: 2px;
   background: transparent;
   border: none;
-  color: ${theme.colors.primary[600]};
+  color: ${theme.colors.primary[500]};
   cursor: pointer;
   border-radius: ${theme.borderRadius.full};
+  transition: all 0.2s ease;
 
   &:hover {
     background: ${theme.colors.primary[100]};
+    color: ${theme.colors.primary[800]};
   }
 `;
 
@@ -205,24 +223,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
           />
         );
       
-      case 'date':
-        return (
-          <Input
-            type="date"
-            value={filters[config.key] || ''}
-            onChange={(e) => onFilterChange(config.key, e.target.value)}
-          />
-        );
       
-      case 'dateRange':
-        return (
-          <DateRangePicker
-            startDate={filters[`${config.key}Start`] || ''}
-            endDate={filters[`${config.key}End`] || ''}
-            onStartDateChange={(date) => onFilterChange(`${config.key}Start`, date)}
-            onEndDateChange={(date) => onFilterChange(`${config.key}End`, date)}
-          />
-        );
+      
+      
       
       default:
         return null;
@@ -240,8 +243,15 @@ const FilterBar: React.FC<FilterBarProps> = ({
           <FaFilter size={14} />
           Filters
           {getActiveFilterCount() > 0 && (
-            <span style={{ color: theme.colors.primary[600] }}>
-              ({getActiveFilterCount()} active)
+            <span style={{ 
+              background: theme.colors.primary[100],
+              color: theme.colors.primary[700],
+              padding: '2px 8px',
+              borderRadius: theme.borderRadius.full,
+              fontSize: theme.typography.fontSize.xs,
+              marginLeft: theme.spacing.xs
+            }}>
+              {getActiveFilterCount()} active
             </span>
           )}
         </FilterTitle>
@@ -254,12 +264,13 @@ const FilterBar: React.FC<FilterBarProps> = ({
       </FilterHeader>
 
       {showSearch && (
-        <SearchInput
-          value={searchValue}
-          onChange={handleSearch}
-          placeholder={searchPlaceholder}
-          style={{ marginBottom: theme.spacing.md }}
-        />
+        <div style={{ marginBottom: theme.spacing.lg }}>
+          <SearchInput
+            value={searchValue}
+            onChange={handleSearch}
+            placeholder={searchPlaceholder}
+          />
+        </div>
       )}
 
       <FilterGrid>

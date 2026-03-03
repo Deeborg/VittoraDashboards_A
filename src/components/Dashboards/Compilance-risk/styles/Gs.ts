@@ -18,8 +18,8 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${theme.typography.fontFamily.sans};
-    color: ${theme.colors.text.primary};
-    background-color: ${theme.colors.background.primary};
+    color: ${theme.colors.gray[900]};
+    background-color: ${theme.colors.gray[50]};
     line-height: 1.5;
     height: 100%;
     overflow: hidden;
@@ -31,19 +31,19 @@ const GlobalStyles = createGlobalStyle`
     overflow: hidden;
   }
 
-  /* Scrollbar Styling - Dark Mode */
+  /* Scrollbar Styling - Light Mode */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: ${theme.colors.background.secondary};
+    background: ${theme.colors.gray[100]};
     border-radius: ${theme.borderRadius.full};
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${theme.colors.primary[600]};
+    background: ${theme.colors.primary[400]};
     border-radius: ${theme.borderRadius.full};
     
     &:hover {
@@ -51,7 +51,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  /* Chart Container Styles - Dark Mode */
+  /* Chart Container Styles - Light Mode */
   .recharts-wrapper {
     width: 100% !important;
     height: 100% !important;
@@ -64,7 +64,7 @@ const GlobalStyles = createGlobalStyle`
   .recharts-text {
     font-family: ${theme.typography.fontFamily.sans};
     font-size: 11px;
-    fill: ${theme.colors.text.secondary} !important;
+    fill: ${theme.colors.gray[600]} !important;
   }
 
   .recharts-legend-wrapper {
@@ -80,7 +80,7 @@ const GlobalStyles = createGlobalStyle`
 
   .recharts-legend-item-text {
     font-size: 12px !important;
-    color: ${theme.colors.text.secondary} !important;
+    color: ${theme.colors.gray[700]} !important;
   }
 
   .recharts-tooltip-wrapper {
@@ -88,31 +88,31 @@ const GlobalStyles = createGlobalStyle`
   }
 
   .recharts-default-tooltip {
-    background-color: ${theme.colors.background.card} !important;
-    border: 1px solid ${theme.colors.border.medium} !important;
+    background-color: white !important;
+    border: 1px solid ${theme.colors.gray[200]} !important;
     border-radius: ${theme.borderRadius.lg} !important;
     box-shadow: ${theme.shadows.lg} !important;
     padding: ${theme.spacing.sm} ${theme.spacing.md} !important;
   }
 
   .recharts-tooltip-label {
-    color: ${theme.colors.text.primary} !important;
+    color: ${theme.colors.gray[900]} !important;
     font-weight: ${theme.typography.fontWeight.medium} !important;
   }
 
   .recharts-tooltip-item {
-    color: ${theme.colors.text.secondary} !important;
+    color: ${theme.colors.gray[700]} !important;
   }
 
   .recharts-cartesian-grid-horizontal line,
   .recharts-cartesian-grid-vertical line {
-    stroke: ${theme.colors.border.light} !important;
-    stroke-opacity: 0.3;
+    stroke: ${theme.colors.gray[200]} !important;
+    stroke-opacity: 0.5;
   }
 
   .recharts-xAxis line,
   .recharts-yAxis line {
-    stroke: ${theme.colors.border.medium} !important;
+    stroke: ${theme.colors.gray[300]} !important;
   }
 
   /* Animations */
@@ -131,27 +131,27 @@ const GlobalStyles = createGlobalStyle`
     animation: fadeIn 0.3s ease;
   }
 
-  /* Card Styles - Dark Mode */
+  /* Card Styles - Light Mode */
   .gradient-card {
-    background: ${theme.colors.background.card};
+    background: white;
     border-radius: ${theme.borderRadius['2xl']};
-    border: 1px solid ${theme.colors.border.medium};
+    border: 1px solid ${theme.colors.gray[200]};
     box-shadow: ${theme.shadows.card};
     transition: ${theme.transitions.smooth};
     
     &:hover {
       box-shadow: ${theme.shadows['card-hover']};
       transform: translateY(-2px);
-      background: ${theme.colors.background.hover};
     }
   }
 
-  /* Table Styles - Dark Mode */
+  /* Table Styles - Light Mode */
   .table-container {
-    background: ${theme.colors.background.card};
+    background: white;
     border-radius: ${theme.borderRadius['2xl']};
-    border: 1px solid ${theme.colors.border.medium};
+    border: 1px solid ${theme.colors.gray[200]};
     overflow: hidden;
+    box-shadow: ${theme.shadows.sm};
   }
 
   .table {
@@ -159,45 +159,55 @@ const GlobalStyles = createGlobalStyle`
     border-collapse: collapse;
     
     th {
-      background: ${theme.colors.background.secondary};
-      color: ${theme.colors.text.primary};
+      background: ${theme.colors.gray[50]};
+      color: ${theme.colors.gray[700]};
       font-weight: ${theme.typography.fontWeight.medium};
       padding: ${theme.spacing.md} ${theme.spacing.lg};
       text-align: left;
-      border-bottom: 1px solid ${theme.colors.border.medium};
+      border-bottom: 1px solid ${theme.colors.gray[200]};
+      font-size: ${theme.typography.fontSize.sm};
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
     
     td {
       padding: ${theme.spacing.md} ${theme.spacing.lg};
-      color: ${theme.colors.text.secondary};
-      border-bottom: 1px solid ${theme.colors.border.light};
+      color: ${theme.colors.gray[700]};
+      border-bottom: 1px solid ${theme.colors.gray[100]};
+      background: white;
     }
     
     tr:hover td {
-      background: ${theme.colors.background.hover};
+      background: ${theme.colors.gray[50]};
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
     }
   }
 
-  /* Input Styles - Dark Mode */
+  /* Input Styles - Light Mode */
   input, select, textarea {
-    background: ${theme.colors.background.secondary};
-    border: 1px solid ${theme.colors.border.medium};
-    color: ${theme.colors.text.primary};
+    background: white;
+    border: 1px solid ${theme.colors.gray[300]};
+    color: ${theme.colors.gray[900]};
     border-radius: ${theme.borderRadius.lg};
     padding: ${theme.spacing.sm} ${theme.spacing.md};
+    font-size: ${theme.typography.fontSize.sm};
+    transition: all 0.2s ease;
     
     &:focus {
       outline: none;
       border-color: ${theme.colors.primary[500]};
-      box-shadow: 0 0 0 3px ${theme.colors.primary[900]};
+      box-shadow: 0 0 0 3px ${theme.colors.primary[100]};
     }
     
     &::placeholder {
-      color: ${theme.colors.text.muted};
+      color: ${theme.colors.gray[400]};
     }
   }
 
-  /* Badge Styles - Dark Mode */
+  /* Badge Styles - Light Mode */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -207,25 +217,26 @@ const GlobalStyles = createGlobalStyle`
     font-weight: ${theme.typography.fontWeight.medium};
     
     &-success {
-      background: ${theme.colors.success[900]};
-      color: ${theme.colors.success[300]};
+      background: ${theme.colors.success[50]};
+      color: ${theme.colors.success[700]};
     }
     
     &-warning {
-      background: ${theme.colors.warning[900]};
-      color: ${theme.colors.warning[300]};
+      background: ${theme.colors.warning[50]};
+      color: ${theme.colors.warning[700]};
     }
     
     &-error {
-      background: ${theme.colors.error[900]};
-      color: ${theme.colors.error[300]};
+      background: ${theme.colors.error[50]};
+      color: ${theme.colors.error[700]};
     }
     
     &-info {
-      background: ${theme.colors.info[900]};
-      color: ${theme.colors.info[300]};
+      background: ${theme.colors.info[50]};
+      color: ${theme.colors.info[700]};
     }
   }
 `;
+
 
 export default GlobalStyles;

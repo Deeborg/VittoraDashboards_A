@@ -15,28 +15,27 @@ import { theme } from '../../styles/theme_cr';
 
 const SidebarContainer = styled.aside`
   width: 275px;
-  background: ${theme.colors.background.card};
+  background: ${theme.colors.primary[900]};
   border-right: 1px solid ${theme.colors.border.medium};
   height: 93vh;
   position: sticky;
   top: 0;
   display: flex;
   flex-direction: column;
- 
   box-shadow: ${theme.shadows.lg};
 `;
 
 const LogoArea = styled.div`
   padding: ${theme.spacing.xl};
-  border-bottom: 1px solid ${theme.colors.border.medium};
+  border-bottom: 1px solid ${theme.colors.primary[800]};
   flex-shrink: 0;
-  background: ${theme.colors.background.secondary};
+  background: ${theme.colors.primary[900]};
 `;
 
 const Logo = styled.div`
   font-size: ${theme.typography.fontSize['2xl']};
   font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: white;
   display: flex;
   align-items: center;
   gap: ${theme.spacing.sm};
@@ -44,13 +43,14 @@ const Logo = styled.div`
   svg {
     color: ${theme.colors.primary[400]};
     font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
   }
 `;
 
 const LogoSubtext = styled.span`
   font-size: ${theme.typography.fontSize.sm};
   font-weight: ${theme.typography.fontWeight.normal};
-  color: ${theme.colors.text.tertiary};
+  color: rgba(255, 255, 255, 0.6);
   margin-left: ${theme.spacing.xs};
 `;
 
@@ -67,15 +67,15 @@ const NavList = styled.nav`
   }
   
   &::-webkit-scrollbar-track {
-    background: ${theme.colors.background.secondary};
+    background: ${theme.colors.primary[800]};
   }
   
   &::-webkit-scrollbar-thumb {
-    background: ${theme.colors.primary[600]};
+    background: ${theme.colors.primary[500]};
     border-radius: ${theme.borderRadius.full};
     
     &:hover {
-      background: ${theme.colors.primary[500]};
+      background: ${theme.colors.primary[400]};
     }
   }
 `;
@@ -86,39 +86,57 @@ const NavItem = styled.div<{ $active: boolean }>`
   display: flex;
   align-items: center;
   gap: ${theme.spacing.md};
-  color: ${props => props.$active ? theme.colors.text.primary : theme.colors.text.secondary};
-  background: ${props => props.$active ? theme.colors.background.hover : 'transparent'};
+  color: ${props => props.$active ? 'white' : 'rgba(255, 255, 255, 0.8)'};
+  background: ${props => props.$active ? theme.colors.primary[700] : 'transparent'};
   cursor: pointer;
-  transition: ${theme.transitions.base};
-  font-weight: ${props => props.$active ? theme.typography.fontWeight.medium : theme.typography.fontWeight.normal};
+  transition: all 0.2s ease;
+  font-weight: ${props => props.$active ? theme.typography.fontWeight.semibold : theme.typography.fontWeight.normal};
   position: relative;
-  overflow: hidden;
+  border: 1px solid ${props => props.$active ? theme.colors.primary[600] : 'transparent'};
+  box-shadow: ${props => props.$active ? '0 4px 8px rgba(0, 0, 0, 0.2)' : 'none'};
 
+  &:hover {
+    background: ${theme.colors.primary[700]};
+    color: white;
+    transform: translateX(6px);
+    border-color: ${theme.colors.primary[500]};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Left accent bar */
   &::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0;
-    bottom: 0;
+    top: 20%;
+    bottom: 20%;
     width: 4px;
-    background: ${props => props.$active ? theme.colors.primary[500] : 'transparent'};
+    background: ${props => props.$active ? theme.colors.primary[400] : 'transparent'};
     border-radius: 0 ${theme.borderRadius.full} ${theme.borderRadius.full} 0;
+    transition: all 0.2s ease;
   }
 
-  &:hover {
-    background: ${theme.colors.background.hover};
-    color: ${theme.colors.text.primary};
-    transform: translateX(4px);
+  &:hover::before {
+    background: ${theme.colors.primary[400]};
+    top: 10%;
+    bottom: 10%;
   }
 
   svg {
     font-size: 1.25rem;
-    color: ${props => props.$active ? theme.colors.primary[400] : theme.colors.text.tertiary};
+    color: ${props => props.$active ? 'white' : 'rgba(255, 255, 255, 0.7)'};
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+    color: white;
   }
 `;
 
 const NavLabel = styled.span`
   flex: 1;
+  letter-spacing: 0.3px;
 `;
 
 const Badge = styled.span<{ $variant?: 'error' | 'warning' | 'success' }>`
@@ -134,15 +152,23 @@ const Badge = styled.span<{ $variant?: 'error' | 'warning' | 'success' }>`
   font-size: ${theme.typography.fontSize.xs};
   padding: 0.25rem 0.5rem;
   border-radius: ${theme.borderRadius.full};
-  font-weight: ${theme.typography.fontWeight.medium};
+  font-weight: ${theme.typography.fontWeight.semibold};
   box-shadow: ${theme.shadows.sm};
+  min-width: 24px;
+  text-align: center;
+  transition: all 0.2s ease;
+
+  ${NavItem}:hover & {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 const FooterArea = styled.div`
   padding: ${theme.spacing.lg};
-  border-top: 1px solid ${theme.colors.border.medium};
+  border-top: 1px solid ${theme.colors.primary[800]};
   flex-shrink: 0;
-  background: ${theme.colors.background.secondary};
+  background: ${theme.colors.primary[900]};
 `;
 
 const UserProfile = styled.div`
@@ -151,8 +177,16 @@ const UserProfile = styled.div`
   gap: ${theme.spacing.md};
   padding: ${theme.spacing.sm};
   border-radius: ${theme.borderRadius.xl};
-  background: ${theme.colors.background.card};
-  border: 1px solid ${theme.colors.border.medium};
+  background: ${theme.colors.primary[800]};
+  border: 1px solid ${theme.colors.primary[700]};
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${theme.colors.primary[700]};
+    border-color: ${theme.colors.primary[600]};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const UserAvatar = styled.div`
@@ -166,6 +200,13 @@ const UserAvatar = styled.div`
   color: white;
   font-weight: ${theme.typography.fontWeight.bold};
   font-size: ${theme.typography.fontSize.lg};
+  border: 2px solid ${theme.colors.primary[400]};
+  transition: all 0.2s ease;
+
+  ${UserProfile}:hover & {
+    border-color: ${theme.colors.primary[300]};
+    transform: scale(1.05);
+  }
 `;
 
 const UserDetails = styled.div`
@@ -174,37 +215,42 @@ const UserDetails = styled.div`
 
 const UserName = styled.div`
   font-size: ${theme.typography.fontSize.sm};
-  font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.text.primary};
+  font-weight: ${theme.typography.fontWeight.semibold};
+  color: white;
 `;
 
 const UserRole = styled.div`
   font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.text.tertiary};
+  color: rgba(255, 255, 255, 0.7);
 `;
 
 const LogoutButton = styled.button`
   background: transparent;
   border: none;
-  color: ${theme.colors.text.tertiary};
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   padding: ${theme.spacing.sm};
   border-radius: ${theme.borderRadius.lg};
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: ${theme.transitions.base};
+  transition: all 0.2s ease;
 
   &:hover {
-    background: ${theme.colors.error[900]};
-    color: ${theme.colors.error[400]};
+    background: ${theme.colors.error[700]};
+    color: white;
     transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
 `;
 
 const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
   
   const navItems = [
     { path: '/analytics/risk/', label: 'Dashboard', icon: <FaChartLine /> },
@@ -231,7 +277,7 @@ const Sidebar: React.FC = () => {
           <NavItem
             key={item.path}
             $active={location.pathname === item.path}
-            onClick={() => navigate(item.path)}
+            onClick={() => handleNavigation(item.path)}
           >
             {item.icon}
             <NavLabel>{item.label}</NavLabel>
@@ -242,7 +288,7 @@ const Sidebar: React.FC = () => {
         ))}
       </NavList>
 
-     
+      
     </SidebarContainer>
   );
 };

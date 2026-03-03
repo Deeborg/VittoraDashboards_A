@@ -520,7 +520,7 @@
 
 /* Table - UPDATED WITH WHITE TEXT */
 .table-container {
-  background: #0f172a !important; /* Dark background */
+  background: #f2f3f5 !important; /* Dark background */
   border-radius: 1rem;
   border: 1px solid #334155 !important;
   overflow: hidden;
@@ -540,7 +540,7 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  background: #0f172a !important;
+  background: #f9fafb !important;
 }
 
 th {
@@ -558,10 +558,10 @@ th {
 td {
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #334155 !important;
-  color: #ffffff !important; /* White text */
+  color: #130101 !important; /* White text */
   font-size: 0.875rem;
   font-weight: 500;
-  background: #0f172a !important;
+  background: #f3f4f6 !important;
 }
 
 tr:last-child td {
@@ -569,7 +569,7 @@ tr:last-child td {
 }
 
 tbody tr:hover td {
-  background: #1e293b !important; /* Slightly lighter on hover */
+  background: #fafafa !important; /* Slightly lighter on hover */
 }
 
 .color-dot {

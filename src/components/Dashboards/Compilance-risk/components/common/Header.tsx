@@ -30,12 +30,9 @@ const BottomRow = styled.div`
 `;
 
 const Logo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${theme.spacing.sm};
   font-size: ${theme.typography.fontSize.xl};
   font-weight: ${theme.typography.fontWeight.bold};
-  color: ${theme.colors.text.primary};
+  color: ${theme.colors.gray[900]};  // Changed from theme.colors.text.primary
   
   svg {
     color: ${theme.colors.primary[400]};
@@ -45,14 +42,14 @@ const Logo = styled.div`
 const LogoSubtext = styled.span`
   font-size: ${theme.typography.fontSize.sm};
   font-weight: ${theme.typography.fontWeight.normal};
-  color: ${theme.colors.text.tertiary};
+  color: ${theme.colors.primary[400]};
   margin-left: ${theme.spacing.xs};
 `;
 
 const Title = styled.h1`
   font-size: ${theme.typography.fontSize['2xl']};
   font-weight: ${theme.typography.fontWeight.semibold};
-  color: ${theme.colors.text.primary};
+  color: ${theme.colors.primary[900]};;
   margin: 0;
   background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
   -webkit-background-clip: text;
@@ -71,7 +68,7 @@ const IconButton = styled.button`
   border: 1px solid ${theme.colors.border.medium};
   padding: ${theme.spacing.sm};
   border-radius: ${theme.borderRadius.xl};
-  color: ${theme.colors.text.secondary};
+  color: ${theme.colors.gray[600]};
   cursor: pointer;
   transition: ${theme.transitions.base};
   display: flex;
@@ -83,7 +80,7 @@ const IconButton = styled.button`
 
   &:hover {
     background: ${theme.colors.background.hover};
-    color: ${theme.colors.text.primary};
+    color: ${theme.colors.gray[900]}; 
     border-color: ${theme.colors.primary[600]};
     transform: scale(1.05);
   }
@@ -125,7 +122,7 @@ const UserInfo = styled.div`
 const UserName = styled.span`
   font-size: ${theme.typography.fontSize.sm};
   font-weight: ${theme.typography.fontWeight.medium};
-  color: ${theme.colors.text.primary};
+  color: ${theme.colors.gray[900]}; 
 `;
 
 const MetricCards = styled.div`
@@ -158,7 +155,7 @@ const MetricCard = styled.div<{ $color: string }>`
 
 const MetricLabel = styled.div`
   font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.text.tertiary};
+  color: ${theme.colors.gray[500]};
   margin-bottom: ${theme.spacing.xs};
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -188,7 +185,7 @@ const SearchInput = styled.input`
   transition: ${theme.transitions.base};
   height: 40px;
   background: ${theme.colors.background.secondary};
-  color: ${theme.colors.text.primary};
+  color: ${theme.colors.gray[900]};
 
   &:focus {
     outline: none;
@@ -197,14 +194,14 @@ const SearchInput = styled.input`
   }
 
   &::placeholder {
-    color: ${theme.colors.text.muted};
+    color: ${theme.colors.gray[400]}; 
   }
 `;
 
 const SearchIcon = styled(FaSearch)`
   position: absolute;
   left: ${theme.spacing.sm};
-  color: ${theme.colors.text.muted};
+  color: ${theme.colors.gray[400]}; 
   pointer-events: none;
 `;
 

@@ -111,7 +111,7 @@ const RegulationBadge = styled.span<{ $type: string }>`
   background: ${props => {
     switch (props.$type) {
       case 'GST': return theme.colors.purple[50];
-      case 'MCA': return theme.colors.blue[50];
+      case 'MCA': return theme.colors.success[50];
       case 'SEBI': return theme.colors.primary[50];
       case 'Income Tax': return theme.colors.warning[50];
       default: return theme.colors.gray[100];
@@ -120,7 +120,7 @@ const RegulationBadge = styled.span<{ $type: string }>`
   color: ${props => {
     switch (props.$type) {
       case 'GST': return theme.colors.purple[700];
-      case 'MCA': return theme.colors.blue[700];
+      case 'MCA': return theme.colors.success[700];
       case 'SEBI': return theme.colors.primary[700];
       case 'Income Tax': return theme.colors.warning[700];
       default: return theme.colors.gray[700];

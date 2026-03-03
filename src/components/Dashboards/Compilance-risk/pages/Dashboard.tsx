@@ -24,11 +24,19 @@ const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
   overflow-y: auto;
-  background: ${theme.colors.gray[50]};
+  background: ${theme.colors.background.primary};
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 `;
 
 const WelcomeSection = styled.div`
   margin-bottom: ${theme.spacing.xl};
+  background: white;
+  padding: ${theme.spacing.xl};
+  border-radius: ${theme.borderRadius['2xl']};
+  border: 1px solid ${theme.colors.gray[200]};
+  box-shadow: ${theme.shadows.sm};
 `;
 
 const WelcomeTitle = styled.h1`
@@ -36,12 +44,11 @@ const WelcomeTitle = styled.h1`
   font-weight: ${theme.typography.fontWeight.bold};
   color: ${theme.colors.gray[900]};
   margin-bottom: ${theme.spacing.xs};
-  font-color: ${theme.colors.text.tertiary};
 `;
 
 const WelcomeSubtitle = styled.p`
   font-size: ${theme.typography.fontSize.lg};
-  color: ${theme.colors.gray[500]};
+  color: ${theme.colors.gray[600]};
 `;
 
 const MetricGrid = styled.div`
@@ -49,6 +56,14 @@ const MetricGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const GridContainer = styled.div`
@@ -69,7 +84,7 @@ const ChartCard = styled.div<{ $colspan?: number }>`
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
-  color: ${theme.colors.text.tertiary};
+  
   &:hover {
     box-shadow: ${theme.shadows.md};
     transform: translateY(-2px);
@@ -88,7 +103,7 @@ const ChartTitle = styled.h3`
   font-size: ${theme.typography.fontSize.lg};
   font-weight: ${theme.typography.fontWeight.semibold};
   color: ${theme.colors.gray[900]};
-  font-color: ${theme.colors.text.tertiary};
+  
   margin: 0;
 `;
 
@@ -419,20 +434,7 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
-      <WelcomeSection>
-        <WelcomeTitle>Good morning</WelcomeTitle>
-        <WelcomeSubtitle>
-          Here's your compliance overview for today, {new Date().toLocaleDateString('en-US', { 
-            weekday: 'long', 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-          })}
-        </WelcomeSubtitle>
-      </WelcomeSection>
-
-     
+    <PageContainer>   
 <MetricGrid>
   <MetricCard
     label="Compliance Score"

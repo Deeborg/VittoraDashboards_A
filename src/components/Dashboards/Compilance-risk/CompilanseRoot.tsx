@@ -8,6 +8,7 @@ import Sidebar from './components/common/Sidebar';
 import Header from './components/common/Header';
 import GlobalStyles from './styles/Gs';
 import { theme } from './styles/theme_cr';
+import { ScrollToTop } from './components/common/ScrollToTop';
 
 // Import pages
 import Dashboard from './pages/Dashboard';
@@ -51,6 +52,7 @@ const App: React.FC = () => {
   };
 
   return (
+    
     <ThemeProvider theme={theme}>
      
         <DataProvider>
@@ -59,6 +61,7 @@ const App: React.FC = () => {
             <AppContainer>
               <Sidebar />
               <MainContent>
+                <ScrollToTop />
                 <Routes>
                   <Route path="/" element={<><Header pageTitle={getPageTitle('/')} /><ContentArea><Dashboard /></ContentArea></>} />
                   <Route path="/audit-trail" element={<><Header pageTitle={getPageTitle('/audit-trail')} /><ContentArea><AuditTrail /></ContentArea></>} />
@@ -75,6 +78,7 @@ const App: React.FC = () => {
         </DataProvider>
      
     </ThemeProvider>
+    
   );
 };
 

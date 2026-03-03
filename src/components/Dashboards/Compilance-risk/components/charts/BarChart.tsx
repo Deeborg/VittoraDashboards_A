@@ -45,7 +45,7 @@ const BarChart: React.FC<BarChartProps> = ({
         alignItems: 'center', 
         justifyContent: 'center',
         flexDirection: 'column',
-        color: theme.colors.text.primary,
+        color: theme.colors.gray[400],
    
         fontSize: theme.typography.fontSize.sm,
         
