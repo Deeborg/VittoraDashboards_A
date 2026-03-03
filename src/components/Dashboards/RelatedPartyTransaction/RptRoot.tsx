@@ -95,7 +95,7 @@ const App: React.FC = () => {
           </div>
 
           {/* KPI Cards */}
-          <div className="kpi-grid">
+          <div className="kpi-grid-g">
             <KpiCard
               title="Total RPT Value"
               value={formatCurrency(kpiData.totalValue)}
@@ -124,7 +124,7 @@ const App: React.FC = () => {
 
           {/* Financial Exposure Summary */}
           <div className="financial-summary">
-            <div className="financial-summary-title">Financial Exposure & Risk</div>
+            <div className="financial-summary-title"><h2>Financial Exposure & Risk</h2></div>
             <div className="financial-metrics-grid">
               <div className="metric-item">
                 <div className="metric-label">Total Receivables</div>
@@ -156,9 +156,9 @@ const App: React.FC = () => {
           {/* Charts Section */}
           <div className="charts-grid">
             {/* Transaction Analysis */}
-            <div className="chart-container">
+            <div className="chart-container-g">
               <div className="chart-title">
-                <span><h1 style={{ color: 'white' }}>Transaction Trends</h1></span>
+                <span><h3>Transaction Trends</h3></span>
                 <div className="chart-period-selector">
                   <button
                     className={`chart-period-button ${chartPeriod === 'monthly' ? 'active' : ''}`}
@@ -184,9 +184,9 @@ const App: React.FC = () => {
             </div>
 
             {/* Compliance Tracking */}
-            <div className="chart-container">
+            <div className="chart-container-g">
               <div className="chart-title">
-                <span><h1 style={{ color: 'white' }}>Compliance Health</h1></span>
+                <span><h3>Compliance Health</h3></span>
                 <span style={{ fontSize: '13px', color: 'var(--primary)', fontWeight: '600' }}>
                   Rate: {summaryStats.complianceRate}%
                 </span>
@@ -195,9 +195,9 @@ const App: React.FC = () => {
             </div>
 
             {/* Outstanding Balances */}
-            <div className="chart-container" style={{ gridColumn: balanceZoom ? '1 / -1' : 'span 2' }}>
+            <div className="chart-container-g" style={{ gridColumn: balanceZoom ? '1 / -1' : 'span 2' }}>
               <div className="chart-title">
-                <span><h1 style={{ color: 'white' }}>Party-wise Exposure</h1></span>
+                <span><h3>Party-wise Exposure</h3></span>
                 <button
                   className="chart-period-button"
                   onClick={() => setBalanceZoom(!balanceZoom)}
@@ -211,8 +211,8 @@ const App: React.FC = () => {
           </div>
 
           {/* Transactions Table */}
-          <div className="table-container">
-            <div className="table-title">Recent Transactions</div>
+          <div className="table-container-g">
+            <div className="table-title"><h3>Transaction Details</h3></div>
 
             <div className="table-filters">
               <select

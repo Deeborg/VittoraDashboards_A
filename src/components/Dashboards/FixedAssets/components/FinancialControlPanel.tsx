@@ -12,7 +12,7 @@ const FinancialControlPanel: React.FC<Props> = ({
   reconciliationData,
 }) => {
   return (
-    <div className="financial-control-panel">
+    <div className="fa-control-panel">
       <div>Total Assets: {assets.length}</div>
       <div>Total CWIP: {cwipProjects.length}</div>
       <div>Reconciliation Items: {reconciliationData.length}</div>

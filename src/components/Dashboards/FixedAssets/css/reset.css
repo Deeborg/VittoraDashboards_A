@@ -1,6 +1,6 @@
 /**
  * RESET.CSS
- * 
+ *
  * Removes inconsistent browser defaults.
  * Every browser has different default margins, paddings, and font sizes.
  * This file makes them all start from the same baseline.
@@ -37,7 +37,7 @@ body {
                  'Helvetica Neue', Arial, sans-serif;
     line-height: 1.5;
     color: #FFFFFF;
-    background-color: #0D1117;
+    /* background-color: #0D1117; */
 }
 
 /* 

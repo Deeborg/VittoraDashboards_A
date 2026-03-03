@@ -1,4 +1,4 @@
-/* LoanRoot.css - Complete file with white header title */
+/* LoanRoot.css - All classes now prefixed with loan- */
 
 * {
   margin: 0;
@@ -14,7 +14,7 @@
 }
 
 /* Dashboard Layout */
-.dashboard-layout {
+.loan-dashboard-layout {
   display: flex;
   flex: 1;
   padding: 20px;
@@ -24,7 +24,7 @@
 }
 
 /* Left Panel */
-.left-panel {
+.loan-left-panel {
   width: 260px;
   background: white;
   border-radius: 12px;
@@ -38,18 +38,18 @@
   border: 1px solid #e5e7eb;
 }
 
-.panel-brand {
+.loan-panel-brand {
   padding: 20px 16px 8px 16px;
 }
 
-.panel-brand h1 {
+.loan-panel-brand h1 {
   font-size: 24px;
   font-weight: 600;
   color: #111827;
   margin: 0;
 }
 
-.panel-header {
+.loan-panel-header {
   padding: 8px 16px 12px 16px;
   border-bottom: 1px solid #edf2f7;
   display: flex;
@@ -57,7 +57,7 @@
   align-items: center;
 }
 
-.panel-header h3 {
+.loan-panel-header h3 {
   font-size: 14px;
   font-weight: 600;
   color: #374151;
@@ -66,7 +66,7 @@
   letter-spacing: 0.3px;
 }
 
-.panel-count {
+.loan-panel-count {
   font-size: 11px;
   color: #6b7280;
   background: #f3f4f6;
@@ -74,18 +74,18 @@
   border-radius: 12px;
 }
 
-.menu-list {
+.loan-menu-list {
   list-style: none;
   padding: 12px;
   margin: 0;
   flex: 1;
 }
 
-.menu-list li {
+.loan-menu-list li {
   margin-bottom: 2px;
 }
 
-.menu-item {
+.loan-menu-item {
   width: 100%;
   padding: 8px 12px;
   display: flex;
@@ -101,57 +101,57 @@
   font-size: 13px;
 }
 
-.menu-item:hover {
+.loan-menu-item:hover {
   background: #f8fafc;
 }
 
-.menu-item.active {
+.loan-menu-item.active {
   background: #3b82f6;
 }
 
-.menu-item.active .menu-icon,
-.menu-item.active .menu-name {
+.loan-menu-item.active .loan-menu-icon,
+.loan-menu-item.active .loan-menu-name {
   color: white;
 }
 
-.menu-icon {
+.loan-menu-icon {
   font-size: 16px;
   color: #6b7280;
   width: 20px;
 }
 
-.menu-name {
+.loan-menu-name {
   font-size: 13px;
   font-weight: 500;
   color: #374151;
   flex: 1;
 }
 
-.menu-indicator {
+.loan-menu-indicator {
   color: white;
   font-size: 8px;
-  animation: pulse 2s infinite;
+  animation: loan-pulse 2s infinite;
 }
 
-@keyframes pulse {
+@keyframes loan-pulse {
   0% { opacity: 1; }
   50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
 
-.panel-footer {
+.loan-panel-footer {
   padding: 12px 16px;
   border-top: 1px solid #edf2f7;
   margin-top: auto;
 }
 
-.user-info {
+.loan-user-info {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.user-avatar {
+.loan-user-avatar {
   width: 28px;
   height: 28px;
   background: #f3f4f6;
@@ -162,14 +162,14 @@
   font-size: 14px;
 }
 
-.user-name {
+.loan-user-name {
   font-size: 12px;
   font-weight: 500;
   color: #374151;
 }
 
 /* Right Content Area */
-.right-content {
+.loan-right-content {
   flex: 1;
   min-width: 0;
   background: white;
@@ -182,34 +182,34 @@
 }
 
 /* Dashboard Header - Dark blue with white title */
-.dashboard-header {
+.loan-dashboard-header {
   padding: 24px 24px 16px 24px;
   border-bottom: 1px solid #2a2a4a;
-  background: #1a1a3a; /* Dark blue background */
+  background: #1a1a3a;
 }
 
-.dashboard-header h2 {
+.loan-dashboard-header h2 {
   font-size: 24px;
   font-weight: 600;
-  color: white; /* White title */
+  color: white;
   margin: 0 0 8px 0;
 }
 
-.dashboard-header p {
+.loan-dashboard-header p {
   font-size: 14px;
-  color: #a0a0d0; /* Light purple/blue description */
+  color: #a0a0d0;
   margin: 0;
 }
 
 /* Content Area */
-.content-area {
+.loan-content-area {
   padding: 24px;
   flex: 1;
   overflow: auto;
 }
 
 /* Simple Footer */
-.dashboard-footer {
+.loan-dashboard-footer {
   background: white;
   padding: 12px 24px;
   display: flex;
@@ -220,19 +220,19 @@
   color: #6b7280;
 }
 
-.footer-left,
-.footer-right {
+.loan-footer-left,
+.loan-footer-right {
   display: flex;
   gap: 16px;
   align-items: center;
 }
 
-.footer-left span:first-child {
+.loan-footer-left span:first-child {
   font-weight: 500;
   color: #111827;
 }
 
-.footer-right span {
+.loan-footer-right span {
   padding: 4px 8px;
   background: #f9fafb;
   border-radius: 4px;
@@ -240,57 +240,57 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .dashboard-layout {
+  .loan-dashboard-layout {
     flex-direction: column;
   }
   
-  .left-panel {
+  .loan-left-panel {
     width: 100%;
     position: static;
     top: auto;
   }
   
-  .menu-list {
+  .loan-menu-list {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
   
-  .menu-list li {
+  .loan-menu-list li {
     width: calc(50% - 4px);
     margin-bottom: 0;
   }
   
-  .menu-item {
+  .loan-menu-item {
     padding: 10px;
   }
 }
 
 @media (max-width: 768px) {
-  .dashboard-header {
+  .loan-dashboard-header {
     padding: 20px 20px 12px 20px;
   }
   
-  .dashboard-header h2 {
+  .loan-dashboard-header h2 {
     font-size: 20px;
   }
   
-  .dashboard-header p {
+  .loan-dashboard-header p {
     font-size: 13px;
   }
   
-  .menu-list li {
+  .loan-menu-list li {
     width: 100%;
   }
   
-  .footer-left,
-  .footer-right {
+  .loan-footer-left,
+  .loan-footer-right {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
   }
   
-  .dashboard-footer {
+  .loan-dashboard-footer {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
@@ -298,7 +298,7 @@
   }
 }
 
-/* Scrollbar Styling */
+/* Scrollbar Styling (global, but harmless) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

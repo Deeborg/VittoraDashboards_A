@@ -1,8 +1,8 @@
 /**
  * COMPONENTS.CSS
- * 
+ *
  * Reusable UI component styling.
- * 
+ *
  * Components included:
  * - Buttons
  * - Tables (interactive, sortable)
@@ -17,7 +17,7 @@
    BUTTONS
    ======================================== */
 
-.btn {
+.fa-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -29,63 +29,51 @@
     cursor: pointer;
     transition: all var(--transition-fast);
     border: 1px solid transparent;
-    white-space: nowrap; /* Prevents text wrapping */
+    white-space: nowrap;
 }
 
-/*
- * Button variants
- */
-
-.btn--primary {
+.fa-btn--primary {
     background: var(--color-interactive-blue);
     color: var(--color-text-primary);
 }
 
-.btn--primary:hover {
+.fa-btn--primary:hover {
     background: var(--color-interactive-blue-light);
     box-shadow: var(--shadow-md);
 }
 
-.btn--secondary {
+.fa-btn--secondary {
     background: rgba(255, 255, 255, 0.1);
     color: var(--color-text-primary);
     border-color: var(--color-border-medium);
 }
 
-.btn--secondary:hover {
+.fa-btn--secondary:hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: var(--color-secondary);
 }
 
-.btn--ghost {
+.fa-btn--ghost {
     background: transparent;
     color: var(--color-text-secondary);
 }
 
-.btn--ghost:hover {
+.fa-btn--ghost:hover {
     background: rgba(255, 255, 255, 0.05);
     color: var(--color-text-primary);
 }
 
-/*
- * Button sizes
- */
-
-.btn--sm {
+.fa-btn--sm {
     padding: var(--space-xs) var(--space-md);
     font-size: var(--font-size-xs);
 }
 
-.btn--lg {
+.fa-btn--lg {
     padding: var(--space-md) var(--space-xl);
     font-size: var(--font-size-base);
 }
 
-/*
- * Icon buttons
- */
-
-.btn--icon {
+.fa-btn--icon {
     padding: var(--space-sm);
     width: 36px;
     height: 36px;
@@ -95,32 +83,29 @@
    TABLES
    ======================================== */
 
-.table-container {
+.fa-table-container {
     background: var(--color-bg-card);
     border: none;
     border-radius: var(--radius-lg);
 }
 
-.table-wrapper {
-    overflow-x: auto; /* Horizontal scroll on small screens */
+.fa-table-wrapper {
+    overflow-x: auto;
 }
 
-.table {
+.fa-table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--font-size-sm);
+    color: #e6edf3;
 }
 
-/*
- * Table header
- */
-
-.table__head {
+.fa-table__head {
     background: var(--color-bg-card-hover);
     border-bottom: 1px solid var(--color-border-light);
 }
 
-.table__header-cell {
+.fa-table__header-cell {
     padding: var(--space-md) var(--space-lg);
     text-align: left;
     font-weight: var(--font-weight-semibold);
@@ -131,101 +116,77 @@
     white-space: nowrap;
 }
 
-/*
- * Sortable column headers
- */
-
-.table__header-cell--sortable {
+.fa-table__header-cell--sortable {
     cursor: pointer;
-    user-select: none; /* Prevents text selection when clicking */
+    user-select: none;
     transition: background var(--transition-fast);
 }
 
-.table__header-cell--sortable:hover {
+.fa-table__header-cell--sortable:hover {
     background: rgba(255, 255, 255, 0.05);
 }
 
-.table__header-cell--sorted {
+.fa-table__header-cell--sorted {
     color: var(--color-secondary-bright);
 }
 
-/*
- * Sort indicator
- */
-
-.sort-indicator {
+.fa-sort-indicator {
     display: inline-block;
     margin-left: var(--space-xs);
     font-size: var(--font-size-xs);
     color: var(--color-text-tertiary);
 }
 
-.sort-indicator--asc::after {
+.fa-sort-indicator--asc::after {
     content: '▲';
 }
 
-.sort-indicator--desc::after {
+.fa-sort-indicator--desc::after {
     content: '▼';
 }
 
-/*
- * Table body
- */
-
-.table__body {
+.fa-table__body {
     background: var(--color-bg-card);
 }
 
-.table__row {
+.fa-table__row {
     border-bottom: 1px solid var(--color-border-light);
     transition: background var(--transition-fast);
 }
 
-.table__row:hover {
+.fa-table__row:hover {
     background: var(--color-bg-card-hover);
 }
 
-.table__row:last-child {
+.fa-table__row:last-child {
     border-bottom: none;
 }
 
-/*
- * Row states
- */
-
-.table__row--highlighted {
+.fa-table__row--highlighted {
     background: rgba(255, 167, 38, 0.08);
 }
 
-.table__row--clickable {
+.fa-table__row--clickable {
     cursor: pointer;
 }
 
-.table__cell {
+.fa-table__cell {
     padding: var(--space-md) var(--space-lg);
     color: var(--color-text-primary);
     vertical-align: middle;
 }
 
-/*
- * Cell alignment
- */
-
-.table__cell--right {
+.fa-table__cell--right {
     text-align: right;
 }
 
-.table__cell--center {
+.fa-table__cell--center {
     text-align: center;
 }
 
-/*
- * Numeric cells (right-aligned, monospace font)
- */
-
-.table__cell--numeric {
+.fa-table__cell--numeric {
     text-align: right;
-    font-feature-settings: 'tnum'; /* Tabular numbers */
+    font-feature-settings: 'tnum';
     font-variant-numeric: tabular-nums;
 }
 
@@ -233,32 +194,28 @@
    FILTERS & SEARCH
    ======================================== */
 
-.toolbar {
+.fa-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--space-md);
     margin-bottom: var(--space-lg);
-    flex-wrap: wrap; /* Wraps on small screens */
+    flex-wrap: wrap;
 }
 
-.toolbar__left,
-.toolbar__right {
+.fa-toolbar__left,
+.fa-toolbar__right {
     display: flex;
     gap: var(--space-md);
     align-items: center;
 }
 
-/*
- * Search input
- */
-
-.search-input {
+.fa-search-input {
     position: relative;
     width: 300px;
 }
 
-.search-input__field {
+.fa-search-input__field {
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     padding-left: var(--space-xl);
@@ -270,18 +227,18 @@
     transition: all var(--transition-fast);
 }
 
-.search-input__field::placeholder {
+.fa-search-input__field::placeholder {
     color: var(--color-text-tertiary);
 }
 
-.search-input__field:focus {
+.fa-search-input__field:focus {
     outline: none;
     border-color: var(--color-secondary);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
 }
 
-.search-input__icon {
+.fa-search-input__icon {
     position: absolute;
     left: var(--space-md);
     top: 50%;
@@ -290,16 +247,12 @@
     font-size: var(--font-size-sm);
 }
 
-/*
- * Select dropdown
- */
-
-.select {
+.fa-select {
     position: relative;
     min-width: 180px;
 }
 
-.select__field {
+.fa-select__field {
     width: 100%;
     padding: var(--space-sm) var(--space-md);
     padding-right: var(--space-xl);
@@ -309,31 +262,31 @@
     background: rgba(255, 255, 255, 0.05);
     color: var(--color-text-primary);
     cursor: pointer;
-    appearance: none; /* Removes default browser styling */
+    appearance: none;
     transition: all var(--transition-fast);
 }
 
-.select__field:focus {
+.fa-select__field:focus {
     outline: none;
     border-color: var(--color-secondary);
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
 }
 
-.select__icon {
+.fa-select__icon {
     position: absolute;
     right: var(--space-md);
     top: 50%;
     transform: translateY(-50%);
     color: var(--color-text-tertiary);
-    pointer-events: none; /* Allows clicks to pass through to select */
+    pointer-events: none;
 }
 
 /* ========================================
    BADGES & STATUS INDICATORS
    ======================================== */
 
-.badge {
+.fa-badge {
     display: inline-flex;
     align-items: center;
     padding: var(--space-xs) var(--space-md);
@@ -343,40 +296,32 @@
     white-space: nowrap;
 }
 
-/*
- * Badge variants (Vittora theme - colored backgrounds with text)
- */
-
-.badge--success {
+.fa-badge--success {
     background: rgba(38, 166, 154, 0.15);
     color: var(--color-success);
 }
 
-.badge--warning {
+.fa-badge--warning {
     background: rgba(255, 167, 38, 0.15);
     color: var(--color-warning);
 }
 
-.badge--danger {
+.fa-badge--danger {
     background: rgba(183, 28, 28, 0.15);
     color: var(--color-danger);
 }
 
-.badge--info {
+.fa-badge--info {
     background: rgba(25, 118, 210, 0.15);
     color: var(--color-info);
 }
 
-.badge--neutral {
+.fa-badge--neutral {
     background: rgba(255, 255, 255, 0.08);
     color: var(--color-text-secondary);
 }
 
-/*
- * Status dots (for reconciliation status)
- */
-
-.status-dot {
+.fa-status-dot {
     display: inline-block;
     width: 8px;
     height: 8px;
@@ -384,15 +329,15 @@
     margin-right: var(--space-xs);
 }
 
-.status-dot--success {
+.fa-status-dot--success {
     background: var(--color-success);
 }
 
-.status-dot--warning {
+.fa-status-dot--warning {
     background: var(--color-warning);
 }
 
-.status-dot--danger {
+.fa-status-dot--danger {
     background: var(--color-danger);
 }
 
@@ -400,7 +345,7 @@
    CHARTS
    ======================================== */
 
-.chart-container {
+.fa-chart-container {
     position: relative;
     height: 400px;
     padding: var(--space-lg);
@@ -410,8 +355,7 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* Ensure chart text is visible */
-.chart-container canvas {
+.fa-chart-container canvas {
     max-height: 100%;
     filter: brightness(1);
 }
@@ -420,17 +364,17 @@
    TOOLTIPS
    ======================================== */
 
-.tooltip {
+.fa-tooltip {
     position: relative;
     display: inline-block;
 }
 
-.tooltip__trigger {
+.fa-tooltip__trigger {
     cursor: help;
     border-bottom: 1px dotted var(--color-text-tertiary);
 }
 
-.tooltip__content {
+.fa-tooltip__content {
     visibility: hidden;
     opacity: 0;
     position: absolute;
@@ -448,7 +392,7 @@
     border: 1px solid var(--color-border-light);
 }
 
-.tooltip__content::after {
+.fa-tooltip__content::after {
     content: '';
     position: absolute;
     top: 100%;
@@ -458,7 +402,7 @@
     border-top-color: var(--color-bg-card-hover);
 }
 
-.tooltip:hover .tooltip__content {
+.fa-tooltip:hover .fa-tooltip__content {
     visibility: visible;
     opacity: 1;
 }
@@ -467,26 +411,26 @@
    EMPTY STATES
    ======================================== */
 
-.empty-state {
+.fa-empty-state {
     padding: var(--space-xxl);
     text-align: center;
     color: var(--color-text-secondary);
 }
 
-.empty-state__icon {
+.fa-empty-state__icon {
     font-size: 48px;
     color: var(--color-text-tertiary);
     margin-bottom: var(--space-md);
 }
 
-.empty-state__title {
+.fa-empty-state__title {
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
     margin-bottom: var(--space-sm);
 }
 
-.empty-state__description {
+.fa-empty-state__description {
     font-size: var(--font-size-sm);
 }
 
@@ -494,7 +438,7 @@
    LOADING STATES
    ======================================== */
 
-.loading-spinner {
+.fa-loading-spinner {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -508,7 +452,7 @@
     to { transform: rotate(360deg); }
 }
 
-.loading-overlay {
+.fa-loading-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -525,13 +469,13 @@
    DIVIDERS
    ======================================== */
 
-.divider {
+.fa-divider {
     height: 1px;
     background: var(--color-border-light);
     margin: var(--space-lg) 0;
 }
 
-.divider--thick {
+.fa-divider--thick {
     height: 2px;
     background: var(--color-border-medium);
 }
@@ -540,51 +484,51 @@
    TEXT UTILITIES
    ======================================== */
 
-.text-primary {
+.fa-text-primary {
     color: var(--color-text-primary);
 }
 
-.text-secondary {
+.fa-text-secondary {
     color: var(--color-text-secondary);
 }
 
-.text-tertiary {
+.fa-text-tertiary {
     color: var(--color-text-tertiary);
 }
 
-.text-success {
+.fa-text-success {
     color: var(--color-success);
 }
 
-.text-warning {
+.fa-text-warning {
     color: var(--color-warning);
 }
 
-.text-danger {
+.fa-text-danger {
     color: var(--color-danger);
 }
 
-.text-bold {
+.fa-text-bold {
     font-weight: var(--font-weight-bold);
 }
 
-.text-semibold {
+.fa-text-semibold {
     font-weight: var(--font-weight-semibold);
 }
 
-.text-small {
+.fa-text-small {
     font-size: var(--font-size-sm);
 }
 
-.text-xs {
+.fa-text-xs {
     font-size: var(--font-size-xs);
 }
 
-.text-right {
+.fa-text-right {
     text-align: right;
 }
 
-.text-center {
+.fa-text-center {
     text-align: center;
 }
 
@@ -592,84 +536,79 @@
    SPACING UTILITIES
    ======================================== */
 
-.mt-0 { margin-top: 0; }
-.mt-sm { margin-top: var(--space-sm); }
-.mt-md { margin-top: var(--space-md); }
-.mt-lg { margin-top: var(--space-lg); }
-.mt-xl { margin-top: var(--space-xl); }
+.fa-mt-0 { margin-top: 0; }
+.fa-mt-sm { margin-top: var(--space-sm); }
+.fa-mt-md { margin-top: var(--space-md); }
+.fa-mt-lg { margin-top: var(--space-lg); }
+.fa-mt-xl { margin-top: var(--space-xl); }
 
-.mb-0 { margin-bottom: 0; }
-.mb-sm { margin-bottom: var(--space-sm); }
-.mb-md { margin-bottom: var(--space-md); }
-.mb-lg { margin-bottom: var(--space-lg); }
-.mb-xl { margin-bottom: var(--space-xl); }
+.fa-mb-0 { margin-bottom: 0; }
+.fa-mb-sm { margin-bottom: var(--space-sm); }
+.fa-mb-md { margin-bottom: var(--space-md); }
+.fa-mb-lg { margin-bottom: var(--space-lg); }
+.fa-mb-xl { margin-bottom: var(--space-xl); }
 
 /* ========================================
    DISPLAY UTILITIES
    ======================================== */
 
-.flex {
+.fa-flex {
     display: flex;
 }
 
-.flex-column {
+.fa-flex-column {
     flex-direction: column;
 }
 
-.flex-center {
+.fa-flex-center {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.flex-between {
+.fa-flex-between {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.gap-sm { gap: var(--space-sm); }
-.gap-md { gap: var(--space-md); }
-.gap-lg { gap: var(--space-lg); }
+.fa-gap-sm { gap: var(--space-sm); }
+.fa-gap-md { gap: var(--space-md); }
+.fa-gap-lg { gap: var(--space-lg); }
 
 /* ========================================
    RESPONSIVE UTILITIES
    ======================================== */
 
 @media (max-width: 768px) {
-    /* Hide exception widget on mobile */
-    .exception-widget {
+    .fa-exception-widget {
         display: none;
     }
-    
-    /* Stack toolbar items */
-    .toolbar {
+
+    .fa-toolbar {
         flex-direction: column;
         align-items: stretch;
     }
 }
+
 /* ========================================
    ROU ASSETS (IFRS 16 / IND AS 116)
    ======================================== */
 
-.rou-assets-section {
+.fa-rou-assets-section {
     margin-top: var(--space-xl);
     padding-top: var(--space-xl);
     border-top: 2px solid var(--color-border-medium);
 }
 
-/*
- * Compliance badge styling for IFRS/Ind AS standards
- */
-
-.section__compliance-note {
+.fa-section__compliance-note {
     display: flex;
     gap: var(--space-sm);
     margin-top: var(--space-md);
     align-items: center;
 }
 
-.compliance-badge {
+.fa-compliance-badge {
     display: inline-flex;
     align-items: center;
     padding: var(--space-xs) var(--space-md);
@@ -682,103 +621,83 @@
     border: 1px solid rgba(0, 191, 255, 0.3);
 }
 
-/*
- * ROU Assets Table Row Styling
- */
-
-.rou-asset-row {
+.fa-rou-asset-row {
     transition: background-color var(--transition-fast);
 }
 
-.rou-asset-row:hover {
+.fa-rou-asset-row:hover {
     background-color: rgba(0, 191, 255, 0.05);
 }
 
-/*
- * Table Totals Row (highlighted)
- */
-
-.table-row--totals {
+.fa-table-row--totals {
     background: rgba(25, 118, 210, 0.08);
     border-top: 2px solid var(--color-interactive-blue);
     border-bottom: 2px solid var(--color-interactive-blue);
     font-weight: var(--font-weight-bold);
 }
 
-.table-row--totals td {
+.fa-table-row--totals td {
     padding-top: var(--space-md);
     padding-bottom: var(--space-md);
     color: var(--color-text-primary);
 }
 
-/*
- * Badge variants for lease types in ROU table
- */
-
-.badge--primary {
+.fa-badge--primary {
     background: rgba(25, 118, 210, 0.15);
     color: var(--color-info);
 }
 
-.badge--info {
+.fa-badge--info {
     background: rgba(0, 191, 255, 0.15);
     color: var(--color-secondary);
 }
 
-/*
- * Text utility classes (for ROU tables)
- */
-
-.font-weight-bold {
+.fa-font-weight-bold {
     font-weight: var(--font-weight-bold);
 }
 
-.text-muted {
+.fa-text-muted {
     color: var(--color-text-tertiary);
 }
 
-.text-muted.small {
+.fa-text-muted.fa-small {
     font-size: var(--font-size-sm);
 }
 
-.small {
+.fa-small {
     font-size: var(--font-size-sm);
 }
 
-.text-right {
+.fa-text-right {
     text-align: right;
 }
 
-.text-center {
+.fa-text-center {
     text-align: center;
 }
 
-.text-success {
+.fa-text-success {
     color: var(--color-success);
 }
 
-.text-warning {
+.fa-text-warning {
     color: var(--color-warning);
 }
 
-.text-danger {
+.fa-text-danger {
     color: var(--color-danger);
 }
 
-.text-info {
+.fa-text-info {
     color: var(--color-info);
 }
 
-/*
- * Table responsive wrapper
- */
-
-.table-responsive {
+.fa-table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
-.table-responsive table {
+.fa-table-responsive table {
     width: 100%;
     border-collapse: collapse;
     background: var(--color-bg-card);
@@ -788,35 +707,28 @@
    MEDIA QUERIES
    ======================================== */
 
-/* @media (max-width: 768px) {
-        width: 100%;
-        flex-direction: column;
-    } */
-    
-    /* Full width search on mobile */
-    .search-input {
+@media (max-width: 768px) {
+    .fa-search-input {
         width: 100%;
     }
-    
-    /* Adjust grid layout */
+
     #app {
         grid-template-areas:
             "header"
             "content";
         grid-template-columns: 1fr;
     }
-    
-    /* Hide sidebar on mobile (could toggle later) */
+
     #sidebar {
         display: none;
     }
-    
-    /* Adjust content padding */
+
     #content {
         padding: var(--space-md);
     }
+}
 
-    /* CARDS GRID */
+/* CARDS GRID */
 .fa-card-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -829,26 +741,28 @@
   padding: 24px;
   border-radius: 12px;
 }
+
 /* FIX TABLE TEXT COLOR */
-.section table,
-.section th,
-.section td {
+.fa-section table,
+.fa-section th,
+.fa-section td {
   color: #e6edf3 !important;
 }
 
-.section thead th {
+.fa-section thead th {
   color: #8cc8ff !important;
 }
 
-.section tbody tr {
+.fa-section tbody tr {
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.section {
+
+.fa-section {
   color: #e6edf3;
 }
-/* TABLE STYLING FIX */
 
-.table-wrapper {
+/* TABLE STYLING FIX */
+.fa-table-wrapper {
   overflow-x: auto;
   margin-top: 20px;
 }
@@ -879,4 +793,3 @@
 .fa-table tbody tr:hover {
   background: rgba(255,255,255,0.03);
 }
-

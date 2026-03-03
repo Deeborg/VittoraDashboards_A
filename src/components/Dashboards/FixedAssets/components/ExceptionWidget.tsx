@@ -16,7 +16,7 @@ const ExceptionWidget: React.FC<Props> = ({
   ).length;
 
   return (
-    <div className="exception-widget">
+    <div className="fa-exception-widget">
       <h4>Exceptions</h4>
       <p>Assets: {assets.length}</p>
       <p>CWIP: {cwipProjects.length}</p>

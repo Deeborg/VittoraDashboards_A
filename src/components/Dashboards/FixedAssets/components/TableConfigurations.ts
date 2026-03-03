@@ -1,6 +1,6 @@
 /**
  * TABLECONFIGURATIONS.TS
- * 
+ *
  * Table configurations for each section.
  * Defines columns, formatting, and styling for:
  * - Asset Register
@@ -93,7 +93,7 @@ export function getAssetTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatLargeNumber,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'accumulatedDepreciation',
@@ -101,7 +101,7 @@ export function getAssetTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatLargeNumber,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'netValue',
@@ -109,7 +109,7 @@ export function getAssetTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatLargeNumber,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'location',
@@ -125,7 +125,7 @@ export function getAssetTableColumns(): TableColumn[] {
  */
 export function getAssetRowClassName(asset: Asset): string {
     if (!asset.vendor || asset.vendor === '') {
-        return 'table__row--highlighted';
+        return 'fa-table__row--highlighted';
     }
     return '';
 }
@@ -161,14 +161,14 @@ export function getCWIPTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatLargeNumber,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'ageingDays',
             label: 'Days Old',
             sortable: true,
             align: 'right',
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'ageingBucket',
@@ -176,10 +176,9 @@ export function getCWIPTableColumns(): TableColumn[] {
             sortable: true,
             align: 'center',
             format: (value: string) => {
-                // Add badge styling
-                const badgeClass = value === '>365 days' ? 'badge--danger' : 
-                                   value === '181-365 days' ? 'badge--warning' : 'badge--success';
-                return `<span class="badge ${badgeClass}">${value}</span>`;
+                const badgeClass = value === '>365 days' ? 'fa-badge--danger' : 
+                                   value === '181-365 days' ? 'fa-badge--warning' : 'fa-badge--success';
+                return `<span class="fa-badge ${badgeClass}">${value}</span>`;
             }
         },
         {
@@ -188,9 +187,9 @@ export function getCWIPTableColumns(): TableColumn[] {
             sortable: true,
             align: 'center',
             format: (value: string) => {
-                const badgeClass = value === 'Active' ? 'badge--success' : 
-                                   value === 'On Hold' ? 'badge--warning' : 'badge--neutral';
-                return `<span class="badge ${badgeClass}">${value}</span>`;
+                const badgeClass = value === 'Active' ? 'fa-badge--success' : 
+                                   value === 'On Hold' ? 'fa-badge--warning' : 'fa-badge--neutral';
+                return `<span class="fa-badge ${badgeClass}">${value}</span>`;
             }
         }
     ];
@@ -201,7 +200,7 @@ export function getCWIPTableColumns(): TableColumn[] {
  */
 export function getCWIPRowClassName(project: CWIP): string {
     if (project.ageingDays > 365) {
-        return 'table__row--highlighted';
+        return 'fa-table__row--highlighted';
     }
     return '';
 }
@@ -230,7 +229,7 @@ export function getReconciliationTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatCurrency,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'glDepreciation',
@@ -238,7 +237,7 @@ export function getReconciliationTableColumns(): TableColumn[] {
             sortable: true,
             align: 'right',
             format: formatCurrency,
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'difference',
@@ -248,9 +247,9 @@ export function getReconciliationTableColumns(): TableColumn[] {
             format: (value: number) => {
                 const formatted = formatCurrency(value);
                 if (value === 0) return formatted;
-                return `<span class="${value > 0 ? 'text-success' : 'text-danger'}">${formatted}</span>`;
+                return `<span class="${value > 0 ? 'fa-text-success' : 'fa-text-danger'}">${formatted}</span>`;
             },
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'differencePercent',
@@ -260,9 +259,9 @@ export function getReconciliationTableColumns(): TableColumn[] {
             format: (value: number) => {
                 const formatted = `${value.toFixed(1)}%`;
                 if (value === 0) return formatted;
-                return `<span class="${Math.abs(value) < 5 ? 'text-warning' : 'text-danger'}">${formatted}</span>`;
+                return `<span class="${Math.abs(value) < 5 ? 'fa-text-warning' : 'fa-text-danger'}">${formatted}</span>`;
             },
-            className: 'table__cell--numeric'
+            className: 'fa-table__cell--numeric'
         },
         {
             key: 'status',
@@ -270,26 +269,26 @@ export function getReconciliationTableColumns(): TableColumn[] {
             sortable: true,
             align: 'center',
             format: (value: string) => {
-                let badgeClass = 'badge--neutral';
-                let dotClass = 'status-dot--success';
+                let badgeClass = 'fa-badge--neutral';
+                let dotClass = 'fa-status-dot--success';
                 
                 if (value === 'Matched') {
-                    badgeClass = 'badge--success';
-                    dotClass = 'status-dot--success';
+                    badgeClass = 'fa-badge--success';
+                    dotClass = 'fa-status-dot--success';
                 } else if (value === 'Minor Variance') {
-                    badgeClass = 'badge--warning';
-                    dotClass = 'status-dot--warning';
+                    badgeClass = 'fa-badge--warning';
+                    dotClass = 'fa-status-dot--warning';
                 } else if (value === 'Investigate') {
-                    badgeClass = 'badge--danger';
-                    dotClass = 'status-dot--danger';
+                    badgeClass = 'fa-badge--danger';
+                    dotClass = 'fa-status-dot--danger';
                 } else if (value === 'Informational') {
-                    badgeClass = 'badge--info';
-                    dotClass = 'status-dot--success';
+                    badgeClass = 'fa-badge--info';
+                    dotClass = 'fa-status-dot--success';
                 }
                 
                 return `
-                    <span class="badge ${badgeClass}">
-                        <span class="status-dot ${dotClass}"></span>
+                    <span class="fa-badge ${badgeClass}">
+                        <span class="fa-status-dot ${dotClass}"></span>
                         ${value}
                     </span>
                 `;
@@ -301,7 +300,6 @@ export function getReconciliationTableColumns(): TableColumn[] {
             sortable: false,
             align: 'left',
             format: (value: string) => {
-                // Truncate long reasons for display, full text in title
                 const truncated = value.length > 60 ? value.substring(0, 57) + '...' : value;
                 return `<span title="${value}" style="cursor: help; text-decoration: dotted underline;">${truncated}</span>`;
             }
@@ -314,7 +312,7 @@ export function getReconciliationTableColumns(): TableColumn[] {
  */
 export function getReconciliationRowClassName(item: ReconciliationItem): string {
     if (item.status === 'Investigate') {
-        return 'table__row--highlighted';
+        return 'fa-table__row--highlighted';
     }
     return '';
 }

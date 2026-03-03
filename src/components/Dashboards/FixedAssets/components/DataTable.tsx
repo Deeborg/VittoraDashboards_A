@@ -16,7 +16,7 @@ interface DataTableProps {
 
 const DataTable: React.FC<DataTableProps> = ({ columns, data }) => {
   return (
-    <div className="table-wrapper">
+    <div className="fa-table-wrapper">
       <table className="fa-table">
         <thead>
           <tr>

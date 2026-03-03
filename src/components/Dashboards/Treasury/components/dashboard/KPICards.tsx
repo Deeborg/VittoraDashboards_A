@@ -25,23 +25,34 @@ const KPICards: React.FC = () => {
     <Grid container spacing={3}>
       {kpiData.map((item: KPIItem, index: number) => (
         <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-          <Card sx={{ height: "87%" }}>
-            <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                {item.title}
-              </Typography>
-
-              <Typography variant="h6" fontWeight={600}>
-                {item.value}
-              </Typography>
-
-              {item.subtitle && (
-                <Typography variant="caption">
-                  {item.subtitle}
-                </Typography>
-              )}
-            </CardContent>
-          </Card>
+         <Card
+  sx={{
+    height: "87%",
+    backgroundColor: "#231939",   // white background
+    color: "#ffffff",             // default text black
+  }}
+>
+  <CardContent>
+    <Typography
+      variant="body2"
+      sx={{ color: "#ffffff" }}   // dark gray for the title
+    >
+      {item.title}
+    </Typography>
+    <Typography
+      variant="h6"
+      fontWeight={600}
+      sx={{ color: "#ffffff" }}   // nearly black for the value
+    >
+      {item.value}
+    </Typography>
+    {item.subtitle && (
+      <Typography variant="caption" sx={{ color: "#6b7280" }}>
+        {item.subtitle}
+      </Typography>
+    )}
+  </CardContent>
+</Card>
         </Grid>
       ))}
     </Grid>

@@ -16,8 +16,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
-      
+      <div className="expense-dashboard">   {/* ← ADD THIS WRAPPER */}
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Dashboard />} />
@@ -26,8 +25,7 @@ function App() {
             <Route path="drill-down" element={<DrillDown />} />
           </Route>
         </Routes>
-     
-
+      </div>                                 {/* ← CLOSE WRAPPER */}
     </ThemeProvider>
   );
 }

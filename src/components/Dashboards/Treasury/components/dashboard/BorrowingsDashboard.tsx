@@ -212,7 +212,7 @@ const BorrowingsDashboard: React.FC = () => {
               variant="outlined"
               sx={{
                 borderColor: "#cbd5e1",
-                color: "#ffffff",
+                color: "#000000",
               }}
             />
           </TableCell>

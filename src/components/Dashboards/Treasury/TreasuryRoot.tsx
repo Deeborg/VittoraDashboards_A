@@ -67,39 +67,39 @@ const App: React.FC = () => {
       case 'Investments':
         return <InvestmentsDashboard />;
 
-      case 'Cash Flow':
-        return (
-          <Box sx={{ p: 3, textAlign: 'center', bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>
-            <Typography variant="h2" sx={{ mb: 2, color: '#1a237e' }}>
-              Cash Flow Analysis
-            </Typography>
-            <Typography variant="body1" sx={{ color: '#546e7a', mb: 2 }}>
-              This module provides detailed cash flow statements, operating cash analysis, and liquidity forecasting.
-            </Typography>
-            <Box sx={{ p: 4, bgcolor: '#f5f7fa', borderRadius: 2, border: '1px dashed #e0e0e0' }}>
-              <Typography variant="body2" sx={{ color: '#90a4ae' }}>
-                Cash Flow Analysis will be implemented in Phase 2
-              </Typography>
-            </Box>
-          </Box>
-        );
+      // case 'Cash Flow':
+      //   return (
+      //     <Box sx={{ p: 3, textAlign: 'center', bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>
+      //       <Typography variant="h2" sx={{ mb: 2, color: '#1a237e' }}>
+      //         Cash Flow Analysis
+      //       </Typography>
+      //       <Typography variant="body1" sx={{ color: '#546e7a', mb: 2 }}>
+      //         This module provides detailed cash flow statements, operating cash analysis, and liquidity forecasting.
+      //       </Typography>
+      //       <Box sx={{ p: 4, bgcolor: '#f5f7fa', borderRadius: 2, border: '1px dashed #e0e0e0' }}>
+      //         <Typography variant="body2" sx={{ color: '#90a4ae' }}>
+      //           Cash Flow Analysis will be implemented in Phase 2
+      //         </Typography>
+      //       </Box>
+      //     </Box>
+      //   );
 
-      case 'Reports':
-        return (
-          <Box sx={{ p: 3, textAlign: 'center', bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>
-            <Typography variant="h2" sx={{ mb: 2, color: '#1a237e' }}>
-              Financial Reports
-            </Typography>
-            <Typography variant="body1" sx={{ color: '#546e7a', mb: 2 }}>
-              Generate comprehensive treasury reports including debt schedules, investment summaries, and compliance documents.
-            </Typography>
-            <Box sx={{ p: 4, bgcolor: '#f5f7fa', borderRadius: 2, border: '1px dashed #e0e0e0' }}>
-              <Typography variant="body2" sx={{ color: '#90a4ae' }}>
-                Reports module will be implemented in Phase 2
-              </Typography>
-            </Box>
-          </Box>
-        );
+      // case 'Reports':
+      //   return (
+      //     <Box sx={{ p: 3, textAlign: 'center', bgcolor: 'white', borderRadius: 2, boxShadow: 1 }}>
+      //       <Typography variant="h2" sx={{ mb: 2, color: '#1a237e' }}>
+      //         Financial Reports
+      //       </Typography>
+      //       <Typography variant="body1" sx={{ color: '#546e7a', mb: 2 }}>
+      //         Generate comprehensive treasury reports including debt schedules, investment summaries, and compliance documents.
+      //       </Typography>
+      //       <Box sx={{ p: 4, bgcolor: '#f5f7fa', borderRadius: 2, border: '1px dashed #e0e0e0' }}>
+      //         <Typography variant="body2" sx={{ color: '#90a4ae' }}>
+      //           Reports module will be implemented in Phase 2
+      //         </Typography>
+      //       </Box>
+      //     </Box>
+      //   );
 
       default:
         return (
@@ -145,13 +145,13 @@ const App: React.FC = () => {
         >
           <Container maxWidth="xl" disableGutters>
             <Box sx={{ mb: 3 }}>
-              <Typography variant="h5" sx={{ color: '#1a237e', mb: 0.5 }}>
+              <Typography variant="h1" sx={{ color: '#1a237e', mb: 0.5 }}>
                 {activeModule === 'Dashboard Overview'
                   ? 'Treasury Management Console'
                   : activeModule}
               </Typography>
 
-              <Typography variant="body2" sx={{ color: '#546e7a' }}>
+              <Typography variant="body2" sx={{ color: '#000000' }}>
                 {activeModule === 'Dashboard Overview'
                   ? 'Consolidated view of debt, investments, and liquidity positions as of March 2024'
                   : `Detailed analysis of ${activeModule.toLowerCase()}`}

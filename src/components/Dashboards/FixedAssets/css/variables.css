@@ -1,8 +1,8 @@
 /**
  * VARIABLES.CSS
- * 
+ *
  * Design tokens for the entire dashboard.
- * 
+ *
  * Think of this as the "brand guidelines" for the application.
  * Instead of writing "#2c3e50" 50 times, we write "var(--color-primary)"
  * and change it once here if needed.
