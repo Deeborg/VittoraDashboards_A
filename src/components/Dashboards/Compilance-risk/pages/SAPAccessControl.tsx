@@ -7,21 +7,20 @@ import { DataTable } from '../components/common/DataTable';
 import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import AccessPermissionDetail from '../components/modals/AccessPermissionDetail';
-import PermissionMatrix from '../components/charts/PermissionMatrix';
+import MetricCard from '../components/common/MetricCard';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
 import LineChart from '../components/charts/LineChart';
 import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AccessPermission } from '../types';
-import { FaShieldAlt } from 'react-icons/fa';
+import { FaShieldAlt, FaUsers, FaCheckCircle, FaExclamationTriangle, FaClock, FaUserShield } from 'react-icons/fa';
 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
-  width: 850px;
   background: ${theme.colors.gray[50]};
-  
+  overflow-y: auto;
 `;
 
 const GridContainer = styled.div`
@@ -49,7 +48,6 @@ const ChartCard = styled.div<{ $colspan?: number }>`
   }
 `;
 
-
 const ChartTitle = styled.h3`
   font-size: ${theme.typography.fontSize.lg};
   font-weight: ${theme.typography.fontWeight.semibold};
@@ -65,31 +63,6 @@ const MetricGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-`;
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
-  margin-top: ${theme.spacing.xs};
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
 `;
 
 const SystemTag = styled.span`
@@ -172,10 +145,24 @@ const SAPAccessControl: React.FC = () => {
     direction: 'desc',
   });
 
- const { paginatedData, pagination } = usePagination(sortedData, 5);
+  const { paginatedData, pagination } = usePagination(sortedData, 5);
 
   // Calculate metrics
   const metrics = useMemo(() => {
+    const now = new Date();
+    const monthAgo = new Date(now);
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+    const lastMonthAccess = accessPermissions.filter(p => new Date(p.lastAccessed) > monthAgo);
+    const previousMonthAccess = accessPermissions.filter(p => {
+      const accessDate = new Date(p.lastAccessed);
+      return accessDate <= monthAgo && accessDate > new Date(monthAgo.setMonth(monthAgo.getMonth() - 1));
+    });
+
+    const monthlyTrend = previousMonthAccess.length > 0 
+      ? ((lastMonthAccess.length - previousMonthAccess.length) / previousMonthAccess.length * 100).toFixed(1)
+      : '0';
+
     return {
       totalUsers: accessPermissions.length,
       activePermissions: accessPermissions.filter(p => p.status === 'Active').length,
@@ -186,6 +173,9 @@ const SAPAccessControl: React.FC = () => {
       criticalRoles: accessPermissions.filter(p => 
         p.role.includes('Admin') || p.role.includes('Manager')
       ).length,
+      lastMonthAccess: lastMonthAccess.length,
+      monthlyTrend: monthlyTrend,
+      complianceRate: ((accessPermissions.filter(p => p.complianceStatus === 'Compliant').length / accessPermissions.length) * 100).toFixed(1),
     };
   }, [accessPermissions]);
 
@@ -219,40 +209,6 @@ const SAPAccessControl: React.FC = () => {
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 5);
-  }, [accessPermissions]);
-
-  // Permission matrix data
-  const permissionMatrixData = useMemo(() => {
-    
-    const permissions = ['Create', 'Read', 'Update', 'Delete', 'Approve', 'Export'];
-    
-    const matrix: Record<string, Record<string, 'full' | 'partial' | 'none'>> = {};
-    
-    accessPermissions.slice(0, 5).forEach(( index) => {
-      const roleId = `role-${index}`;
-      matrix[roleId] = {};
-      permissions.forEach(permName => {
-        // Randomly assign permissions for demo
-        const rand = Math.random();
-        if (rand < 0.3) matrix[roleId][permName] = 'full';
-        else if (rand < 0.6) matrix[roleId][permName] = 'partial';
-        else matrix[roleId][permName] = 'none';
-      });
-    });
-
-    return {
-      roles: accessPermissions.slice(0, 5).map((p, index) => ({
-        id: `role-${index}`,
-        name: p.role,
-        description: `Role for ${p.system}`,
-      })),
-      permissions: permissions.map((p, index) => ({
-        id: p,
-        name: p,
-        category: index < 2 ? 'Basic' : index < 4 ? 'Advanced' : 'Administrative',
-      })),
-      matrix,
-    };
   }, [accessPermissions]);
 
   const columns = [
@@ -344,26 +300,34 @@ const SAPAccessControl: React.FC = () => {
       />
 
       <MetricGrid>
-        <MetricCard>
-          <MetricValue>{metrics.totalUsers}</MetricValue>
-          <MetricLabel>Total Users</MetricLabel>
-          <MetricSubtext>With SAP access</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.success[600]}>{metrics.compliant}</MetricValue>
-          <MetricLabel>Compliant</MetricLabel>
-          <MetricSubtext>{((metrics.compliant / metrics.totalUsers) * 100).toFixed(1)}% of users</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.error[600]}>{metrics.nonCompliant}</MetricValue>
-          <MetricLabel>Non-Compliant</MetricLabel>
-          <MetricSubtext>Requires immediate action</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.warning[600]}>{metrics.reviewRequired}</MetricValue>
-          <MetricLabel>Review Required</MetricLabel>
-          <MetricSubtext>Pending assessment</MetricSubtext>
-        </MetricCard>
+        <MetricCard
+          label="Total Users"
+          value={metrics.totalUsers}
+          icon={<FaUsers />}
+          trend={{ value: parseFloat(metrics.monthlyTrend), isPositive: parseFloat(metrics.monthlyTrend) >= 0, label: 'vs last month' }}
+          color="primary"
+        />
+        <MetricCard
+          label="Compliant"
+          value={metrics.compliant}
+          icon={<FaCheckCircle />}
+          subtext={`${metrics.complianceRate}% of users`}
+          color="success"
+        />
+        <MetricCard
+          label="Non-Compliant"
+          value={metrics.nonCompliant}
+          icon={<FaExclamationTriangle />}
+          subtext="Requires immediate action"
+          color="error"
+        />
+        <MetricCard
+          label="Review Required"
+          value={metrics.reviewRequired}
+          icon={<FaClock />}
+          subtext="Pending assessment"
+          color="warning"
+        />
       </MetricGrid>
 
       <GridContainer>
@@ -399,17 +363,7 @@ const SAPAccessControl: React.FC = () => {
           />
         </ChartCard>
       </GridContainer>
-<GridContainer>
-      <ChartCard $colspan={12}>
-        <ChartTitle>
-          Permission Matrix
-          <span style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[500] }}>
-            Showing sample of roles and permissions
-          </span>
-        </ChartTitle>
-        <PermissionMatrix data={permissionMatrixData} />
-      </ChartCard>
-</GridContainer>
+
       <FilterBar
         filters={filters}
         onFilterChange={updateFilter}

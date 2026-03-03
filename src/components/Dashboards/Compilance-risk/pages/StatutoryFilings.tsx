@@ -7,18 +7,25 @@ import { DataTable } from '../components/common/DataTable';
 import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import FilingDetail from '../components/modals/FilingDetail';
+import MetricCard from '../components/common/MetricCard';
 import BarChart from '../components/charts/BarChart';
 import LineChart from '../components/charts/LineChart';
 import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { StatutoryFiling } from '../types';
-import { FaCalendarCheck, FaDownload, FaExclamationTriangle } from 'react-icons/fa'; // Added FaExclamationTriangle
-import { isOverdue, getDaysUntil } from '../utils/dateUtils'; // Added both imports
+import { FaCalendarCheck, FaDownload, FaExclamationTriangle, FaFileAlt, FaCheckCircle, FaClock } from 'react-icons/fa';
+import { isOverdue, getDaysUntil } from '../utils/dateUtils';
 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
+  height: 100%;
+  overflow-y: auto;
+  background: ${theme.colors.background.primary};
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 `;
-// Add this styled component after the existing imports
+
 const TableWrapper = styled.div`
   margin-top: ${theme.spacing.xl};
   background: white;
@@ -35,6 +42,7 @@ const FilterSection = styled.div`
   border-radius: ${theme.borderRadius.lg};
   border: 1px solid ${theme.colors.gray[200]};
 `;
+
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -75,32 +83,6 @@ const MetricGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
-`;
-
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
-  margin-top: ${theme.spacing.xs};
 `;
 
 const RegulationBadge = styled.span<{ $type: string }>`
@@ -175,7 +157,6 @@ const StatutoryFilings: React.FC = () => {
       type: 'text' as const,
       placeholder: 'Search by assignee...',
     },
-   
   ];
 
   const { filters, filteredData, updateFilter, clearFilters } = useFilters(
@@ -195,6 +176,18 @@ const StatutoryFilings: React.FC = () => {
     const now = new Date();
     const nextWeek = new Date(now);
     nextWeek.setDate(nextWeek.getDate() + 7);
+    const monthAgo = new Date(now);
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+    const lastMonthFilings = statutoryFilings.filter(f => new Date(f.dueDate) > monthAgo);
+    const previousMonthFilings = statutoryFilings.filter(f => {
+      const filingDate = new Date(f.dueDate);
+      return filingDate <= monthAgo && filingDate > new Date(monthAgo.setMonth(monthAgo.getMonth() - 1));
+    });
+
+    const monthlyTrend = previousMonthFilings.length > 0 
+      ? ((lastMonthFilings.length - previousMonthFilings.length) / previousMonthFilings.length * 100).toFixed(1)
+      : '0';
 
     return {
       totalFilings: statutoryFilings.length,
@@ -206,7 +199,11 @@ const StatutoryFilings: React.FC = () => {
       submitted: statutoryFilings.filter(f => f.status === 'Submitted').length,
       inProgress: statutoryFilings.filter(f => f.status === 'In Progress').length,
       draft: statutoryFilings.filter(f => f.status === 'Draft').length,
+      acknowledged: statutoryFilings.filter(f => f.status === 'Acknowledged').length,
       totalAmount: statutoryFilings.reduce((sum, f) => sum + (f.amount || 0), 0),
+      lastMonthFilings: lastMonthFilings.length,
+      monthlyTrend: monthlyTrend,
+      complianceRate: ((statutoryFilings.filter(f => f.status === 'Submitted' || f.status === 'Acknowledged').length / statutoryFilings.length) * 100).toFixed(1),
     };
   }, [statutoryFilings]);
 
@@ -218,9 +215,11 @@ const StatutoryFilings: React.FC = () => {
     });
     return Object.entries(counts).map(([name, value]) => ({ name, value }));
   }, [statutoryFilings]);
-const handleSearch = (value: string) => {
-  updateFilter('search', value);
-};
+
+  const handleSearch = (value: string) => {
+    updateFilter('search', value);
+  };
+
   // Chart data - Status distribution
   const statusData = useMemo(() => {
     return [
@@ -228,6 +227,7 @@ const handleSearch = (value: string) => {
       { name: 'In Progress', value: metrics.inProgress },
       { name: 'Draft', value: metrics.draft },
       { name: 'Overdue', value: metrics.overdue },
+      { name: 'Acknowledged', value: metrics.acknowledged },
     ];
   }, [metrics]);
 
@@ -343,26 +343,34 @@ const handleSearch = (value: string) => {
       />
 
       <MetricGrid>
-        <MetricCard>
-          <MetricValue>{metrics.totalFilings}</MetricValue>
-          <MetricLabel>Total Filings</MetricLabel>
-          <MetricSubtext>FY 2023-24</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.error[600]}>{metrics.overdue}</MetricValue>
-          <MetricLabel>Overdue</MetricLabel>
-          <MetricSubtext>Requires immediate action</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.warning[600]}>{metrics.dueThisWeek}</MetricValue>
-          <MetricLabel>Due This Week</MetricLabel>
-          <MetricSubtext>Upcoming deadlines</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue>₹{(metrics.totalAmount / 10000000).toFixed(2)}Cr</MetricValue>
-          <MetricLabel>Total Amount</MetricLabel>
-          <MetricSubtext>Across all filings</MetricSubtext>
-        </MetricCard>
+        <MetricCard
+          label="Total Filings"
+          value={metrics.totalFilings}
+          icon={<FaFileAlt />}
+          trend={{ value: parseFloat(metrics.monthlyTrend), isPositive: parseFloat(metrics.monthlyTrend) >= 0, label: 'vs last month' }}
+          color="primary"
+        />
+        <MetricCard
+          label="Overdue"
+          value={metrics.overdue}
+          icon={<FaExclamationTriangle />}
+          subtext="Requires immediate action"
+          color="error"
+        />
+        <MetricCard
+          label="Due This Week"
+          value={metrics.dueThisWeek}
+          icon={<FaClock />}
+          subtext="Upcoming deadlines"
+          color="warning"
+        />
+        <MetricCard
+          label="Compliance Rate"
+          value={`${metrics.complianceRate}%`}
+          icon={<FaCheckCircle />}
+          subtext={`${metrics.submitted + metrics.acknowledged} completed`}
+          color="success"
+        />
       </MetricGrid>
 
       <GridContainer>
@@ -399,27 +407,27 @@ const handleSearch = (value: string) => {
             </div>
             <div>
               <div style={{ fontSize: theme.typography.fontSize.sm, color: theme.colors.gray[600] }}>
-                Compliance Rate
+                Total Amount
               </div>
-              <div style={{ fontSize: theme.typography.fontSize.lg, fontWeight: theme.typography.fontWeight.bold, color: theme.colors.success[600] }}>
-                {((metrics.submitted / metrics.totalFilings) * 100).toFixed(1)}%
+              <div style={{ fontSize: theme.typography.fontSize.lg, fontWeight: theme.typography.fontWeight.bold }}>
+                ₹{(metrics.totalAmount / 10000000).toFixed(2)}Cr
               </div>
             </div>
           </div>
         </ChartCard>
-     
 
-      <ChartCard $colspan={6}>
-        <ChartTitle>Due Date Timeline</ChartTitle>
-        <LineChart
-          data={dueDateData}
-          xAxisKey="month"
-          series={[{ key: 'filings', name: 'Filings Due', color: theme.colors.warning[500] }]}
-          height={250}
-        />
-      </ChartCard>
- </GridContainer>
- <GridContainer>
+        <ChartCard $colspan={6}>
+          <ChartTitle>Due Date Timeline</ChartTitle>
+          <LineChart
+            data={dueDateData}
+            xAxisKey="month"
+            series={[{ key: 'filings', name: 'Filings Due', color: theme.colors.warning[500] }]}
+            height={250}
+          />
+        </ChartCard>
+      </GridContainer>
+
+      <GridContainer>
         <ChartCard $colspan={12}>
           <FilterBar
             filters={filters}
@@ -462,5 +470,4 @@ const handleSearch = (value: string) => {
   );
 };
 
-         
 export default StatutoryFilings;

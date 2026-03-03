@@ -8,18 +8,17 @@ import RiskBadge from '../components/common/RiskBadge';
 import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import AuditFindingDetail from '../components/modals/AuditFindingDetail';
+import MetricCard from '../components/common/MetricCard';
 import BarChart from '../components/charts/BarChart';
 import PieChart from '../components/charts/PieChart';
 import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AuditFinding } from '../types';
-import { FaClipboardCheck, FaUserCheck, FaDownload, FaChartLine } from 'react-icons/fa';
+import { FaClipboardCheck, FaUserCheck, FaDownload, FaChartLine, FaExclamationTriangle, FaClock, FaCheckCircle } from 'react-icons/fa';
 
-// Local styled components (not imported)
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
-  width: 850px;
   overflow-y: auto;
   background: ${theme.colors.gray[50]};
 `;
@@ -29,38 +28,6 @@ const MetricGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.md};
-  }
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
 `;
 
 const GridContainer = styled.div`
@@ -281,7 +248,19 @@ const InternalAuditPoints: React.FC = () => {
   // Calculate metrics
   const metrics = useMemo(() => {
     const now = new Date();
-    
+    const monthAgo = new Date(now);
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+    const lastMonthFindings = auditFindings.filter(f => new Date(f.auditDate) > monthAgo);
+    const previousMonthFindings = auditFindings.filter(f => {
+      const findingDate = new Date(f.auditDate);
+      return findingDate <= monthAgo && findingDate > new Date(monthAgo.setMonth(monthAgo.getMonth() - 1));
+    });
+
+    const monthlyTrend = previousMonthFindings.length > 0 
+      ? ((lastMonthFindings.length - previousMonthFindings.length) / previousMonthFindings.length * 100).toFixed(1)
+      : '0';
+
     return {
       totalFindings: auditFindings.length,
       openFindings: auditFindings.filter(f => f.status === 'Open').length,
@@ -297,6 +276,8 @@ const InternalAuditPoints: React.FC = () => {
       }).length,
       avgClosureDays: 18,
       departments: Array.from(new Set(auditFindings.map(f => f.department))).length,
+      lastMonthFindings: lastMonthFindings.length,
+      monthlyTrend: monthlyTrend,
     };
   }, [auditFindings]);
 
@@ -447,26 +428,34 @@ const InternalAuditPoints: React.FC = () => {
       />
 
       <MetricGrid>
-        <MetricCard>
-          <MetricValue>{metrics.totalFindings}</MetricValue>
-          <MetricLabel>Total Findings</MetricLabel>
-          <MetricSubtext>Year to date</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.error[600]}>{metrics.openFindings}</MetricValue>
-          <MetricLabel>Open Findings</MetricLabel>
-          <MetricSubtext>{metrics.criticalFindings} critical</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.warning[600]}>{metrics.overdueFindings}</MetricValue>
-          <MetricLabel>Overdue</MetricLabel>
-          <MetricSubtext>Past target date</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.success[600]}>{closureRate}%</MetricValue>
-          <MetricLabel>Closure Rate</MetricLabel>
-          <MetricSubtext>{metrics.closedFindings} closed</MetricSubtext>
-        </MetricCard>
+        <MetricCard
+          label="Total Findings"
+          value={metrics.totalFindings}
+          icon={<FaClipboardCheck />}
+          trend={{ value: parseFloat(metrics.monthlyTrend), isPositive: parseFloat(metrics.monthlyTrend) >= 0, label: 'vs last month' }}
+          color="primary"
+        />
+        <MetricCard
+          label="Open Findings"
+          value={metrics.openFindings}
+          icon={<FaExclamationTriangle />}
+          subtext={`${metrics.criticalFindings} critical`}
+          color="error"
+        />
+        <MetricCard
+          label="Overdue"
+          value={metrics.overdueFindings}
+          icon={<FaClock />}
+          subtext="Past target date"
+          color="warning"
+        />
+        <MetricCard
+          label="Closure Rate"
+          value={`${closureRate}%`}
+          icon={<FaCheckCircle />}
+          subtext={`${metrics.closedFindings} closed`}
+          color="success"
+        />
       </MetricGrid>
 
       <GridContainer>

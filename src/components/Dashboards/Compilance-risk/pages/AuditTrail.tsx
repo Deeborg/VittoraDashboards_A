@@ -7,20 +7,23 @@ import { DataTable } from '../components/common/DataTable';
 import StatusBadge from '../components/common/StatusBadge';
 import Modal from '../components/common/Modal';
 import AuditLogDetail from '../components/modals/AuditLogDetail';
-
+import MetricCard from '../components/common/MetricCard';
 import BarChart from '../components/charts/BarChart';
 import { theme } from '../styles/theme_cr';
 import { usePagination, useSorting, useFilters } from '../hooks';
 import { AuditLog } from '../types';
-import { FaDownload, FaChartLine } from 'react-icons/fa';
+import { FaDownload, FaChartLine, FaHistory, FaUsers, FaExclamationTriangle, FaCalendarCheck } from 'react-icons/fa';
 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
   overflow-y: auto;
-  background: ${theme.colors.gray[50]};
+  background: ${theme.colors.background.primary};
+  
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
 `;
-// Add this styled component after the existing imports
+
 const TableWrapper = styled.div`
   margin-top: ${theme.spacing.xl};
   background: white;
@@ -37,43 +40,12 @@ const FilterSection = styled.div`
   border-radius: ${theme.borderRadius.lg};
   border: 1px solid ${theme.colors.gray[200]};
 `;
+
 const MetricGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
-`;
-
-const MetricCard = styled.div`
-  background: white;
-  border-radius: ${theme.borderRadius.lg};
-  border: 1px solid ${theme.colors.gray[200]};
-  padding: ${theme.spacing.lg};
-  box-shadow: ${theme.shadows.sm};
-  transition: all 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.md};
-  }
-`;
-
-const MetricValue = styled.div<{ $color?: string }>`
-  font-size: ${theme.typography.fontSize['2xl']};
-  font-weight: ${theme.typography.fontWeight.bold};
-  color: ${props => props.$color || theme.colors.gray[900]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricLabel = styled.div`
-  font-size: ${theme.typography.fontSize.sm};
-  color: ${theme.colors.gray[500]};
-  margin-bottom: ${theme.spacing.xs};
-`;
-
-const MetricSubtext = styled.div`
-  font-size: ${theme.typography.fontSize.xs};
-  color: ${theme.colors.gray[400]};
 `;
 
 const GridContainer = styled.div`
@@ -201,6 +173,18 @@ const AuditTrail: React.FC = () => {
     const today = now.toISOString().split('T')[0];
     const weekAgo = new Date(now);
     weekAgo.setDate(weekAgo.getDate() - 7);
+    const monthAgo = new Date(now);
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+
+    const lastWeekLogs = auditLogs.filter(log => new Date(log.timestamp) > weekAgo);
+    const previousWeekLogs = auditLogs.filter(log => {
+      const logDate = new Date(log.timestamp);
+      return logDate <= weekAgo && logDate > new Date(weekAgo.setDate(weekAgo.getDate() - 7));
+    });
+
+    const weeklyTrend = previousWeekLogs.length > 0 
+      ? ((lastWeekLogs.length - previousWeekLogs.length) / previousWeekLogs.length * 100).toFixed(1)
+      : '0';
 
     return {
       totalEvents: auditLogs.length,
@@ -208,6 +192,11 @@ const AuditTrail: React.FC = () => {
       uniqueUsers: Array.from(new Set(auditLogs.map(log => log.user))).length,
       failedEvents: auditLogs.filter(log => log.status === 'failure').length,
       weeklyAverage: Math.round(auditLogs.filter(log => new Date(log.timestamp) > weekAgo).length / 7),
+      lastWeekEvents: lastWeekLogs.length,
+      weeklyTrend: weeklyTrend,
+      successRate: auditLogs.length > 0 
+        ? ((auditLogs.filter(log => log.status === 'success').length / auditLogs.length) * 100).toFixed(1)
+        : '0',
     };
   }, [auditLogs]);
 
@@ -222,9 +211,6 @@ const AuditTrail: React.FC = () => {
       return { hour: `${hour}:00`, count };
     });
   }, [auditLogs]);
-
-  // Chart data - Daily activity for last 7 days
- 
 
   // Chart data - Top actions
   const topActionsData = useMemo(() => {
@@ -285,9 +271,10 @@ const AuditTrail: React.FC = () => {
       render: (item: AuditLog) => <StatusBadge status={item.status} />,
     },
   ];
-const handleSearch = (value: string) => {
-  updateFilter('search', value);
-};
+
+  const handleSearch = (value: string) => {
+    updateFilter('search', value);
+  };
 
   const handleRowClick = (log: AuditLog) => {
     setSelectedLog(log);
@@ -320,26 +307,34 @@ const handleSearch = (value: string) => {
       />
 
       <MetricGrid>
-        <MetricCard>
-          <MetricValue>{metrics.totalEvents}</MetricValue>
-          <MetricLabel>Total Events</MetricLabel>
-          <MetricSubtext>All time</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.primary[600]}>{metrics.todayEvents}</MetricValue>
-          <MetricLabel>Today's Events</MetricLabel>
-          <MetricSubtext>Last 24 hours</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue>{metrics.uniqueUsers}</MetricValue>
-          <MetricLabel>Unique Users</MetricLabel>
-          <MetricSubtext>Active in audit trail</MetricSubtext>
-        </MetricCard>
-        <MetricCard>
-          <MetricValue $color={theme.colors.error[600]}>{metrics.failedEvents}</MetricValue>
-          <MetricLabel>Failed Events</MetricLabel>
-          <MetricSubtext>Require investigation</MetricSubtext>
-        </MetricCard>
+        <MetricCard
+          label="Total Events"
+          value={metrics.totalEvents}
+          icon={<FaHistory />}
+          subtext="All time"
+          color="primary"
+        />
+        <MetricCard
+          label="Today's Events"
+          value={metrics.todayEvents}
+          icon={<FaCalendarCheck />}
+          trend={{ value: parseFloat(metrics.weeklyTrend), isPositive: parseFloat(metrics.weeklyTrend) >= 0, label: 'vs last week' }}
+          color="info"
+        />
+        <MetricCard
+          label="Active Users"
+          value={metrics.uniqueUsers}
+          icon={<FaUsers />}
+          subtext="Unique users"
+          color="success"
+        />
+        <MetricCard
+          label="Failed Events"
+          value={metrics.failedEvents}
+          icon={<FaExclamationTriangle />}
+          subtext={`${metrics.successRate}% success rate`}
+          color="error"
+        />
       </MetricGrid>
 
       <GridContainer>
@@ -351,12 +346,11 @@ const handleSearch = (value: string) => {
             <BarChart
               data={hourlyActivityData}
               xAxisKey="hour"
-              series={[{ key: 'count', name: 'Events', color: theme.colors.primary[500], }]}
+              series={[{ key: 'count', name: 'Events', color: theme.colors.primary[500] }]}
               height={350}
             />
           </ChartBody>
         </ChartCard>
-        
       </GridContainer>
 
       <GridContainer>
@@ -394,44 +388,40 @@ const handleSearch = (value: string) => {
               <SummaryItem>
                 <SummaryLabel>Success rate</SummaryLabel>
                 <SummaryValue style={{ color: theme.colors.success[600] }}>
-                  {metrics.totalEvents > 0 
-                    ? ((metrics.totalEvents - metrics.failedEvents) / metrics.totalEvents * 100).toFixed(1)
-                    : '0'}%
+                  {metrics.successRate}%
                 </SummaryValue>
               </SummaryItem>
             </SummaryCard>
           </ChartBody>
         </ChartCard>
       </GridContainer>
-<GridContainer>
-        <ChartCard $colspan={20}>
-      
-     
-<FilterSection>
-  <FilterBar
-    filters={filters}
-    onFilterChange={updateFilter}
-    onClearFilters={clearFilters}
-    filterConfig={filterConfig}
-    showSearch={true}
-    onSearch={handleSearch}
-    searchPlaceholder="Search audit logs..."
-  />
-</FilterSection>
 
-<TableWrapper>
-  <DataTable 
-    columns={columns}
-    data={paginatedData}
-    onRowClick={handleRowClick}
-    pagination={pagination}
-    sortConfig={{
-      key: sortConfig.key,
-      direction: sortConfig.direction,
-      onSort: handleSort,
-    }}
-  />
-</TableWrapper>
+      <FilterSection>
+        <FilterBar
+          filters={filters}
+          onFilterChange={updateFilter}
+          onClearFilters={clearFilters}
+          filterConfig={filterConfig}
+          showSearch={true}
+          onSearch={handleSearch}
+          searchPlaceholder="Search audit logs..."
+        />
+      </FilterSection>
+
+      <TableWrapper>
+        <DataTable 
+          columns={columns}
+          data={paginatedData}
+          onRowClick={handleRowClick}
+          pagination={pagination}
+          sortConfig={{
+            key: sortConfig.key,
+            direction: sortConfig.direction,
+            onSort: handleSort,
+          }}
+        />
+      </TableWrapper>
+
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -445,11 +435,6 @@ const handleSearch = (value: string) => {
           />
         )}
       </Modal>
-      </ChartCard>
-      </GridContainer>
-      
-        
-        
     </PageContainer>
   );
 };
