@@ -48,34 +48,31 @@ const LoanRoot: React.FC = () => {
       <div className="loan-root-container">
         {/* Main content with left panel and right content */}
         <div className="dashboard-layout">
-          {/* Left Panel - Simple with just Vittora */}
+          {/* Left Panel - Square format, full screen */}
           <div className="left-panel">
-            <div className="panel-brand">
-              <h1>Vittora</h1>
-            </div>
-            <div className="panel-header">
-              <h3>ANALYTICS</h3>
-              <span className="panel-count">{menuItems.length} modules</span>
-            </div>
-            <ul className="menu-list">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <button
-                    className={`menu-item ${activePage === item.id ? 'active' : ''}`}
-                    onClick={() => setActivePage(item.id)}
-                  >
-                    <span className="menu-icon">{item.icon}</span>
-                    <span className="menu-name">{item.name}</span>
-                    {activePage === item.id && <span className="menu-indicator">●</span>}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="panel-footer">
-              <div className="user-info">
-                <span className="user-avatar">👤</span>
-                <span className="user-name">Admin</span>
+            {/* Scrollable content */}
+            <div className="left-panel-content">
+              {/* Analytics Section */}
+              <div className="panel-header">
+                <h3>ANALYTICS</h3>
+                <span className="panel-count">{menuItems.length} modules</span>
               </div>
+              
+              {/* Menu Items */}
+              <ul className="menu-list">
+                {menuItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      className={`menu-item ${activePage === item.id ? 'active' : ''}`}
+                      onClick={() => setActivePage(item.id)}
+                    >
+                      <span className="menu-icon">{item.icon}</span>
+                      <span className="menu-name">{item.name}</span>
+                      {activePage === item.id && <span className="menu-indicator">●</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
@@ -83,23 +80,12 @@ const LoanRoot: React.FC = () => {
           <div className="right-content">
             <div className="dashboard-header">
               <h2>Loans & Borrowing Dashboard</h2>
-              <p>Monitor outstanding loans and improve borrowing strategy with visual insights</p>
+              <p className="header-description">Monitor outstanding loans and improve borrowing strategy with visual insights</p>
+              <div className="header-date">Friday, February 27, 2026</div>
             </div>
             <div className="content-area">
               {renderContent()}
             </div>
-          </div>
-        </div>
-
-        {/* Simple Footer */}
-        <div className="dashboard-footer">
-          <div className="footer-left">
-            <span>AJALABS.AI</span>
-            <span>•</span>
-            <span>info@ajalabs.ai</span>
-          </div>
-          <div className="footer-right">
-            <span>Friday, February 27, 2026</span>
           </div>
         </div>
       </div>
