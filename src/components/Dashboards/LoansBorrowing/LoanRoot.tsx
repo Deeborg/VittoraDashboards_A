@@ -46,59 +46,45 @@ const LoanRoot: React.FC = () => {
   return (
     <DashboardProvider>
       <div className="loan-root-container">
-        <div className="loan-dashboard-layout">
-          {/* Left Panel */}
-          <div className="loan-left-panel">
-            <div className="loan-panel-brand">
-              <h1>Vittora</h1>
-            </div>
-            <div className="loan-panel-header">
-              <h3>ANALYTICS</h3>
-              <span className="loan-panel-count">{menuItems.length} modules</span>
-            </div>
-            <ul className="loan-menu-list">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <button
-                    className={`loan-menu-item ${activePage === item.id ? 'active' : ''}`}
-                    onClick={() => setActivePage(item.id)}
-                  >
-                    <span className="loan-menu-icon">{item.icon}</span>
-                    <span className="loan-menu-name">{item.name}</span>
-                    {activePage === item.id && <span className="loan-menu-indicator">●</span>}
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <div className="loan-panel-footer">
-              <div className="loan-user-info">
-                <span className="loan-user-avatar">👤</span>
-                <span className="loan-user-name">Admin</span>
+        {/* Main content with left panel and right content */}
+        <div className="dashboard-layout">
+          {/* Left Panel - Square format, full screen */}
+          <div className="left-panel">
+            {/* Scrollable content */}
+            <div className="left-panel-content">
+              {/* Analytics Section */}
+              <div className="panel-header">
+                <h3>ANALYTICS</h3>
+                <span className="panel-count">{menuItems.length} modules</span>
               </div>
+              
+              {/* Menu Items */}
+              <ul className="menu-list">
+                {menuItems.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      className={`menu-item ${activePage === item.id ? 'active' : ''}`}
+                      onClick={() => setActivePage(item.id)}
+                    >
+                      <span className="menu-icon">{item.icon}</span>
+                      <span className="menu-name">{item.name}</span>
+                      {activePage === item.id && <span className="menu-indicator">●</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          {/* Right Content Area */}
-          <div className="loan-right-content">
-            <div className="loan-dashboard-header">
+          {/* Right Content Area with Square Dark Blue Header */}
+          <div className="right-content">
+            <div className="dashboard-header">
               <h2>Loans & Borrowing Dashboard</h2>
-              <p>Monitor outstanding loans and improve borrowing strategy with visual insights</p>
+              <p className="header-description">Monitor outstanding loans and improve borrowing strategy with visual insights</p>
             </div>
-            <div className="loan-content-area">
+            <div className="content-area">
               {renderContent()}
             </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="loan-dashboard-footer">
-          <div className="loan-footer-left">
-            <span>AJALABS.AI</span>
-            <span>•</span>
-            <span>info@ajalabs.ai</span>
-          </div>
-          <div className="loan-footer-right">
-            <span>Friday, February 27, 2026</span>
           </div>
         </div>
       </div>
