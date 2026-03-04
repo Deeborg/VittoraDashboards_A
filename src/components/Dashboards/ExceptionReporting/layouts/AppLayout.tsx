@@ -11,18 +11,13 @@ interface AppLayoutProps {
 
 export default function AppLayout({ activePage, onNavigate, children }: AppLayoutProps) {
     return (
-        <div className="ed-layout">
-            {/* Background Effects */}
-            <div className="ed-blob-blue" />
-            <div className="ed-blob-purple" />
-
-            {/* Left Side: Sidebar (Height handled by CSS) */}
+        <div className="exception-scope">
+            {/* Left Side: Sidebar (Height 100% via CSS) */}
             <Sidebar activePage={activePage} onNavigate={onNavigate} />
 
             {/* Right Side: Content Wrapper */}
             <div className="ed-content-wrapper">
-                
-                {/* Top Filter Bar (Fixed) */}
+                {/* Top Filter Bar (Stays fixed via flex-shrink: 0) */}
                 <FilterBar />
 
                 {/* Main Scrollable Area */}

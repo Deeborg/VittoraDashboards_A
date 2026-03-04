@@ -9,13 +9,13 @@ interface KpiCardProps {
 }
 
 export default function KpiCard({ kpi, index, onClick }: KpiCardProps) {
-    // Map severity to our CSS accent classes
+    // Determine classes based on severity
     const accentClass = 
         kpi.severity === 'critical' ? 'accent-red' :
         kpi.severity === 'high' ? 'accent-amber' :
-        kpi.severity === 'medium' ? 'accent-blue' : 'accent-emerald';
+        'accent-blue';
 
-    const trendClass = kpi.change < 0 ? 'trend-good' : 'trend-bad'; // Negative change usually good in risk
+    const trendClass = kpi.change < 0 ? 'trend-good' : 'trend-bad'; 
     
     return (
         <motion.div
@@ -25,22 +25,31 @@ export default function KpiCard({ kpi, index, onClick }: KpiCardProps) {
             onClick={onClick}
             className={`ed-card ${accentClass}`}
         >
-            <div>
+            {/* 1. The Red Notification Dot in the top right corner */}
+            <div className="ed-card-dot" />
+
+            <div className="ed-card-main-content">
                 <div className="ed-card-label">{kpi.label}</div>
-                <div style={{display:'flex', alignItems:'baseline', gap:'10px'}}>
+                
+                <div className="ed-metric-row">
                     <span className="ed-metric-val">{kpi.value}</span>
                     <span className={`ed-trend-badge ${trendClass}`}>
                         {kpi.change < 0 ? <HiArrowDown /> : <HiArrowUp />}
                         {Math.abs(kpi.change)}%
                     </span>
                 </div>
+
+                <div className="ed-card-desc">{kpi.description}</div>
             </div>
             
-            <div className="ed-card-desc">{kpi.description}</div>
-            
-            <div style={{marginTop:'10px'}}>
+            {/* 2. The Bottom Footer with Badge and View Details */}
+            <div className="ed-card-footer">
                 <span className={`ed-badge badge-${kpi.severity}`}>
                     {kpi.severity}
+                </span>
+                
+                <span className="ed-view-details">
+                    View Details →
                 </span>
             </div>
         </motion.div>

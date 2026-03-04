@@ -7,45 +7,45 @@ export default function FilterBar() {
 
     return (
         <div className="ed-filter-bar">
-            <div className="ed-filter-label">
-                <HiOutlineFilter size={16} />
-                <span>Filters</span>
+            {/* 1. Header Label */}
+            <div className="ed-filter-main-label">
+                <HiOutlineFilter size={18} />
+                <span>FILTERS</span>
             </div>
 
-            <div className="ed-divider" />
+            <div className="ed-v-divider" />
 
-            {/* Date Range */}
+            {/* 2. Date Range Group */}
             <div className="ed-filter-group">
-                <label className="ed-input-label">From</label>
+                <span className="ed-label-small">FROM</span>
                 <input
                     type="date"
                     value={filters.dateRange.start}
                     onChange={(e) =>
                         setFilters({ dateRange: { ...filters.dateRange, start: e.target.value } })
                     }
-                    className="ed-input"
+                    className="ed-filter-input"
                 />
-                <label className="ed-input-label">To</label>
+                <span className="ed-label-small">TO</span>
                 <input
                     type="date"
                     value={filters.dateRange.end}
                     onChange={(e) =>
                         setFilters({ dateRange: { ...filters.dateRange, end: e.target.value } })
                     }
-                    className="ed-input"
+                    className="ed-filter-input"
                 />
             </div>
 
-            <div className="ed-divider" />
+            <div className="ed-v-divider" />
 
-            {/* Department */}
+            {/* 3. Department Group */}
             <div className="ed-filter-group">
-                <label className="ed-input-label">Department</label>
+                <span className="ed-label-small">DEPARTMENT</span>
                 <select
                     value={filters.department}
                     onChange={(e) => setFilters({ department: e.target.value })}
-                    className="ed-input"
-                    style={{cursor: 'pointer'}}
+                    className="ed-filter-select"
                 >
                     <option value="All">All Departments</option>
                     {allDepartments.map((d) => (
@@ -54,16 +54,15 @@ export default function FilterBar() {
                 </select>
             </div>
 
-            <div className="ed-divider" />
+            <div className="ed-v-divider" />
 
-            {/* Category */}
+            {/* 4. Category Group */}
             <div className="ed-filter-group">
-                <label className="ed-input-label">Category</label>
+                <span className="ed-label-small">CATEGORY</span>
                 <select
                     value={filters.category}
                     onChange={(e) => setFilters({ category: e.target.value })}
-                    className="ed-input"
-                    style={{cursor: 'pointer'}}
+                    className="ed-filter-select"
                 >
                     <option value="All">All Categories</option>
                     {allCategories.map((c) => (
@@ -72,10 +71,10 @@ export default function FilterBar() {
                 </select>
             </div>
 
-            {/* Reset */}
-            <button onClick={resetFilters} className="ed-reset-btn">
-                <HiOutlineRefresh size={14} />
-                Reset
+            {/* 5. Reset pushed to the right */}
+            <button onClick={resetFilters} className="ed-filter-reset-btn">
+                <HiOutlineRefresh size={16} />
+                <span>RESET</span>
             </button>
         </div>
     );

@@ -21,7 +21,7 @@ export default function InventoryRisk() {
             <p className="ed-page-subtitle">Stock exceptions, ageing analysis and warehouse risk stratification</p>
 
             {/* KPI Section: Using ed-auto-grid forces the single card to stretch */}
-            <div className="ed-auto-grid">
+            <div className="ed-kpi-row">
                 {kpis.map((kpi, i) => (
                     <KpiCard key={kpi.label} kpi={kpi} index={i} />
                 ))}

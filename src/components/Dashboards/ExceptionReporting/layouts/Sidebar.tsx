@@ -28,71 +28,30 @@ const navItems = [
 ];
 
 export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
-    const [collapsed, setCollapsed] = useState(false);
-
     return (
-        <motion.aside
-            animate={{ width: collapsed ? 64 : 260 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="ed-sidebar"
-        >
-            {/* Header: Logo + Collapse Button */}
+        <aside className="ed-sidebar">
             <div className="ed-logo-area">
-                <div className="ed-logo-wrapper">
-                    <div className="ed-logo-box">ER</div>
-                    <AnimatePresence>
-                        {!collapsed && (
-                            <motion.span
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="ed-logo-text"
-                            >
-                                ExceptiBoard
-                            </motion.span>
-                        )}
-                    </AnimatePresence>
-                </div>
-                
-                {/* Collapse Button is now here at the top */}
-                <button 
-                    onClick={() => setCollapsed(!collapsed)} 
-                    className="ed-collapse-btn-top"
-                    title={collapsed ? "Expand" : "Collapse"}
-                >
-                    {collapsed ? <HiOutlineMenuAlt2 size={20} /> : <HiOutlineChevronLeft size={20} />}
-                </button>
+                <div className="ed-logo-box">ER</div>
             </div>
 
-            {/* Navigation */}
             <nav className="ed-nav-container">
                 {navItems.map((item) => {
                     const isActive = activePage === item.id;
                     const Icon = item.icon;
                     return (
                         <button
-                            key={item.id} // Fixed type error
+                            key={item.id}
                             onClick={() => onNavigate(item.id as PageId)}
                             className={`ed-nav-btn ${isActive ? 'active' : ''}`}
-                            title={collapsed ? item.label : ''} // Tooltip when collapsed
+                            title={item.label} 
                         >
-                            <Icon size={20} style={{minWidth: '20px'}} />
-                            <AnimatePresence>
-                                {!collapsed && (
-                                    <motion.span
-                                        initial={{ opacity: 0, width: 0 }}
-                                        animate={{ opacity: 1, width: 'auto' }}
-                                        exit={{ opacity: 0, width: 0 }}
-                                        style={{overflow: 'hidden'}}
-                                    >
-                                        {item.label}
-                                    </motion.span>
-                                )}
-                            </AnimatePresence>
+                            <Icon size={22} />
+                            {/* Labels are hidden by CSS */}
+                            <span>{item.label}</span>
                         </button>
                     );
                 })}
             </nav>
-        </motion.aside>
+        </aside>
     );
 }

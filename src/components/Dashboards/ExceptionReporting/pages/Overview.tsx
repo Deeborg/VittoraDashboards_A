@@ -16,8 +16,8 @@ export default function Overview() {
             transition={{ duration: 0.3 }}
         >
             {/* Headers */}
-            <h1 style={{fontSize: '1.5rem', fontWeight: 700, color: '#0f172a'}}>Dashboard Overview</h1>
-            <p style={{fontSize: '0.875rem', color: '#64748b', marginBottom: '1.5rem'}}>Real-time exception monitoring and risk analytics</p>
+            <h1 style={{fontSize: '1.5rem', fontWeight: 700, color: '#fefeff'}}>Dashboard Overview</h1>
+            <p style={{fontSize: '0.875rem', color: '#d1d9e4', marginBottom: '1.5rem'}}>Real-time exception monitoring and risk analytics</p>
 
             {/* Top Cards */}
             <KpiAlertStrip />

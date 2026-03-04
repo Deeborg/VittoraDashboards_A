@@ -19,16 +19,16 @@ export default function KpiAlertStrip() {
                     <span className="ed-section-title">Critical Alert Stream</span>
                 </div>
                 
-                <div className="ed-grid-5">
-                    {kpis.slice(0, 5).map((kpi, i) => (
-                        <KpiCard
-                            key={kpi.label}
-                            kpi={kpi}
-                            index={i}
-                            onClick={() => setSelectedKpi(kpi)}
-                        />
-                    ))}
-                </div>
+                <div className="ed-kpi-row">
+                {kpis.slice(0, 5).map((kpi, i) => (
+                    <KpiCard
+                        key={kpi.label}
+                        kpi={kpi}
+                        index={i}
+                        onClick={() => setSelectedKpi(kpi)}
+                    />
+                ))}
+            </div>
             </div>
 
             <AnimatePresence>
