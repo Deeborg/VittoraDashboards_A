@@ -5,17 +5,17 @@ import { createTheme, ThemeOptions } from '@mui/material/styles';
 const themeOptions: ThemeOptions = {
   palette: {
     primary: {
-      main: '#1a237e', // Navy blue
+      main: '#1a237e',
       light: '#534bae',
       dark: '#000051',
     },
     secondary: {
-      main: '#37474f', // Slate grey
+      main: '#37474f',
       light: '#62727b',
       dark: '#102027',
     },
     success: {
-      main: '#2e7d32', // Muted green
+      main: '#2e7d32',
       light: '#60ad5e',
       dark: '#005005',
     },
@@ -56,6 +56,7 @@ const themeOptions: ThemeOptions = {
 
     body1: {
       fontSize: '0.875rem',
+      color: '#263238',
     },
 
     body2: {
@@ -65,6 +66,9 @@ const themeOptions: ThemeOptions = {
   },
 
   components: {
+
+    /* ================= CARDS ================= */
+
     MuiCard: {
       styleOverrides: {
         root: {
@@ -74,13 +78,71 @@ const themeOptions: ThemeOptions = {
       },
     },
 
+    /* ================= PAPER ================= */
+
     MuiPaper: {
       styleOverrides: {
+        root: {
+          backgroundColor: '#ffffff',
+          color: '#263238',
+        },
         elevation1: {
           boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
         },
       },
     },
+
+    /* ================= TABLE ================= */
+
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ffffff',
+        },
+      },
+    },
+
+    /* ================= TABLE HEADER ================= */
+
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#f8fafc',
+        },
+      },
+    },
+
+    /* ================= TABLE CELL ================= */
+
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: '#1f2937 !important',
+          borderBottom: '1px solid #e5e7eb',
+        },
+        head: {
+          color: '#111827 !important',
+          fontWeight: 600,
+          backgroundColor: '#f8fafc',
+        },
+        body: {
+          color: '#1f2937 !important',
+        },
+      },
+    },
+
+    /* ================= TABLE ROW ================= */
+
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: '#f1f5f9',
+          },
+        },
+      },
+    },
+
   },
 };
 
