@@ -47,4 +47,4 @@ const FinancialControlPanel: React.FC<FinancialControlPanelProps> = ({
   );
 };
 
-export default FinancialControlPanel;
+export default FinancialControlPanel; 

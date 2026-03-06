@@ -19,6 +19,7 @@ import { FaClipboardCheck, FaUserCheck, FaDownload, FaChartLine, FaExclamationTr
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
+  width: 850px;
   overflow-y: auto;
   background: ${theme.colors.gray[50]};
 `;

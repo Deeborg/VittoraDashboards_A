@@ -19,6 +19,7 @@ import { FaShieldAlt, FaUsers, FaCheckCircle, FaExclamationTriangle, FaClock, Fa
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
+  width: 850px;
   background: ${theme.colors.gray[50]};
   overflow-y: auto;
 `;
@@ -281,7 +282,7 @@ const SAPAccessControl: React.FC = () => {
 
   return (
     <PageContainer>
-      <PageHeader
+      <PageHeader 
         title="SAP Access Control Summary"
         subtitle="Monitor user permissions and access compliance across SAP systems"
         actions={[
