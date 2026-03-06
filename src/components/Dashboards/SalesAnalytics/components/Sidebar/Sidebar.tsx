@@ -52,10 +52,10 @@ const Sidebar: React.FC = () => {
   return (
     <aside className={`sales-sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <div className="logo">
+        {/* <div className="logo">
           <span className="logo-icon">V</span>
           {!collapsed && <h2>Vittora</h2>}
-        </div>
+        </div> */}
         <button 
           className="sidebar-toggle"
           onClick={() => setCollapsed(!collapsed)}

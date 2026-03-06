@@ -59,14 +59,14 @@
 }
 
 /* Stats Grid */
-.stats-grid {
+.stats-grid-1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
-.stat-card-wrapper {
+.stat-card-wrapper-1 {
   background: white;
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);

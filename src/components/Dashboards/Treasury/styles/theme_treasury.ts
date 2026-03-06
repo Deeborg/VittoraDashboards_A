@@ -121,12 +121,12 @@ const themeOptions: ThemeOptions = {
           borderBottom: '1px solid #e5e7eb',
         },
         head: {
-          color: '#111827 !important',
+          color: '#ffffff !important',
           fontWeight: 600,
           backgroundColor: '#f8fafc',
         },
         body: {
-          color: '#1f2937 !important',
+          color: '#000000 !important',
         },
       },
     },
