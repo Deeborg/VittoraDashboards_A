@@ -124,6 +124,7 @@
     box-shadow: var(--shadow-md);
     // 👇 Ensure the container doesn’t overflow and the chart fills the space
     width: 100%;
+    height: auto;
     overflow: hidden;
     min-height: 350px; // fallback if the chart fails to set height
   }
