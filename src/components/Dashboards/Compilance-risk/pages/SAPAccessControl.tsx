@@ -19,7 +19,7 @@ import { FaShieldAlt, FaUsers, FaCheckCircle, FaExclamationTriangle, FaClock, Fa
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
-  width: 850px;
+  width: 1150px; 
   background: ${theme.colors.gray[50]};
   overflow-y: auto;
 `;
@@ -30,7 +30,13 @@ const GridContainer = styled.div`
   gap: ${theme.spacing.lg};
   margin-bottom: ${theme.spacing.xl};
 `;
-
+const ChartBody = styled.div`
+  flex: 1;
+  min-height: 250px;
+  max-height: 300px; /* Add max-height to prevent overflow */
+  position: relative;
+  width: 100%;
+`;
 const ChartCard = styled.div<{ $colspan?: number }>`
   grid-column: span ${props => props.$colspan || 6};
   background: white;
