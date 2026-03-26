@@ -23,9 +23,7 @@ interface ModulePillProps {
   isActive: boolean;
 }
 
-// NEW: Updated ModulePill with floating squares
-const ModulePill: React.FC<ModulePillProps> = ({ module, onClick, index, isActive }) => {
-  // We no longer need the unique gradient class for the background
+const ModulePill: React.FC<ModulePillProps> = ({ module, onClick, isActive }) => {
   return (
     <div
       className={`box ${isActive ? 'active' : ''}`}
@@ -34,7 +32,6 @@ const ModulePill: React.FC<ModulePillProps> = ({ module, onClick, index, isActiv
       tabIndex={0}
       title={`Learn more about ${module.displayText}`}
     >
-      {/* These are the new floating squares */}
       <div className="floating-square top-square"></div>
       <div className="floating-square bottom-square"></div>
 
@@ -46,19 +43,12 @@ const ModulePill: React.FC<ModulePillProps> = ({ module, onClick, index, isActiv
   );
 };
 
-
 const KeyModulesPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeModule, setActiveModule] = useState<string | null>(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
-  // Refs for scrolling
-  const fpaRef = useRef<HTMLDivElement>(null);
-  const cpxRef = useRef<HTMLDivElement>(null);
-  const scmRef = useRef<HTMLDivElement>(null);
-  const autmRef = useRef<HTMLDivElement>(null);
-  const topContentRef = useRef<HTMLDivElement>(null);
   const scrollWrapperRef = useRef<HTMLDivElement>(null);
 
   const moduleDataList: ModuleDetail[] = [
@@ -69,7 +59,7 @@ const KeyModulesPage: React.FC = () => {
       abbreviation: 'FP&A',
       detailsComponent: SixPhaseInfographic,
     },
-        {
+    {
       id: 'autm',
       displayText: 'Autonomous Treasury Management',
       description: 'Automated treasury operations for cash and risk management.',
@@ -83,48 +73,32 @@ const KeyModulesPage: React.FC = () => {
       abbreviation: 'SCM',
       detailsComponent: ScmDetails,
     },
-        {
+    {
       id: 'commercial',
       displayText: 'Commercial and Pricing Excellence',
       description: 'Data-driven pricing and commercial strategy enhancement.',
       abbreviation: 'CPX',
       detailsComponent: CommercialDetails,
     },
-
   ];
 
-  const moduleRefsMap: Record<string, React.RefObject<HTMLDivElement>> = {
-    finance: fpaRef,
-    commercial: cpxRef,
-    scm: scmRef,
-    autm: autmRef,
-  };
-
   useEffect(() => {
-    // Handles deep-linking to a specific module from another page
     if (location.state?.scrollToModule) {
-      const moduleId = location.state.scrollToModule;
-      setActiveModule(moduleId);
-      setTimeout(() => {
-        const targetRef = moduleRefsMap[moduleId];
-        if (targetRef?.current) {
-          scrollToSection(targetRef);
-        }
-      }, 100);
+      handleModuleClick(location.state.scrollToModule);
     }
   }, [location.state]);
 
   useEffect(() => {
-    // Manages the visibility of the "Back to Top" button
     const scrollWrapper = scrollWrapperRef.current;
     const handleScroll = () => {
       if (scrollWrapper) {
+        // Show button if scrolled down OR if viewing a specific module
         setShowBackToTop(scrollWrapper.scrollTop > 200 || activeModule !== null);
       }
     };
 
     scrollWrapper?.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
+    handleScroll(); 
 
     return () => scrollWrapper?.removeEventListener('scroll', handleScroll);
   }, [activeModule]);
@@ -133,28 +107,20 @@ const KeyModulesPage: React.FC = () => {
     navigate('/');
   };
 
-  const scrollToSection = (targetRef: React.RefObject<HTMLDivElement | null>) => {
-    targetRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   const handleModuleClick = (moduleId: string) => {
-    if (activeModule === moduleId) {
-      setActiveModule(null);
-      scrollToSection(topContentRef);
-    } else {
-      setActiveModule(moduleId);
-      setTimeout(() => {
-        const targetRef = moduleRefsMap[moduleId];
-        if (targetRef?.current) {
-          scrollToSection(targetRef);
-        }
-      }, 100); // Delay ensures the component is rendered before scrolling
+    setActiveModule(moduleId);
+    // Reset scroll to top instantly when switching views
+    if (scrollWrapperRef.current) {
+      scrollWrapperRef.current.scrollTop = 0;
     }
   };
 
   const handleBackToTop = () => {
     setActiveModule(null);
-    scrollToSection(topContentRef);
+    // Reset scroll back to the top of the cards
+    if (scrollWrapperRef.current) {
+      scrollWrapperRef.current.scrollTop = 0;
+    }
   };
 
   return (
@@ -172,7 +138,9 @@ const KeyModulesPage: React.FC = () => {
       </header>
 
       <div className="key-modules-scroll-wrapper" ref={scrollWrapperRef}>
-        <div className="modules-main-view" ref={topContentRef}>
+        
+        {/* 🌟 CRITICAL FIX: The 'hidden' class hides the cards entirely when a module is active */}
+        <div className={`modules-main-view ${activeModule !== null ? 'hidden' : ''}`}>
           <ul className="circles">
             {Array.from({ length: 10 }).map((_, i) => (
               <li key={i}></li>
@@ -190,13 +158,13 @@ const KeyModulesPage: React.FC = () => {
           ))}
         </div>
 
+        {/* Detail Sections */}
         {moduleDataList.map((module) => {
           const DetailComponent = module.detailsComponent;
           return (
             <div
               key={`${module.id}-details`}
               className={`module-details-section ${activeModule === module.id ? 'active' : ''}`}
-              ref={moduleRefsMap[module.id]}
             >
               <ul className="circles">
                 {Array.from({ length: 15 }).map((_, i) => (
@@ -212,15 +180,13 @@ const KeyModulesPage: React.FC = () => {
       <button
         className={`back-to-top-button ${showBackToTop ? 'visible' : ''}`}
         onClick={handleBackToTop}
-        title="Back to top"
-        aria-label="Back to top"
+        title={activeModule ? "Back to Modules" : "Back to top"}
       >
-        <span className="back-text">Back to top</span>
-        <span className="back-icon">▲</span>
+        <span className="back-text">{activeModule ? "Back to Modules" : "Back to top"}</span>
+        <span className="back-icon">{activeModule ? "←" : "▲"}</span>
       </button>
     </div>
   );
 };
-
 
 export default KeyModulesPage;

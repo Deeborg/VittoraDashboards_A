@@ -19,7 +19,7 @@ import { FaShieldAlt, FaUsers, FaCheckCircle, FaExclamationTriangle, FaClock, Fa
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
-  width: 1150px; 
+  width: 940px; 
   background: ${theme.colors.gray[50]};
   overflow-y: auto;
 `;

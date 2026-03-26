@@ -25,7 +25,7 @@ const PageContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   background: ${theme.colors.background.primary};
-  width: 1150px;
+  width: 100%;
   /* Smooth scrolling */
   scroll-behavior: smooth;
 `;

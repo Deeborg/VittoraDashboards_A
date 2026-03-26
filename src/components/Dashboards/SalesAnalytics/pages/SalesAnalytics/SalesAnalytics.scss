@@ -64,68 +64,122 @@
   }
 }
 
+/* --- KPI Metrics Cards (Sales Analytics) --- */
+
 .metrics-summary {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  gap: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  align-items: stretch !important; /* Makes all cards equal height */
+  width: 100% !important;
 }
 
 .metric-card {
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-lg);
-  box-shadow: var(--shadow-md);
+  background: white !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+  border: 1px solid #e2e8f0 !important;
+  
+  /* 🌟 CRITICAL FIX: Forces elements to stack vertically instead of side-by-side */
+  display: flex !important;
+  flex-direction: column !important; 
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  
+  /* 🌟 CRITICAL FIX: Traps the line inside the card */
+  overflow: hidden !important; 
+  box-sizing: border-box !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
 }
 
+.metric-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Row 1: Title (Left) & Badge (Right) */
 .metric-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-md);
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  margin: 0 !important;
 }
 
 .metric-title {
-  font-size: 0.875rem;
-  color: var(--color-gray-500);
-  font-weight: 500;
+  font-size: 0.875rem !important;
+  color: #64748b !important; /* Slate 500 */
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin: 0 !important;
 }
 
 .metric-change {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: var(--radius-full);
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px 12px !important;
+  border-radius: 20px !important; /* Pill shape */
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important; /* Stops text from wrapping */
+  margin: 0 !important;
 }
 
 .metric-change.positive {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--color-success);
+  background: #d1fae5 !important;
+  color: #059669 !important;
 }
 
 .metric-change.negative {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--color-danger);
+  background: #fee2e2 !important;
+  color: #dc2626 !important;
 }
 
+/* Row 2: Large Number */
 .metric-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-gray-900);
-  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+  color: #0f172a !important; /* Slate 900 */
+  margin: 0 !important;
+  line-height: 1.1 !important;
+  width: 100% !important;
+  text-align: left !important;
 }
 
+/* Row 3: Neat Trend / Progress Line at the bottom */
 .metric-trend {
-  height: 40px;
+  width: 100% !important;
+  height: 6px !important; /* Thin, clean track */
+  background: #f1f5f9 !important; /* Light gray track */
+  border-radius: 6px !important;
+  margin: 0 !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .trend-line {
-  width: 100%;
-  height: 3px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(90deg, var(--color-success) 0%, var(--color-success) 70%, transparent 100%);
+  height: 100% !important;
+  border-radius: 6px !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.trend-line.up {
+  background: #10b981 !important; /* Green */
+  width: 70% !important; 
 }
 
 .trend-line.down {
-  background: linear-gradient(90deg, var(--color-danger) 0%, var(--color-danger) 70%, transparent 100%);
+  background: #ef4444 !important; /* Red */
+  width: 35% !important; 
 }
 }

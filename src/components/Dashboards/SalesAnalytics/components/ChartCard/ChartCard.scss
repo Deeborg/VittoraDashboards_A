@@ -61,6 +61,11 @@
 
 .chart-container {
   margin-top: var(--spacing-md);
+  width: 100%;
+  height: 100%;
+  // Ensure the container doesn't constrain the chart unexpectedly
+  display: flex;
+  flex-direction: column;
 }
 
 .chart-table {

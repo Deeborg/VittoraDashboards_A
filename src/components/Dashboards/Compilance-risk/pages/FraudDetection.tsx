@@ -19,9 +19,9 @@ import { FaExclamationTriangle, FaChartLine, FaShieldAlt, FaRupeeSign, FaClock, 
 const PageContainer = styled.div`
   padding: ${theme.spacing.xl};
   height: 100%;
+  width: 940px; 
   overflow-y: auto;
   background: ${theme.colors.background.primary};
-  
   /* Smooth scrolling */
   scroll-behavior: smooth;
 `;

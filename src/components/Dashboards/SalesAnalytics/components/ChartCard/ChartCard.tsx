@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, ComposedChart,
+  LineChart, Line, AreaChart, Area, PieChart, Pie, Cell, ComposedChart,LabelList
 } from 'recharts';
 import { ChartCardProps } from '../../types/index';
 import { CHART_COLORS, CHART_COLOR_PALETTE } from '../../utils/chartConfigs';
@@ -21,11 +21,14 @@ const ChartCard: React.FC<ChartCardProps> = ({
     switch (type) {
       case 'bar':
         return (
-          <BarChart data={data}>
+          <BarChart layout="vertical" data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip 
+            <XAxis type="number" />
+            <YAxis dataKey="name" 
+        type="category" 
+        width={90} 
+        tick={{ fontSize: 11, fill: '#374151' }}/>
+            <Tooltip cursor={{ fill: '#f3f4f6' }}
               contentStyle={{ 
                 background: 'white', 
                 border: '1px solid #e5e7eb',
@@ -37,8 +40,10 @@ const ChartCard: React.FC<ChartCardProps> = ({
             <Bar 
               dataKey="value" 
               fill={colors[0]}
-              radius={[4, 4, 0, 0]}
+              radius={[0, 4, 4, 0]}
+              barSize={20}
             />
+            <LabelList dataKey="value" position="right" formatter={(val: number) => `$${val.toLocaleString()}`} />
           </BarChart>
         );
 

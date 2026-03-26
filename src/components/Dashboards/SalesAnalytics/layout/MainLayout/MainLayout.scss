@@ -8,6 +8,7 @@
     width: 100%;
     min-height: 100vh;
     background-color: var(--color-gray-50); /* Restores your original light-gray background! */
+    overflow: hidden;
   }
 
   /* 2. This makes the content area take up all the remaining space next to the sidebar */
@@ -16,14 +17,23 @@
     display: flex;
     flex-direction: column; /* Header on top, Dashboard below */
     min-width: 0; /* Prevents flexbox from blowing out the screen width */
-    min-height: 100vh;
+    height: 100vh;
   }
 
   /* 3. This gives your dashboard pages the correct spacing */
   .content-area {
     flex: 1;
+    overflow-y: auto;
     padding: var(--spacing-lg) 0;
     width: 100%;
+  }
+
+  .content-area::-webkit-scrollbar {
+    width: 6px;
+  }
+  .content-area::-webkit-scrollbar-thumb {
+    background: var(--color-gray-300);
+    border-radius: var(--radius-full);
   }
 
 }

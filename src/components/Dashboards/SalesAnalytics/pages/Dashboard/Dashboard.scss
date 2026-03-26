@@ -1,4 +1,3 @@
-/* Dashboard.css */
 #sales-dashboard-isolated {
 .dashboard-container {
   padding: 2rem;
@@ -59,31 +58,105 @@
 }
 
 /* Stats Grid */
-.stats-grid-1 {
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2rem;
+  align-items: stretch; /* Ensures all cards in a row stretch to the same height */
 }
 
-.stat-card-wrapper-1 {
+/* 1. The Outer Professional Card */
+.stat-card-wrapper {
   background: white;
-  border-radius: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  border-radius: 16px;
+  padding: 24px; 
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); 
   border: 1px solid #e2e8f0;
-  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;       /* Fills the grid height equally */
+  min-height: 160px;  /* Guarantees a nice tall card */
+  box-sizing: border-box;
 }
 
 .stat-card-wrapper:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   border-color: #cbd5e1;
 }
 
+/* 2. Strip Inner Component Styles (Fixes the "Double Box" issue) */
+.stat-card-wrapper > *,
 .stat-card-wrapper .stat-card {
-  height: 100%;
-  width: 100%;
+  display: flex !important;
+  flex-direction: column !important; /* Stacks Title -> Value -> Badge */
+  align-items: center !important;    /* Centers everything horizontally */
+  justify-content: center !important;/* Centers everything vertically */
+  gap: 16px !important;              /* Perfect spacing between items */
+  width: 100% !important;
+  height: 100% !important;
+  
+  /* Kill all inner padding/borders */
+  padding: 0 !important;
+  border: none !important; 
+  box-shadow: none !important;
+  background: transparent !important;
+  margin: 0 !important;
+}
+
+/* Force inner wrappers to follow the same center stack */
+.stat-card-wrapper .stat-card > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;  
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* 3. Style the Title */
+.stat-card-wrapper [class*="title"], 
+.stat-card-wrapper h3 {
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important; /* Slate 500 */
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin: 0 !important;
+  text-align: center !important;
+  line-height: 1.2 !important;
+}
+
+/* 4. Style the Large Value */
+.stat-card-wrapper [class*="value"], 
+.stat-card-wrapper h2 {
+  font-size: 2.25rem !important; /* Big, bold number */
+  font-weight: 700 !important;
+  color: #0f172a !important; /* Slate 900 */
+  margin: 0 !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
+}
+
+/* 5. Style the Pill / Badge */
+.stat-card-wrapper [class*="change"],
+.stat-card-wrapper .badge,
+.stat-card-wrapper [style*="background"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  // gap: 0.02px !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important; /* Perfect Pill */
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important; /* Keeps text on ONE line */
+  width: max-content !important; 
+  margin: 0 auto !important;      /* Forces it to the dead center */
 }
 
 /* Charts Grid */

@@ -93,8 +93,8 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Stats Grid */}
-      <div className="stats-grid-1">
-        <div className="stat-card-wrapper-1-1">
+      <div className="stats-grid">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Total Sales"
             value={summary.totalSales}
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
             titlePosition="top"
           />
         </div>
-        <div className="stat-card-wrapper-1">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Total Orders"
             value={summary.totalOrders}
@@ -113,7 +113,7 @@ const Dashboard: React.FC = () => {
             titlePosition="top"
           />
         </div>
-        <div className="stat-card-wrapper-1">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Active Customers"
             value={summary.totalCustomers}
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
             titlePosition="top"
           />
         </div>
-        <div className="stat-card-wrapper-1">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Pending Orders"
             value={summary.pendingOrders}
@@ -131,7 +131,7 @@ const Dashboard: React.FC = () => {
             titlePosition="top"
           />
         </div>
-        <div className="stat-card-wrapper-1">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Avg Order Value"
             value={summary.avgOrderValue}
@@ -141,7 +141,7 @@ const Dashboard: React.FC = () => {
             titlePosition="top"
           />
         </div>
-        <div className="stat-card-wrapper-1">
+        <div className="stat-card-wrapper">
           <StatCard
             title="Conversion Rate"
             value={summary.conversionRate}

@@ -26,32 +26,75 @@ const KpiCard: React.FC<KpiCardProps> = ({
     if (trend === 'down') return '#f87171'; // Reddish
     return '#60a5fa'; // Neutral blue
   };
-console.log(Icon)
+
   return (
-    <div className="kpi-card">
-      <div> {/* Top content wrapper */}
-        <div className="kpi-card-header">
-          <span className="kpi-card-title">{title}</span>
-          <div className="kpi-card-icon" style={{ backgroundColor: iconBgColor }}>
-            {Icon && <Icon color={iconColor} />}
+    <div 
+      className="kpi-card" 
+      style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        justifyContent: 'space-between',
+        height: '100%', 
+        minHeight: '160px',
+        overflow: 'hidden' /* Keeps the chart inside the rounded corners safely */
+      }}
+    >
+      {/* Top Content: Title, Icon, Value */}
+      <div style={{ padding: '20px 20px 5px 20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+          <span style={{ 
+            fontSize: '0.85rem', 
+            color: '#cbd5e1', 
+            fontWeight: 600, 
+            lineHeight: '1.4',
+            maxWidth: '70%' /* Prevents text from smashing into the icon */
+          }}>
+            {title}
+          </span>
+          <div style={{ 
+            backgroundColor: iconBgColor, 
+            padding: '8px', 
+            borderRadius: '50%', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            flexShrink: 0, /* CRITICAL: Prevents icon from squishing */
+            width: '36px',
+            height: '36px'
+          }}>
+            {Icon && <Icon color={iconColor} size={18} />}
           </div>
         </div>
-        <div className="kpi-card-value">{value}</div>
+        <div style={{ 
+          fontSize: '1.8rem', 
+          fontWeight: '700', 
+          color: '#ffffff',
+          textAlign: 'left' 
+        }}>
+          {value}
+        </div>
       </div>
 
+      {/* Bottom Content: Sparkline Chart */}
       {sparklineData && sparklineData.length > 0 && (
-        <div className="kpi-card-sparkline">
+        <div style={{ 
+          width: '100%', 
+          height: '50px', /* CRITICAL: Exact height for Recharts */
+          marginTop: 'auto' /* Pushes chart to the absolute bottom */
+        }}>
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={sparklineData} margin={{ top: 5, right: 0, left: 0, bottom: 5 }}>
+            {/* margin handles the padding of the line inside the container */}
+            <LineChart data={sparklineData} margin={{ top: 5, right: 15, left: 15, bottom: 15 }}>
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#2f3349',
+                  backgroundColor: '#1e293b',
                   border: 'none',
                   borderRadius: '6px',
-                  fontSize: '0.8rem'
+                  fontSize: '0.75rem',
+                  color: '#f8fafc'
                 }}
-                itemStyle={{ color: '#e0e0e0' }}
-                labelStyle={{ display: 'none' }} // Hide default label if not needed
+                itemStyle={{ color: '#e2e8f0' }}
+                labelStyle={{ display: 'none' }}
               />
               <Line
                 type="monotone"
