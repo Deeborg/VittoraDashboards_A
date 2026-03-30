@@ -26,19 +26,23 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
     const chart = root.container.children.push(
       am5xy.XYChart.new(root, {
         layout: root.verticalLayout,
-        panX: true,
-        panY: true,
-        wheelX: "panX",
-        wheelY: "zoomX",
+        panX: false,
+        panY: false,
+        paddingTop: 40,
+        paddingBottom: 160
       })
     );
 
     const xAxis = chart.xAxes.push(
       am5xy.CategoryAxis.new(root, {
         categoryField: xField,
-        renderer: am5xy.AxisRendererX.new(root, {}),
+        renderer: am5xy.AxisRendererX.new(root, {minGridDistance: 50, // More space between labels
+      cellStartLocation: 0.1,
+      cellEndLocation: 0.9}),
       })
     );
+    xAxis.data.setAll(data);
+
     xAxis.get("renderer").labels.template.setAll({
       fontSize: 12,
       rotation: -45, // Optional: rotate for better fit
@@ -74,7 +78,7 @@ const AmMultiAreaChart: React.FC<AmMultiAreaChartProps> = ({
 
       series.fills.template.setAll({
         visible: true,
-        fillOpacity: 0.8,
+        fillOpacity: 0.6,
       });
 
       series.data.setAll(data);

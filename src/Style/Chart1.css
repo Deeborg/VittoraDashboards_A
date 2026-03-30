@@ -56,6 +56,7 @@ div {
 }
 
 
+
 /* Stats cards area */
 
 
@@ -73,7 +74,7 @@ div {
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  min-height: 400px; /* Ensure a minimum height for the charts */
+  min-height: 600px; /* Ensure a minimum height for the charts */
 }
 
 /* For full-width charts like Waterfall and Stacked Bar */

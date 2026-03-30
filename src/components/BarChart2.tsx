@@ -55,11 +55,12 @@ const ColumnChart: React.FC<DataPorts> = ({
     // Create chart
     const chart = root.container.children.push(
       am5xy.XYChart.new(root, {
-        panX: true,
-        panY: true,
-        wheelX: "panX",
-        wheelY: "zoomX",
-        pinchZoomX: true,
+        panX: false,
+        panY: false,
+        wheelX: "none",
+        wheelY: "none",
+        paddingTop: 60, // Space for the legend
+        paddingBottom: 20
       })
     );
 
@@ -86,11 +87,11 @@ const ColumnChart: React.FC<DataPorts> = ({
       })
     );
 
-    const yAxis = chart.yAxes.push(
-      am5xy.ValueAxis.new(root, {
-        renderer: am5xy.AxisRendererY.new(root, { strokeOpacity: 0.1 }),
-      })
-    );
+const yAxis = chart.yAxes.push(
+  am5xy.ValueAxis.new(root, {
+    renderer: am5xy.AxisRendererY.new(root, { strokeOpacity: 0.1 }),
+  })
+);
 
     // Add X-axis label (same as BarChart.tsx)
     chart.children.push(
@@ -122,6 +123,7 @@ const ColumnChart: React.FC<DataPorts> = ({
       am5.Legend.new(root, {
         centerX: am5.p50,
         x: am5.p50,
+        y: 0
       })
     );
     //move legend to the top
@@ -134,13 +136,14 @@ const ColumnChart: React.FC<DataPorts> = ({
     // Add Scrollbar
     const scrollbarX = am5xy.XYChartScrollbar.new(root, {
       orientation: "horizontal",
-      height: 10,
+      height: 20,
       background: am5.Rectangle.new(root, {
         fill: am5.color(0xe0e0e0),
         fillOpacity: 0.6,
       }),
     });
     chart.set("scrollbarX", scrollbarX);
+    chart.bottomAxesContainer.children.push(scrollbarX);
 
     // Series
     Yaxes.forEach((yField, index) => {
