@@ -17,6 +17,7 @@ import {
   FaTachometerAlt, // Ensure this is exactly here
   FaThLarge        // Adding this as a backup dashboard icon
 } from "react-icons/fa";
+import { TbDeviceAnalytics } from "react-icons/tb";
 
 interface Props {
   children: ReactNode;
@@ -38,6 +39,8 @@ export default function ResponsiveSidebar({ children }: Props) {
     { path: "/modules", icon: <FaBook />, label: "Key Modules" },
     { path: "/trial-balance", icon: <FaMoneyBillWave />, label: "Trial Balance" },
     { path: "/analytics", icon: <FaTachometerAlt />, label: "Financial Dashboards" },
+    { path: "http://localhost:9002", icon: <TbDeviceAnalytics  />, label: "Forcast simulation" },
+
   ];
 
   // Modules submenu
