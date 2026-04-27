@@ -5,7 +5,10 @@
   position: relative;
   height: 97vh;
   overflow: hidden;
-  background: #fcf5f5;
+  background: #f8fafc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(77, 171, 247, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(132, 94, 247, 0.05) 0px, transparent 50%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 12px;
 }
@@ -377,4 +380,95 @@
 
 @media (max-width: 480px) {
   .key-modules-header h1 { font-size: 1.8rem; }
+}
+
+/* --- Professional Bubble Styles --- */
+.bubble-navigation-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  width: 100%;
+}
+
+.professional-bubble {
+  width: 280px; /* Increased size to fit text properly */
+  height: 280px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.1), 
+    inset -10px -10px 20px rgba(255,255,255,0.2),
+    0 0 30px rgba(77, 171, 247, 0.3);
+  transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  padding: 20px;
+  overflow: hidden; /* Ensures text doesn't bleed out */
+}
+
+.bubble-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 10px;
+}
+
+.bubble-content h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.bubble-content p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* The Glossy Highlight */
+.professional-bubble::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  filter: blur(8px);
+}
+/* Floating Animation for Bubbles */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.professional-bubble {
+  animation: float 4s ease-in-out infinite;
+}
+
+.professional-bubble:nth-child(2) { animation-delay: 0.5s; }
+.professional-bubble:nth-child(3) { animation-delay: 1s; }
+.professional-bubble:nth-child(4) { animation-delay: 1.5s; }
+
+/* The "Glossy" highlight to make it look spherical */
+.professional-bubble::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  filter: blur(5px);
 }

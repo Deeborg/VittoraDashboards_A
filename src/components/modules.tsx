@@ -7,6 +7,7 @@ import SixPhaseInfographic from './modules/FinanceDetails';
 import CommercialDetails from './modules/CommercialDetails';
 import AuTmDetails from './modules/AutmDetails';
 import ScmDetails from './modules/ScmDetails';
+import { motion } from 'framer-motion';
 
 export interface ModuleDetail {
   id: string;
@@ -110,6 +111,7 @@ const KeyModulesPage: React.FC = () => {
   const handleModuleClick = (moduleId: string) => {
     setActiveModule(moduleId);
     // Reset scroll to top instantly when switching views
+    setTimeout(() => setActiveModule(moduleId), 100);
     if (scrollWrapperRef.current) {
       scrollWrapperRef.current.scrollTop = 0;
     }
@@ -141,22 +143,46 @@ const KeyModulesPage: React.FC = () => {
         
         {/* 🌟 CRITICAL FIX: The 'hidden' class hides the cards entirely when a module is active */}
         <div className={`modules-main-view ${activeModule !== null ? 'hidden' : ''}`}>
-          <ul className="circles">
-            {Array.from({ length: 10 }).map((_, i) => (
-              <li key={i}></li>
-            ))}
-          </ul>
-
-          {moduleDataList.map((module, index) => (
-            <ModulePill
-              key={module.id}
-              module={module}
-              onClick={() => handleModuleClick(module.id)}
-              index={index}
-              isActive={activeModule === module.id}
-            />
-          ))}
-        </div>
+  <ul className="circles">
+    {Array.from({ length: 10 }).map((_, i) => <li key={i}></li>)}
+  </ul>
+  
+  {/* The Bubble Container */}
+  <div className="bubble-navigation-wrapper">
+    {moduleDataList.map((module) => (
+      <motion.div
+        layout
+        key={module.id}
+        onClick={() => handleModuleClick(module.id)}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        className="professional-bubble"
+        style={{ background: `linear-gradient(135deg, #4dabf7, #2c3e50)` }}
+        transition={{ 
+    type: "spring", 
+    stiffness: 300, 
+    damping: 20 
+  }} // You can map colors here
+      >
+          <div className="bubble-content">
+    <motion.h2 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2 }}
+    >
+      {`${module.displayText} (${module.abbreviation})`}
+    </motion.h2>
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
+      {module.description}
+    </motion.p>
+  </div>
+</motion.div>
+    ))}
+  </div>
+</div>
 
         {/* Detail Sections */}
         {moduleDataList.map((module) => {

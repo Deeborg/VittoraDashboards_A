@@ -47,8 +47,8 @@ const stepsData: StepData[] = [
   },
   {
     id: 5,
-    title: 'Finance',
-    items: ['Cash Flow Forecast', 'Budget Allocation', 'Credit Optimization'],
+    title: 'Supply Chain Finance',
+    items: ['Fixed Assets'],
     color: '#84C441',
     textColorInCircle: '#84C441',
     position: 'top',
