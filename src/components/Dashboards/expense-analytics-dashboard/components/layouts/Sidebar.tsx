@@ -74,8 +74,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: '#ffffff',
-          borderRight: '1px solid #1e293b',
+          backgroundColor: '#0B1E3F',
+          color: '#ffffff',
+          borderRight: 'none',
           position: 'relative',
           height: '100vh',
         },
@@ -109,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
               EA
             </Avatar>
             <Box>
-              <Typography variant="subtitle1" sx={{  fontWeight: 600, lineHeight: 1.2 }}>
+              <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 600, lineHeight: 1.2 }}>
                 Expense
               </Typography>
               <Typography variant="caption" sx={{ color: '#94a3b8', display: 'block', fontSize: '0.7rem' }}>
