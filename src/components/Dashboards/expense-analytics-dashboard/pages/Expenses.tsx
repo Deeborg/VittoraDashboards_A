@@ -50,7 +50,7 @@ const Expenses: React.FC = () => {
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
           <Box>
-            <Typography variant="h4" sx={{ fontWeight: 700, color: '#ffffff', mb: 1 }}>
+            <Typography variant="h4" sx={{ fontWeight: 700, color: '#000000', mb: 1 }}>
               Expense Trends Analysis
             </Typography>
             <Typography variant="body1" sx={{ color: '#94a3b8', fontSize: '0.95rem' }}>

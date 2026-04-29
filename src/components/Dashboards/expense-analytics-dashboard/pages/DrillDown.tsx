@@ -323,7 +323,7 @@ const DrillDown: React.FC = () => {
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Box>
-            <Typography variant="h4" gutterBottom sx={{ fontSize: '2rem', fontWeight: 700, color: '#ffffff' }}>
+            <Typography variant="h4" gutterBottom sx={{ fontSize: '2rem', fontWeight: 700, color: '#000000' }}>
               {getPageTitle()}
             </Typography>
             <Typography variant="body1" sx={{ color: '#94a3b8', fontSize: '0.95rem' }}>
