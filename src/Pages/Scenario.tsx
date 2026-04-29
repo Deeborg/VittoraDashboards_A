@@ -13,6 +13,7 @@ import TableComponent from "../components/TableSenario";
 import LoadingMobiusStrip from '../components/LoadingMobiusStrip';
 // Import the new component and its type
 import ControlCenter, { SliderValues } from '../components/ControlCenter';
+import { useNavigate } from "react-router-dom";
 
 const DashBoard1: React.FC = () => {
   const [data, setData] = useState<Array<Record<string, any>>>([]);
@@ -26,6 +27,7 @@ const DashBoard1: React.FC = () => {
   const [countrysummary, setCountrySummary] = useState<Array<Record<string, any>>>([]);
   const [Materialsummary, setMaterialSummary] = useState<Array<Record<string, any>>>([]);
   const [materialDateSummary, setMaterialDateSummary] = useState<any[]>([]);
+  const navigate = useNavigate();
 
   // State for SIMULATION values ONLY. These are updated by the ControlCenter.
   const [simPriceChange, setSimPriceChange] = useState(8);
@@ -316,9 +318,12 @@ const DashBoard1: React.FC = () => {
   return (
     <div className="dashboard-container-senario">
       <div className="Header-container-senario">
+          <button className="back-button-senario" onClick={() => navigate(-1)}>
+            ← Back
+          </button>
         <h1>Financial Forecast and Scenario Simulator</h1>
         <div>
-          <img src=".\asset\vittora_grey.png" alt="Logo" height={50} />
+          <img src=".\asset\vittora_grey.png" alt="Logo" />
         </div>
       </div>
       <div className="Kpi-container-senario">

@@ -33,6 +33,35 @@ html, body {
   margin-bottom: 10px;
 }
 
+.header-logo {
+  width: 150px; /* Adjust this value as needed */
+  height: auto;  /* Maintains aspect ratio */
+  display: block;
+}
+
+.Header-container-senario img {
+  width: 140px;   /* Change this to your desired width */
+  height: auto;   /* Keeps the proportions correct */
+  max-width: 100%;
+}
+
+.back-button-senario {
+  padding: 8px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.back-button-senario:hover {
+  background-color: #5a6268;
+}
+
+
 /* Header */
 .Header-container-senario {
   display: flex;
