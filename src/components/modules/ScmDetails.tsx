@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './SupplyChainProcess.module.css';
+import { useNavigate } from 'react-router-dom';
 
 // Define the structure for each step's data
 interface StepData {
@@ -16,7 +17,7 @@ const stepsData: StepData[] = [
   {
     id: 1,
     title: 'Demand Forecasting',
-    items: ['Demand Prediction', 'Scenario Analysis', 'Sentiment Analysis'],
+    items: ['Demand Prediction'],
     color: '#8A63D2',
     textColorInCircle: '#8A63D2',
     position: 'top',
@@ -24,7 +25,7 @@ const stepsData: StepData[] = [
   {
     id: 2,
     title: 'Production Planning',
-    items: ['Capacity Optimization', 'Bottleneck Analysis', 'Manufacturing Cycle Analysis'],
+    items: ['Production Planning'],
     color: '#0095DA',
     textColorInCircle: '#0095DA',
     position: 'bottom',
@@ -32,7 +33,7 @@ const stepsData: StepData[] = [
   {
     id: 3,
     title: 'Procurement Planning',
-    items: ['Lead Time Analysis', 'Cost Optimization', 'Supplier Performance'],
+    items: ['Procurement Planning'],
     color: '#0095DA',
     textColorInCircle: '#0095DA',
     position: 'top',
@@ -40,7 +41,7 @@ const stepsData: StepData[] = [
   {
     id: 4,
     title: 'Inventory Management',
-    items: ['Stock Optimization', 'Auto Replenishment', 'Stockout Risk Analytics'],
+    items: ['Inventory Management'],
     color: '#00A98F',
     textColorInCircle: '#00A98F',
     position: 'bottom',
@@ -58,6 +59,7 @@ const stepsData: StepData[] = [
 const SupplyChainProcess: React.FC = () => {
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [showMessage, setShowMessage] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = (id: number) => {
     setActiveStep(id);
@@ -67,9 +69,21 @@ const SupplyChainProcess: React.FC = () => {
     setActiveStep(null);
   };
 
-  const handleStepClick = () => {
+  const handleStepClick = (step: StepData, item: string) => {
+    if (item === 'Demand Prediction' || item === 'Demand Forecasting') {
+    navigate('/analytics/demand-forecasting');
+  } else if (item === 'Production Planning') {
+    navigate('/analytics/production-planning');
+  }else if (item === 'Procurement Planning') {
+    navigate('/analytics/procurement-planning');
+  }else if (item === 'Inventory Management') {
+    navigate('/analytics/inventory-management');
+  }else if (item === 'Fixed Assets') {
+    navigate('/analytics/assets'); 
+  }else {
     setShowMessage(true);
-  };
+  }
+};
 
   const handleCloseMessage = () => {
     setShowMessage(false);
@@ -88,11 +102,7 @@ const SupplyChainProcess: React.FC = () => {
               activeStep !== null && activeStep !== step.id ? styles.inactive : ''
             }`}
             onMouseEnter={() => handleMouseEnter(step.id)}
-            onClick={handleStepClick}
             style={{ '--step-color': step.color } as React.CSSProperties}
-            tabIndex={0}
-            role="button"
-            aria-label={`Step: ${step.title}`}
           >
             {/* Info Bubble */}
             <div
@@ -103,7 +113,13 @@ const SupplyChainProcess: React.FC = () => {
               <h4 className={styles.bubbleTitle}>{step.title}</h4>
               <ul className={styles.bubbleList}>
                 {step.items.map((item, index) => (
-                  <li key={index}>{item}</li>
+                  <li 
+                    key={index} 
+                    onClick={() => handleStepClick(step, item)} // Trigger logic here
+                    style={{ cursor: 'pointer'}}
+                  >
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>

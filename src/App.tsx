@@ -31,7 +31,10 @@ import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRo
 import AgeRoot from "./components/Dashboards/Ageing/AgeRoot";
 import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
 import FixedRoot from "./components/Dashboards/FixedAssets/FixedRoot";
-
+import DemandForecasting from "./components/Dashboards/Forecast/DemandForecasting";
+import ProductionPlanning from "./components/Dashboards/Forecast/ProductionPlanning";
+import ProcurementPlanning from "./components/Dashboards/Forecast/Procurement";
+import InventoryManagement from "./components/Dashboards/Forecast/InventoryManagement";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -42,66 +45,43 @@ const theme = createTheme({
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <ResponsiveSidebar>
-          <Routes>
-            {/* ================= BASIC ================= */}
-            <Route path="/" element={<Home />} />
-            <Route path="/summary" element={<Summary />} />
-            <Route path="/modules" element={<KeyModulesPage />} />
+    <Router>
+      <ResponsiveSidebar>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/summary" element={<Summary />} />
+          <Route path="/modules" element={<KeyModulesPage />} />
+          <Route path="/flux" element={<Chart_P1 />} />
+          <Route path="/dashboard" element={<DashBoard1 />} />
+          <Route path="/liquidity" element={<DashBoard2 />} />
+          <Route path="/receivables" element={<DashBoard3 />} />
+          <Route path="/scenario" element={<Scenario />} />
+          <Route path="/bankefficiency" element={<BankEfficiency/>}/>
+          <Route path="/forex" element={<Forex />} />
+          <Route path="/sentiment" element={<SentimentDashboard />} />
+          <Route path="/trial-balance" element={<TrialBalanceHome />} />
+          <Route path="/trial-balance/admin" element={<TrialBalanceAdmin />} />
+          <Route path="/trial-balance/user" element={<TrialBalanceUser />} />
+          <Route path="/analytics" element={<DashboardPortal />} />
+          <Route path="/analytics/sales/*" element={<SalesRoot />} />
+          <Route path="/analytics/exceptions/*" element={<ExceptionRoot />} />
+          <Route path="/analytics/investor/*" element={<InvestorRoot />} />
+          <Route path="/analytics/treasury/*" element={<TreasuryRoot />} />
+          <Route path="/analytics/rpt/*" element={<RptRoot />} />
+          <Route path="/analytics/expense/*" element={<ExpenseRoot />} />
+          <Route path="/analytics/risk/*" element={<CompilanseRoot />} />
+          <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
+         <Route path="/analytics/Loans/*" element={<LoanRoot />} />
+         <Route path="/analytics/assets/*" element={<FixedRoot />} />
+         <Route path="/analytics/demand-forecasting" element={<DemandForecasting />} />
+         <Route path="/analytics/production-planning" element={<ProductionPlanning />} />
+         <Route path="/analytics/procurement-planning" element={<ProcurementPlanning />} />
+         <Route path="/analytics/inventory-management" element={<InventoryManagement />} />
 
-            {/* ================= FP&A ================= */}
-            <Route path="/flux" element={<Chart_P1 />} />
-            <Route path="/scenario" element={<Scenario />} />
-            <Route path="/sentiment" element={<SentimentDashboard />} />
-            <Route path="/bankefficiency" element={<BankEfficiency />} />
-
-            {/* ================= AuTM ================= */}
-            <Route path="/forex" element={<Forex />} />
-
-            {/* ================= TRIAL BALANCE ================= */}
-            <Route path="/trial-balance" element={<TrialBalanceHome />} />
-            <Route path="/trial-balance/admin" element={<TrialBalanceAdmin />} />
-            <Route path="/trial-balance/user" element={<TrialBalanceUser />} />
-
-            {/* ================= DASHBOARD PORTAL ================= */}
-            <Route path="/analytics" element={<DashboardPortal />} />
-
-            {/* ================= FINANCIAL MONITORING ================= */}
-            <Route path="/sales" element={<SalesRoot />} />
-            <Route path="/expense" element={<ExpenseRoot />} />
-            <Route path="/ageing" element={<AgeRoot />} />
-            <Route path="/investor" element={<InvestorRoot />} />
-            <Route path="/exception" element={<ExceptionRoot />} />
-
-            {/* ================= AuTM - CAPITAL ================= */}
-            <Route path="/dashboard" element={<DashBoard1 />} />
-            <Route path="/liquidity" element={<DashBoard2 />} />
-            <Route path="/receivables" element={<DashBoard3 />} />
-            <Route path="/treasury" element={<TreasuryRoot />} />
-            <Route path="/loans" element={<LoanRoot />} />
-
-            {/* ================= SCM ================= */}
-            <Route path="/fixed-assets" element={<FixedRoot />} />
-
-            {/* ================= CPX ================= */}
-            <Route path="/related-party" element={<RptRoot />} />
-            <Route path="/compliance" element={<CompilanseRoot />} />
-
-            {/* ================= OLD ROUTES (KEEP FOR SAFETY) ================= */}
-            <Route path="/analytics/sales/*" element={<SalesRoot />} />
-            <Route path="/analytics/exceptions/*" element={<ExceptionRoot />} />
-            <Route path="/analytics/investor/*" element={<InvestorRoot />} />
-            <Route path="/analytics/treasury/*" element={<TreasuryRoot />} />
-            <Route path="/analytics/rpt/*" element={<RptRoot />} />
-            <Route path="/analytics/expense/*" element={<ExpenseRoot />} />
-            <Route path="/analytics/risk/*" element={<CompilanseRoot />} />
-            <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
-            <Route path="/analytics/Loans/*" element={<LoanRoot />} />
-            <Route path="/analytics/assets/*" element={<FixedRoot />} />
-          </Routes>
-        </ResponsiveSidebar>
-      </Router>
+          {/* Add more routes as needed */}
+        </Routes>
+      </ResponsiveSidebar>
+    </Router>
     </ThemeProvider>
   );
 }
