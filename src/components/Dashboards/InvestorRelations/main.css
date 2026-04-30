@@ -55,6 +55,51 @@
     border-bottom: 1px solid var(--border);
 }
 
+/* ADD THIS TO main.css */
+
+/* =========================
+   INVESTOR BACK BUTTON
+========================= */
+.investor-back-header {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 12px;
+}
+
+.investor-back-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.investor-back-btn:hover {
+  background: linear-gradient(135deg, #4f8cff, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 140, 255, 0.35);
+}
+
+.investor-back-btn:active {
+  transform: scale(0.96);
+}
+
+.sidebar-header {
+  margin-top: 4px;
+}
 .investor-scope .nav-item {
     height: 60px;
     display: flex;

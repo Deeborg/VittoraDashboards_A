@@ -21,6 +21,41 @@
   flex-shrink: 0;
 }
 
+/* BACK BUTTON HEADER */
+.age-back-header {
+  padding: 14px 20px 18px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 18px;
+}
+
+/* BACK BUTTON */
+.age-back-btn {
+  width: 42px;
+  height: 42px;
+  background: #eef2ff;
+  color: #0b1e3f;
+  border: none;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+/* HOVER */
+.age-back-btn:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
 /* Main content */
 .ageing-main {
   flex: 1;

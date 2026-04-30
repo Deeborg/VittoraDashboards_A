@@ -15,6 +15,7 @@ import {
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 import { useTheme } from '@mui/material/styles';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 // import PeopleIcon from '@mui/icons-material/People';
@@ -70,6 +71,7 @@ interface DashboardData {
 const InteractiveStackedBarChart = ({ data }: { data: DashboardData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
 
   return (
     <Box sx={{
@@ -188,6 +190,7 @@ const ChartContainer = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+ 
 
   return (
     <Box
@@ -265,6 +268,7 @@ const ChartContainer = ({
 const SentimentDashboard = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -468,11 +472,67 @@ const SentimentDashboard = () => {
   const distinctAuthors = data ? new Set(data.authors.filter(a => a && a !== 'Unknown Author')).size : 0;
 
   return (
-    <Box sx={{
-      p: { xs: 1, sm: 3 },
-    //   background: theme.palette.mode === 'dark' ? '#121212' : '#f5f7fa',
-      minHeight: '100vh'
-    }}>
+<Box
+  sx={{
+    p: { xs: 1, sm: 3 },
+    minHeight: '100vh',
+    position: 'relative',
+  }}
+>
+
+  {/* =========================
+       BACK BUTTON
+  ========================= */}
+  <Box
+    sx={{
+      position: 'absolute',
+      top: { xs: 18, sm: 40 },
+      left: { xs: 18, sm: 40 },
+      zIndex: 20,
+    }}
+  >
+    <Box
+      component="button"
+      onClick={() =>
+        navigate('/modules', {
+          state: { scrollToModule: 'finance' },
+        })
+      }
+      title="Back to Finance Planning & Analysis"
+      sx={{
+        width: '46px',
+        height: '46px',
+        border: 'none',
+        borderRadius: '14px',
+        background: 'rgba(4, 4, 31, 0.88)',
+        color: '#ffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        backdropFilter: 'blur(12px)',
+        fontSize: '24px',
+        fontWeight: 700,
+        lineHeight: 1,
+        transition: 'all 0.3s ease',
+        boxShadow: '0 6px 18px rgba(0, 0, 0, 0.22)',
+
+        '&:hover': {
+          background:
+            'linear-gradient(135deg, #4f8cff, #2563eb)',
+          transform: 'translateY(-2px)',
+          boxShadow:
+            '0 10px 24px rgba(79, 140, 255, 0.35)',
+        },
+
+        '&:active': {
+          transform: 'scale(0.96)',
+        },
+      }}
+    >
+      ←
+    </Box>
+  </Box>
       {/* Header with Title and Logo */}
       <Box sx={{
         display: 'flex',
@@ -496,6 +556,7 @@ const SentimentDashboard = () => {
             fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' },
             textAlign: { xs: 'center', sm: 'left' },
             mb: { xs: 1.5, sm: 0 }, // Margin below title when stacked
+            ml: { xs: 8, sm: 10, md: 9 },
             flexGrow: 1 // Allows title to take available space
           }}
         >

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { exportToCSV } from '../../utils/formatters';
 import { dashboardService } from '../../services/api';
 import './Header.scss';

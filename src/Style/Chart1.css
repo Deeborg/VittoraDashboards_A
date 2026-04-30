@@ -3,16 +3,158 @@ div {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Header section with logo and title */
+//* REPLACE / UPDATE YOUR HEADER + NAV CSS IN Chart1.css */
+
+/* =========================
+   TOP MAIN HEADER CONTAINER
+========================= */
 .Header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #ccc;
+  padding: 22px 36px;
+  margin: 18px 24px 12px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+  border: none;
+  position: relative;
+  overflow: hidden;
 }
 
+/* Decorative glow */
+.Header-container::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  top: -120px;
+  right: -60px;
+}
+
+/* TITLE */
+.Header-container h1,
+.Header-container h2,
+.Header-container h3 {
+  color: white !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+/* Optional subtitle if exists */
+.Header-container p {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* =========================
+   NAVIGATION BAR
+========================= */
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 28px;
+  margin: 0 24px 22px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.08);
+  flex-wrap: wrap;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.nav-link {
+  text-decoration: none;
+  color: #334155;
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hover */
+.nav-link:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* Active */
+.nav-link.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white !important;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+}
+
+/* =========================
+   HOME BUTTON
+========================= */
+.Navigation-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 24px 18px;
+}
+
+.clear-filters-btn,
+.home-btn {
+  background: linear-gradient(135deg, #ffffff, #dbeafe);
+  color: #2563eb;
+  border: none;
+  padding: 12px 18px;
+  font-weight: 700;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+}
+
+.clear-filters-btn:hover,
+.home-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .Header-container {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .Header-container h1,
+  .Header-container h2,
+  .Header-container h3 {
+    font-size: 2rem !important;
+  }
+
+  .nav-bar {
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .nav-link {
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+}
 /* Button bar */
 .Navigation-container {
   text-align: right;

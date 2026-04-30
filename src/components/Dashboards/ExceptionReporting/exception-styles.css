@@ -30,6 +30,50 @@
   z-index: 100;
 }
 
+/* ADD THIS TO YOUR Exception Dashboard CSS */
+
+/* =========================
+   EXCEPTION BACK BUTTON
+========================= */
+.exception-back-header {
+  display: flex;
+  justify-content: center;
+  padding: 18px 0 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 14px;
+}
+
+.exception-back-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.exception-back-btn:hover {
+  background: linear-gradient(135deg, #4f8cff, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79, 140, 255, 0.35);
+}
+
+.exception-back-btn:active {
+  transform: scale(0.96);
+}
+
+/* Optional spacing adjustment */
+.ed-logo-area {
+  margin-top: 8px;
+}
+
 .exception-scope .ed-logo-area {
   height: 64px;
   display: flex;

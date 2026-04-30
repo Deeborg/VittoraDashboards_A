@@ -1,6 +1,5 @@
-// layout.tsx
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import "../Style/layout.css";
 
 interface LayoutProps {
@@ -12,62 +11,180 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
-
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 300);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
-
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
-  const handleRestrictedNav = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+
+  const handleRestrictedNav = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
     e.preventDefault();
     setShowMessage(true);
-  };  
+  };
+
   const handleCloseMessage = () => setShowMessage(false);
 
   return (
     <div className="layout-container">
-      {/* White container for header area */}
+      {/* MAIN HERO HEADER */}
       <div
         style={{
-          background: "#fff",
-          borderRadius: "18px",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
-          padding: "24px 32px",
-          margin: "0px auto 0 auto",
+          background:
+            "linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%)",
+          borderRadius: "24px",
+          boxShadow: "0 10px 40px rgba(15,23,42,0.08)",
+          padding: "28px",
+          margin: "24px auto",
           maxWidth: "100vw",
           width: "100%",
           boxSizing: "border-box",
         }}
       >
-        {/* Header */}
-        <div className="header-container" style={{ background: "transparent", boxShadow: "none", margin: 0, padding: 0, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <h1 style={{ margin: 0, color: "#2c3e50" }}>{title}</h1>
-          {/* Optional: Insert logo here */}
-        </div>
+        {/* HERO SECTION */}
+        <div
+          style={{
+            background:
+              "linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)",
+            borderRadius: "28px",
+            padding: "42px 36px 32px",
+            boxShadow: "0 12px 30px rgba(59,130,246,0.10)",
+            marginBottom: "28px",
+          }}
+        >
+          {/* TITLE + BUTTONS */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "24px",
+              marginBottom: "28px",
+            }}
+          >
+            {/* BACK BUTTON */}
+            <button
+              onClick={() =>
+                (window.location.href = "/modules")
+              }
+              style={{
+                width: "62px",
+                height: "62px",
+                borderRadius: "18px",
+                border: "none",
+                background:
+                  "linear-gradient(135deg, #2563eb, #1d4ed8)",
+                color: "#fff",
+                fontSize: "30px",
+                fontWeight: 700,
+                cursor: "pointer",
+                boxShadow:
+                  "0 12px 24px rgba(37,99,235,0.28)",
+                transition: "all 0.3s ease",
+              }}
+            >
+              ←
+            </button>
 
-        {/* Navigation inside white container */}
-        <nav className="nav-bar" style={{ marginTop: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div className="nav-links-center">
-            <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Overview</NavLink>
-            <NavLink to="/liquidity" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Liquidity & Cash</NavLink>
-            {/* Restricted links */}
+            {/* TITLE */}
+            <div style={{ flex: 1, textAlign: "center" }}>
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: "3rem",
+                  fontWeight: 900,
+                  color: "#1e3a8a",
+                  lineHeight: 1,
+                  letterSpacing: "-2px",
+                }}
+              >
+                {title || "Working Capital"}
+                <br />
+              </h1>
+
+              <p
+                style={{
+                  marginTop: "18px",
+                  color: "#475569",
+                  fontWeight: 500,
+                  fontSize: "1.4rem",
+                }}
+              >
+                Monitor liquidity, receivables, payables,
+                inventory & cash cycle performance
+              </p>
+            </div>
+
+            {/* REFRESH */}
+            <button
+              onClick={() => window.location.reload()}
+              style={{
+                background:
+                  "linear-gradient(135deg, #0f172a, #1e293b)",
+                color: "#fff",
+                border: "none",
+                padding: "18px 28px",
+                borderRadius: "16px",
+                fontWeight: 700,
+                fontSize: "1rem",
+                cursor: "pointer",
+                boxShadow:
+                  "0 8px 18px rgba(15,23,42,0.18)",
+              }}
+            >
+              Refresh Dashboard
+            </button>
+          </div>
+
+          {/* NAVIGATION */}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "18px",
+              flexWrap: "wrap",
+              background: "rgba(255,255,255,0.96)",
+              padding: "22px",
+              borderRadius: "22px",
+              boxShadow:
+                "0 8px 18px rgba(15,23,42,0.06)",
+            }}
+          >
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Overview
+            </NavLink>
+
+            <NavLink
+              to="/liquidity"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+              Liquidity & Cash
+            </NavLink>
+
             <NavLink
               to="/receivables"
               className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
@@ -90,72 +207,72 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
               Inventory
             </NavLink>
           </div>
-          <NavLink to="/dashboard" className="home-button">Home</NavLink>
-        </nav>
+        </div>
       </div>
 
-      {/* Page Content */}
+      {/* PAGE CONTENT */}
       <main>{children}</main>
 
-      {/* Go To Top Button */}
+      {/* GO TOP BUTTON */}
       <button
         onClick={scrollToTop}
-        className={`go-top-button ${isVisible ? 'visible' : ''}`}
+        className={`go-top-button ${
+          isVisible ? "visible" : ""
+        }`}
         aria-label="Go to top"
       >
         &#8679;
       </button>
 
-      {/* Message Modal */}
+      {/* RESTRICTED MODAL */}
       {showMessage && (
         <div
           style={{
-            position: 'fixed',
-            top: 0, left: 0, width: '100vw', height: '100vh',
-            background: 'rgba(0,0,0,0.3)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.3)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             zIndex: 9999,
           }}
           onClick={handleCloseMessage}
         >
           <div
             style={{
-              background: '#fff',
-              padding: '32px 24px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 24px rgba(0,0,0,0.15)',
+              background: "#fff",
+              padding: "32px 24px",
+              borderRadius: "12px",
+              boxShadow:
+                "0 4px 24px rgba(0,0,0,0.15)",
               maxWidth: 350,
-              textAlign: 'center',
-              position: 'relative',
+              textAlign: "center",
             }}
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
-            <p style={{ color: '#c0392b', fontWeight: 600, marginBottom: 12 }}>
+            <p
+              style={{
+                color: "#c0392b",
+                fontWeight: 600,
+              }}
+            >
               Not available in demo environment.
             </p>
-            <p style={{ color: '#2d3a4a', marginBottom: 0 }}>
-              Write to{' '}
-              <a
-                href="https://www.ajalabs.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: '#0072ce', textDecoration: 'underline', fontWeight: 500 }}
-              >
-                ajalabs
-              </a>{' '}
-              to discuss further.
-            </p>
+
             <button
               onClick={handleCloseMessage}
               style={{
                 marginTop: 18,
-                padding: '6px 18px',
-                borderRadius: 6,
-                border: 'none',
-                background: '#0072ce',
-                color: '#fff',
-                fontWeight: 500,
-                cursor: 'pointer',
+                padding: "8px 18px",
+                borderRadius: 8,
+                border: "none",
+                background: "#0072ce",
+                color: "#fff",
+                fontWeight: 600,
+                cursor: "pointer",
               }}
             >
               Close

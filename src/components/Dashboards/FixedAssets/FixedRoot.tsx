@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   assets,
@@ -27,6 +28,8 @@ import {
 const ITEMS_PER_PAGE = 15;
 
 const FixedAssets: React.FC = () => {
+  const navigate = useNavigate();
+
   const totalAssets = assets.length;
   const totalGrossBlock = assets.reduce((sum, a) => sum + a.grossValue, 0);
   const totalDepreciation = assets.reduce(
@@ -42,9 +45,9 @@ const FixedAssets: React.FC = () => {
   );
 
   const totalReconciliation = reconciliationData.length;
-  
+
   const [activeSection, setActiveSection] = useState("asset");
-  
+
   // Pagination states
   const [assetPage, setAssetPage] = useState(1);
   const [cwipPage, setCwipPage] = useState(1);
@@ -74,17 +77,31 @@ const FixedAssets: React.FC = () => {
           <div className="header__brand-icon">FA</div>
           <span className="header__brand-name">Fixed Assets</span>
         </div>
+
         <div className="header__title">
           <h1>Fixed Asset Management</h1>
         </div>
-       
       </div>
 
       {/* LEFT INTERNAL SIDEBAR */}
       <div className="fa-sidebar">
+
+        {/* BACK BUTTON */}
+        <div className="fa-back-header">
+          <button
+            className="fa-back-btn"
+            onClick={() => navigate("/analytics")}
+            aria-label="Back to Dashboards"
+          >
+            ←
+          </button>
+        </div>
+
         <div className="sidebar__nav">
           <div
-            className={`sidebar__nav-item ${activeSection === "asset" ? "active" : ""}`}
+            className={`sidebar__nav-item ${
+              activeSection === "asset" ? "active" : ""
+            }`}
             onClick={() => setActiveSection("asset")}
           >
             <span className="nav-icon">📊</span>
@@ -92,7 +109,9 @@ const FixedAssets: React.FC = () => {
           </div>
 
           <div
-            className={`sidebar__nav-item ${activeSection === "cwip" ? "active" : ""}`}
+            className={`sidebar__nav-item ${
+              activeSection === "cwip" ? "active" : ""
+            }`}
             onClick={() => setActiveSection("cwip")}
           >
             <span className="nav-icon">🏗️</span>
@@ -100,7 +119,9 @@ const FixedAssets: React.FC = () => {
           </div>
 
           <div
-            className={`sidebar__nav-item ${activeSection === "depreciation" ? "active" : ""}`}
+            className={`sidebar__nav-item ${
+              activeSection === "depreciation" ? "active" : ""
+            }`}
             onClick={() => setActiveSection("depreciation")}
           >
             <span className="nav-icon">📉</span>
@@ -148,7 +169,7 @@ const FixedAssets: React.FC = () => {
               columns={getAssetTableColumns()}
               data={paginatedAssets}
             />
-            
+
             <Pagination
               currentPage={assetPage}
               totalItems={assets.length}
@@ -183,7 +204,7 @@ const FixedAssets: React.FC = () => {
               columns={getCWIPTableColumns()}
               data={paginatedCWIP}
             />
-            
+
             <Pagination
               currentPage={cwipPage}
               totalItems={cwipProjects.length}
@@ -202,7 +223,9 @@ const FixedAssets: React.FC = () => {
 
             <div className="kpi-strip-fa">
               <div className="kpi-card-fa">
-                <div className="kpi-card__label-fa">Reconciliation Items</div>
+                <div className="kpi-card__label-fa">
+                  Reconciliation Items
+                </div>
                 <div className="kpi-card__value-fa">
                   {totalReconciliation}
                 </div>
@@ -213,7 +236,7 @@ const FixedAssets: React.FC = () => {
               columns={getReconciliationTableColumns()}
               data={paginatedReconciliation}
             />
-            
+
             <Pagination
               currentPage={reconciliationPage}
               totalItems={reconciliationData.length}

@@ -11,14 +11,18 @@ import {
   useTheme,
   useMediaQuery,
   Avatar,
+  IconButton,
 } from '@mui/material';
+
 import {
   Dashboard as DashboardIcon,
   TrendingUp as TrendingUpIcon,
   CompareArrows as CompareIcon,
   ZoomIn as DrillDownIcon,
   ChevronLeft as ChevronLeftIcon,
+  ArrowBack as ArrowBackIcon,
 } from '@mui/icons-material';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 
 interface SidebarProps {
@@ -27,9 +31,14 @@ interface SidebarProps {
   drawerWidth: number;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  open,
+  onClose,
+  drawerWidth,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,7 +46,8 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
     {
       text: 'Dashboard',
       icon: <DashboardIcon />,
-      path: '/analytics/expense',
+      path: '/modules',
+      state: { scrollToModule: 'finance' }, // Finance main page
     },
     {
       text: 'Expense Trends',
@@ -56,8 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
     },
   ];
 
-  const handleNavigation = (path: string) => {
-    navigate(path);
+  const handleNavigation = (path: string, state?: any) => {
+    navigate(path, state ? { state } : undefined);
+
     if (isMobile) {
       onClose();
     }
@@ -71,6 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
       sx={{
         width: drawerWidth,
         flexShrink: 0,
+
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
@@ -82,12 +94,16 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
         },
       }}
     >
-      <Box sx={{ 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-      }}>
-        {/* Logo/Brand Section */}
+      <Box
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        {/* =========================
+             HEADER SECTION
+        ========================= */}
         <Box
           sx={{
             p: 2.5,
@@ -97,67 +113,148 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
             borderBottom: '1px solid #1e293b',
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-            <Avatar 
-              sx={{ 
-                bgcolor: '#2563eb', 
-                width: 36, 
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1.5,
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: '#2563eb',
+                width: 36,
                 height: 36,
                 fontSize: '0.9rem',
-                fontWeight: 600
+                fontWeight: 600,
               }}
             >
               EA
             </Avatar>
+
             <Box>
-              <Typography variant="subtitle1" sx={{ color: '#ffffff', fontWeight: 600, lineHeight: 1.2 }}>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  color: '#ffffff',
+                  fontWeight: 600,
+                  lineHeight: 1.2,
+                }}
+              >
                 Expense
               </Typography>
-              <Typography variant="caption" sx={{ color: '#94a3b8', display: 'block', fontSize: '0.7rem' }}>
+
+              <Typography
+                variant="caption"
+                sx={{
+                  color: '#94a3b8',
+                  display: 'block',
+                  fontSize: '0.7rem',
+                }}
+              >
                 Analytics
               </Typography>
             </Box>
           </Box>
+
           {isMobile && (
             <ChevronLeftIcon
               onClick={onClose}
-              sx={{ 
-                cursor: 'pointer', 
+              sx={{
+                cursor: 'pointer',
                 color: '#94a3b8',
-                '&:hover': { color: '#ffffff' }
+
+                '&:hover': {
+                  color: '#ffffff',
+                },
               }}
             />
           )}
         </Box>
 
-        {/* Navigation Menu */}
-        <List sx={{ flexGrow: 1, px: 1.5, py: 2 }}>
+        {/* =========================
+             SMART BACK BUTTON
+        ========================= */}
+        <Box
+          sx={{
+            px: 2,
+            py: 1.5,
+            display: 'flex',
+            alignItems: 'center',
+            borderBottom: '1px solid #1e293b',
+          }}
+        >
+          <IconButton
+            onClick={() =>
+              navigate('/modules', {
+                state: { scrollToModule: 'finance' },
+              })
+            }
+            sx={{
+              color: '#ffffff',
+              backgroundColor: 'transparent',
+              border: '1px solid #334155',
+              width: 36,
+              height: 36,
+
+              '&:hover': {
+                backgroundColor: '#1e293b',
+              },
+            }}
+          >
+            <ArrowBackIcon fontSize="small" />
+          </IconButton>
+        </Box>
+
+        {/* =========================
+             NAVIGATION MENU
+        ========================= */}
+        <List
+          sx={{
+            flexGrow: 1,
+            px: 1.5,
+            py: 2,
+          }}
+        >
           {menuItems.map((item) => {
             const isSelected = location.pathname === item.path;
+
             return (
-              <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
+              <ListItem
+                key={item.text}
+                disablePadding
+                sx={{ mb: 0.5 }}
+              >
                 <ListItemButton
                   selected={isSelected}
-                  onClick={() => handleNavigation(item.path)}
+                  onClick={() =>
+                    handleNavigation(item.path, item.state)
+                  }
                   sx={{
                     py: 1.2,
                     px: 1.5,
                     borderRadius: 1.5,
+
                     '&.Mui-selected': {
                       backgroundColor: '#2563eb',
+
                       '&:hover': {
                         backgroundColor: '#1d4ed8',
                       },
+
                       '& .MuiListItemIcon-root': {
                         color: '#ffffff',
                       },
+
                       '& .MuiListItemText-primary': {
                         color: '#ffffff',
                         fontWeight: 600,
                       },
                     },
+
                     '&:hover': {
                       backgroundColor: '#1e293b',
+
                       '& .MuiListItemIcon-root': {
                         color: '#ffffff',
                       },
@@ -166,18 +263,23 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose, drawerWidth }) => {
                 >
                   <ListItemIcon
                     sx={{
-                      color: isSelected ? '#ffffff' : '#94a3b8',
+                      color: isSelected
+                        ? '#ffffff'
+                        : '#94a3b8',
                       minWidth: 36,
                     }}
                   >
                     {item.icon}
                   </ListItemIcon>
+
                   <ListItemText
                     primary={item.text}
                     primaryTypographyProps={{
                       fontSize: '0.9rem',
                       fontWeight: isSelected ? 600 : 500,
-                      color: isSelected ? '#ffffff' : '#cbd5e1',
+                      color: isSelected
+                        ? '#ffffff'
+                        : '#cbd5e1',
                     }}
                   />
                 </ListItemButton>
