@@ -42,9 +42,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
       position="relative"
       sx={{
         zIndex: theme.zIndex.drawer,
-        backgroundColor: '#0a1929',
-        color: '#ffffff',
-        borderBottom: '1px solid #f9fbfd',
+        backgroundColor: '#ffffff',
+        color: '#152236',
+        borderBottom: '1px solid #e2e8f0',
       }}
       elevation={0}
     >
@@ -54,23 +54,23 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           aria-label="open drawer"
           onClick={onMenuClick}
           edge="start"
-          sx={{ mr: 2, color: '#ffffff' }}
+          sx={{ mr: 2, color: '#3c485b' }}
         >
           <MenuIcon />
         </IconButton>
 
         <Typography
-          variant="h6"
-          noWrap
-          component="div"
-          sx={{ 
-            flexGrow: 1, 
-            fontWeight: 600,
-            color: '#ffffff',
-          }}
-        >
-          Expense Analytics
-        </Typography>
+        variant="h5"   
+        noWrap
+        component="div"
+        sx={{ 
+          flexGrow: 1, 
+          fontWeight: 600,
+          color: '#1e293b',  
+        }}
+      >
+        Expense Analytics
+      </Typography>
 
         
       </Toolbar>

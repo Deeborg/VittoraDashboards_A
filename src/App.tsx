@@ -1,43 +1,41 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ResponsiveSidebar from "./components/sidebar";
+
 import Home from "./components/home";
 import Summary from "./components/summary";
 import Chart_P1 from "./components/Chart_1";
-import DashBoard1 from "./components/Chart1"
-import DashBoard3 from "./components/Chart2"
+import DashBoard1 from "./components/Chart1";
+import DashBoard3 from "./components/Chart2";
 import DashBoard2 from "./components/Chart3";
 import KeyModulesPage from "./components/modules";
 import Scenario from "./Pages/Scenario";
 import BankEfficiency from "./Pages/BankEfficiency";
 import Forex from "./components/Forex";
-import SentimentDashboard from "./components/Sentimentanalysis"
+import SentimentDashboard from "./components/Sentimentanalysis";
 
 import TrialBalanceAdmin from "./modules/trial-balance/TrialBalanceAdmin";
 import TrialBalanceUser from "./modules/trial-balance/TrialBalanceUser";
 import TrialBalanceHome from "./modules/trial-balance/Pages/HomePage";
+
 import DashboardPortal from "./components/DashboardPortal";
 
-import SalesRoot from "./components/Dashboards/SalesAnalytics/SalesRoot"; 
-import ExceptionRoot from './components/Dashboards/ExceptionReporting/ExceptionRoot';
+// DASHBOARD ROOTS
+import SalesRoot from "./components/Dashboards/SalesAnalytics/SalesRoot";
+import ExceptionRoot from "./components/Dashboards/ExceptionReporting/ExceptionRoot";
 import InvestorRoot from "./components/Dashboards/InvestorRelations/InvestorRoot";
-import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot"; 
-import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot"; 
+import TreasuryRoot from "./components/Dashboards/Treasury/TreasuryRoot";
+import RptRoot from "./components/Dashboards/RelatedPartyTransaction/RptRoot";
 import ExpenseRoot from "./components/Dashboards/expense-analytics-dashboard/ExpenseRoot";
 import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRoot";
 import AgeRoot from "./components/Dashboards/Ageing/AgeRoot";
 import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
 import FixedRoot from "./components/Dashboards/FixedAssets/FixedRoot";
-import DemandForecasting from "./components/Dashboards/Forecast/DemandForecasting";
-import ProductionPlanning from "./components/Dashboards/Forecast/ProductionPlanning";
-import ProcurementPlanning from "./components/Dashboards/Forecast/Procurement";
-import InventoryManagement from "./components/Dashboards/Forecast/InventoryManagement";
 
 import { ThemeProvider, createTheme } from "@mui/material";
-// Make sure to import the SCSS file in your main App or in AgeRoot
 
 const theme = createTheme({
-  palette: { mode: 'light' } // or 'dark'
+  palette: { mode: "light" },
 });
 
 export default function App() {
@@ -71,10 +69,6 @@ export default function App() {
           <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
          <Route path="/analytics/Loans/*" element={<LoanRoot />} />
          <Route path="/analytics/assets/*" element={<FixedRoot />} />
-        <Route path="/analytics/demand-forecasting/*" element={<DemandForecasting />} />
-        <Route path="/analytics/production-planning/*" element={<ProductionPlanning />} />
-        <Route path="/analytics/procurement-planning/*" element={<ProcurementPlanning />} />
-        <Route path="/analytics/inventory-management/*" element={<InventoryManagement />} />
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>

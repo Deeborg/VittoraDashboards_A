@@ -29,7 +29,7 @@ const Layout: React.FC = () => {
       height: '100vh',
       width: '100vw',
       overflow: 'hidden',
-      backgroundColor: '#0a1929',
+      backgroundColor: '#f5f7fa',
     }}>
       {/* Sidebar - Fixed width */}
       <Sidebar
@@ -63,7 +63,7 @@ const Layout: React.FC = () => {
             flexGrow: 1,
             overflow: 'auto',
             p: 3,
-            backgroundColor: '#0a1929',
+            backgroundColor: '#f5f7fa',
           }}
         >
           <Outlet />

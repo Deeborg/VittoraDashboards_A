@@ -173,7 +173,7 @@ const Comparison: React.FC = () => {
       <Box sx={{ mb: 4 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
           <Box>
-            <Typography variant="h4" gutterBottom sx={{ fontSize: '2rem', fontWeight: 700, color: '#ffffff' }}>
+            <Typography variant="h4" gutterBottom sx={{ fontSize: '2rem', fontWeight: 700, color: '#000000' }}>
               Expense Comparison Analysis
             </Typography>
             <Typography variant="body1" sx={{ color: '#94a3b8', fontSize: '0.95rem' }}>
