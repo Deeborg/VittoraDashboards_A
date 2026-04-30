@@ -74,16 +74,12 @@ const SupplyChainProcess: React.FC = () => {
     navigate('/analytics/demand-forecasting');
   } else if (item === 'Production Planning') {
     navigate('/analytics/production-planning');
-  } else if (item === 'Fixed Assets') {
-    navigate('/analytics/assets'); 
-  }else if (item === 'Fixed Assets') {
-    navigate('/analytics/assets'); 
-  }else if (item === 'Procurement Planning') {
-    navigate('/analytics/procurement-planning');
   }else if (item === 'Procurement Planning') {
     navigate('/analytics/procurement-planning');
   }else if (item === 'Inventory Management') {
     navigate('/analytics/inventory-management');
+  }else if (item === 'Fixed Assets') {
+    navigate('/analytics/assets'); 
   }else {
     setShowMessage(true);
   }

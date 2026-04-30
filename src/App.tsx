@@ -31,6 +31,10 @@ import CompilanseRoot from "./components/Dashboards/Compilance-risk/CompilanseRo
 import AgeRoot from "./components/Dashboards/Ageing/AgeRoot";
 import LoanRoot from "./components/Dashboards/LoansBorrowing/LoanRoot";
 import FixedRoot from "./components/Dashboards/FixedAssets/FixedRoot";
+import DemandForecasting from "./components/Dashboards/Forecast/DemandForecasting";
+import ProductionPlanning from "./components/Dashboards/Forecast/ProductionPlanning";
+import ProcurementPlanning from "./components/Dashboards/Forecast/Procurement";
+import InventoryManagement from "./components/Dashboards/Forecast/InventoryManagement";
 
 import { ThemeProvider, createTheme } from "@mui/material";
 
@@ -69,6 +73,11 @@ export default function App() {
           <Route path="/analytics/Ageing/*" element={<AgeRoot />} />
          <Route path="/analytics/Loans/*" element={<LoanRoot />} />
          <Route path="/analytics/assets/*" element={<FixedRoot />} />
+         <Route path="/analytics/demand-forecasting" element={<DemandForecasting />} />
+         <Route path="/analytics/production-planning" element={<ProductionPlanning />} />
+         <Route path="/analytics/procurement-planning" element={<ProcurementPlanning />} />
+         <Route path="/analytics/inventory-management" element={<InventoryManagement />} />
+
           {/* Add more routes as needed */}
         </Routes>
       </ResponsiveSidebar>
