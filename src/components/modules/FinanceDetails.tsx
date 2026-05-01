@@ -12,7 +12,7 @@ const navData = [
 
 const routeMap: Record<string, string> = {
   'Scenario Analysis': '/scenario', 'Flux Analysis': '/flux', 'Sentiment Analysis': '/sentiment',
-  'Forecast': '/dashboard', 'Ageing': '/analytics/Ageing', 'Investor Relations': '/analytics/investor',
+  'Forecast': 'http://localhost:9002', 'Ageing': '/analytics/Ageing', 'Investor Relations': '/analytics/investor',
   'Exception Reporting': '/analytics/exceptions', 'Sales Analytics': '/analytics/sales', 'Expense Analytics': '/analytics/expense',
   'ROI': '/roi', 'ESG': '/esg'
 };

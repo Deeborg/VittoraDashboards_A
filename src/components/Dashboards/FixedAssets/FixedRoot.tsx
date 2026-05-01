@@ -88,13 +88,7 @@ const FixedAssets: React.FC = () => {
 
         {/* BACK BUTTON */}
         <div className="fa-back-header">
-          <button
-            className="fa-back-btn"
-            onClick={() => navigate("/analytics")}
-            aria-label="Back to Dashboards"
-          >
-            ←
-          </button>
+           <button className="df-back-btn" onClick={() => navigate('/modules', {state: { scrollToModule: 'scm' }})}>← </button>
         </div>
 
         <div className="sidebar__nav">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import "../Style/layout.css";
 
 interface LayoutProps {
@@ -8,6 +8,8 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ title, children }) => {
+  const navigate = useNavigate();
+
   const [isVisible, setIsVisible] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
@@ -27,6 +29,13 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
     });
   };
 
+  /* BACK TO AUTM MODULE */
+  const goBackToFinance = () => {
+    navigate("/modules", {
+      state: { scrollToModule: "autm" },
+    });
+  };
+
   const handleRestrictedNav = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -38,7 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
 
   return (
     <div className="layout-container">
-      {/* MAIN HERO HEADER */}
+      {/* HERO SECTION */}
       <div
         style={{
           background:
@@ -47,12 +56,10 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
           boxShadow: "0 10px 40px rgba(15,23,42,0.08)",
           padding: "28px",
           margin: "24px auto",
-          maxWidth: "100vw",
           width: "100%",
           boxSizing: "border-box",
         }}
       >
-        {/* HERO SECTION */}
         <div
           style={{
             background:
@@ -63,7 +70,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
             marginBottom: "28px",
           }}
         >
-          {/* TITLE + BUTTONS */}
+          {/* HEADER */}
           <div
             style={{
               display: "flex",
@@ -76,9 +83,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
           >
             {/* BACK BUTTON */}
             <button
-              onClick={() =>
-                (window.location.href = "/modules")
-              }
+              onClick={goBackToFinance}
               style={{
                 width: "62px",
                 height: "62px",
@@ -106,12 +111,11 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                   fontSize: "3rem",
                   fontWeight: 900,
                   color: "#1e3a8a",
-                  lineHeight: 1,
+                  lineHeight: 1.1,
                   letterSpacing: "-2px",
                 }}
               >
                 {title || "Working Capital"}
-                <br />
               </h1>
 
               <p
@@ -119,7 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
                   marginTop: "18px",
                   color: "#475569",
                   fontWeight: 500,
-                  fontSize: "1.4rem",
+                  fontSize: "1.2rem",
                 }}
               >
                 Monitor liquidity, receivables, payables,
@@ -166,9 +170,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
             <NavLink
               to="/dashboard"
               className={({ isActive }) =>
-                isActive
-                  ? "nav-link active"
-                  : "nav-link"
+                isActive ? "nav-link active" : "nav-link"
               }
             >
               Overview
@@ -177,9 +179,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
             <NavLink
               to="/liquidity"
               className={({ isActive }) =>
-                isActive
-                  ? "nav-link active"
-                  : "nav-link"
+                isActive ? "nav-link active" : "nav-link"
               }
             >
               Liquidity & Cash
@@ -187,21 +187,23 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
 
             <NavLink
               to="/receivables"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              className="nav-link"
               onClick={handleRestrictedNav}
             >
               Account Receivables
             </NavLink>
+
             <NavLink
               to="/payables"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              className="nav-link"
               onClick={handleRestrictedNav}
             >
               Account Payable
             </NavLink>
+
             <NavLink
               to="/inventory"
-              className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              className="nav-link"
               onClick={handleRestrictedNav}
             >
               Inventory
@@ -210,10 +212,10 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         </div>
       </div>
 
-      {/* PAGE CONTENT */}
+      {/* CONTENT */}
       <main>{children}</main>
 
-      {/* GO TOP BUTTON */}
+      {/* GO TOP */}
       <button
         onClick={scrollToTop}
         className={`go-top-button ${
@@ -224,7 +226,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children }) => {
         &#8679;
       </button>
 
-      {/* RESTRICTED MODAL */}
+      {/* MODAL */}
       {showMessage && (
         <div
           style={{

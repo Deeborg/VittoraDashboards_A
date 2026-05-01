@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
-import { Box, Paper, Typography, Tabs, Tab, Stack, Divider } from '@mui/material';
+import { Box, Paper, Typography, Tabs, Tab, Stack, Divider,Button } from '@mui/material';
 import LineChart from './Forex_linechart';
 import MultiLineChart from './Forex_multilinechart';
 import KPICard from './Forex_kpi';
@@ -41,6 +42,7 @@ interface ForexData {
 }
 
 const Forex: React.FC = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState<ForexData[]>([]);
   const [filteredData, setFilteredData] = useState<ForexData[]>([]);
   const [activeTab, setActiveTab] = useState(0);
@@ -145,13 +147,95 @@ const Forex: React.FC = () => {
   return (
     <Box sx={{ p: 3, bgcolor: '#f4f7f9', minHeight: '100vh' }}>
       {/* PROFESSIONAL HEADER */}
-      <Paper elevation={0} sx={{ p: 3, mb: 3, borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid #eef2f6' }}>
+    <Paper
+      elevation={0}
+      sx={{
+        p: 3,
+        mb: 3,
+        borderRadius: '18px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        border: '1px solid #eef2f6',
+        background:
+          'linear-gradient(135deg, #ffffff 0%, #dbeafe 100%)',
+        boxShadow: '0 8px 24px rgba(59,130,246,0.10)',
+      }}
+    >
+      {/* LEFT SIDE */}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2,
+        }}
+      >
+        {/* BACK BUTTON */}
+        <Button
+          onClick={() =>
+            navigate('/modules', {
+              state: { scrollToModule: 'autm' },
+            })
+          }
+          sx={{
+            minWidth: '52px',
+            width: '52px',
+            height: '52px',
+            borderRadius: '14px',
+            background:
+              'linear-gradient(135deg, #2563eb, #1d4ed8)',
+            color: '#fff',
+            fontSize: '28px',
+            fontWeight: 700,
+            boxShadow:
+              '0 8px 20px rgba(37,99,235,0.25)',
+            transition: 'all 0.3s ease',
+
+            '&:hover': {
+              background:
+                'linear-gradient(135deg, #1d4ed8, #1e40af)',
+              transform: 'translateY(-2px)',
+            },
+          }}
+        >
+          ←
+        </Button>
+
+        {/* TITLE */}
         <Box>
-            <Typography variant="h4" sx={{ fontWeight: 800, color: '#1a237e', letterSpacing: '-0.5px' }}>Forex & Risk Management</Typography>
-            <Typography variant="body2" color="text.secondary"></Typography>
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 800,
+              color: '#1a237e',
+              letterSpacing: '-0.5px',
+            }}
+          >
+            Forex & Risk Management
+          </Typography>
+
+          <Typography
+            variant="body2"
+            sx={{
+              color: '#475569',
+              mt: 0.5,
+            }}
+          >
+            Currency exposure, hedging, receivables & payables
+          </Typography>
         </Box>
-        <img src="./asset/vittora_grey.png" alt="Logo" style={{ height: 40 }} />
-      </Paper>
+      </Box>
+
+      {/* RIGHT LOGO */}
+      <img
+        src="./asset/vittora_grey.png"
+        alt="Logo"
+        style={{
+          height: 42,
+          objectFit: 'contain',
+        }}
+      />
+    </Paper>
 
       {/* FILTER STACK */}
       <Box sx={{ mb: 4 }}>
