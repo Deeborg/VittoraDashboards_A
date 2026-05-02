@@ -110,8 +110,43 @@
     grid-area: sidebar;
     background: #112240;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 24px 0;
+    padding: 0;
     overflow-y: auto;
+}
+
+/* BACK BUTTON HEADER */
+.fa-back-header {
+    padding: 14px 24px 18px 24px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 18px;
+}
+
+/* BACK BUTTON */
+.fa-back-btn {
+    width: 42px;
+    height: 42px;
+    background: #eef2ff;
+    color: #0b1e3f;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+/* HOVER */
+.fa-back-btn:hover {
+    background: #ffffff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .sidebar__nav {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import './styles/ageing-dashboard.scss';
 
 // Import chart components
@@ -9,6 +9,7 @@ import LineChartComponent from './components/charts/LineChart';
 
 const AgeRoot: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname.split('/').pop() || 'dashboard';
 
   // KPI Data - All 6 cards
@@ -108,10 +109,25 @@ const AgeRoot: React.FC = () => {
     return `₹${value}`;
   };
 
-  return (
+return (
     <div className="ageing-container">
+
       {/* Left Sidebar */}
       <div className="ageing-sidebar">
+
+        <div className="age-back-header">
+  <button
+    className="age-back-btn"
+    onClick={() =>
+      navigate('/modules', {
+        state: { scrollToModule: 'finance' },
+      })
+    }
+    title="Back to Finance Planning & Analysis"
+  >
+    ←
+  </button>
+</div>
         {/* Dashboard Section - ONLY SECTION NOW */}
         <div className="sidebar-section" style={{ paddingTop: '24px' }}>
           <div className="section-title">DASHBOARD</div>

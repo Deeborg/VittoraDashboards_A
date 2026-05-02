@@ -3,18 +3,17 @@ import * as XLSX from "xlsx";
 import HorizontalBarChartSlid from "./BarChartHoriSlid";
 import ExcelTable from "./ExcelTable";
 import "./Chart_1.css";
-// import logo from "../Asset/ajalabs.png";
-// import back from "../Asset/back.png";
+import { useNavigate } from "react-router-dom";
+import { HiArrowLeft, HiHome } from "react-icons/hi";
 
 const Chart_P1: React.FC = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState<Array<Record<string, any>>>([]);
   const [desc, setDesc] = useState<Array<Record<string, any>>>([]);
   const [desc1, setDesc1] = useState<Array<Record<string, any>>>([]);
-
   const [originaldata, setDataorg] = useState<Array<Record<string, any>>>([]);
-  const [groupedData, setGroupedData] = useState<Array<Record<string, any>>>(
-    []
-  );
+  const [groupedData, setGroupedData] = useState<Array<Record<string, any>>>([]);
   const [level, setLevel] = useState<string>("Level 1 Desc");
   const [category, setCategory] = useState<string>("");
   const [category1, setCategory1] = useState<string>("");
@@ -32,13 +31,11 @@ const Chart_P1: React.FC = () => {
         const file = await blob.arrayBuffer();
         const workbook = XLSX.read(file, { type: "array" });
 
-        // Read first sheet (main data)
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const jsonData: Array<Record<string, any>> =
           XLSX.utils.sheet_to_json(sheet);
 
-        // Read second sheet (description data)
         if (workbook.SheetNames.length > 1) {
           const sheetName1 = workbook.SheetNames[1];
           const sheet1 = workbook.Sheets[sheetName1];
@@ -46,18 +43,14 @@ const Chart_P1: React.FC = () => {
           if (sheet1) {
             const jsonData1: Array<Record<string, any>> =
               XLSX.utils.sheet_to_json(sheet1);
-            setDesc([...jsonData1]); // Ensure state change
-          } else {
-            console.warn("⚠️ Second sheet is empty or undefined");
+            setDesc([...jsonData1]);
           }
-        } else {
-          console.warn("⚠️ Workbook does not contain a second sheet");
         }
 
         setData(jsonData);
         setDataorg(jsonData);
       } catch (error) {
-        console.error("❌ Error reading Excel file:", error);
+        console.error("Error reading Excel file:", error);
       }
     };
 
@@ -73,13 +66,16 @@ const Chart_P1: React.FC = () => {
 
     data1.forEach((row) => {
       const key = row[level1];
+
       if (!groupedMap.has(key)) {
         groupedMap.set(key, {
           [level1]: key,
           ...Object.fromEntries(columnsToSum.map((col) => [col, 0])),
         });
       }
+
       const group = groupedMap.get(key);
+
       columnsToSum.forEach((col) => {
         group[col] += Number(row[col]) || 0;
       });
@@ -99,22 +95,27 @@ const Chart_P1: React.FC = () => {
     const processedData = groupedData1.map((row) => {
       const q1 = Number(row["Mapped amount Q1FY23"]) || 0;
       const q4 = Number(row["Mapped amount Q4FY22"]) || 0;
+
       return {
         ...row,
         "Flux Amount": q1 - q4,
-
-        // "Flux Amount": Math.abs(q1) - Math.abs(q4),
       };
     });
 
     const finalData = processedData.map((row) => {
       const fluxAmount = row["Flux Amount"];
+
       const q4fy22_1 =
-        row["Mapped amount Q4FY22"] === 0 ? 1 : row["Mapped amount Q4FY22"];
+        row["Mapped amount Q4FY22"] === 0
+          ? 1
+          : row["Mapped amount Q4FY22"];
 
       return {
         ...row,
-        "Flux Percentage": ((fluxAmount / Math.abs(q4fy22_1)) * 100).toFixed(2),
+        "Flux Percentage": (
+          (fluxAmount / Math.abs(q4fy22_1)) *
+          100
+        ).toFixed(2),
       };
     });
 
@@ -125,17 +126,20 @@ const Chart_P1: React.FC = () => {
     const filteredData = originaldata.filter(
       (row) => row[filters.CategoryColumn] === filters.Category
     );
+
     setData(filteredData);
+
     const filteredDesc = desc.filter(
       (row) =>
         row["Level"] === filters.CategoryColumn &&
         row["Description"] === filters.Category
     );
+
     setCategory(filters.Category);
     setDesc1(filteredDesc);
-    // console.log(filters)
 
     let newLevel = level;
+
     if (filters.CategoryColumn === "Level 1 Desc") {
       newLevel = "Level 2 Desc";
       setCategory1(filters.Category);
@@ -149,34 +153,40 @@ const Chart_P1: React.FC = () => {
       newLevel = "G/L Acct Long Text";
       setCategory4(filters.Category);
     }
+
     setLevel(newLevel);
   }
 
-  function handleBackClick(filters: any): void {
+  function handleBackClick(): void {
     let newLevel = level;
-    let oldLevel = level;
+
     if (newLevel === "Level 2 Desc") {
       newLevel = "Level 1 Desc";
       setData(originaldata);
     } else if (newLevel === "Level 3 Desc") {
       newLevel = "Level 2 Desc";
+
       const filteredData = originaldata.filter(
         (row) => row["Level 1 Desc"] === category1
       );
+
       setData(filteredData);
-    } else if (category4 != "") {
-      console.log("item level");
+    } else if (category4 !== "") {
       newLevel = "G/L Acct Long Text";
+
       const filteredData = originaldata.filter(
         (row) => row["Level 3 Desc"] === category3
       );
+
       setData(filteredData);
       setCategory4("");
     } else if (newLevel === "G/L Acct Long Text") {
       newLevel = "Level 3 Desc";
+
       const filteredData = originaldata.filter(
         (row) => row["Level 2 Desc"] === category2
       );
+
       setData(filteredData);
     } else {
       newLevel = "Level 1 Desc";
@@ -185,48 +195,110 @@ const Chart_P1: React.FC = () => {
 
     setLevel(newLevel);
   }
+
   return (
     <div>
-      {/* <div className="heading-container">
-        <h1 className="vittora-icon">Vittora</h1>
-        <h3 className="main-heading">Financial Flux Analysis</h3>
-        <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="80px" />
-      </div> */}
+      {/* HEADER */}
+      <div
+        style={{
+          background: "#fff",
+          borderRadius: "16px",
+          boxShadow: "0 4px 18px rgba(0,0,0,0.08)",
+          padding: "20px 28px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          margin: "32px auto 24px auto",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      >
+        {/* LEFT BUTTONS */}
         <div
           style={{
-            background: "#fff",
-            borderRadius: "16px",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-            padding: "24px 32px",
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
-            margin: "32px auto 24px auto",
-            // maxWidth: 900,
-            width: "100%",
-            boxSizing: "border-box"
+            gap: "12px",
+            minWidth: "140px",
           }}
         >
-          <img src=".\asset\back.png" onClick={handleBackClick} alt="Logo" width="80px" />
-          {/* Empty div for left spacing, same width as logo */}
-          <div style={{ width: 48 }} />
-          <h2 style={{ 
-            margin: 0, 
-            fontWeight: 700, 
-            fontSize: "2rem", 
-            color: "#1a237e", 
-            flex: 1, 
-            textAlign: "center" 
-          }}>
-            Flux Analysis
-          </h2>
-          <img
-            src="./asset/vittora_grey.png"
-            alt="Vittora Logo"
-            style={{ height: 48 }}
-          />
-        </div>      
+          <button
+            onClick={handleBackClick}
+            title="Back within Flux"
+            style={{
+              width: "52px",
+              height: "52px",
+              borderRadius: "14px",
+              border: "none",
+              background:
+                "linear-gradient(135deg, #4f8cff, #2563eb)",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow:
+                "0 6px 14px rgba(37,99,235,0.25)",
+              transition: "all 0.3s ease",
+            }}
+          >
+            <HiArrowLeft size={28} />
+          </button>
 
+          <button
+            onClick={() =>
+              navigate("/modules", {
+                state: { scrollToModule: "finance" },
+              })
+            }
+            title="Back to Finance Planning & Analysis"
+            style={{
+              width: "52px",
+              height: "52px",
+              borderRadius: "14px",
+              border: "none",
+              background: "#04041f",
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow:
+                "0 6px 14px rgba(0,0,0,0.18)",
+              transition: "all 0.3s ease",
+            }}
+          >
+            <HiHome size={24} />
+          </button>
+        </div>
+
+        {/* TITLE */}
+        <h2
+          style={{
+            margin: 0,
+            fontWeight: 700,
+            fontSize: "2rem",
+            color: "#1a237e",
+            flex: 1,
+            textAlign: "center",
+          }}
+        >
+          Flux Analysis
+        </h2>
+
+        {/* LOGO */}
+        <img
+          src="./asset/vittora_grey.png"
+          alt="Vittora Logo"
+          style={{
+            height: 48,
+            minWidth: "140px",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+
+      {/* CHART */}
       <div className="chart-container">
         <HorizontalBarChartSlid
           data2={groupedData}
@@ -237,12 +309,18 @@ const Chart_P1: React.FC = () => {
             "Flux Amount",
             "Flux Percentage",
           ]}
-          Labels={["Q1FY23", "Q4FY22", "Flux Amount", "Flux %"]}
+          Labels={[
+            "Q1FY23",
+            "Q4FY22",
+            "Flux Amount",
+            "Flux %",
+          ]}
           yLabel={level}
           onFilterChange1={handleChartFilterChange}
         />
       </div>
 
+      {/* TABLE */}
       {desc1.length > 0 ? (
         <ExcelTable
           EXdata={desc1}

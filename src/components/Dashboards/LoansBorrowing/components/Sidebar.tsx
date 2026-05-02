@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Sidebar.css';
 
 interface NavItem {
@@ -13,6 +14,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {
+  const navigate = useNavigate();
   const navItems: NavItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: 'tachometer-alt' },
     { id: 'currency-exposure', label: 'Currency Exposure', icon: 'globe-americas' },
@@ -24,7 +26,18 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className="sidebar"> 
+        <button
+          className="sidebar-back-btn"
+          onClick={() =>
+            navigate('/modules', {
+              state: { scrollToModule: 'autm' },
+            })
+          }
+          title="Back to AuTM"
+        >
+          ←
+        </button>
       <div className="sidebar-header">
         <div className="logo">
           <i className="fas fa-university"></i>
