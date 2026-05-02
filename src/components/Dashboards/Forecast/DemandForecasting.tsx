@@ -24,7 +24,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 type RiskLevel = 'Critical' | 'Watch' | 'On track' | 'Overstock';
 type ScenarioKey = 'pessimistic' | 'base' | 'optimistic';
-type CategoryKey = 'all' | 'electronics' | 'apparel' | 'home';
+type RegionalViewKey = 'forecast' | 'historical';
+type CapacityViewKey = 'forecast' | 'historical';
+type ProductKey =
+  | 'headset'
+  | 'laptop'
+  | 'monitor'
+  | 'keyboard'
+  | 'webcam'
+  | 'dock';
+
+interface ProductConfig {
+  key: ProductKey;
+  label: string;       // Short pill label
+  fullName: string;    // Full product name shown in chart header
+  base: number;        // Baseline monthly demand
+  amp: number;         // Seasonal amplitude
+  noise: number;       // Actual-demand noise factor
+  seed: number;        // Deterministic random seed
+}
+
+interface RegionalDataPoint {
+  name: string;
+  demand: number;     // Forecast value
+  historical: number; // Prior-year actual
+  growth: string;     // YoY growth label
+}
 
 interface SKU {
   id: string;
@@ -61,6 +86,106 @@ const MONTH_LABELS: string[] = Array.from({ length: 42 }, (_, i) => {
   return `${names[i % 12]} '${String(year).slice(-2)}`;
 });
 
+const PRODUCTS: ProductConfig[] = [
+  {
+    key: 'headset',
+    label: 'Wireless headset',
+    fullName: 'Wireless Headset Pro',
+    base: 1200, amp: 180, noise: 120, seed: 11,
+  },
+  {
+    key: 'laptop',
+    label: '15" laptop',
+    fullName: '15" Business Laptop',
+    base: 980,  amp: 130, noise: 90,  seed: 22,
+  },
+  {
+    key: 'monitor',
+    label: '4K display',
+    fullName: '4K Display 27"',
+    base: 760,  amp: 110, noise: 80,  seed: 33,
+  },
+  {
+    key: 'keyboard',
+    label: 'Mech keyboard',
+    fullName: 'Mechanical Keyboard TKL',
+    base: 640,  amp: 90,  noise: 60,  seed: 44,
+  },
+  {
+    key: 'webcam',
+    label: 'HD webcam',
+    fullName: 'HD Webcam 4K',
+    base: 520,  amp: 75,  noise: 50,  seed: 55,
+  },
+  {
+    key: 'dock',
+    label: 'USB-C dock',
+    fullName: 'USB-C Docking Station',
+    base: 430,  amp: 60,  noise: 40,  seed: 66,
+  },
+];
+
+const REGIONAL_DATA: RegionalDataPoint[] = [
+  { name: 'Asia Pacific',  demand: 22000, historical: 18400, growth: '+19.6% YoY' },
+  { name: 'North America', demand: 18000, historical: 16200, growth: '+11.1% YoY' },
+  { name: 'Europe',        demand: 15500, historical: 15100, growth: '+2.6% YoY'  },
+  { name: 'LATAM',         demand: 8000,  historical: 6300,  growth: '+27.0% YoY' },
+];
+
+const CAPACITY_HISTORICAL_DATA = [
+  { month: "Jan '23", demand: 3100, stockLimit: 5500 },
+  { month: "Feb '23", demand: 3250, stockLimit: 5500 },
+  { month: "Mar '23", demand: 3400, stockLimit: 5500 },
+  { month: "Apr '23", demand: 3600, stockLimit: 5500 },
+  { month: "May '23", demand: 3750, stockLimit: 5500 },
+  { month: "Jun '23", demand: 3900, stockLimit: 5500 },
+  { month: "Jul '23", demand: 4100, stockLimit: 5500 },
+  { month: "Aug '23", demand: 3800, stockLimit: 5500 },
+  { month: "Sep '23", demand: 3950, stockLimit: 5500 },
+  { month: "Oct '23", demand: 4300, stockLimit: 5500 },
+  { month: "Nov '23", demand: 4600, stockLimit: 5500 },
+  { month: "Dec '23", demand: 5100, stockLimit: 5500 },
+  { month: "Jan '24", demand: 3200, stockLimit: 5500 },
+  { month: "Feb '24", demand: 3350, stockLimit: 5500 },
+  { month: "Mar '24", demand: 3550, stockLimit: 5500 },
+  { month: "Apr '24", demand: 3800, stockLimit: 5500 },
+  { month: "May '24", demand: 4050, stockLimit: 5500 },
+  { month: "Jun '24", demand: 4200, stockLimit: 5500 },
+  { month: "Jul '24", demand: 4400, stockLimit: 5500 },
+  { month: "Aug '24", demand: 4150, stockLimit: 5500 },
+  { month: "Sep '24", demand: 4350, stockLimit: 5500 },
+  { month: "Oct '24", demand: 4700, stockLimit: 5500 },
+  { month: "Nov '24", demand: 5050, stockLimit: 5500 },
+  { month: "Dec '24", demand: 5600, stockLimit: 5500 }, // ← breached
+  { month: "Jan '25", demand: 3500, stockLimit: 5500 },
+  { month: "Feb '25", demand: 3700, stockLimit: 5500 },
+  { month: "Mar '25", demand: 3900, stockLimit: 5500 },
+  { month: "Apr '25", demand: 4100, stockLimit: 5500 },
+  { month: "May '25", demand: 4300, stockLimit: 5500 },
+  { month: "Jun '25", demand: 4500, stockLimit: 5500 },
+  { month: "Jul '25", demand: 4700, stockLimit: 5500 },
+  { month: "Aug '25", demand: 4500, stockLimit: 5500 },
+  { month: "Sep '25", demand: 4750, stockLimit: 5500 },
+  { month: "Oct '25", demand: 5100, stockLimit: 5500 },
+  { month: "Nov '25", demand: 5400, stockLimit: 5500 },
+  { month: "Dec '25", demand: 5800, stockLimit: 5500 }, // ← breached
+  { month: "Jan '26", demand: 3800, stockLimit: 5500 },
+  { month: "Feb '26", demand: 4000, stockLimit: 5500 },
+  { month: "Mar '26", demand: 4200, stockLimit: 5500 }, // ← last historical month
+];
+
+const CAPACITY_FORECAST_DATA = [
+  { month: "Apr '26", demand: 4500, stockLimit: 5500 },
+  { month: "May '26", demand: 4800, stockLimit: 5500 },
+  { month: "Jun '26", demand: 5200, stockLimit: 5500 },
+  { month: "Jul '26", demand: 5500, stockLimit: 5500 },
+  { month: "Aug '26", demand: 5900, stockLimit: 5500 }, // ← breached
+  { month: "Sep '26", demand: 5700, stockLimit: 5500 }, // ← breached
+  { month: "Oct '26", demand: 6300, stockLimit: 5500 }, // ← breached
+  { month: "Nov '26", demand: 6100, stockLimit: 5500 }, // ← breached
+  { month: "Dec '26", demand: 5800, stockLimit: 5500 }, // ← breached
+];
+
 const BUFFER_DATA = [
   { month: 'Jul', forecast: 4500, stockLimit: 5500, critical: 3500 },
   { month: 'Aug', forecast: 4800, stockLimit: 5500, critical: 3500 },
@@ -70,12 +195,12 @@ const BUFFER_DATA = [
   { month: 'Dec', forecast: 6100, stockLimit: 5500, critical: 3500 },
 ];
 
-const REGIONAL_DATA = [
-  { name: 'Asia Pacific', demand: 22000 },
-  { name: 'North America', demand: 18000 },
-  { name: 'Europe', demand: 15500 },
-  { name: 'LATAM', demand: 8000 },
-];
+// const REGIONAL_DATA = [
+//   { name: 'Asia Pacific', demand: 22000 },
+//   { name: 'North America', demand: 18000 },
+//   { name: 'Europe', demand: 15500 },
+//   { name: 'LATAM', demand: 8000 },
+// ];
 
 const SKUS: SKU[] = [
   { id: 'SKU-8829', name: 'Wireless Headset Pro', daysLeft: 3,  region: 'APAC', trend: '↑ 22%', risk: 'Critical',  unitsAtRisk: '~$62K' },
@@ -118,12 +243,12 @@ const SCENARIO_CONFIG: Record<ScenarioKey, { label: string; mult: number; color:
   optimistic:  { label: 'Optimistic (+20%)',   mult: 1.20, color: '#1D9E75' },
 };
 
-const CATEGORY_OFFSETS: Record<CategoryKey, { base: number; amp: number }> = {
-  all:         { base: 3100, amp: 500 },
-  electronics: { base: 1180, amp: 190 },
-  apparel:     { base: 820,  amp: 130 },
-  home:        { base: 640,  amp: 100 },
-};
+// const CATEGORY_OFFSETS: Record(CategoryKey, { base: number; amp: number }> = {
+//   all:         { base: 3100, amp: 500 },
+//   electronics: { base: 1180, amp: 190 },
+//   apparel:     { base: 820,  amp: 130 },
+//   home:        { base: 640,  amp: 100 },
+// };
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -134,9 +259,9 @@ function generateSeries(base: number, amp: number, withNoise = false) {
   });
 }
 
-function useChartData(category: CategoryKey) {
+function useChartData(product: ProductConfig) {
   return useMemo(() => {
-    const { base, amp } = CATEGORY_OFFSETS[category];
+    const { base, amp } = product;
     const forecast = generateSeries(base, amp);
     const actual   = generateSeries(base, amp, true).map((v, i) => (i < 36 ? v : null));
     const upper    = forecast.map(v => Math.round(v * 1.12));
@@ -148,7 +273,7 @@ function useChartData(category: CategoryKey) {
       upper:    upper[i],
       lower:    lower[i],
     }));
-  }, [category]);
+  }, [product]);
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -246,6 +371,63 @@ const TrendTooltip: React.FC<any> = ({ active, payload, label }) => {
   );
 };
 
+const RegionalTooltip: React.FC<any> = ({ active, payload, label, view }: any) => {
+  if (!active || !payload?.length) return null;
+  const row = REGIONAL_DATA.find(r => r.name === label);
+  return (
+    <div className="df-tooltip">
+      <p className="df-tooltip-label">{label}</p>
+      <p style={{ color: view === 'forecast' ? '#185FA5' : '#BA7517' }}>
+        {view === 'forecast' ? 'Forecast (next 12 mo)' : 'Historical (prior 12 mo)'}:{' '}
+        {Number(payload[0].value).toLocaleString()} units
+      </p>
+      {view === 'forecast' && row && (
+        <p style={{ color: '#1D9E75', fontSize: 11, marginTop: 2 }}>{row.growth} vs prior year</p>
+      )}
+    </div>
+  );
+};
+
+interface RegionalViewToggleProps {
+  view: RegionalViewKey;
+  onChange: (v: RegionalViewKey) => void;
+}
+
+const RegionalViewToggle: React.FC<{ view: RegionalViewKey; onChange: (v: RegionalViewKey) => void }> = ({ view, onChange }) => {
+  const base: React.CSSProperties = {
+    fontSize: 12,
+    fontWeight: 500,
+    padding: '5px 14px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background 0.15s, color 0.15s',
+    lineHeight: 1.4,
+    outline: 'none',
+  };
+  const active: React.CSSProperties   = { background: '#185FA5', color: '#fff' };
+  const inactive: React.CSSProperties = { background: '#F1F5F9', color: '#555' };
+
+  return (
+    <div style={{ display: 'flex', borderRadius: 8, overflow: 'hidden', border: '1px solid #E2E8F0', flexShrink: 0 }}>
+      <button
+        style={{ ...base, ...(view === 'forecast' ? active : inactive), borderRadius: '7px 0 0 7px' }}
+        onClick={() => onChange('forecast')}
+        aria-pressed={view === 'forecast'}
+      >
+        Forecast
+      </button>
+      <button
+        style={{ ...base, ...(view === 'historical' ? { background: '#BA7517', color: '#fff' } : inactive), borderRadius: '0 7px 7px 0' }}
+        onClick={() => onChange('historical')}
+        aria-pressed={view === 'historical'}
+      >
+        Historical
+      </button>
+    </div>
+  );
+};
+
+
 // Custom buffer chart bar to colour over-capacity bars red
 const BufferBar: React.FC<any> = (props) => {
   const { x, y, width, height, value } = props;
@@ -264,12 +446,18 @@ const BufferBar: React.FC<any> = (props) => {
 const DemandForecasting: React.FC = () => {
   const navigate = useNavigate();
 
-  const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
+  const [activeProduct, setActiveProduct] = useState<ProductConfig>(PRODUCTS[0]);  
   const [activeScenario, setActiveScenario] = useState<ScenarioKey>('base');
   const [demandShift, setDemandShift]       = useState<number>(0);
   const [expandedInsight, setExpandedInsight] = useState<number | null>(null);
+  const [regionalView, setRegionalView]       = useState<RegionalViewKey>('forecast');
+  const [capacityView, setCapacityView] = useState<CapacityViewKey>('forecast');
 
-  const chartData = useChartData(activeCategory);
+  const chartData = useChartData(activeProduct);
+
+  const regionalDataKey: keyof RegionalDataPoint = regionalView === 'forecast' ? 'demand' : 'historical';
+  const regionalColor  = regionalView === 'forecast' ? '#185FA5' : '#BA7517';
+  const regionalMuted  = regionalView === 'forecast' ? '#C8D6E5' : '#DDD0B3';
 
   // ── KPI Data ──
   const kpiData: KPIItem[] = useMemo(() => [
@@ -345,12 +533,12 @@ const DemandForecasting: React.FC = () => {
   }, []);
 
   // ── Categories ──
-  const categories: { key: CategoryKey; label: string }[] = [
-    { key: 'all',         label: 'All categories' },
-    { key: 'electronics', label: 'Electronics'    },
-    { key: 'apparel',     label: 'Apparel'        },
-    { key: 'home',        label: 'Home & garden'  },
-  ];
+  // const categories: { key: CategoryKey; label: string }[] = [
+  //   { key: 'all',         label: 'All categories' },
+  //   { key: 'electronics', label: 'Electronics'    },
+  //   { key: 'apparel',     label: 'Apparel'        },
+  //   { key: 'home',        label: 'Home & garden'  },
+  // ];
 
   return (
     <div className="demand-dashboard-container">
@@ -442,13 +630,13 @@ const DemandForecasting: React.FC = () => {
             </p>
           </div>
           <div className="df-pills">
-            {categories.map(cat => (
+            {PRODUCTS.map(product => (
               <button
-                key={cat.key}
-                className={`df-pill${activeCategory === cat.key ? ' df-pill--active' : ''}`}
-                onClick={() => setActiveCategory(cat.key)}
+                key={product.key}
+                className={`df-pill${activeProduct === product ? ' df-pill--active' : ''}`}
+                onClick={() => setActiveProduct(product)}
               >
-                {cat.label}
+                {product.label}
               </button>
             ))}
           </div>
@@ -462,7 +650,7 @@ const DemandForecasting: React.FC = () => {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeCategory}
+            key={activeProduct.key}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -539,26 +727,86 @@ const DemandForecasting: React.FC = () => {
       {/* ── Regional + Profit Breakdown ── */}
       <div className="df-grid-2">
         <div className="chart-card">
-          <h3 className="chart-title">Regional demand split</h3>
-          <p className="df-chart-desc">Which markets drive volume? Use this to prioritise replenishment and logistics investment.</p>
-          <div style={{ height: 220 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={REGIONAL_DATA} barSize={42} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.15} />
-                <XAxis dataKey="name" fontSize={11} tick={{ fill: '#888' }} tickLine={false} axisLine={false} />
-                <YAxis fontSize={11} tick={{ fill: '#888' }} tickLine={false} axisLine={false} tickFormatter={v => `${v / 1000}K`} />
-                <Tooltip
-                  cursor={{ fill: '#f1f5f9' }}
-                  formatter={(v: number) => [v.toLocaleString() + ' units', 'Demand']}
-                />
-                <Bar dataKey="demand" radius={[5, 5, 0, 0]}>
-                  {REGIONAL_DATA.map((_, i) => (
-                    <Cell key={i} fill={i === 0 ? '#185FA5' : '#B4B2A9'} />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+
+          {/* Header row: title left, toggle right */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 4 }}>
+            <div>
+              <h3 className="chart-title" style={{ marginBottom: 4 }}>Regional demand split</h3>
+              <p className="df-chart-desc" style={{ maxWidth: 280 }}>
+                {regionalView === 'forecast'
+                  ? ' Prioritise replenishment accordingly.'
+                  : 'Actual units sold in the prior 12 months, by region.'}
+              </p>
+            </div>
+            <RegionalViewToggle view={regionalView} onChange={setRegionalView} />
           </div>
+
+          {/* Period pill */}
+          <div style={{ marginBottom: 8 }}>
+            <span style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20,
+              background: regionalView === 'forecast' ? '#EBF3FD' : '#FDF3E3',
+              color:      regionalView === 'forecast' ? '#185FA5' : '#BA7517',
+              border:     regionalView === 'forecast' ? '1px solid #BDD4F0' : '1px solid #F0D9A8',
+            }}>
+              <span style={{ fontSize: 13 }}>{regionalView === 'forecast' ? '📈' : '🕐'}</span>
+              {regionalView === 'forecast' ? 'Forecast ' : 'Historical'}
+            </span>
+          </div>
+
+          {/* Animated bar chart */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={regionalView}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.2 }}
+              style={{ height: 190 }}
+            >
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={REGIONAL_DATA} barSize={38} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.15} />
+                  <XAxis dataKey="name" fontSize={11} tick={{ fill: '#888' }} tickLine={false} axisLine={false} />
+                  <YAxis fontSize={11} tick={{ fill: '#888' }} tickLine={false} axisLine={false} tickFormatter={v => `${v / 1000}K`} />
+                  <Tooltip cursor={{ fill: '#f1f5f9' }} content={<RegionalTooltip view={regionalView} />} />
+                  <Bar dataKey={regionalDataKey as string} radius={[5, 5, 0, 0]}>
+                    {REGIONAL_DATA.map((_, i) => (
+                      <Cell key={i} fill={i === 0 ? regionalColor : regionalMuted} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* YoY growth chips — only in forecast view */}
+          {/* <AnimatePresence>
+            {regionalView === 'forecast' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}
+              >
+                {REGIONAL_DATA.map(r => (
+                  <div key={r.name} style={{
+                    display: 'flex', flexDirection: 'column', alignItems: 'center',
+                    background: '#F0FBF6', border: '1px solid #C6ECD9',
+                    borderRadius: 8, padding: '4px 10px', minWidth: 64,
+                  }}>
+                    <span style={{ fontSize: 10, color: '#888', fontWeight: 500 }}>
+                      {r.name === 'Asia Pacific' ? 'APAC' : r.name === 'North America' ? 'NA' : r.name === 'Europe' ? 'EU' : 'LATAM'}
+                    </span>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1D9E75' }}>{r.growth}</span>
+                    <span style={{ fontSize: 9, color: '#aaa' }}>YoY</span>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence> */}
         </div>
 
         <div className="chart-card">
@@ -665,42 +913,161 @@ const DemandForecasting: React.FC = () => {
 
       {/* ── Capacity vs Demand + SKU Watchlist ── */}
       <div className="df-grid-2">
-        <div className="chart-card">
-          <h3 className="chart-title">Capacity vs demand outlook</h3>
-          <p className="df-chart-desc">
-            Red bars show months where forecast exceeds fulfillment capacity — a direct profit risk
-            requiring early action.
-          </p>
-          <div className="df-legend">
-            <span><span className="df-legend-dot" style={{ background: '#185FA5' }} />Within capacity</span>
-            <span><span className="df-legend-dot" style={{ background: '#E24B4A' }} />Over capacity</span>
+        {/* ── Capacity vs Demand ── */}
+<div className="chart-card">
+  {/* Header row */}
+  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, marginBottom: 4 }}>
+    <div>
+      <h3 className="chart-title">Capacity vs demand outlook</h3>
+      <p className="df-chart-desc" style={{ maxWidth: 300 }}>
+        {capacityView === 'forecast'
+          ? 'Red bars exceed the 5,500-unit fulfillment limit.'
+          : 'Red bars are historical breaches.'}
+      </p>
+    </div>
+
+    {/* Toggle — same pattern as RegionalViewToggle */}
+    <div style={{ display: 'flex', borderRadius: 8, overflow: 'hidden', border: '1px solid #E2E8F0', flexShrink: 0 }}>
+      <button
+        style={{
+          fontSize: 12, fontWeight: 500, padding: '5px 14px',
+          border: 'none', cursor: 'pointer', lineHeight: 1.4, outline: 'none',
+          borderRadius: '7px 0 0 7px',
+          background: capacityView === 'forecast' ? '#185FA5' : '#F1F5F9',
+          color:      capacityView === 'forecast' ? '#fff'    : '#555',
+          transition: 'background 0.15s, color 0.15s',
+        }}
+        onClick={() => setCapacityView('forecast')}
+        aria-pressed={capacityView === 'forecast'}
+      >
+        Forecast
+      </button>
+      <button
+        style={{
+          fontSize: 12, fontWeight: 500, padding: '5px 14px',
+          border: 'none', cursor: 'pointer', lineHeight: 1.4, outline: 'none',
+          borderRadius: '0 7px 7px 0',
+          background: capacityView === 'historical' ? '#BA7517' : '#F1F5F9',
+          color:      capacityView === 'historical' ? '#fff'    : '#555',
+          transition: 'background 0.15s, color 0.15s',
+        }}
+        onClick={() => setCapacityView('historical')}
+        aria-pressed={capacityView === 'historical'}
+      >
+        Historical
+      </button>
+    </div>
+  </div>
+
+  {/* Period pill */}
+  <div style={{ marginBottom: 8 }}>
+    <span style={{
+      display: 'inline-flex', alignItems: 'center', gap: 6,
+      fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20,
+      background: capacityView === 'forecast' ? '#EBF3FD' : '#FDF3E3',
+      color:      capacityView === 'forecast' ? '#185FA5' : '#BA7517',
+      border:     capacityView === 'forecast' ? '1px solid #BDD4F0' : '1px solid #F0D9A8',
+    }}>
+      {capacityView === 'forecast' ? '📈 Forecast' : '🕐 Historical'}
+    </span>
+  </div>
+
+  <div className="df-legend">
+    <span>
+      <span className="df-legend-dot" style={{ background: '#185FA5' }} />
+      Within capacity
+    </span>
+    <span>
+      <span className="df-legend-dot" style={{ background: '#E24B4A' }} />
+      Over capacity
+    </span>
+  </div>
+
+  <AnimatePresence mode="wait">
+    <motion.div
+      key={capacityView}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.2 }}
+      style={{ height: 240 }}
+    >
+      <ResponsiveContainer width="100%" height="100%">
+        <ComposedChart
+          data={capacityView === 'forecast' ? CAPACITY_FORECAST_DATA : CAPACITY_HISTORICAL_DATA}
+          margin={{ top: 4, right: 8, left: 0, bottom: 0 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.15} />
+          <XAxis
+            dataKey="month"
+            fontSize={capacityView === 'historical' ? 9 : 11}
+            tick={{ fill: '#888' }}
+            tickLine={false}
+            axisLine={false}
+            interval={capacityView === 'historical' ? 2 : 0} // skip labels when dense
+          />
+          <YAxis
+            fontSize={11}
+            tick={{ fill: '#888' }}
+            tickLine={false}
+            axisLine={false}
+            domain={[2500, 7000]}
+            tickFormatter={v => `${v / 1000}K`}
+            width={40}
+          />
+          <Tooltip formatter={(v: number) => [v.toLocaleString() + ' units', 'Demand']} />
+          <Bar
+            dataKey="demand"
+            name="Demand"
+            barSize={capacityView === 'historical' ? 10 : 36}
+            shape={<BufferBar />}
+            radius={[4, 4, 0, 0]}
+          />
+          <ReferenceLine
+            y={5500}
+            stroke="#888"
+            strokeDasharray="4 3"
+            label={{
+              value: 'Capacity limit 5.5K',
+              fontSize: 10,
+              fill: '#888',
+              position: 'insideTopRight',
+            }}
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </motion.div>
+  </AnimatePresence>
+
+  {/* Historical summary chips — only visible in historical view */}
+  <AnimatePresence>
+    {capacityView === 'historical' && (
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: 'auto' }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: 0.2 }}
+        style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 10 }}
+      >
+        {/* {[
+          { label: 'Breach months',  value: '3',     color: '#E24B4A', bg: '#FCEBEB', border: '#F7C1C1' },
+          { label: 'Worst month',    value: 'Dec',   color: '#E24B4A', bg: '#FCEBEB', border: '#F7C1C1' },
+          { label: 'Avg demand',     value: '4,311', color: '#185FA5', bg: '#EBF3FD', border: '#BDD4F0' },
+          { label: 'Peak (Dec \'25)', value: '5,800', color: '#BA7517', bg: '#FDF3E3', border: '#F0D9A8' },
+        ].map(chip => (
+          <div key={chip.label} style={{
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            background: chip.bg, border: `1px solid ${chip.border}`,
+            borderRadius: 8, padding: '4px 12px', minWidth: 70,
+          }}>
+            <span style={{ fontSize: 10, color: '#888', fontWeight: 500 }}>{chip.label}</span>
+            <span style={{ fontSize: 13, fontWeight: 700, color: chip.color }}>{chip.value}</span>
           </div>
-          <div style={{ height: 220 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <ComposedChart data={BUFFER_DATA} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.15} />
-                <XAxis dataKey="month" fontSize={11} tick={{ fill: '#888' }} tickLine={false} axisLine={false} />
-                <YAxis
-                  fontSize={11}
-                  tick={{ fill: '#888' }}
-                  tickLine={false}
-                  axisLine={false}
-                  domain={[3000, 7000]}
-                  tickFormatter={v => `${v / 1000}K`}
-                  width={40}
-                />
-                <Tooltip formatter={(v: number) => v.toLocaleString()} />
-                <Bar dataKey="forecast" name="Forecast demand" barSize={36} shape={<BufferBar />} radius={[4, 4, 0, 0]} />
-                <ReferenceLine
-                  y={5500}
-                  stroke="#888"
-                  strokeDasharray="4 3"
-                  label={{ value: 'Stock limit 5.5K', fontSize: 10, fill: '#888', position: 'insideTopRight' }}
-                />
-              </ComposedChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
+        ))} */}
+      </motion.div>
+    )}
+  </AnimatePresence>
+</div>
 
         <div className="chart-card">
           <div className="df-chart-header" style={{ marginBottom: 8 }}>
