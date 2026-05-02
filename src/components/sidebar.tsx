@@ -37,7 +37,6 @@ export default function ResponsiveSidebar({ children }: Props) {
     { path: "/summary", icon: <FaChartBar />, label: "Financial Snapshot" },
     { path: "/modules", icon: <FaBook />, label: "Key Modules" },
     { path: "/trial-balance", icon: <FaMoneyBillWave />, label: "Trial Balance" },
-    { path: "http://localhost:9002", icon: <TbDeviceAnalytics />, label: "Forecast simulation" },
   ];
 
   const modulesMenu = [

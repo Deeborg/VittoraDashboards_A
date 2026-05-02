@@ -27,7 +27,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
-import AdminLogin from "../components/AdminLogin";
+
 
 const API_URL = "http://localhost:5000/api/journal";
 
@@ -939,13 +939,13 @@ const groupedViewEntries = entryList.reduce((acc, entry) => {
         </div>
       )}
 
-      {showAdminLogin && (
+      {/* {showAdminLogin && (
         <AdminLogin
           open={showAdminLogin}
           onClose={() => setShowAdminLogin(false)}
           onLogin={handleAdminLogin}
         />
-      )}
+      )} */}
     </Box>
   );
 };

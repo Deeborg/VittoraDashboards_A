@@ -15,9 +15,6 @@ import Forex from "./components/Forex";
 import SentimentDashboard from "./components/Sentimentanalysis";
 
 import TrialBalanceAdmin from "./modules/trial-balance/TrialBalanceAdmin";
-import TrialBalanceUser from "./modules/trial-balance/TrialBalanceUser";
-import TrialBalanceHome from "./modules/trial-balance/Pages/HomePage";
-
 import DashboardPortal from "./components/DashboardPortal";
 
 // DASHBOARD ROOTS
@@ -59,9 +56,7 @@ export default function App() {
           <Route path="/bankefficiency" element={<BankEfficiency/>}/>
           <Route path="/forex" element={<Forex />} />
           <Route path="/sentiment" element={<SentimentDashboard />} />
-          <Route path="/trial-balance" element={<TrialBalanceHome />} />
-          <Route path="/trial-balance/admin" element={<TrialBalanceAdmin />} />
-          <Route path="/trial-balance/user" element={<TrialBalanceUser />} />
+          <Route path="/trial-balance" element={<TrialBalanceAdmin />} />
           <Route path="/analytics" element={<DashboardPortal />} />
           <Route path="/analytics/sales/*" element={<SalesRoot />} />
           <Route path="/analytics/exceptions/*" element={<ExceptionRoot />} />
