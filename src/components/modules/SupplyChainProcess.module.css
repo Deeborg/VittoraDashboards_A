@@ -11,6 +11,7 @@
   height: 100vh;       
   overflow-x: auto;
   box-sizing: border-box;
+  margin-top: -80px;
 }
 
 /* Flex container for the horizontal process flow */
