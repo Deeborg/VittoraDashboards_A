@@ -10,11 +10,10 @@ import {
 // ─── Static Data ─────────────────────────────────────────────────────────────
 
 const machineHealth = [
-  { machine: 'CNC-01', status: 'Optimal',  temp: 42, load: 88, uptime: '99.1%', nextPM: '12 days' },
-  { machine: 'CNC-02', status: 'Warning',  temp: 85, load: 95, uptime: '91.4%', nextPM: '2 days'  },
-  { machine: 'ROB-01', status: 'Offline',  temp: 0,  load: 0,  uptime: '0%',    nextPM: 'Overdue'  },
-  { machine: 'ASM-03', status: 'Optimal',  temp: 55, load: 72, uptime: '97.8%', nextPM: '20 days' },
-  { machine: 'WLD-02', status: 'Warning',  temp: 78, load: 89, uptime: '88.2%', nextPM: '4 days'  },
+  { machine: 'SMT Pick-and-Place', status: 'Optimal', temp: 45, load: 88, uptime: '98.5%', nextPM: '10 days' },
+  { machine: 'Reflow Oven', status: 'Warning', temp: 210, load: 92, uptime: '94.1%', nextPM: '3 days' },
+  { machine: 'AOI Scanner', status: 'Offline', temp: 0, load: 0, uptime: '0%', nextPM: 'Overdue' },
+  { machine: 'Wave Soldering', status: 'Optimal', temp: 260, load: 75, uptime: '97.2%', nextPM: '15 days' },
 ];
 
 const capacityUtilization = [
@@ -27,10 +26,10 @@ const capacityUtilization = [
 ];
 
 const productionFlow = [
-  { line: 'Line A', actual: 3950, downtime: 250, target: 4200 },
-  { line: 'Line B', actual: 3800, downtime: 0,   target: 4000 },
-  { line: 'Line C', actual: 4700, downtime: 300, target: 5000 },
-  { line: 'Line D', actual: 2900, downtime: 300, target: 3500 },
+  { line: 'SMT Line', actual: 4200, downtime: 300, target: 4500 },
+  { line: 'PCB Assembly', actual: 3800, downtime: 200, target: 4000 },
+  { line: 'Functional Test', actual: 3400, downtime: 400, target: 3800 },
+  { line: 'Final Assembly', actual: 3600, downtime: 150, target: 3700 },
 ];
 
 const shiftData = [
@@ -41,19 +40,17 @@ const shiftData = [
 const SHIFT_COLORS = ['#10b981', '#f59e0b', '#ef4444'];
 
 const wipOrders = [
-  { id: 'WO-992', prod: 'Engine Component', stage: 'Assembly', prog: 75,  priority: 'High',   due: 'Today'    },
-  { id: 'WO-993', prod: 'Chassis Frame',    stage: 'Welding',  prog: 40,  priority: 'Medium', due: 'May 02'   },
-  { id: 'WO-994', prod: 'Sensor Array',     stage: 'Testing',  prog: 95,  priority: 'High',   due: 'Today'    },
-  { id: 'WO-995', prod: 'Brake Assembly',   stage: 'Machining',prog: 20,  priority: 'Low',    due: 'May 05'   },
-  { id: 'WO-996', prod: 'Drive Shaft',      stage: 'QC Check', prog: 60,  priority: 'Medium', due: 'May 03'   },
+  { id: 'WO-501', prod: 'Smartphone PCB', stage: 'SMT', prog: 70, priority: 'High', due: 'Today' },
+  { id: 'WO-502', prod: 'IoT Sensor Board', stage: 'Testing', prog: 45, priority: 'Medium', due: 'May 04' },
+  { id: 'WO-503', prod: 'Laptop Motherboard', stage: 'Assembly', prog: 90, priority: 'High', due: 'Today' },
 ];
 
 const materialReadiness = [
-  { name: 'Raw Material A',    pct: 82, status: 'OK'       },
-  { name: 'Raw Material B',    pct: 47, status: 'Low'      },
-  { name: 'Specialized Bolts', pct: 91, status: 'OK'       },
-  { name: 'Steel Sheets',      pct: 23, status: 'Critical' },
-  { name: 'Polymer Resin',     pct: 68, status: 'OK'       },
+  { name: 'Microchips', pct: 65, status: 'OK' },
+  { name: 'Capacitors', pct: 40, status: 'Low' },
+  { name: 'Resistors', pct: 85, status: 'OK' },
+  { name: 'PCBs', pct: 25, status: 'Critical' },
+  { name: 'Solder Paste', pct: 70, status: 'OK' },
 ];
 
 const qualityData = [
@@ -65,18 +62,20 @@ const qualityData = [
 ];
 
 const bottleneckData = [
-  { process: 'Machining', taktTime: 4.2, cycleTime: 5.1 },
-  { process: 'Assembly',  taktTime: 4.2, cycleTime: 3.8 },
-  { process: 'Welding',   taktTime: 4.2, cycleTime: 6.3 },
-  { process: 'Testing',   taktTime: 4.2, cycleTime: 2.9 },
-  { process: 'QC',        taktTime: 4.2, cycleTime: 4.0 },
+  { process: 'SMT Line', taktTime: 3.5, cycleTime: 4.2 },
+  { process: 'PCB Assembly', taktTime: 3.5, cycleTime: 3.2 },
+  { process: 'Functional Test', taktTime: 3.5, cycleTime: 5.1 },
+  { process: 'Final Assembly', taktTime: 3.5, cycleTime: 3.6 },
+  { process: 'Quality Control', taktTime: 3.5, cycleTime: 4.0 },
 ];
 
 const laborData = [
-  { dept: 'Machining', allocated: 24, present: 22, efficiency: 88 },
-  { dept: 'Assembly',  allocated: 18, present: 18, efficiency: 94 },
-  { dept: 'Welding',   allocated: 12, present: 10, efficiency: 76 },
-  { dept: 'Testing',   allocated: 8,  present: 8,  efficiency: 97 },
+  { dept: 'SMT Line',         allocated: 26, present: 24, efficiency: 91 },
+  { dept: 'PCB Assembly',     allocated: 18, present: 17, efficiency: 89 },
+  { dept: 'Functional Test',  allocated: 12, present: 10, efficiency: 82 },
+  { dept: 'Final Assembly',   allocated: 14, present: 14, efficiency: 95 },
+  { dept: 'Quality Control',  allocated: 10, present: 8,  efficiency: 78 },
+  { dept: 'Packaging',        allocated: 8,  present: 8,  efficiency: 97 },
 ];
 
 const productionSchedule = [
@@ -87,10 +86,9 @@ const productionSchedule = [
 ];
 
 const alerts = [
-  { type: 'critical', msg: 'ROB-01 offline — Line B capacity reduced by 40%',    time: '08:14 AM' },
-  { type: 'warning',  msg: 'Steel Sheets inventory below reorder point (23%)',     time: '09:02 AM' },
-  { type: 'warning',  msg: 'CNC-02 running at 95% load — overheating risk',        time: '09:45 AM' },
-  { type: 'info',     msg: 'WO-994 Sensor Array approaching completion (95%)',      time: '10:20 AM' },
+  { type: 'critical', msg: 'SMT Pick-and-Place machine offline — PCB production halted', time: '08:10 AM' },
+  { type: 'warning',  msg: 'Capacitor stock below reorder level (40%)', time: '09:50 AM' },
+  { type: 'info',     msg: 'WO-503 Laptop Motherboard nearing completion (90%)', time: '10:15 AM' },
 ];
 
 const ALERT_COLORS: Record<string, string> = {
@@ -181,9 +179,9 @@ const ProductionPlanning: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'schedule' | 'quality' | 'labor'>('overview');
 
   const kpiData = [
-    { title: 'Projected Revenue',   value: '$4.2M', trend: '+8.4%', sub: 'vs last week', data: [10,20,15,25,30,40] },
+    { title: 'Projected Revenue',   value: '$4.2M', trend: '+8.4%', sub: 'vs last month', data: [10,20,15,25,30,40] },
     { title: 'OEE Efficiency',      value: '92.4%', trend: '+2.1%', sub: 'target: 95%',  data: [80,85,82,90,92,92] },
-    { title: 'Planned Downtime',    value: '12 hrs',trend: '-1.5%', sub: 'this week',     data: [50,40,30,25,20,12] },
+    { title: 'Planned Downtime',    value: '12 hrs',trend: '-1.5%', sub: 'this month',     data: [50,40,30,25,20,12] },
     { title: 'Active Work Orders',  value: '482',   trend: '+5.0%', sub: '18 overdue',    data: [300,350,400,420,450,482] },
     { title: 'On-Time Delivery',    value: '87.3%', trend: '-1.2%', sub: 'target: 95%',  data: [92,90,88,89,87,87] },
     { title: 'Defect Rate',         value: '1.9%',  trend: '+0.3%', sub: 'last 5 weeks',  data: [2.1,1.8,2.4,1.6,1.9,1.9] },
@@ -504,7 +502,7 @@ const ProductionPlanning: React.FC = () => {
       {activeTab === 'quality' && (
         <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '20px' }}>
           <div className="chart-card">
-            <h3 className="chart-title">Defect Rate Trend — Rework vs Scrap (5-week)</h3>
+            <h3 className="chart-title">Defect Rate Trend — Rework vs Scrap</h3>
             <div style={{ height: '300px' }}>
               <ResponsiveContainer>
                 <AreaChart data={qualityData}>
@@ -553,11 +551,11 @@ const ProductionPlanning: React.FC = () => {
               <ResponsiveContainer>
                 <BarChart data={laborData} barGap={4}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="dept" />
+                  <XAxis dataKey="dept" interval={0} tick={{ fontSize: 11 }}/>
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="allocated" name="Allocated"  fill="#bfdbfe" radius={[4,4,0,0]} />
+                  <Bar dataKey="allocated" name="Allocated"  fill="#a7ccf8" radius={[4,4,0,0]} />
                   <Bar dataKey="present"   name="Present"    fill="#3b82f6" radius={[4,4,0,0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -596,7 +594,8 @@ const ProductionPlanning: React.FC = () => {
             <div style={{ marginTop: '20px', padding: '14px', background: '#eff6ff', borderRadius: '10px', border: '1px solid #bfdbfe' }}>
               <p style={{ fontSize: '12px', fontWeight: 700, color: '#1d4ed8', marginBottom: '4px' }}>📌 Action Required</p>
               <p style={{ fontSize: '12px', color: '#334155', margin: 0 }}>
-                ROB-01 offline reduces Welding headcount need — redeploy 2 workers to Assembly to recover WO-992 schedule.
+                    Functional Testing understaffed (10/12 present) and efficiency dropped to 82% — production backlog increasing. 
+                    Reassign 2 operators from Packaging to Testing to prevent shipment delays.
               </p>
             </div>
           </div>

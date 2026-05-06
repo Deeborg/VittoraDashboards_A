@@ -65,53 +65,132 @@ interface POInsight {
 
 const PRICING_TIERS: PricingTier[] = [
   {
-    id: 'SKU-PRO',   name: 'Pro Suite',          currentPrice: 299,  aiOptimalPrice: 349,
-    elasticity: -0.6, margin: 68, volume: 1240, competitors: 320,
-    recommendation: 'Increase', revenueImpact: 52000,
+    id: 'SKU-MOB-01',
+    name: 'Apple iPhone 14 (128GB)',
+    currentPrice: 70000,
+    aiOptimalPrice: 75000,
+    elasticity: -0.5,
+    margin: 32,
+    volume: 980,
+    competitors: 73000,
+    recommendation: 'Increase',
+    revenueImpact: 8500000,
   },
   {
-    id: 'SKU-ENT',   name: 'Enterprise Platform', currentPrice: 1299, aiOptimalPrice: 1199,
-    elasticity: -1.4, margin: 72, volume: 186,  competitors: 1150,
-    recommendation: 'Decrease', revenueImpact: 28000,
+    id: 'SKU-MOB-02',
+    name: 'Redmi Note 12',
+    currentPrice: 15000,
+    aiOptimalPrice: 14500,
+    elasticity: -2.2,
+    margin: 18,
+    volume: 4200,
+    competitors: 14000,
+    recommendation: 'Decrease',
+    revenueImpact: 3200000,
   },
   {
-    id: 'SKU-STR',   name: 'Starter Pack',        currentPrice: 79,   aiOptimalPrice: 79,
-    elasticity: -2.1, margin: 44, volume: 3820, competitors: 85,
-    recommendation: 'Hold',     revenueImpact: 0,
+    id: 'SKU-LAP-01',
+    name: 'Dell Inspiron 15',
+    currentPrice: 60000,
+    aiOptimalPrice: 62000,
+    elasticity: -0.9,
+    margin: 28,
+    volume: 760,
+    competitors: 61000,
+    recommendation: 'Increase',
+    revenueImpact: 4100000,
   },
   {
-    id: 'SKU-ADV',   name: 'Advanced Analytics',  currentPrice: 599,  aiOptimalPrice: 699,
-    elasticity: -0.4, margin: 81, volume: 420,  competitors: 650,
-    recommendation: 'Increase', revenueImpact: 38000,
+    id: 'SKU-TV-01',
+    name: 'Sony Bravia 55" Smart TV',
+    currentPrice: 85000,
+    aiOptimalPrice: 85000,
+    elasticity: -1.8,
+    margin: 22,
+    volume: 540,
+    competitors: 83000,
+    recommendation: 'Hold',
+    revenueImpact: 0,
   },
   {
-    id: 'SKU-CON',   name: 'Connector Add-on',    currentPrice: 149,  aiOptimalPrice: 189,
-    elasticity: -0.8, margin: 76, volume: 890,  competitors: 175,
-    recommendation: 'Increase', revenueImpact: 31000,
+    id: 'SKU-ACC-01',
+    name: 'Boat Rockerz 450 Headphones',
+    currentPrice: 2000,
+    aiOptimalPrice: 2200,
+    elasticity: -1.1,
+    margin: 35,
+    volume: 5200,
+    competitors: 2100,
+    recommendation: 'Increase',
+    revenueImpact: 1800000,
   },
   {
-    id: 'SKU-SUP',   name: 'Premium Support',     currentPrice: 249,  aiOptimalPrice: 299,
-    elasticity: -0.3, margin: 88, volume: 310,  competitors: 280,
-    recommendation: 'Bundle',   revenueImpact: 18000,
+    id: 'SKU-ACC-02',
+    name: 'JBL Tune 510BT + Warranty Bundle',
+    currentPrice: 4000,
+    aiOptimalPrice: 4500,
+    elasticity: -0.6,
+    margin: 42,
+    volume: 1900,
+    competitors: 4200,
+    recommendation: 'Bundle',
+    revenueImpact: 2600000,
   },
 ];
 
 const COMPETITOR_PRICES: CompetitorPrice[] = [
-  { product: 'Pro Suite',          ourPrice: 299,  compA: 320, compB: 289, compC: 349, position: 'Below'   },
-  { product: 'Enterprise Platform',ourPrice: 1299, compA: 1150,compB: 1399,compC: 1249,position: 'Premium'  },
-  { product: 'Starter Pack',       ourPrice: 79,   compA: 85,  compB: 79,  compC: 99,  position: 'Parity'   },
-  { product: 'Advanced Analytics', ourPrice: 599,  compA: 650, compB: 580, compC: 699, position: 'Below'    },
+  {
+    product: 'Apple iPhone 14 (128GB)',
+    ourPrice: 70000,
+    compA: 73000,   // Samsung Store / Premium reseller
+    compB: 69000,   // Amazon
+    compC: 72000,   // Flipkart
+    position: 'Below'
+  },
+  {
+    product: 'Redmi Note 12',
+    ourPrice: 15000,
+    compA: 14000,
+    compB: 15500,
+    compC: 14800,
+    position: 'Premium'
+  },
+  {
+    product: 'Dell Inspiron 15',
+    ourPrice: 60000,
+    compA: 61000,
+    compB: 59000,
+    compC: 60500,
+    position: 'Parity'
+  },
+  {
+    product: 'Sony Bravia 55" Smart TV',
+    ourPrice: 85000,
+    compA: 83000,
+    compB: 87000,
+    compC: 86000,
+    position: 'Premium'
+  },
+  {
+    product: 'Boat Rockerz 450 Headphones',
+    ourPrice: 2000,
+    compA: 2100,
+    compB: 1950,
+    compC: 2050,
+    position: 'Parity'
+  },
 ];
 
 const MARGIN_TREND = [
-  { month: "Jan '24", gross: 62, net: 38, target: 70 },
-  { month: "Feb '24", gross: 64, net: 40, target: 70 },
-  { month: "Mar '24", gross: 63, net: 39, target: 70 },
-  { month: "Apr '24", gross: 67, net: 42, target: 70 },
-  { month: "May '24", gross: 69, net: 44, target: 70 },
-  { month: "Jun '24", gross: 71, net: 46, target: 70 },
-  { month: "Jul '24", gross: 70, net: 45, target: 70 },
-  { month: "Aug '24", gross: 73, net: 48, target: 70 },
+  { month: "Aug '25", gross: 62, net: 38, target: 70 },
+  { month: "Sep '25", gross: 64, net: 40, target: 70 },
+  { month: "Oct '25", gross: 66, net: 41, target: 70 },
+  { month: "Nov '25", gross: 68, net: 43, target: 70 },
+  { month: "Dec '25", gross: 70, net: 45, target: 70 },
+  { month: "Jan '26", gross: 72, net: 47, target: 70 },
+  { month: "Feb '26", gross: 71, net: 46, target: 70 },
+  { month: "Mar '26", gross: 73, net: 48, target: 70 },
+  { month: "Apr '26", gross: 75, net: 50, target: 70 },
 ];
 
 const ELASTICITY_DATA = [
@@ -131,14 +210,15 @@ const DISCOUNT_DATA = [
 ];
 
 const REVENUE_WATERFALL = [
-  { label: 'Current ARR',   value: 6320, type: 'base'   },
-  { label: 'Pro Suite ↑',   value: 52,   type: 'gain'   },
-  { label: 'Adv Analytics ↑',value: 38,  type: 'gain'   },
-  { label: 'Connector ↑',   value: 31,   type: 'gain'   },
-  { label: 'Support bundle', value: 18,  type: 'gain'   },
-  { label: 'Ent Platform ↓',value: -28,  type: 'loss'   },
-  { label: 'Churn risk',    value: -14,  type: 'loss'   },
-  { label: 'Optimised ARR', value: 6417, type: 'total'  },
+  { label: 'Current Revenue',            value: 6320, type: 'base'  },
+
+  { label: 'iPhone 14 Price ↑',          value: 85,   type: 'gain'  },
+  { label: 'Laptop Price Optimisation',  value: 41,   type: 'gain'  },
+  { label: 'Accessories Price ↑',        value: 18,   type: 'gain'  },
+  { label: 'Warranty Bundle Sales',      value: 26,   type: 'gain'  },
+  { label: 'Redmi Price ↓',              value: -32,  type: 'loss'  },
+  { label: 'Post-season Demand Drop',    value: -14,  type: 'loss'  },
+  { label: 'Optimised Revenue',          value: 6444, type: 'total' },
 ];
 
 const RADAR_DATA = [
@@ -160,38 +240,38 @@ const STRATEGY_CONFIG: Record<PriceStrategy, { label: string; revMult: number; m
 const PO_INSIGHTS: POInsight[] = [
   {
     type: 'ok',
-    title: 'Pro Suite underpriced by 17% vs market — raise to $349',
-    desc: 'Elasticity of −0.6 means a 17% price increase causes only ~10% volume loss. Net revenue impact: +$52K ARR.',
-    impact: '+$52K ARR',
-    action: 'Update Pro Suite list price to $349 from next billing cycle',
+    title: 'iPhone 14 underpriced vs market — increase price to ₹75,000',
+    desc: 'Elasticity of −0.5 shows low price sensitivity. A 7% price increase will reduce demand slightly but increase overall revenue significantly.',
+    impact: '+₹85L revenue',
+    action: 'Increase iPhone 14 price gradually across online and retail channels',
   },
   {
     type: 'ok',
-    title: 'Advanced Analytics has inelastic demand — raise to $699',
-    desc: 'Elasticity of −0.4 is the lowest in the portfolio. Customers are price-insensitive here; $100 increase loses <4% volume.',
-    impact: '+$38K ARR',
-    action: 'Pilot price increase with new customers first, then migrate existing',
+    title: 'Dell Inspiron demand is stable — optimise price to ₹62,000',
+    desc: 'Moderate elasticity (−0.9) indicates controlled demand impact. Slight price increase improves margin without affecting sales significantly.',
+    impact: '+₹41L revenue',
+    action: 'Apply price optimisation for mid-range laptops',
   },
   {
     type: 'warn',
-    title: 'Enterprise Platform overpriced vs Competitor A by $149',
-    desc: 'At $1,299 you are $149 above the category leader. Win rate in this segment is 12pp below SMB. Price reduction or enhanced bundling is recommended.',
-    impact: 'Win rate risk: −12pp',
-    action: 'Reduce to $1,199 or add 3 months free onboarding to justify premium',
+    title: 'Redmi Note 12 overpriced vs competitors',
+    desc: 'High elasticity (−2.2) means customers are highly price-sensitive. Current price is above competitors, causing volume drop.',
+    impact: 'Sales drop risk: −15%',
+    action: 'Reduce price to ₹14,500 to regain market share',
   },
   {
     type: 'danger',
-    title: 'Discounts >30% destroying margin — 64 deals at 28% avg margin',
-    desc: '64 deals closed with 30%+ discounts this quarter. Average margin is 28% — below the 40% floor. Sales is over-discounting to hit volume targets.',
-    impact: 'Margin erosion: −$84K',
-    action: 'Enforce discount approval above 20% through deal desk',
+    title: 'High discounting (>25%) impacting margins in accessories',
+    desc: 'Frequent discounting on headphones and accessories is reducing margins below 30%.',
+    impact: 'Margin loss: −₹30L',
+    action: 'Limit discounts to below 20% and introduce bundle offers instead',
   },
   {
     type: 'info',
-    title: 'Premium Support is a bundle opportunity — not standalone',
-    desc: 'Standalone win rate for Premium Support is 34%. When bundled with Enterprise Platform, attach rate is 78% and margin improves to 91%.',
-    impact: '+$18K ARR via bundling',
-    action: 'Add Premium Support to Enterprise Platform as default bundle',
+    title: 'Warranty bundle increasing attach rate significantly',
+    desc: 'Customers buying headphones and TVs are opting for extended warranty bundles, improving overall profitability.',
+    impact: '+₹26L revenue',
+    action: 'Promote bundle offers at checkout and retail stores',
   },
 ];
 
@@ -303,7 +383,7 @@ const PricingOptimization: React.FC = () => {
         <div className="df-header-center">
           <div className="po-module-tag">Commercial & pricing excellence</div>
           <h1>Pricing optimisation</h1>
-          <p className="df-header-sub">AI-driven price intelligence · margin management · competitive positioning</p>
+          {/* <p className="df-header-sub">AI-driven price intelligence · margin management · competitive positioning</p> */}
         </div>
         <div className="df-header-right">
           <span className="status-badge" style={{ background: '#fef3c7', color: '#92400e' }}>● 6 price actions pending</span>
@@ -531,7 +611,7 @@ const PricingOptimization: React.FC = () => {
       {/* ── Margin trend + Elasticity curve ── */}
       <div className="df-grid-2">
         <div className="chart-card">
-          <h3 className="chart-title">Gross & net margin trend — 8 months</h3>
+          <h3 className="chart-title">Gross & net margin trend</h3>
           <p className="df-chart-desc">
             Gross margin above target (70%) means pricing is healthy. When gross and net diverge, check
             for rising COGS or discount over-use in the same period.

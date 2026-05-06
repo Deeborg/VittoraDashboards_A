@@ -35,6 +35,7 @@ import InventoryManagement from "./components/Dashboards/Forecast/InventoryManag
 import CustomerIntelligence from "./components/Dashboards/commercial/CustomerIntelligence";
 import PricingOptimization from "./components/Dashboards/commercial/PricingOptimization";
 import DiscountStrategy from "./components/Dashboards/commercial/DiscountStategy";
+import PromotionAnalyticsDashboard from "./components/Dashboards/commercial/Promotionanalyticsdashboard";
 import { ThemeProvider, createTheme } from "@mui/material";
 
 const theme = createTheme({
@@ -77,6 +78,7 @@ export default function App() {
          <Route path="/analytics/customer-intelligence" element={<CustomerIntelligence />} />
          <Route path="/analytics/pricing-optimization" element={<PricingOptimization />} />
          <Route path="/analytics/discount-strategy" element={<DiscountStrategy />} />
+         <Route path="/analytics/promotion-analytics" element={<PromotionAnalyticsDashboard />} />
 
 
           {/* Add more routes as needed */}

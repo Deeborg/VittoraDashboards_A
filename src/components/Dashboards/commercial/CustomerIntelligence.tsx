@@ -240,15 +240,177 @@ const KPI = [
   { lbl:"NPS Score",           val:"74",        delta:"+6 pts", dir:"up", sub:"satisfaction index",cls:"c-amber"  },
 ];
 
-const SEGS = ["All","HNI","Retail","SME","Corporate","NRI","New (<6m)"];
+const SEGS = [
+  "All",
+  "Retail Consumers",
+  "Online Buyers",
+  "Enterprise / B2B Clients",
+  "Distributors & Dealers",
+  "Service & Warranty Customers"
+];
 
 const CUSTOMERS = [
-  { id:"CIF001248", name:"Rajesh Mehta",       seg:"HNI",       aum:"₹4.2 Cr", prod:7, hs:92, risk:"l", trend:[60,70,75,80,92], ava:"#2554F4" },
-  { id:"CIF003901", name:"Priya Nair",          seg:"Corporate", aum:"₹8.8 Cr", prod:5, hs:85, risk:"l", trend:[50,60,70,78,85], ava:"#09BEAA" },
-  { id:"CIF002210", name:"Arjun Finance Ltd.",  seg:"SME",       aum:"₹1.1 Cr", prod:3, hs:58, risk:"m", trend:[75,70,65,60,58], ava:"#7C3AED" },
-  { id:"CIF007744", name:"Sudhir Kumar",        seg:"Retail",    aum:"₹42 L",   prod:2, hs:34, risk:"h", trend:[60,55,45,40,34], ava:"#EF4444" },
-  { id:"CIF005520", name:"Nalini Investments",  seg:"HNI",       aum:"₹3.3 Cr", prod:6, hs:78, risk:"l", trend:[60,65,70,74,78], ava:"#F59E0B" },
-  { id:"CIF009010", name:"Kiran Deshpande",     seg:"NRI",       aum:"₹2.1 Cr", prod:4, hs:65, risk:"m", trend:[80,75,70,67,65], ava:"#EC4899" },
+  {
+    id: "CUST001",
+    name: "Rahul Sharma",
+    seg: "Retail Consumers",
+    spend: "₹1.8 L",
+    products: 6,
+    freq: "Monthly",
+    hs: 91,
+    risk: "l",
+    trend: [50, 65, 75, 85, 91],
+    category: "Smartphones",
+    ava: "#2554F4",
+
+    riskProfile: {
+      churn: "12%",
+      fraud: "Low",
+      channel: "Mobile App",
+      tickets: 1
+    },
+
+    activity: [
+      { txt:"Purchased smartphone — ₹45,000", time:"Today, 11:20 AM", cls:"green" },
+      { txt:"Viewed accessories section", time:"Yesterday, 6:10 PM", cls:"blue" },
+      { txt:"Added item to cart", time:"Apr 25", cls:"amber" }
+    ]
+  },
+
+  {
+    id: "CUST002",
+    name: "Priya Nair",
+    seg: "Online Buyers",
+    spend: "₹95 K",
+    products: 4,
+    freq: "Bi-Monthly",
+    hs: 82,
+    risk: "l",
+    trend: [60, 70, 78, 80, 82],
+    category: "Accessories",
+    ava: "#09BEAA",
+
+    riskProfile: {
+      churn: "18%",
+      fraud: "Low",
+      channel: "Website",
+      tickets: 0
+    },
+
+    activity: [
+      { txt:"Purchased headphones — ₹8,000", time:"Today, 9:30 AM", cls:"green" },
+      { txt:"Browsed Bluetooth speakers", time:"Yesterday", cls:"blue" },
+      { txt:"Wishlist updated", time:"Apr 20", cls:"amber" }
+    ]
+  },
+
+  {
+    id: "CUST003",
+    name: "Tech Solutions Pvt Ltd",
+    seg: "Enterprise / B2B Clients",
+    spend: "₹14.5 L",
+    products: 15,
+    freq: "Quarterly",
+    hs: 68,
+    risk: "m",
+    trend: [75, 72, 70, 69, 68],
+    category: "Laptops & Servers",
+    ava: "#7C3AED",
+
+    riskProfile: {
+      churn: "42%",
+      fraud: "Low",
+      channel: "Direct Sales",
+      tickets: 2
+    },
+
+    activity: [
+      { txt:"Bulk order — 25 laptops", time:"Apr 15", cls:"green" },
+      { txt:"Requested quotation for servers", time:"Apr 10", cls:"blue" },
+      { txt:"Delayed payment alert", time:"Apr 2", cls:"amber" }
+    ]
+  },
+
+  {
+    id: "CUST004",
+    name: "City Electronics",
+    seg: "Distributors & Dealers",
+    spend: "₹32 L",
+    products: 40,
+    freq: "Weekly",
+    hs: 88,
+    risk: "l",
+    trend: [70, 78, 82, 85, 88],
+    category: "Multi-category",
+    ava: "#F59E0B",
+
+    riskProfile: {
+      churn: "15%",
+      fraud: "Low",
+      channel: "Distributor Portal",
+      tickets: 1
+    },
+
+    activity: [
+      { txt:"Restocked inventory — ₹5 L", time:"Today", cls:"green" },
+      { txt:"Bulk purchase — accessories", time:"Yesterday", cls:"blue" },
+      { txt:"Payment cleared", time:"Apr 22", cls:"green" }
+    ]
+  },
+
+  {
+    id: "CUST005",
+    name: "Amit Verma",
+    seg: "Retail Consumers",
+    spend: "₹45 K",
+    products: 2,
+    freq: "Occasional",
+    hs: 42,
+    risk: "h",
+    trend: [65, 55, 50, 45, 42],
+    category: "Home Appliances",
+    ava: "#EF4444",
+
+    riskProfile: {
+      churn: "78%",
+      fraud: "Medium",
+      channel: "Offline Store",
+      tickets: 3
+    },
+
+    activity: [
+      { txt:"No purchase in last 60 days", time:"--", cls:"red" },
+      { txt:"Complaint — delayed delivery", time:"Apr 18", cls:"amber" },
+      { txt:"Last purchase — mixer grinder", time:"Mar 2", cls:"blue" }
+    ]
+  },
+
+  {
+    id: "CUST006",
+    name: "Service Hub Bangalore",
+    seg: "Service & Warranty Customers",
+    spend: "₹2.5 L",
+    products: 8,
+    freq: "Monthly",
+    hs: 63,
+    risk: "m",
+    trend: [80, 75, 70, 66, 63],
+    category: "Repairs & Warranty",
+    ava: "#EC4899",
+
+    riskProfile: {
+      churn: "35%",
+      fraud: "Low",
+      channel: "Service Center",
+      tickets: 5
+    },
+
+    activity: [
+      { txt:"Repaired 12 devices", time:"Today", cls:"green" },
+      { txt:"Warranty claim processed", time:"Yesterday", cls:"blue" },
+      { txt:"Pending service request", time:"Apr 21", cls:"amber" }
+    ]
+  }
 ];
 
 const LIFECYCLE = [
@@ -260,28 +422,97 @@ const LIFECYCLE = [
 ];
 
 const AFFINITY = [
-  { prod:"Fixed Deposits", pct:82, color:"#2554F4" },
-  { prod:"Mutual Funds",   pct:68, color:"#09BEAA" },
-  { prod:"Insurance",      pct:54, color:"#7C3AED" },
-  { prod:"SIP",            pct:72, color:"#F59E0B" },
-  { prod:"Loans",          pct:39, color:"#EF4444" },
-  { prod:"NPS",            pct:28, color:"#EC4899" },
+  { prod:"Mobile Accessories", pct:78, color:"#2554F4" },
+  { prod:"Extended Warranty", pct:65, color:"#09BEAA" },
+  { prod:"Laptop Accessories", pct:72, color:"#7C3AED" },
+  { prod:"Smart Home Devices", pct:48, color:"#F59E0B" },
+  { prod:"Gaming Accessories", pct:55, color:"#EF4444" },
+  { prod:"Software Subscriptions", pct:38, color:"#EC4899" },
 ];
 
 const INSIGHTS = [
-  { type:"opp",  ico:"💡", t:"SIP Upsell — 2,340 customers",      b:"Retail customers with 12+ month FD maturity, age 30–45, show 74% SIP conversion probability."  },
-  { type:"warn", ico:"⚠️", t:"Dormancy alert — Q3 spike",          b:"283 HNI customers inactive 60+ days. Likely competing bank offers. Schedule RM outreach."       },
-  { type:"alrt", ico:"🔔", t:"Churn risk — 1,248 flagged",         b:"Top risk: SME customers with missed EMIs and no product diversification. Immediate action needed." },
-  { type:"info", ico:"📊", t:"Cross-sell signal — Insurance",       b:"Customers with loans + FDs but no insurance show 61% cross-sell readiness. Bundle offer advised." },
+  {
+    type: "opp",
+    ico: "💡",
+    t: "Accessory Bundle Opportunity — 4,820 customers",
+    b: "Customers purchasing smartphones show 78% likelihood of buying accessories within 5 days. Recommend bundle offers."
+  },
+  {
+    type: "warn",
+    ico: "⚠️",
+    t: "Cart Abandonment Spike — 12%",
+    b: "High drop-off observed at checkout for mid-range laptops. Possible pricing or payment friction."
+  },
+  {
+    type: "alrt",
+    ico: "🔔",
+    t: "Churn Risk — 1,120 inactive users",
+    b: "Customers inactive for 60+ days after purchase. Re-engagement campaigns required."
+  },
+  {
+    type: "info",
+    ico: "📊",
+    t: "Smart Device Trend Rising",
+    b: "Smart home devices demand increased by 22% in last 2 months. Inventory planning recommended."
+  }
 ];
 
 const SEGS_DETAIL = [
-  { name:"HNI Investors",  cnt:8690,  aum:"₹1,820 Cr", act:"Wealth review + NPS",    opp:"₹240 Cr",  color:"#2554F4" },
-  { name:"Retail Mass",    cnt:20280, aum:"₹320 Cr",   act:"SIP + Insurance push",   opp:"₹48 Cr",   color:"#09BEAA" },
-  { name:"SME Business",   cnt:10620, aum:"₹640 Cr",   act:"Working capital loan",   opp:"₹120 Cr",  color:"#7C3AED" },
-  { name:"Corporate",      cnt:5320,  aum:"₹2,400 Cr", act:"Treasury + Trade finance",opp:"₹380 Cr", color:"#F59E0B" },
-  { name:"NRI Segment",    cnt:3380,  aum:"₹480 Cr",   act:"Remittance + NRE FD",    opp:"₹95 Cr",   color:"#EF4444" },
+  {
+    name: "Retail Consumers",
+    cnt: 24500,
+    revenue: "₹52 Cr",
+    act: "Run promotional campaigns & bundle offers",
+    opp: "₹10 Cr",
+    color: "#2554F4"
+  },
+  {
+    name: "Online Buyers (E-commerce)",
+    cnt: 18200,
+    revenue: "₹38 Cr",
+    act: "Improve recommendations & checkout experience",
+    opp: "₹8 Cr",
+    color: "#09BEAA"
+  },
+  {
+    name: "Enterprise / B2B Clients",
+    cnt: 4200,
+    revenue: "₹72 Cr",
+    act: "Offer bulk pricing & annual contracts",
+    opp: "₹18 Cr",
+    color: "#7C3AED"
+  },
+  {
+    name: "Distributors & Dealers",
+    cnt: 2600,
+    revenue: "₹95 Cr",
+    act: "Optimize supply chain & inventory allocation",
+    opp: "₹22 Cr",
+    color: "#F59E0B"
+  },
+  {
+    name: "Service & Warranty Customers",
+    cnt: 9800,
+    revenue: "₹14 Cr",
+    act: "Upsell extended warranty & repair services",
+    opp: "₹5 Cr",
+    color: "#EF4444"
+  }
 ];
+
+const getRiskReason = (c: { hs: number; freq: string; risk: string; }) => {
+  if (c.hs < 50) return "No recent purchases / inactivity";
+  if (c.freq === "Occasional") return "Low purchase frequency";
+  if (c.risk === "m") return "Declining engagement trend";
+  return "Moderate activity drop";
+};
+
+const getAction = (c: { hs: number; seg: string; }) => {
+  if (c.hs < 50) return "Send discount / reactivation offer";
+  if (c.seg === "Enterprise / B2B Clients") return "Assign sales manager follow-up";
+  if (c.seg === "Retail Consumers") return "Push personalized offers";
+  return "Monitor closely";
+};
 
 const CHURN_FACTORS = [
   { lbl:"No product activity 60+ days",    w:34, color:"#EF4444" },
@@ -308,11 +539,12 @@ const TIMELINE = [
 ];
 
 const PIE_DATA = [
-  { lbl:"HNI",       val:18, color:"#2554F4" },
-  { lbl:"Retail",    val:42, color:"#09BEAA" },
-  { lbl:"SME",       val:22, color:"#7C3AED" },
-  { lbl:"Corporate", val:11, color:"#F59E0B" },
-  { lbl:"NRI",       val:7,  color:"#EF4444" },
+  { lbl:"Retail Consumers", val:45, color:"#2554F4" },
+  { lbl:"Online Shoppers", val:20, color:"#09BEAA" },
+  { lbl:"Enterprise Buyers", val:12, color:"#7C3AED" },
+  { lbl:"Distributors & Dealers", val:10, color:"#F59E0B" },
+  { lbl:"Service & Repair Customers", val:8, color:"#EF4444" },
+  { lbl:"Bulk / Institutional", val:5, color:"#EC4899" },
 ];
 
 /* ─── HELPERS ───────────────────────────────────────────────────────────────── */
@@ -370,7 +602,7 @@ function AISummary() {
       <div>
         <div className="ci-ai-tag">AI Intelligence Summary</div>
         <div className="ci-ai-txt">
-          <strong>Top action this week:</strong> 2,340 retail customers match the SIP upsell profile. HNI segment revenue potential has grown by ₹12.4 Cr. Churn risk in SME is elevated — 483 accounts need RM attention before month-end. Cross-sell readiness for insurance is at a 6-month high.
+          <strong>Top action this week:</strong>3,120 customers who purchased mid-range smartphones in the last 8–12 months show high probability for upgrade to 5G devices. Premium segment revenue potential has increased by ₹8.6 Cr driven by rising demand for smart TVs and gaming laptops. Customer churn risk is elevated in the accessories category — 1,050 customers have not made repeat purchases in 90+ days. Cross-sell opportunities are strong for bundled products (smartphones + earbuds + extended warranty), with a 67% conversion likelihood.
         </div>
       </div>
     </div>
@@ -382,17 +614,97 @@ function EngagementRow({ scriptLoaded }: { scriptLoaded: boolean }) {
   const trendRef = useRef<HTMLCanvasElement>(null);
   const pieRef   = useRef<HTMLCanvasElement>(null);
 
-  useChart(trendRef, ()=>({
-    type:"line",
-    data:{
-      labels:["Oct","Nov","Dec","Jan","Feb","Mar"],
-      datasets:[
-        {label:"Transactions", data:[120,145,160,138,175,190], borderColor:"#2554F4", backgroundColor:"#2554F418", fill:true, tension:.4, pointRadius:3, borderWidth:2},
-        {label:"Digital Logins",data:[80,95,105,88,112,130],  borderColor:"#09BEAA", backgroundColor:"#09BEAA18", fill:true, tension:.4, pointRadius:3, borderWidth:2},
-      ]
+useChart(trendRef, () => ({
+  type: "line",
+  data: {
+    labels: [
+      "2025-Aug","2025-Sep","2025-Oct","2025-Nov","2025-Dec",
+      "2026-Jan","2026-Feb","2026-Mar","2026-Apr"
+    ],
+    datasets: [
+      {
+        label: "Transactions",
+        data: [120,145,160,138,175,190,183,149,164],
+        borderColor: "#2554F4",
+        backgroundColor: "#2554F418",
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        borderWidth: 2,
+      },
+      {
+        label: "Digital Logins",
+        data: [80,95,105,88,112,130,121,98,110],
+        borderColor: "#09BEAA",
+        backgroundColor: "#09BEAA18",
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        borderWidth: 2,
+      }
+    ]
+  },
+
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    // ✅ IMPORTANT FIX (interaction improves tooltip behavior)
+    interaction: {
+      mode: "index",
+      intersect: false
     },
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:"rgba(0,0,0,0.04)"},ticks:{font:{size:11}}},y:{grid:{color:"rgba(0,0,0,0.04)"},ticks:{font:{size:11}}}}}
-  }), scriptLoaded);
+
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+        labels: {
+          color: "#464D72",
+          font: {
+            size: 12,
+            weight: "500"
+          },
+          usePointStyle: true,
+          pointStyle: "circle",
+          padding: 15
+        }
+      },
+
+      tooltip: {
+        enabled: true,
+        backgroundColor: "#13172A",
+        titleColor: "#fff",
+        bodyColor: "#fff",
+        padding: 10,
+        cornerRadius: 8,
+        displayColors: true,
+        callbacks: {
+          title: (context: { label: any; }[]) => `Month: ${context[0].label}`,
+          label: (context: { dataset: { label: any; }; raw: any; }) => `${context.dataset.label}: ${context.raw}`
+        }
+      }
+    },
+
+    scales: {
+      x: {
+        grid: { color: "rgba(0,0,0,0.04)" },
+        ticks: {
+          font: { size: 11 },
+          color: "#8A91B2"
+        }
+      },
+      y: {
+        grid: { color: "rgba(0,0,0,0.04)" },
+        ticks: {
+          font: { size: 11 },
+          color: "#8A91B2"
+        }
+      }
+    }
+  }
+}), scriptLoaded);
+
 
   useChart(pieRef, ()=>({
     type:"doughnut",
@@ -508,8 +820,8 @@ function CustomerList({ onSelect, selected }: { onSelect: (customer: typeof CUST
       <table className="tbl">
         <thead>
           <tr>
-            <th>CIF ID</th><th>Customer</th><th>Segment</th><th>AUM</th>
-            <th>Products</th><th>Health Score</th><th>Risk</th><th>Trend</th><th>Action</th>
+            <th>CIF ID</th><th>Customer</th><th>Segment</th><th>Spend</th>
+            <th>Products</th><th>Score</th><th>Risk</th><th>Trend</th><th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -518,8 +830,8 @@ function CustomerList({ onSelect, selected }: { onSelect: (customer: typeof CUST
               <td><span style={{fontFamily:"monospace",fontSize:11,color:"var(--muted)"}}>{c.id}</span></td>
               <td><strong style={{fontWeight:500}}>{c.name}</strong></td>
               <td><span className="seg-tag">{c.seg}</span></td>
-              <td style={{fontWeight:500}}>{c.aum}</td>
-              <td style={{textAlign:"center"}}>{c.prod}</td>
+              <td style={{fontWeight:500}}>{c.spend}</td>
+              <td style={{textAlign:"center"}}>{c.products}</td>
               <td>
                 <div style={{display:"flex",alignItems:"center",gap:8}}>
                   <span style={{fontWeight:700,fontSize:14,color:hColor(c.hs),minWidth:26}}>{c.hs}</span>
@@ -565,26 +877,36 @@ function Profile360({ customer }: { customer: typeof CUSTOMERS[number] | null })
               <div className="hs-l">Health</div>
             </div>
           </div>
-          {[["AUM",c.aum],["Products",c.prod],["Segment",c.seg],["RM","Asha Verma"]].map(([k,v])=>(
+          {[["Spend",c.spend],["Products",c.products],["Segment",c.seg],["Frequency",c.freq],["RM", "Asha Verma"]].map(([k,v])=>(
             <div className="attr-r" key={k}><span className="attr-k">{k}</span><span className="attr-v">{v}</span></div>
           ))}
         </div>
         <div className="ci-card">
           <div className="ct"><span className="ico" style={{background:"#FEF2F2"}}>⚡</span> Risk & Behaviour</div>
-           {[["Churn Prob.", "35%"], ["Fraud Risk", "Low"], ["Digital Channel", "Mobile App"], ["Support Tks", "2"]].map(([k,v])=>(
-            <div className="attr-r" key={k}><span className="attr-k">{k}</span><span className="attr-v">{v}</span></div>
-          ))}
+           {[
+  ["Churn Probability", c.riskProfile.churn],
+  ["Fraud Risk", c.riskProfile.fraud],
+  ["Purchase Channel", c.riskProfile.channel],
+  ["Support Tickets", c.riskProfile.tickets]
+].map(([k,v]) => (
+  <div className="attr-r" key={k}>
+    <span className="attr-k">{k}</span>
+    <span className="attr-v">{v}</span>
+  </div>
+))}
         </div>
         <div className="ci-card">
           <div className="ct"><span className="ico" style={{background:"#F3F0FF"}}>🕐</span> Recent Activity</div>
           <div className="tl">
-            {TIMELINE.slice(0,3).map((t,i)=>(
-              <div className="tl-item" key={i}>
-                <div className={`tl-dot ${t.cls}`}></div>
-                <div style={{fontWeight:500,color:"var(--txt)"}}>{t.txt}</div>
-                <div className="tl-time">{t.time}</div>
-              </div>
-            ))}
+            {c.activity.map((t, i) => (
+  <div className="tl-item" key={i}>
+    <div className={`tl-dot ${t.cls}`}></div>
+    <div style={{fontWeight:500,color:"var(--txt)"}}>
+      {t.txt}
+    </div>
+    <div className="tl-time">{t.time}</div>
+  </div>
+))}
           </div>
         </div>
       </div>
@@ -599,7 +921,7 @@ function Segmentation() {
         <div className="seg-card" key={s.name} style={{borderTopColor:s.color}}>
           <div className="seg-n">{s.name}</div>
           <div className="seg-cnt">{s.cnt.toLocaleString()} customers</div>
-          <div className="seg-aum" style={{background:s.color+"1E",color:s.color, marginTop:10}}>{s.aum}</div>
+          <div className="seg-aum" style={{background:s.color+"1E",color:s.color, marginTop:10}}>{s.revenue}</div>
         </div>
       ))}
     </div>
@@ -607,22 +929,65 @@ function Segmentation() {
 }
 
 function ChurnRisk() {
-  const atRisk = CUSTOMERS.filter(c=>c.hs<70);
+  const atRisk = CUSTOMERS.filter(c => c.hs < 70 || c.risk === "h");
+
+  const getRiskReason = (c: { id?: string; name?: string; seg?: string; spend?: string; products?: number; freq: any; hs: any; risk: any; trend?: number[]; category?: string; ava?: string; riskProfile?: { churn: string; fraud: string; channel: string; tickets: number; }; activity?: { txt: string; time: string; cls: string; }[]; }) => {
+    if (c.hs < 50) return "No recent purchases / inactivity";
+    if (c.freq === "Occasional") return "Low purchase frequency";
+    if (c.risk === "m") return "Declining engagement trend";
+    return "Moderate activity drop";
+  };
+
+  const getAction = (c: { id?: string; name?: string; seg: any; spend?: string; products?: number; freq?: string; hs: any; risk?: string; trend?: number[]; category?: string; ava?: string; riskProfile?: { churn: string; fraud: string; channel: string; tickets: number; }; activity?: { txt: string; time: string; cls: string; }[]; }) => {
+    if (c.hs < 50) return "Send discount / reactivation offer";
+    if (c.seg === "Enterprise / B2B Clients") return "Assign sales manager";
+    if (c.seg === "Retail Consumers") return "Push personalized offers";
+    return "Monitor closely";
+  };
+
   return (
     <div className="ci-card">
-      <div className="ct"><span className="ico" style={{background:"#FEF2F2"}}>⚠️</span> At-Risk Customer Watchlist</div>
+      <div className="ct">
+        <span className="ico" style={{background:"#FEF2F2"}}>⚠️</span>
+        At-Risk Customer Watchlist
+      </div>
+
       <table className="tbl">
         <thead>
-          <tr><th>Customer</th><th>Segment</th><th>AUM</th><th>Health</th><th>Action</th></tr>
+          <tr>
+            <th>Customer</th>
+            <th>Segment</th>
+            <th>Category</th>
+            <th>Spend</th>
+            <th>Health</th>
+            <th>Risk Reason</th>
+            <th>Recommended Action</th>
+          </tr>
         </thead>
+
         <tbody>
-          {atRisk.map(c=>(
+          {atRisk.map(c => (
             <tr key={c.id}>
-              <td><strong style={{fontWeight:500}}>{c.name}</strong></td>
+              <td><strong>{c.name}</strong></td>
               <td><span className="seg-tag">{c.seg}</span></td>
-              <td>{c.aum}</td>
-              <td><span style={{fontWeight:700,color:c.hs<50?"#DC2626":"#D97706"}}>{c.hs}</span></td>
-              <td><button className="btn-sm">Assign RM</button></td>
+              <td>{c.category}</td>
+              <td>{c.spend}</td>
+
+              <td>
+                <span style={{
+                  fontWeight:700,
+                  color: c.hs < 50 ? "#DC2626" : "#D97706"
+                }}>
+                  {c.hs}
+                </span>
+              </td>
+
+              <td>{getRiskReason(c)}</td>
+              <td>
+                <button className="btn-sm pri">
+                  {getAction(c)}
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -630,6 +995,7 @@ function ChurnRisk() {
     </div>
   );
 }
+
 
 /* ─── ROOT ───────────────────────────────────────────────────────────────────── */
 export default function CustomerIntelligenceDashboard() {

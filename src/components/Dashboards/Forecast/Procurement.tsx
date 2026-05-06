@@ -18,14 +18,19 @@ const supplierPerformance = [
 ];
 
 const spendTrend = [
-  { month: 'Jul', spend: 850000,  budget: 900000  },
-  { month: 'Aug', spend: 920000,  budget: 900000  },
-  { month: 'Sep', spend: 1100000, budget: 1000000 },
-  { month: 'Oct', spend: 980000,  budget: 1000000 },
-  { month: 'Nov', spend: 870000,  budget: 950000  },
-  { month: 'Dec', spend: 1050000, budget: 1000000 },
-  { month: 'Jan', spend: 1200000, budget: 1100000 },
-  { month: 'Feb', spend: 940000,  budget: 1000000 },
+  { month: '2025 Apr', spend: 1300000, budget: 1350000 },
+  { month: '2025 May', spend: 1250000, budget: 1300000 },
+  { month: '2025 June', spend: 1380000, budget: 1400000 },
+  { month: '2025 July', spend: 980000,  budget: 1000000 },
+  { month: '2025 Aug', spend: 870000,  budget: 950000  },
+  { month: '2025 Sep', spend: 1050000, budget: 1000000 },
+  { month: '2025 Oct', spend: 1350000, budget: 1300000 },
+  { month: '2025 Nov', spend: 1420000, budget: 1380000 },
+  { month: '2025 Dec', spend: 1500000, budget: 1450000 },
+  { month: '2026 Jan', spend: 1200000, budget: 1100000 },
+  { month: '2026 Feb', spend: 940000,  budget: 1000000 },
+  { month: '2026 Mar ', spend: 1820000, budget: 1800000 },
+  { month: '2026 Apr ', spend: 1750000, budget: 1780000 },
 ];
 
 const spendByCategory = [
@@ -90,10 +95,26 @@ const radarData = [
 ];
 
 const alerts = [
-  { type: 'critical', msg: 'PO-4405 (CNC Parts) is delayed — production impact on WO-992',       time: '08:30 AM' },
-  { type: 'warning',  msg: 'Global Steel contract expiring in 28 days — renewal action needed',   time: '09:00 AM' },
-  { type: 'warning',  msg: 'Steel Sheets stock at 23% — reorder threshold breached',              time: '09:45 AM' },
-  { type: 'info',     msg: 'PO-4403 Sensor Modules arriving tomorrow — GRN team notified',        time: '10:15 AM' },
+  {
+    type: 'critical',
+    msg: 'PCB stock dropped to 18% — below safety stock level for Laptop Assembly',
+    time: '08:50 AM'
+  },
+  {
+    type: 'warning',
+    msg: 'Capacitor supplier defect rate increased to 3.5% — quality inspection required',
+    time: '09:20 AM'
+  },
+  {
+    type: 'warning',
+    msg: 'Connector inventory at 25% — reorder point reached for mobile production',
+    time: '09:45 AM'
+  },
+  {
+    type: 'info',
+    msg: 'Batch of LED display units cleared quality inspection — ready for assembly',
+    time: '10:40 AM'
+  }
 ];
 
 const ALERT_COLORS: Record<string, string> = {
@@ -236,7 +257,7 @@ const ProcurementPlanning: React.FC = () => {
                 <ResponsiveContainer>
                   <ComposedChart data={spendTrend}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="month" />
+                    <XAxis dataKey="month" interval={0} tick={{ fontSize: 11 }}/>
                     <YAxis tickFormatter={v => `$${(v / 1000).toFixed(0)}K`} />
                     <Tooltip formatter={(v: number) => [`$${(v / 1000).toFixed(0)}K`]} />
                     <Legend />

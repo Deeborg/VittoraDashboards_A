@@ -735,7 +735,7 @@ const DemandForecasting: React.FC = () => {
               <p className="df-chart-desc" style={{ maxWidth: 280 }}>
                 {regionalView === 'forecast'
                   ? ' Prioritise replenishment accordingly.'
-                  : 'Actual units sold in the prior 12 months, by region.'}
+                  : 'Actual units sold in the past months, by region.'}
               </p>
             </div>
             <RegionalViewToggle view={regionalView} onChange={setRegionalView} />

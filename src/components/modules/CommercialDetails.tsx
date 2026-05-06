@@ -35,7 +35,7 @@ const infographicData: ColumnData[] = [
   {
     number: '04', title: 'Promotion Analytics', circleColor: '#2980B9', bgColor: '#3498DB',
     icon: <FiIcons.FiPieChart size={30} />,
-    items: [{ label: 'Campaign ROI' }, { label: 'Basket Analysis' }]
+    items: [{ label: 'Promotion Analytics',path: '/analytics/promotion-analytics' }]
   },
   {
     number: '05', title: 'Commercial Governance', circleColor: '#8E44AD', bgColor: '#9B59B6',

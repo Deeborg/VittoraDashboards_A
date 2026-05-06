@@ -117,14 +117,21 @@ const KPI = [
 ];
 
 const DISCOUNTS = [
-  { id: "TXN-9910", rm: "Arjun Mehta", client: "Global Tech Solutions", segment: "Corporate", discount: "1.25%", impact: "₹18.5L", status: "High Leakage" },
-  { id: "TXN-8821", rm: "Saira Khan", client: "Priya Exports", segment: "SME", discount: "0.50%", impact: "₹4.2L", status: "Strategic" },
-  { id: "TXN-7732", rm: "Vikram Raj", client: "Aditya Finance", segment: "HNI", discount: "0.75%", impact: "₹12.1L", status: "Strategic" },
-  { id: "TXN-6643", rm: "Anjali Singh", client: "Tata Retail Div", segment: "Corporate", discount: "1.80%", impact: "₹45.0L", status: "High Leakage" },
+  { id: "ORD-9910", rm: "Arjun Mehta", client: "Reliance Digital", segment: "Retail Chain", discount: "12%", impact: "₹18.5L", status: "High Leakage" },
+  { id: "ORD-8821", rm: "Saira Khan", client: "Croma Stores", segment: "Corporate", discount: "5%", impact: "₹4.2L", status: "Strategic" },
+  { id: "ORD-7732", rm: "Vikram Raj", client: "Flipkart Seller Hub", segment: "E-commerce", discount: "8%", impact: "₹12.1L", status: "Strategic" },
+  { id: "ORD-6643", rm: "Anjali Singh", client: "Amazon Bulk Orders", segment: "E-commerce", discount: "18%", impact: "₹45.0L", status: "High Leakage" },
 ];
 
 const MATRIX_SEGMENTS = ["HNI", "Corporate", "SME", "Retail", "NRI"];
-const MATRIX_PRODUCTS = ["FD", "Loans", "SIP", "MF", "Bonds", "Treasury"];
+const MATRIX_PRODUCTS = [
+  "Laptops",
+  "Smartphones",
+  "Accessories",
+  "Smart Devices",
+  "Software Licenses",
+  "Support Plans"
+];
 const MATRIX_VALS = [
   [0.80, 1.25, 0.40, 0.60, 0.50, 0.90],
   [0.95, 2.00, 0.35, 0.50, 0.45, 1.50],
@@ -171,7 +178,7 @@ function AIIntelligence() {
       <div>
         <div className="ai-tag">Discount Intelligence Insight</div>
         <div className="ai-txt">
-          <strong>Revenue Leakage Alert:</strong> SME and Corporate segments are showing a 14% increase in "Unapproved Overrides." Recommendation: Standardize the <strong>Business Term Loan</strong> discount floor at 0.85% to recover approx ₹42L in annual margin without impacting win-rate.
+          <strong>Margin Leakage Alert:</strong> Retail and Online channels are showing a 14% increase in unapproved discounts on <strong>Smartphones</strong> and <strong>Smart TVs</strong>. Analysis indicates that discounts above 10% are not improving conversion rates. Recommendation: Standardize discount ceilings at <strong>9% for Smartphones</strong> and <strong>12% for TVs</strong> to recover approx ₹42L in annual margin without impacting sales volume.
         </div>
       </div>
     </div>
@@ -180,30 +187,75 @@ function AIIntelligence() {
 
 function EfficacyChart({ scriptLoaded }: { scriptLoaded: boolean }) {
   const chartRef = useRef<HTMLCanvasElement>(null);
+
   useChart(chartRef, () => ({
     type: 'bar',
     data: {
-      labels: ['HNI', 'Corporate', 'SME', 'Retail', 'NRI'],
+      labels: ['Premium Buyers', 'Corporate Bulk', 'SME Resellers', 'Retail Customers', 'Online Buyers'],
       datasets: [
-        { label: 'Avg Discount %', data: [0.8, 1.5, 1.2, 0.4, 0.6], backgroundColor: '#6366F1', borderRadius: 4 },
-        { label: 'Win Rate lift %', data: [75, 60, 82, 45, 50], type: 'line', borderColor: '#09BEAA', tension: 0.4, yAxisID: 'y1' }
+        {
+          label: 'Avg Discount %',
+          data: [5, 12, 10, 4, 6],
+          backgroundColor: '#6366F1',
+          borderRadius: 6,
+        },
+        {
+          label: 'Conversion Rate %',
+          data: [78, 62, 85, 48, 70],
+          type: 'line',
+          borderColor: '#09BEAA',
+          backgroundColor: '#09BEAA',
+          tension: 0.4,
+          yAxisID: 'y1',
+          pointRadius: 4,
+        }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels: { font: { size: 11 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context: any) {
+              return context.dataset.label + ': ' + context.raw + '%';
+            }
+          }
+        }
+      },
       scales: {
-        x: { grid: { display: false } },
-        y: { grid: { color: '#f0f0f0' }, title: { display: true, text: 'Discount %', font: { size: 10 } } },
-        y1: { position: 'right', grid: { display: false }, title: { display: true, text: 'Win Rate %', font: { size: 10 } } }
+        x: {
+          grid: { display: false }
+        },
+        y: {
+          grid: { color: '#f0f0f0' },
+          title: {
+            display: true,
+            text: 'Discount (%)',
+            font: { size: 11 }
+          }
+        },
+        y1: {
+          position: 'right',
+          grid: { display: false },
+          title: {
+            display: true,
+            text: 'Conversion Rate (%)',
+            font: { size: 11 }
+          }
+        }
       }
     }
   }), scriptLoaded);
 
   return (
     <div className="card" style={{ height: '350px' }}>
-      <div className="ds-slabel">Discount Efficacy by Segment</div>
+      <div className="ds-slabel">Discount Effectiveness by Customer Segment</div>
       <div style={{ position: 'relative', height: '280px' }}>
         <canvas ref={chartRef}></canvas>
       </div>
@@ -370,16 +422,23 @@ export default function DiscountStrategyDashboard() {
                ))}
             </div>
             <div className="card">
-               <div className="ds-slabel">Efficacy Insights</div>
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <div style={{ padding: '12px', background: '#F0FDF4', borderRadius: '8px', fontSize: '13px', color: '#166534' }}>
-                     <strong>Top Efficacy:</strong> SME Segment. 1.2% discount correlates with 82% win rate.
-                  </div>
-                  <div style={{ padding: '12px', background: '#FEF2F2', borderRadius: '8px', fontSize: '13px', color: '#991B1B' }}>
-                     <strong>Low Efficacy:</strong> Retail Segment. Discounts show marginal win-rate lift. Recommend reducing ceilings by 10bps.
-                  </div>
-               </div>
-            </div>
+  <div className="ds-slabel">Efficacy Insights</div>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    
+    <div style={{ padding: '12px', background: '#F0FDF4', borderRadius: '8px', fontSize: '13px', color: '#166534' }}>
+      <strong>Top Efficacy:</strong> SME Buyers. ~1.2% discount on mid-range electronics (e.g., accessories, add-ons) drives highest conversion (82%). These customers are price-sensitive but respond well to small incentives.
+    </div>
+
+    <div style={{ padding: '12px', background: '#FEF2F2', borderRadius: '8px', fontSize: '13px', color: '#991B1B' }}>
+      <strong>Low Efficacy:</strong> Retail Consumers. Discounts show minimal improvement in purchase decisions. Brand value and product features matter more than price — reduce discount levels and protect margin.
+    </div>
+
+    <div style={{ padding: '12px', background: '#EEF2FF', borderRadius: '8px', fontSize: '13px', color: '#3730A3' }}>
+      <strong>Opportunity:</strong> Corporate Bulk Buyers. Slight discounts (~1.5%) combined with bundle offers (devices + warranty/support) significantly improve deal closure and long-term revenue.
+    </div>
+
+  </div>
+</div>
           </div>
 
         </div>

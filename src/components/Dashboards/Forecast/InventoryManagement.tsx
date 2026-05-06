@@ -31,58 +31,66 @@ const agingData = [
 ];
 
 const skuAlerts = [
-  { id: 'SKU-4401', name: 'Aluminum Casing',   cat: 'Finished Goods', qty: 320,  age: 112, val: '$12,400', status: 'Obsolete',  action: 'Clearance'   },
-  { id: 'SKU-9921', name: 'Steel Rods',         cat: 'Raw Materials',  qty: 1800, age: 98,  val: '$8,200',  status: 'Slow-Move',  action: 'Reorder'     },
-  { id: 'SKU-3310', name: 'Sensor Array',        cat: 'WIP',           qty: 55,   age: 74,  val: '$6,750',  status: 'Slow-Move',  action: 'Expedite'    },
-  { id: 'SKU-7712', name: 'Polymer Resin',       cat: 'Raw Materials',  qty: 200,  age: 61,  val: '$3,100',  status: 'At Risk',    action: 'Monitor'     },
-  { id: 'SKU-2204', name: 'Circuit Boards',      cat: 'Components',    qty: 80,   age: 44,  val: '$9,600',  status: 'Healthy',    action: 'None'        },
+  { id: 'SKU-4401', name: 'Microcontroller Unit (MCU)', cat: 'Semiconductors', qty: 320,  age: 112, val: '$12,400', status: 'Obsolete',  action: 'Clearance'   },
+  { id: 'SKU-9921', name: 'Multilayer PCB Board',      cat: 'PCB Assemblies',  qty: 1800, age: 98,  val: '$8,200',  status: 'Slow-Move',  action: 'Reorder'     },
+  { id: 'SKU-3310', name: 'IMU Sensor Module',        cat: 'Sensors',          qty: 55,   age: 74,  val: '$6,750',  status: 'Slow-Move',  action: 'Expedite'    },
+  { id: 'SKU-7712', name: 'Power Management IC',       cat: 'Power Electronics',  qty: 200,  age: 61,  val: '$3,100',  status: 'At Risk',    action: 'Monitor'     },
+  { id: 'SKU-2204', name: 'NAND Flash Memory Chip',      cat: 'Memory',    qty: 80,   age: 44,  val: '$9,600',  status: 'Healthy',    action: 'None'        },
 ];
 
 const abcData = [
-  { class: 'A – Fast', items: 120, pctValue: 70, pctItems: 20 },
-  { class: 'B – Mid',  items: 280, pctValue: 20, pctItems: 30 },
-  { class: 'C – Slow', items: 600, pctValue: 10, pctItems: 50 },
+  { class: 'A – High Value (Critical Components)', items: 120, pctValue: 70, pctItems: 20 },
+  { class: 'B – Medium Value Components',  items: 280, pctValue: 20, pctItems: 30 },
+  { class: 'C – Low Value / Consumables', items: 600, pctValue: 10, pctItems: 50 },
 ];
 
 const reorderItems = [
-  { sku: 'SKU-1001', name: 'Steel Sheets',     currentStock: 230,  reorderPt: 500,  eoq: 1200, leadTime: '7d',  status: 'Below ROP'  },
-  { sku: 'SKU-1042', name: 'Hydraulic Seals',  currentStock: 80,   reorderPt: 150,  eoq: 400,  leadTime: '5d',  status: 'Below ROP'  },
-  { sku: 'SKU-2210', name: 'Drive Shafts',     currentStock: 12,   reorderPt: 25,   eoq: 60,   leadTime: '10d', status: 'Critical'   },
-  { sku: 'SKU-3388', name: 'Polymer Resin',    currentStock: 410,  reorderPt: 400,  eoq: 800,  leadTime: '4d',  status: 'Near ROP'   },
-  { sku: 'SKU-5501', name: 'Fastener Kit',     currentStock: 3200, reorderPt: 1000, eoq: 5000, leadTime: '3d',  status: 'Healthy'    },
+  { sku: 'SKU-1001', name: 'ARM Cortex MCU (Industrial Grade)',     currentStock: 230,  reorderPt: 500,  eoq: 1200, leadTime: '7d',  status: 'Below ROP'  },
+  { sku: 'SKU-1042', name: '6-Layer High Density PCB',  currentStock: 80,   reorderPt: 150,  eoq: 400,  leadTime: '5d',  status: 'Below ROP'  },
+  { sku: 'SKU-2210', name: 'LiDAR Sensor Module',     currentStock: 12,   reorderPt: 25,   eoq: 60,   leadTime: '10d', status: 'Critical'   },
+  { sku: 'SKU-3388', name: 'DC-DC Power Converter IC',    currentStock: 410,  reorderPt: 400,  eoq: 800,  leadTime: '4d',  status: 'Near ROP'   },
+  { sku: 'SKU-5501', name: 'DDR5 DRAM Module',     currentStock: 3200, reorderPt: 1000, eoq: 5000, leadTime: '3d',  status: 'Healthy'    },
 ];
 
 const warehouseZones = [
-  { zone: 'Zone A – Raw',      capacity: 5000, used: 3800, items: 142 },
-  { zone: 'Zone B – WIP',      capacity: 3000, used: 2100, items: 87  },
-  { zone: 'Zone C – Finished', capacity: 6000, used: 4900, items: 213 },
-  { zone: 'Zone D – Returns',  capacity: 1000, used: 380,  items: 24  },
+  { zone: 'Zone A – Semiconductor Storage',      capacity: 2000, used: 1650, items: 142 },
+  { zone: 'Zone B – PCB & Assembly',      capacity: 3000, used: 2100, items: 87  },
+  { zone: 'Zone C – Finished Electronics Goods', capacity: 6000, used: 4900, items: 213 },
+  { zone: 'Zone D – Returns & Defective',  capacity: 1000, used: 380,  items: 24  },
+  { zone: 'Zone E – Battery & Power Modules', capacity: 1800, used: 1400, items: 156 },
 ];
 
 const monthlyMovement = [
-  { month: 'Aug', inbound: 1800, outbound: 1650, returns: 40 },
-  { month: 'Sep', inbound: 2100, outbound: 1980, returns: 55 },
-  { month: 'Oct', inbound: 1950, outbound: 2100, returns: 30 },
-  { month: 'Nov', inbound: 2300, outbound: 2050, returns: 60 },
-  { month: 'Dec', inbound: 2600, outbound: 2400, returns: 80 },
-  { month: 'Jan', inbound: 2200, outbound: 2350, returns: 45 },
+  { date: '2025-Aug', inbound: 1800, outbound: 1650, returns: 40 },
+  { date: '2025-Sep', inbound: 2100, outbound: 1980, returns: 55 },
+  { date: '2025-Oct', inbound: 1950, outbound: 2100, returns: 30 },
+  { date: '2025-Nov', inbound: 2300, outbound: 2050, returns: 60 },
+  { date: '2025-Dec', inbound: 2600, outbound: 2400, returns: 80 },
+  { date: '2026-Jan', inbound: 2200, outbound: 2350, returns: 45 },
+  { date: '2026-Feb', inbound: 2400, outbound: 2250, returns: 50 },
+  { date: '2026-Mar', inbound: 2500, outbound: 2300, returns: 35 },
+  { date: '2026-Apr', inbound: 2700, outbound: 2550, returns: 70 },
 ];
 
 const forecastAccuracy = [
-  { month: 'Aug', actual: 1650, forecast: 1700 },
-  { month: 'Sep', actual: 1980, forecast: 1900 },
-  { month: 'Oct', actual: 2100, forecast: 2200 },
-  { month: 'Nov', actual: 2050, forecast: 2000 },
-  { month: 'Dec', actual: 2400, forecast: 2300 },
-  { month: 'Jan', actual: 2350, forecast: 2400 },
+  { month: '2025-Aug', actual: 1650, forecast: 1700 },
+  { month: '2025-Sep', actual: 1980, forecast: 1900 },
+  { month: '2025-Oct', actual: 2100, forecast: 2200 },
+  { month: '2025-Nov', actual: 2050, forecast: 2000 },
+  { month: '2025-Dec', actual: 2400, forecast: 2300 },
+  { month: '2026-Jan', actual: 2350, forecast: 2400 },
+  { month: '2026-Feb', actual: 2200, forecast: 2250 },
+  { month: '2026-Mar', actual: 2500, forecast: 2450 },
+  { month: '2026-Apr', actual: 2600, forecast: 2550 },
+  { month: '2026-May', actual: null, forecast: 2700 }
 ];
 
 const alerts = [
-  { type: 'critical', msg: 'SKU-2210 (Drive Shafts) at critical level — 12 units left, 10d lead time',   time: '08:10 AM' },
-  { type: 'critical', msg: 'SKU-1001 (Steel Sheets) below reorder point — trigger PO immediately',        time: '08:45 AM' },
-  { type: 'warning',  msg: 'Zone C – Finished Goods at 82% capacity — risk of congestion',                time: '09:20 AM' },
-  { type: 'warning',  msg: 'SKU-4401 (Aluminum Casing) 112 days old — initiate clearance process',       time: '09:55 AM' },
-  { type: 'info',     msg: 'Inventory accuracy audit completed — 98.4% record accuracy achieved',         time: '10:30 AM' },
+  { type: 'critical', msg: 'SKU-IC-7842 (Microcontroller IC) critically low — 8 units left vs safety stock 50, lead time 21 days',   time: '08:10 AM' },
+  { type: 'critical', msg: 'SKU-CPU-9901 (Processor Chips) demand spike +32% — projected stockout within 5 days',        time: '08:45 AM' },
+  { type: 'warning',  msg: 'Zone E – ESD Sensitive Components at 85% capacity — risk of electrostatic damage',                time: '09:20 AM' },
+  { type: 'warning',  msg: 'SKU-DIS-4401 (Display Panels) aging >120 days — high risk of obsolescence due to model refresh',       time: '09:55 AM' },
+  { type: 'info',     msg: 'Inventory accuracy improved to 99.1% with RFID tracking implementation',         time: '10:30 AM' },
 ];
 const ALERT_COLORS: Record<string, string> = { critical: '#ef4444', warning: '#f59e0b', info: '#3b82f6' };
 
@@ -408,7 +416,7 @@ const InventoryManagement: React.FC = () => {
                     <YAxis type="category" dataKey="zone" width={160} tick={{ fontSize: 11 }} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="capacity" name="Max Capacity" fill="#e2e8f0" radius={[0,4,4,0]} />
+                    <Bar dataKey="capacity" name="Max Capacity" fill="#98c1f8" radius={[0,4,4,0]} />
                     <Bar dataKey="used"     name="Used"         radius={[0,4,4,0]}>
                       {warehouseZones.map((w, i) => {
                         const pct = (w.used / w.capacity) * 100;
@@ -442,7 +450,8 @@ const InventoryManagement: React.FC = () => {
                 );
               })}
               <div style={{ padding: '10px 12px', background: '#fef2f2', borderRadius: '8px', fontSize: '12px', color: '#991b1b', marginTop: '8px' }}>
-                ⚠ Zone C at 82% — plan overflow or expedite outbound shipments.
+                ⚠ Finished Goods Zone (Zone C) at 82% capacity — risk of handling congestion and product damage. 
+                   Prioritize outbound dispatch and avoid stacking high-value electronics.
               </div>
             </div>
           </div>
@@ -474,7 +483,7 @@ const InventoryManagement: React.FC = () => {
                 <ResponsiveContainer>
                   <ComposedChart data={monthlyMovement}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="month" />
+                    <XAxis dataKey="date" interval={0} />
                     <YAxis />
                     <Tooltip />
                     <Legend />
@@ -492,7 +501,7 @@ const InventoryManagement: React.FC = () => {
                 <ResponsiveContainer>
                   <AreaChart data={forecastAccuracy}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                    <XAxis dataKey="month" />
+                    <XAxis dataKey="month" interval={0} tick={{ fontSize: 9 }}/>
                     <YAxis />
                     <Tooltip />
                     <Legend />
