@@ -47,7 +47,7 @@ const AuTmDetails: React.FC = () => {
   const [hoveredColumn, setHoveredColumn] = useState<number | null>(null);
 
   const styles: any = {
-    container: { display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center', backgroundColor: 'transparent', padding: '20px',paddingTop: '100px', minHeight: '90vh',width: '100%'},
+    container: { display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center', backgroundColor: 'transparent', padding: '20px',paddingTop: '1px', minHeight: '90vh',width: '100%'},
     columnsContainer: { display: 'flex', justifyContent: 'center', alignItems: 'stretch',gap: '30px', maxWidth: '1000px', width: '100%',flexWrap: 'wrap' },
     column: {
       position: 'relative',flex: '0 0 280px', padding: '40px 25px', borderRadius: '24px',

@@ -29,7 +29,7 @@ const FlipCardNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '30px', padding: '10px', perspective: '2000px', background: '#f8fafc' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '30px', padding: '10px', perspective: '2000px', background: 'transparent' }}>
       {navData.map((item) => (
         <motion.div
           key={item.id}
